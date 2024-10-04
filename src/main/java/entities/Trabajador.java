@@ -14,12 +14,17 @@ import lombok.Setter;
 public class Trabajador {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_trabajador",nullable = false)
-    private int Idtrabajador;
+    private int idTrabajador;
 
+    @OneToOne(mappedBy = "idTrabajador")
     private Datos datosUsuario;
 
+    @OneToOne(mappedBy = "idTrabajador")
     private Experiencia datosExperiencia;
+
+    @OneToOne(mappedBy = "idTrabajador")
+    private PerfilUsuario perfil;
 
 }

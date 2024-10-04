@@ -16,9 +16,9 @@ import java.sql.Timestamp;
 public class Datos {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id_trabajador",nullable = false)
-    private idDatos;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_datos",nullable = false)
+    private int idDatos;
 
     @Basic
     @Column(name = "nombre",nullable = false)
@@ -32,6 +32,11 @@ public class Datos {
     @Column(name = "fecha_edad",nullable = false)
     private Timestamp fechaEdad;
 
+    @OneToOne(mappedBy = "idDatos")
+    private Trabajador trabajador;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_datos", referencedColumnName = "id_datos", nullable = false, updatable = false)
     private Direccion direccion;
 
 }

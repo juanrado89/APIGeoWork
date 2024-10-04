@@ -13,7 +13,7 @@ import lombok.Setter;
 public class PerfilUsuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_perfil",nullable = false)
     private int idPerfil;
 
@@ -21,7 +21,7 @@ public class PerfilUsuario {
     @Column(name = "password",nullable = false)
     private String password;
 
-
+    @OneToOne(mappedBy = "idPerfil")
     private Trabajador idTrabajador;
 
     @Basic
