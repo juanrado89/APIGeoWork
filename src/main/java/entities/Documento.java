@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -15,7 +17,7 @@ public class Documento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_documento",nullable = false)
+    @Column(name = "id_documento",nullable = true)
     private int idDocumento;
 
     @Basic
@@ -31,4 +33,17 @@ public class Documento {
     @Basic
     @Column(name = "contenido",nullable = false)
     private byte[] contenido;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdDocumento());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Documento documento = (Documento) obj;
+        return idDocumento == documento.idDocumento;
+    }
 }

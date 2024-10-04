@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -34,5 +35,17 @@ public class Direccion {
 
     @OneToMany(mappedBy = "direccion")
     private List<Datos> datos;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdDireccion());
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Direccion direccion1 = (Direccion) obj;
+        return idDireccion == direccion1.idDireccion;
+    }
 
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -25,14 +26,14 @@ public class Experiencia {
     private String nivelEducativo;
 
     @Basic
-    @Column(name = "experiencia_total",nullable = false)
+    @Column(name = "experiencia_total",nullable = true)
     private int experienciaTotal;
 
     @Basic
-    @Column(name = "resumen_profesional",nullable = false)
+    @Column(name = "resumen_profesional",nullable = true)
     private String resumenProfesional;
 
-
+    @OneToOne(mappedBy = "id_documento")
     private Documento cvUrl;
 
     @Basic
@@ -43,7 +44,18 @@ public class Experiencia {
     @Column(name = "estado",nullable = false)
     private int estado;
 
-    @OneToOne(mappedBy = "idExperiencia")
-    private Trabajador trabajador;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdExperiencia());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Experiencia experiencia = (Experiencia) obj;
+        return idExperiencia == experiencia.idExperiencia;
+    }
 
 }

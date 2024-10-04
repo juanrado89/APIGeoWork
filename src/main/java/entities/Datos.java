@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -32,11 +33,23 @@ public class Datos {
     @Column(name = "fecha_edad",nullable = false)
     private Timestamp fechaEdad;
 
-    @OneToOne(mappedBy = "idDatos")
-    private Trabajador trabajador;
+
 
     @ManyToOne()
-    @JoinColumn(name = "id_datos", referencedColumnName = "id_datos", nullable = false, updatable = false)
+    @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Direccion direccion;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdDatos());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Datos datos = (Datos) obj;
+        return idDatos == datos.idDatos;
+    }
 
 }
