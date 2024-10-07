@@ -30,8 +30,12 @@ public class Direccion {
     private String ciudad;
 
     @Basic
-    @Column(name = "pais",nullable = false)
-    private String pais;
+    @Column(name = "codigo_postal",nullable = false)
+    private int codigoPostal;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_pais", referencedColumnName = "id_pais", nullable = false, updatable = false)
+    private Pais pais;
 
     @OneToMany(mappedBy = "direccion")
     private List<Datos> datos;

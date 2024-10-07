@@ -33,8 +33,6 @@ public class Datos {
     @Column(name = "fecha_edad",nullable = false)
     private Timestamp fechaEdad;
 
-
-
     @ManyToOne()
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Direccion direccion;

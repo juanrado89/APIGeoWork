@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,29 +14,33 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Trabajador {
+public class Pais {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_trabajador",nullable = false)
-    private int idTrabajador;
+    @Column(name = "id_pais",nullable = false)
+    private int idPais;
 
-    @OneToOne(mappedBy = "id_datos")
-    private Datos datosUsuario;
+    @Basic
+    @Column(name = "pais",nullable = false)
+    private String pais;
 
-    @OneToOne(mappedBy = "id_experiencia")
-    private Experiencia datosExperiencia;
+    @OneToMany(mappedBy = "pais")
+    private List<Direccion> direccion;
+
+    @OneToMany(mappedBy = "pais")
+    private List<OfertaEmpleo> ofertas;
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getIdTrabajador());
+        return Objects.hashCode(getIdPais());
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Trabajador trabajador = (Trabajador) obj;
-        return idTrabajador == trabajador.idTrabajador;
+        Pais pais = (Pais) obj;
+        return idPais == pais.idPais;
     }
 }

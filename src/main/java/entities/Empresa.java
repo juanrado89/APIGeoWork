@@ -13,29 +13,26 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Trabajador {
+public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_trabajador",nullable = false)
-    private int idTrabajador;
+    @Column(name = "id_empresa",nullable = false)
+    private int idEmpresa;
 
-    @OneToOne(mappedBy = "id_datos")
-    private Datos datosUsuario;
-
-    @OneToOne(mappedBy = "id_experiencia")
-    private Experiencia datosExperiencia;
+    @OneToOne(mappedBy = "id_datos_empresa")
+    private DatosEmpresa datosEmpresa;
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getIdTrabajador());
+        return Objects.hashCode(getIdEmpresa());
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Trabajador trabajador = (Trabajador) obj;
-        return idTrabajador == trabajador.idTrabajador;
+        Empresa empresa = (Empresa) obj;
+        return idEmpresa == empresa.idEmpresa;
     }
 }
