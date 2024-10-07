@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,6 +27,8 @@ public class Trabajador {
     @OneToOne(mappedBy = "id_experiencia")
     private Experiencia datosExperiencia;
 
+    @ManyToMany(mappedBy = "trabajadores")
+    private List<HorarioEntrevista> horarios;
     @Override
     public int hashCode() {
         return Objects.hashCode(getIdTrabajador());

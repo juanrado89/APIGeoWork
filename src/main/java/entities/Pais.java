@@ -31,6 +31,7 @@ public class Pais {
     @OneToMany(mappedBy = "pais")
     private List<OfertaEmpleo> ofertas;
 
+
     @Override
     public int hashCode() {
         return Objects.hashCode(getIdPais());

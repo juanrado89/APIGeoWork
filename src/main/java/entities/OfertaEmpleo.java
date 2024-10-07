@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -68,6 +69,9 @@ public class OfertaEmpleo {
     @Basic
     @Column(name = "estado",nullable = false)
     private int estado;
+
+    @OneToMany(mappedBy = "ofertaEmpleo", cascade = CascadeType.ALL)
+    private List<HorarioEntrevista> horarios;
 
     @Override
     public int hashCode() {
