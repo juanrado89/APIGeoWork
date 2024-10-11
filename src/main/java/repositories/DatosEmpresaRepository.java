@@ -1,7 +1,24 @@
 package repositories;
 
+import dtos.DatosEmpresaDto;
 import entities.DatosEmpresa;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface DatosEmpresaRepository extends JpaRepository<DatosEmpresa,Integer> {
+
+    Optional<DatosEmpresaDto> findDatosEmpresaByIdDatosEmpresa(@Param("id") int idDatosEmpresa);
+
+    Optional<DatosEmpresaDto> findDatosEmpresaByNombreEmpresaContainsIgnoreCase(@Param("nombre") String nombreEmpresa);
+
+    List<DatosEmpresaDto> findAllBySectorContainsIgnoreCase(@Param("sector") String sector);
+
+    @Modifying
+    @Transactional
+    int deleteByIdDatosEmpresa(@Param("id") int idDatosEmpresa);
 }

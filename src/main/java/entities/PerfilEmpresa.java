@@ -32,6 +32,9 @@ public class PerfilEmpresa {
     @Column(name = "email",nullable = false)
     private String email;
 
+    @OneToOne(mappedBy = "id_foto")
+    private Foto foto;
+
     @OneToMany(mappedBy = "idEmpresa")
     private List<OfertaEmpleo> ofertas;
 

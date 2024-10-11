@@ -26,6 +26,10 @@ public class Experiencia {
     private String nivelEducativo;
 
     @Basic
+    @Column(name = "sector",nullable = false)
+    private String sector;
+
+    @Basic
     @Column(name = "experiencia_total",nullable = true)
     private int experienciaTotal;
 

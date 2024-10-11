@@ -34,7 +34,7 @@ public class Direccion {
     private int codigoPostal;
 
     @ManyToOne()
-    @JoinColumn(name = "id_pais", referencedColumnName = "id_pais", nullable = false, updatable = false)
+    @JoinColumn(name = "id_pais", referencedColumnName = "id_pais", nullable = true, updatable = false)
     private Pais pais;
 
     @OneToMany(mappedBy = "direccion")
