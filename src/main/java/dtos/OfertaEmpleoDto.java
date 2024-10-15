@@ -1,7 +1,5 @@
 package dtos;
 
-import entities.Pais;
-
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -16,8 +14,7 @@ public interface OfertaEmpleoDto {
     String getNivelEducativoRequerido();
     float getSalarioMin();
     float getSalarioMax();
-    String getCiudad();
-    Pais getPais();
+    DireccionDto getDireccion();
     Timestamp fechaPublicaion();
     int getEstado();
     List<HorarioEntrevistaDto> getHorarios();

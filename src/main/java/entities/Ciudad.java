@@ -14,36 +14,36 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pais {
+public class Ciudad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pais",nullable = false)
-    private int idPais;
+    @Column(name = "id_ciudad",nullable = false)
+    private int idCiudad;
 
     @Basic
-    @Column(name = "pais",nullable = false)
-    private String pais;
+    @Column(name = "ciudad",nullable = false)
+    private String ciudad;
 
-    @OneToMany(mappedBy = "pais")
+    @ManyToOne()
+    @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad", nullable = false, updatable = false)
+    private Estado estado;
+
+    @OneToMany(mappedBy = "ciudad")
     private List<Direccion> direcciones;
-
-    @OneToMany(mappedBy = "pais")
-    private List<Estado> estados;
-
 
 
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getIdPais());
+        return Objects.hashCode(getIdCiudad());
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Pais pais = (Pais) obj;
-        return idPais == pais.idPais;
+        Ciudad ciudad = (Ciudad) obj;
+        return idCiudad == ciudad.idCiudad;
     }
 }

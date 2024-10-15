@@ -54,13 +54,9 @@ public class OfertaEmpleo {
     @Column(name = "salario_max",nullable = false)
     private float salarioMax;
 
-    @Basic
-    @Column(name = "ciudad",nullable = false)
-    private String ciudad;
-
     @ManyToOne()
-    @JoinColumn(name = "id_pais", referencedColumnName = "id_pais", nullable = false, updatable = false)
-    private Pais pais;
+    @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
+    private Direccion direccion;
 
     @Basic
     @Column(name = "fecha_publicacion",nullable = false)

@@ -25,20 +25,20 @@ public class Direccion {
     @Column(name = "direccion_texto",nullable = false)
     private String direccion;
 
-    @Basic
-    @Column(name = "ciudad",nullable = false)
-    private String ciudad;
+    @ManyToOne()
+    @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
+    private Ciudad ciudad;
 
     @Basic
     @Column(name = "codigo_postal",nullable = false)
     private int codigoPostal;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_pais", referencedColumnName = "id_pais", nullable = true, updatable = false)
-    private Pais pais;
 
     @OneToMany(mappedBy = "direccion")
     private List<Datos> datos;
+
+    @OneToMany(mappedBy = "direccion")
+    private List<OfertaEmpleo> ofertas;
 
     @Override
     public int hashCode() {

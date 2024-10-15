@@ -1,10 +1,5 @@
 package dtos;
 
-import entities.Documento;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
-
 import java.sql.Timestamp;
 
 public interface ExperienciaDto {

@@ -1,11 +1,5 @@
 package dtos;
 
-import entities.Direccion;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
 import java.sql.Timestamp;
 
 public interface DatosEmpresaDto {
