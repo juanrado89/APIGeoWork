@@ -14,5 +14,9 @@ public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Int
 
     Optional<PerfilUsuarioPDto> findByEmailContainsIgnoreCase(@Param("email") String email);
 
+    Optional<PerfilUsuarioDto> findPerfilUsuarioByEmailContainsIgnoreCase(@Param("email") String email);
+
     int deleteByIdUsuario(@Param("id") int idUsuario);
+
+    int updatePerfilUsuarioByIdPerfilIs(@Param("id") int idPerfil, @Param("perfil") PerfilUsuario idUsuario);
 }
