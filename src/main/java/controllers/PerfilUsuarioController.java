@@ -51,9 +51,8 @@ public class PerfilUsuarioController {
     }
 
     @DeleteMapping("borrarperfilu/{id}")
-    public ResponseEntity<Void> eliminarPerfil(@PathVariable int id) {
+    public Void eliminarPerfil(@PathVariable int id) {
         perfilUsuarioService.eliminarPerfil(id);
-        return ResponseEntity.noContent().build();
     }
 }
 
