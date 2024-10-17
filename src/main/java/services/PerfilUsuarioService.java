@@ -2,10 +2,13 @@ package services;
 
 import dtos.PerfilUsuarioDto;
 import entities.PerfilUsuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import repositories.PerfilUsuarioRepository;
 
 import java.util.Optional;
 
+@Service
 public class PerfilUsuarioService {
 
     private final PerfilUsuarioRepository perfilUsuarioRepository;
