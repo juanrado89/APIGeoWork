@@ -1,6 +1,7 @@
 package controllers;
 
 import dtos.DireccionDto;
+import entities.Direccion;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import services.DireccionService;
@@ -15,6 +16,15 @@ public class DireccionController {
         this.direccionService = direccionService;
     }
 
+    @PostMapping("/creardireccion")
+    public ResponseEntity<DireccionDto> crearDireccion(@RequestParam Direccion direccion){
+        DireccionDto resultado = direccionService.crearDireccion(direccion);
+        if(resultado != null){
+            return ResponseEntity.ok(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
     @GetMapping("/direccionporid/{id}")
     public ResponseEntity<DireccionDto> getDireccionPorId(@PathVariable int id){
         DireccionDto resultado = direccionService.direccionPorId(id);
@@ -25,8 +35,19 @@ public class DireccionController {
         }
     }
 
-    @DeleteMapping("/borrardireccionporid/{id}")
-    public void borrarDireccionPorId(@PathVariable int id){
+    @PutMapping("/actualizardireccion/{id}")
+    public ResponseEntity<DireccionDto> actualizarDireccion(@PathVariable int id, @RequestParam Direccion direccion){
+        DireccionDto resultado = direccionService.actualizarDireccion(id,direccion);
+        if(resultado != null){
+            return ResponseEntity.ok(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
+    @DeleteMapping("/borrardireccionporid/{id}")
+    public ResponseEntity<Void> borrarDireccionPorId(@PathVariable int id){
+        direccionService.borrarPorId(id);
+        return ResponseEntity.noContent().build();
     }
 }

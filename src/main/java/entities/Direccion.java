@@ -25,6 +25,14 @@ public class Direccion {
     @Column(name = "direccion_texto",nullable = false)
     private String direccion;
 
+    @Basic
+    @Column(name = "piso",nullable = false)
+    private int piso;
+
+    @Basic
+    @Column(name = "puerta",nullable = false)
+    private String puerta;
+
     @ManyToOne()
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Ciudad ciudad;

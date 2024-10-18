@@ -34,7 +34,9 @@ public class PerfilEmpresaService {
     }
 
     public PerfilEmpresaDto actualizarPerfil(int id, PerfilEmpresa perfilEmpresa) {
-        if(perfilEmpresaRepository.updatePerfilUsuarioByIdPerfilIs(id,perfilEmpresa) == 1){
+        Optional<PerfilEmpresaDto> busqueda = perfilEmpresaRepository.findByIdUsuario(id);
+        if(busqueda.isPresent()){
+            perfilEmpresaRepository.save(perfilEmpresa);
             Optional<PerfilEmpresaDto> resultado = perfilEmpresaRepository.findByIdUsuario(id);
             return resultado.orElseGet(null);
         }else{
@@ -43,6 +45,6 @@ public class PerfilEmpresaService {
     }
 
     public void eliminarPerfil(int id) {
-        perfilEmpresaRepository.deleteByIdUsuario(id);
+        perfilEmpresaRepository.deletePerfilEmpresaByIdEmpresa(id);
     }
 }

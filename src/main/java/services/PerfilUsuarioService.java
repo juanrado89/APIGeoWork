@@ -35,7 +35,9 @@ public class PerfilUsuarioService {
     }
 
     public PerfilUsuarioDto actualizarPerfil(int id, PerfilUsuario perfilUsuario) {
-        if(perfilUsuarioRepository.updatePerfilUsuarioByIdPerfilIs(id,perfilUsuario) == 1){
+        Optional<PerfilUsuarioDto> busqueda = perfilUsuarioRepository.findByIdUsuario(id);
+        if(busqueda.isPresent()){
+            perfilUsuarioRepository.save(perfilUsuario);
             Optional<PerfilUsuarioDto> resultado = perfilUsuarioRepository.findByIdUsuario(id);
             return resultado.orElseGet(null);
         }else{
