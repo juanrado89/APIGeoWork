@@ -9,10 +9,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
+
 public interface FotoRepository extends JpaRepository<Foto,Integer> {
 
-    Optional<FotoDto> findAllByIdFoto(@Param("foto") int idFoto);
-    Optional<FotoDto> findAllByNombreLikeIgnoreCase(@Param("foto") String nombre);
+    Optional<FotoDto> findByIdFoto(@Param("foto") int idFoto);
+    Optional<FotoDto> findByNombreLikeIgnoreCaseAndDatos(@Param("foto") String nombre,@Param("datos") byte[] datos);
     @Modifying
     @Transactional
     int deleteFotoByIdFoto(@Param("foto") int idFoto);
