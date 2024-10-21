@@ -3,7 +3,6 @@ package services;
 import dtos.PerfilUsuarioDto;
 import entities.PerfilUsuario;
 import mapper.PerfilUsuarioMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.PerfilUsuarioRepository;
 

@@ -5,11 +5,13 @@ import entities.OfertaEmpleo;
 import especificaciones.OfertaEmpleoEspecificaciones;
 import mapper.OfertaEmpleoMapper;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 import repositories.OfertaEmpleoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class OfertaEmpleoService {
 
     private final OfertaEmpleoRepository ofertaEmpleoRepository;
@@ -21,7 +23,7 @@ public class OfertaEmpleoService {
     }
 
     public OfertaEmpleoDto buscarPorId(int id) {
-        Optional<OfertaEmpleoDto> oferta = ofertaEmpleoRepository.findById(id);
+        Optional<OfertaEmpleoDto> oferta = ofertaEmpleoRepository.findByIdOferta(id);
         return oferta.orElseGet(null);
     }
 

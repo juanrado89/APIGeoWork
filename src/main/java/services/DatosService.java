@@ -3,10 +3,12 @@ package services;
 import dtos.DatosDto;
 import entities.Datos;
 import mapper.DatosMapper;
+import org.springframework.stereotype.Service;
 import repositories.DatosRepository;
 
 import java.util.Optional;
 
+@Service
 public class DatosService {
 
     private final DatosRepository datosRepository;

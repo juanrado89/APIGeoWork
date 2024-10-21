@@ -3,10 +3,12 @@ package services;
 import dtos.EmpresaDto;
 import entities.Empresa;
 import mapper.EmpresaMapper;
+import org.springframework.stereotype.Service;
 import repositories.EmpresaRepository;
 
 import java.util.Optional;
 
+@Service
 public class EmpresaService {
 
     private final EmpresaRepository empresaRepository;

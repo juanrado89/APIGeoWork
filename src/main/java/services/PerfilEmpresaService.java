@@ -1,7 +1,6 @@
 package services;
 
 import dtos.PerfilEmpresaDto;
-import dtos.PerfilUsuarioDto;
 import entities.PerfilEmpresa;
 import mapper.PerfilEmpresaMapper;
 import org.springframework.stereotype.Service;

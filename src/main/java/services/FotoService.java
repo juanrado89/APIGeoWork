@@ -3,10 +3,12 @@ package services;
 import dtos.FotoDto;
 import entities.Foto;
 import mapper.FotoMapper;
+import org.springframework.stereotype.Service;
 import repositories.FotoRepository;
 
 import java.util.Optional;
 
+@Service
 public class FotoService {
     private final FotoRepository fotoRepository;
     private final FotoMapper fotoMapper;

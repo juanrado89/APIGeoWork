@@ -5,11 +5,13 @@ import entities.HorarioEntrevista;
 import especificaciones.HorarioEntrevistaEspecificaciones;
 import mapper.HorarioEntrevistaMapper;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 import repositories.HorarioEntrevistaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class HorarioEntrevistaService {
 
     private final HorarioEntrevistaRepository horarioEntrevistaRepository;
