@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import services.PaisService;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/pais")

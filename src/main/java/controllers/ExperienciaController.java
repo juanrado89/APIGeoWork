@@ -1,8 +1,6 @@
 package controllers;
 
-import dtos.EmpresaDto;
 import dtos.ExperienciaDto;
-import entities.Empresa;
 import entities.Experiencia;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

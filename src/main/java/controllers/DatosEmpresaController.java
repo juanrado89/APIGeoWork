@@ -1,9 +1,7 @@
 package controllers;
 
 import dtos.DatosEmpresaDto;
-import dtos.DocumentoDto;
 import entities.DatosEmpresa;
-import entities.Documento;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import services.DatosEmpresaService;
