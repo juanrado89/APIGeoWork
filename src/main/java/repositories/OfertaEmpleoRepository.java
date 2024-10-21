@@ -12,7 +12,4 @@ import java.util.Optional;
 public interface OfertaEmpleoRepository extends JpaRepository<OfertaEmpleo,Integer>, JpaSpecificationExecutor<OfertaEmpleo> {
     Optional<OfertaEmpleoDto> findByIdOferta(@Param("id") int idOferta);
 
-    List<OfertaEmpleoDto> findAllByTituloContainsIgnoreCase(@Param("titulo") String titulo);
-
-
 }

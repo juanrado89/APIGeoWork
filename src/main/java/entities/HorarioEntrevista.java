@@ -23,16 +23,16 @@ public class HorarioEntrevista {
     private int idHorario;
 
     @ManyToOne
-    @JoinColumn(name = "id_oferta", referencedColumnName = "id_pais", nullable = true,updatable = false)  // Referencia a la oferta de empleo
+    @JoinColumn(name = "id_oferta", referencedColumnName = "id_oferta", nullable = true,updatable = false)
     private OfertaEmpleo ofertaEmpleo;
 
     @Basic
     @Column(name = "dia", nullable = false)
-    private LocalDate dia;  // Fecha del horario
+    private LocalDate dia;
 
     @Basic
     @Column(name = "hora", nullable = false)
-    private LocalTime hora;  // Hora específica
+    private LocalTime hora;
 
     @Basic
     @Column(name = "candidatos_disponibles", nullable = false)
@@ -43,21 +43,7 @@ public class HorarioEntrevista {
     private int candidatosAsignados;
 
     @ManyToMany
-    @JoinTable(
-            name = "trabajador_horario",  // Nombre de la tabla intermedia
-            joinColumns = @JoinColumn(name = "horario_id"),  // Columna que referencia a HorarioEntrevista
-            inverseJoinColumns = @JoinColumn(name = "trabajador_id")  // Columna que referencia a Trabajador
-    )
+    @JoinTable(name = "trabajador_horario", joinColumns = @JoinColumn(name = "horario_id"), inverseJoinColumns = @JoinColumn(name = "trabajador_id"))
     private List<Trabajador> trabajadores;
 
-    // Método para verificar si hay disponibilidad para más candidatos
-    public boolean hayDisponibilidad() {
-        return candidatosAsignados < candidatosDisponibles;
-    }
-
-    public void asignarCandidato() {
-        if (hayDisponibilidad()) {
-            this.candidatosAsignados++;
-        }
-    }
 }

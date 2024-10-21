@@ -5,17 +5,17 @@ import entities.OfertaEmpleo;
 
 public class OfertaEmpleoEspecificaciones {
 
-    // Especificación para el campo 'pais'
+
     public static Specification<OfertaEmpleo> tienePais(String pais) {
         return (root, query, criteriaBuilder) -> {
             if (pais == null || pais.isEmpty()) {
-                return criteriaBuilder.conjunction();  // No agregar condición si el parámetro es nulo
+                return criteriaBuilder.conjunction();
             }
             return criteriaBuilder.like(root.get("pais"), "%" + pais + "%");
         };
     }
 
-    // Especificación para el campo 'ciudad'
+
     public static Specification<OfertaEmpleo> tieneCiudad(String ciudad) {
         return (root, query, criteriaBuilder) -> {
             if (ciudad == null || ciudad.isEmpty()) {
@@ -25,7 +25,16 @@ public class OfertaEmpleoEspecificaciones {
         };
     }
 
-    // Especificación para el campo 'titulo'
+    public static Specification<OfertaEmpleo> tieneEstado(String estado) {
+        return (root, query, criteriaBuilder) -> {
+            if (estado == null || estado.isEmpty()) {
+                return criteriaBuilder.conjunction();
+            }
+            return criteriaBuilder.like(root.get("estado"),"%" +  estado + "%");
+        };
+    }
+
+
     public static Specification<OfertaEmpleo> tieneTitulo(String titulo) {
         return (root, query, criteriaBuilder) -> {
             if (titulo == null || titulo.isEmpty()) {
@@ -35,7 +44,7 @@ public class OfertaEmpleoEspecificaciones {
         };
     }
 
-    // Especificación para el campo 'requisitos'
+
     public static Specification<OfertaEmpleo> tieneRequisitos(String requisitos) {
         return (root, query, criteriaBuilder) -> {
             if (requisitos == null || requisitos.isEmpty()) {
@@ -45,7 +54,7 @@ public class OfertaEmpleoEspecificaciones {
         };
     }
 
-    // Especificación para el campo 'nivelEducativoRequerido'
+
     public static Specification<OfertaEmpleo> tieneNivelEducativo(String nivelEducativoRequerido) {
         return (root, query, criteriaBuilder) -> {
             if (nivelEducativoRequerido == null || nivelEducativoRequerido.isEmpty()) {
@@ -55,8 +64,7 @@ public class OfertaEmpleoEspecificaciones {
         };
     }
 
-    // Especificación para el salario mínimo (campo 'salarioMin')
-    public static Specification<OfertaEmpleo> salarioMayorQue(Integer salarioMin) {
+    public static Specification<OfertaEmpleo> salarioMayorQue(Float salarioMin) {
         return (root, query, criteriaBuilder) -> {
             if (salarioMin == null) {
                 return criteriaBuilder.conjunction();
@@ -65,13 +73,22 @@ public class OfertaEmpleoEspecificaciones {
         };
     }
 
-    // Especificación para el salario máximo (campo 'salarioMax')
-    public static Specification<OfertaEmpleo> salarioMenorQue(Integer salarioMax) {
+    public static Specification<OfertaEmpleo> salarioMenorQue(Float salarioMax) {
         return (root, query, criteriaBuilder) -> {
             if (salarioMax == null) {
                 return criteriaBuilder.conjunction();
             }
             return criteriaBuilder.lessThanOrEqualTo(root.get("salarioMax"), salarioMax);
+        };
+    }
+    public static Specification<OfertaEmpleo> estatus(Integer estatus) {
+        return (root, query, criteriaBuilder) -> {
+
+            if (estatus == null || estatus < 0 || estatus > 1) {
+                return criteriaBuilder.conjunction();
+            }
+
+            return criteriaBuilder.equal(root.get("estatus"), estatus);
         };
     }
 }
