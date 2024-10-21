@@ -3,6 +3,7 @@ package services;
 import dtos.PerfilEmpresaDto;
 import dtos.PerfilUsuarioDto;
 import entities.PerfilEmpresa;
+import mapper.PerfilEmpresaMapper;
 import org.springframework.stereotype.Service;
 import repositories.PerfilEmpresaRepository;
 
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class PerfilEmpresaService {
 
     private final PerfilEmpresaRepository perfilEmpresaRepository;
+    private final PerfilEmpresaMapper perfilEmpresaMapper;
 
-    public PerfilEmpresaService(PerfilEmpresaRepository perfilEmpresaRepository) {
+    public PerfilEmpresaService(PerfilEmpresaRepository perfilEmpresaRepository, PerfilEmpresaMapper perfilEmpresaMapper) {
         this.perfilEmpresaRepository = perfilEmpresaRepository;
+        this.perfilEmpresaMapper = perfilEmpresaMapper;
     }
 
     public PerfilEmpresaDto obtenerPerfilPorId(int id) {
@@ -23,14 +26,8 @@ public class PerfilEmpresaService {
     }
 
     public PerfilEmpresaDto crearPerfil(PerfilEmpresa perfilEmpresa) {
-        Optional<PerfilEmpresaDto> perfil = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(perfilEmpresa.getEmail());
-        if(perfil.isPresent()){
-            return perfil.get();
-        }else{
-            perfilEmpresaRepository.save(perfilEmpresa);
-            Optional<PerfilEmpresaDto> resultado = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(perfilEmpresa.getEmail());
-            return resultado.orElse(null);
-        }
+        PerfilEmpresa creado = perfilEmpresaRepository.save(perfilEmpresa);
+        return perfilEmpresaMapper.toDto(creado);
     }
 
     public PerfilEmpresaDto actualizarPerfil(int id, PerfilEmpresa perfilEmpresa) {

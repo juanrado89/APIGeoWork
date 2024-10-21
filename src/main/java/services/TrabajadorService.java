@@ -2,6 +2,7 @@ package services;
 
 import dtos.TrabajadorDto;
 import entities.Trabajador;
+import mapper.TrabajadorMapper;
 import org.springframework.stereotype.Service;
 import repositories.TrabajadorRepository;
 
@@ -11,20 +12,16 @@ import java.util.Optional;
 public class TrabajadorService {
 
     private final TrabajadorRepository trabajadorRepository;
+    private final TrabajadorMapper trabajadorMapper;
 
-    public TrabajadorService(TrabajadorRepository trabajadorRepository) {
+    public TrabajadorService(TrabajadorRepository trabajadorRepository, TrabajadorMapper trabajadorMapper) {
         this.trabajadorRepository = trabajadorRepository;
+        this.trabajadorMapper = trabajadorMapper;
     }
 
     public TrabajadorDto crearTrabajador(Trabajador trabajador) {
-        TrabajadorDto busqueda = buscarTrabajadorPorId(trabajador.getIdTrabajador());
-        if(busqueda != null){
-            return busqueda;
-        }else{
-            trabajadorRepository.save(trabajador);
-            Optional<TrabajadorDto> resultado = trabajadorRepository.findTrabajadorByDatosUsuario_IdDatos(trabajador.getDatosUsuario().getIdDatos());
-            return resultado.orElseGet(null);
-        }
+        Trabajador creado = trabajadorRepository.save(trabajador);
+        return trabajadorMapper.toDto(creado);
     }
 
     public TrabajadorDto buscarTrabajadorPorId(int id) {

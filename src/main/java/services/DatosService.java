@@ -2,6 +2,7 @@ package services;
 
 import dtos.DatosDto;
 import entities.Datos;
+import mapper.DatosMapper;
 import repositories.DatosRepository;
 
 import java.util.Optional;
@@ -9,9 +10,11 @@ import java.util.Optional;
 public class DatosService {
 
     private final DatosRepository datosRepository;
+    private final DatosMapper datosMapper;
 
-    public DatosService(DatosRepository datosRepository) {
+    public DatosService(DatosRepository datosRepository, DatosMapper datosMapper) {
         this.datosRepository = datosRepository;
+        this.datosMapper = datosMapper;
     }
 
     public DatosDto buscarPorId(int id) {
@@ -21,14 +24,8 @@ public class DatosService {
 
     public DatosDto crearDatos(Datos datos) {
 
-        Optional<DatosDto> busqueda = datosRepository.findDatosByNombreContainsIgnoreCaseAndApellidosContainsIgnoreCaseAndDireccion_IdDireccion(datos.getNombre(),datos.getApellidos(),datos.getDireccion().getIdDireccion());
-        if(busqueda.isPresent()){
-            return null;
-        }else{
-            datosRepository.save(datos);
-            Optional<DatosDto> resultado = datosRepository.findDatosByNombreContainsIgnoreCaseAndApellidosContainsIgnoreCaseAndDireccion_IdDireccion(datos.getNombre(),datos.getApellidos(),datos.getDireccion().getIdDireccion());
-            return resultado.orElseGet(null);
-        }
+        Datos creado = datosRepository.save(datos);
+        return datosMapper.toDto(creado);
 
     }
 

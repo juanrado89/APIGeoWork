@@ -2,6 +2,7 @@ package services;
 
 import dtos.PerfilUsuarioDto;
 import entities.PerfilUsuario;
+import mapper.PerfilUsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.PerfilUsuarioRepository;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class PerfilUsuarioService {
 
     private final PerfilUsuarioRepository perfilUsuarioRepository;
+    private final PerfilUsuarioMapper perfilUsuarioMapper;
 
-    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository) {
+    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository,PerfilUsuarioMapper perfilUsuarioMapper) {
         this.perfilUsuarioRepository = perfilUsuarioRepository;
+        this.perfilUsuarioMapper = perfilUsuarioMapper;
     }
 
     public PerfilUsuarioDto obtenerPerfilPorId(int id) {
@@ -24,14 +27,8 @@ public class PerfilUsuarioService {
     }
 
     public PerfilUsuarioDto crearPerfil(PerfilUsuario perfilUsuario) {
-        Optional<PerfilUsuarioDto> perfilACrear = perfilUsuarioRepository.findPerfilUsuarioByEmailContainsIgnoreCase(perfilUsuario.getEmail());
-        if(perfilACrear.isPresent()) {
-            return perfilACrear.get();
-        }else{
-            perfilUsuarioRepository.save(perfilUsuario);
-            Optional<PerfilUsuarioDto> resultado = perfilUsuarioRepository.findPerfilUsuarioByEmailContainsIgnoreCase(perfilUsuario.getEmail());
-            return resultado.orElseGet(null);
-        }
+        PerfilUsuario creado = perfilUsuarioRepository.save(perfilUsuario);
+        return perfilUsuarioMapper.toDto(creado);
     }
 
     public PerfilUsuarioDto actualizarPerfil(int id, PerfilUsuario perfilUsuario) {

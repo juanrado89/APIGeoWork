@@ -2,6 +2,7 @@ package services;
 
 import dtos.EmpresaDto;
 import entities.Empresa;
+import mapper.EmpresaMapper;
 import repositories.EmpresaRepository;
 
 import java.util.Optional;
@@ -9,20 +10,16 @@ import java.util.Optional;
 public class EmpresaService {
 
     private final EmpresaRepository empresaRepository;
+    private final EmpresaMapper empresaMapper;
 
-    public EmpresaService(EmpresaRepository empresaRepository) {
+    public EmpresaService(EmpresaRepository empresaRepository, EmpresaMapper empresaMapper) {
         this.empresaRepository = empresaRepository;
+        this.empresaMapper = empresaMapper;
     }
 
     public EmpresaDto crearEmpresa(Empresa empresa) {
-        EmpresaDto busqueda = buscarEmpresaPorId(empresa.getIdEmpresa());
-        if(busqueda != null){
-            return busqueda;
-        }else{
-            empresaRepository.save(empresa);
-            Optional<EmpresaDto> resultado = empresaRepository.findByDatosEmpresa_IdDatosEmpresa(empresa.getDatosEmpresa().getIdDatosEmpresa());
-            return resultado.orElseGet(null);
-        }
+        Empresa creada = empresaRepository.save(empresa);
+        return empresaMapper.toDto(creada);
     }
 
     public EmpresaDto buscarEmpresaPorId(int id) {

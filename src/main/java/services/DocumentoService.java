@@ -2,6 +2,7 @@ package services;
 
 import dtos.DocumentoDto;
 import entities.Documento;
+import mapper.DocumentoMapper;
 import org.springframework.stereotype.Service;
 import repositories.DocumentoRepository;
 
@@ -10,9 +11,11 @@ import java.util.Optional;
 public class DocumentoService {
 
     private final DocumentoRepository documentoRepository;
+    private final DocumentoMapper documentoMapper;
 
-    public DocumentoService(DocumentoRepository documentoRepository) {
+    public DocumentoService(DocumentoRepository documentoRepository, DocumentoMapper documentoMapper) {
         this.documentoRepository = documentoRepository;
+        this.documentoMapper = documentoMapper;
     }
 
     public DocumentoDto buscarPorId(int id) {
@@ -22,14 +25,8 @@ public class DocumentoService {
 
     public DocumentoDto crearDocumento(Documento documento) {
 
-        Optional<DocumentoDto> busqueda = documentoRepository.findByNombreLikeIgnoreCaseAndContenidoContainingIgnoreCase(documento.getNombre(),documento.getContenido());
-        if(busqueda.isPresent()){
-            return null;
-        }else{
-            documentoRepository.save(documento);
-            Optional<DocumentoDto> resultado = documentoRepository.findByNombreLikeIgnoreCaseAndContenidoContainingIgnoreCase(documento.getNombre(),documento.getContenido());
-            return resultado.orElseGet(null);
-        }
+        Documento creado = documentoRepository.save(documento);
+        return documentoMapper.toDto(creado);
 
     }
 

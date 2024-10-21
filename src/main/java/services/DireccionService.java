@@ -2,6 +2,7 @@ package services;
 
 import dtos.DireccionDto;
 import entities.Direccion;
+import mapper.DireccionMapper;
 import org.springframework.stereotype.Service;
 import repositories.DireccionReposirory;
 
@@ -10,9 +11,11 @@ import java.util.Optional;
 public class DireccionService {
 
     private final DireccionReposirory direccionReposirory;
+    private final DireccionMapper direccionMapper;
 
-    public DireccionService(DireccionReposirory direccionReposirory) {
+    public DireccionService(DireccionReposirory direccionReposirory, DireccionMapper direccionMapper) {
         this.direccionReposirory = direccionReposirory;
+        this.direccionMapper = direccionMapper;
     }
 
 
@@ -37,13 +40,7 @@ public class DireccionService {
     }
 
     public DireccionDto crearDireccion(Direccion direccion) {
-        Optional<DireccionDto> busqueda = direccionReposirory.findDireccionByDireccionContainsIgnoreCaseAndPisoAndPuertaContainsIgnoreCaseAndCodigoPostal(direccion.getDireccion(),direccion.getPiso(),direccion.getPuerta(),direccion.getCodigoPostal());
-        if(busqueda.isPresent()){
-            return null;
-        }else{
-            direccionReposirory.save(direccion);
-            Optional<DireccionDto> resultado = direccionReposirory.findDireccionByDireccionContainsIgnoreCaseAndPisoAndPuertaContainsIgnoreCaseAndCodigoPostal(direccion.getDireccion(),direccion.getPiso(),direccion.getPuerta(),direccion.getCodigoPostal());
-            return resultado.orElseGet(null);
-        }
+        Direccion creada = direccionReposirory.save(direccion);
+        return direccionMapper.toDto(creada);
     }
 }

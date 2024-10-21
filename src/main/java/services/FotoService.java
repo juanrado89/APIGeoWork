@@ -2,15 +2,18 @@ package services;
 
 import dtos.FotoDto;
 import entities.Foto;
+import mapper.FotoMapper;
 import repositories.FotoRepository;
 
 import java.util.Optional;
 
 public class FotoService {
     private final FotoRepository fotoRepository;
+    private final FotoMapper fotoMapper;
 
-    public FotoService(FotoRepository fotoRepository) {
+    public FotoService(FotoRepository fotoRepository, FotoMapper fotoMapper) {
         this.fotoRepository = fotoRepository;
+        this.fotoMapper = fotoMapper;
     }
 
     public FotoDto buscarPorId(int id) {
@@ -20,14 +23,8 @@ public class FotoService {
 
     public FotoDto crearFoto(Foto foto) {
 
-        Optional<FotoDto> busqueda = fotoRepository.findByNombreLikeIgnoreCaseAndDatos(foto.getNombre(), foto.getDatos());
-        if(busqueda.isPresent()){
-            return null;
-        }else{
-            fotoRepository.save(foto);
-            Optional<FotoDto> resultado = fotoRepository.findByNombreLikeIgnoreCaseAndDatos(foto.getNombre(), foto.getDatos());
-            return resultado.orElseGet(null);
-        }
+        Foto creada = fotoRepository.save(foto);
+        return fotoMapper.ToDto(creada);
 
     }
 
