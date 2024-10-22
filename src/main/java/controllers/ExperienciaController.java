@@ -39,7 +39,7 @@ public class ExperienciaController {
     }
 
     @GetMapping("/buscarexperienciaporsector/{sector}")
-    public ResponseEntity<List<ExperienciaDto>> buscarExperienciaPorId(@PathVariable String sector){
+    public ResponseEntity<List<ExperienciaDto>> buscarExperienciaPorSector(@PathVariable String sector){
         List<ExperienciaDto> resultado = experienciaService.buscarExperienciaPorSector(sector);
         if(!resultado.isEmpty()){
             return ResponseEntity.ok(resultado);

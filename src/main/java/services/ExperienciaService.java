@@ -31,7 +31,8 @@ public class ExperienciaService {
     public ExperienciaDto actualizarExperiencia(int id, Experiencia experiencia) {
         Optional<ExperienciaDto> busqueda = experienciaRepository.findByIdExperiencia(id);
         if(busqueda.isPresent()){
-            return (ExperienciaDto) experienciaRepository.save(experiencia);
+            Experiencia actualizada = experienciaRepository.save(experiencia);
+            return experienciaMapper.toDto(actualizada);
         }else{
             return null;
         }
