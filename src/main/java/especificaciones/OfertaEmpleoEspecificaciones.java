@@ -1,5 +1,6 @@
 package especificaciones;
 
+import entities.Sector;
 import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
 import entities.OfertaEmpleo;
@@ -25,6 +26,15 @@ public class OfertaEmpleoEspecificaciones {
                 return criteriaBuilder.conjunction();  // No agregar condición si el parámetro es nulo
             }
             return criteriaBuilder.like(root.get("ciudad"),"%" +  ciudad + "%");
+        };
+    }
+
+    public static Specification<OfertaEmpleo> tieneSector(Sector sector) {
+        return (root, query, criteriaBuilder) -> {
+            if (sector == null) {
+                return criteriaBuilder.conjunction();
+            }
+            return criteriaBuilder.like(root.get("sector"),"%" +  sector.getSector() + "%");
         };
     }
 
@@ -99,7 +109,6 @@ public class OfertaEmpleoEspecificaciones {
         return (root, query, criteriaBuilder) -> {
 
             Path<Timestamp> fechaPublicacion = root.get("fechaPublicacion");
-
 
             if (ascendente) {
                 query.orderBy(criteriaBuilder.asc(fechaPublicacion));
