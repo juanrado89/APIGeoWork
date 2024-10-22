@@ -57,7 +57,8 @@ public class OfertaEmpleoService {
                         .and(OfertaEmpleoEspecificaciones.salarioMayorQue(parametros.getSalarioMin()))
                         .and(OfertaEmpleoEspecificaciones.salarioMenorQue(parametros.getSalarioMax()))
                         .and(OfertaEmpleoEspecificaciones.tieneRequisitos(parametros.getRequisitos()))
-                        .and(OfertaEmpleoEspecificaciones.estatus(parametros.getEstado())));
+                        .and(OfertaEmpleoEspecificaciones.estatus(parametros.getEstado()))
+                        .and(OfertaEmpleoEspecificaciones.ordenarPorFecha(false)));
         List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAll(especificaciones);
         return ofertaEmpleoMapper.toDto(resultado);
     }

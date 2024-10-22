@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,21 +22,15 @@ public class Experiencia {
     @Column(name = "id_experiencia",nullable = false)
     private int idExperiencia;
 
-    @Basic
-    @Column(name = "nivel_educativo",nullable = false)
-    private String nivelEducativo;
+    @ManyToOne()
+    @JoinColumn(name = "id_experiencia", referencedColumnName = "id_experiencia", nullable = false, updatable = false)
+    private NivelEducativo nivelEducativo;
 
-    @Basic
-    @Column(name = "sector",nullable = false)
-    private String sector;
+    @ManyToMany(mappedBy = "sectores")
+    private List<Sector> sector;
 
-    @Basic
-    @Column(name = "experiencia_total",nullable = true)
-    private int experienciaTotal;
-
-    @Basic
-    @Column(name = "resumen_profesional",nullable = true)
-    private String resumenProfesional;
+    @OneToOne(mappedBy = "experienciaTotal")
+    private ExperienciaTotal experienciaTotal;
 
     @OneToOne(mappedBy = "id_documento")
     private Documento cvUrl;

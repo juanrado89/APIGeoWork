@@ -1,16 +1,17 @@
 package dtos;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public interface ExperienciaDto {
 
     int getIdExperiencia();
 
-    String getNivelEducativo();
+    NivelEducativoDto getNivelEducativo();
 
-    int getExperienciaTotal();
+    List<SectorDto> getSector();
 
-    String getResumenProfesional();
+    ExperienciaTotalDto getExperienciaTotal();
 
     DocumentoDto getCvUrl();
 

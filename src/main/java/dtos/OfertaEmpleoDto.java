@@ -10,6 +10,7 @@ public interface OfertaEmpleoDto {
     String getTitulo();
     int getCantidad();
     String getDescripcion();
+    SectorDto getSector();
     String getRequisitos();
     String getNivelEducativoRequerido();
     float getSalarioMin();

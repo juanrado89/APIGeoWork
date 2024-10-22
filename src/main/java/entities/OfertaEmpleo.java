@@ -38,13 +38,17 @@ public class OfertaEmpleo {
     @Column(name = "descripcion",nullable = false)
     private String descripcion;
 
+    @ManyToOne()
+    @JoinColumn(name = "id_oferta_empleo", referencedColumnName = "id_oferta_empleo", nullable = false, updatable = false)
+    private Sector sector;
+
     @Basic
     @Column(name = "requisitos",nullable = false)
     private String requisitos;
 
-    @Basic
-    @Column(name = "nivel_educativo_requerido",nullable = false)
-    private String nivelEducativoRequerido;
+    @ManyToOne()
+    @JoinColumn(name = "id_oferta_empleo", referencedColumnName = "id_oferta_empleo", nullable = true, updatable = false)
+    private NivelEducativo nivelEducativo;
 
     @Basic
     @Column(name = "salario_min",nullable = false)

@@ -1,7 +1,10 @@
 package especificaciones;
 
+import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
 import entities.OfertaEmpleo;
+
+import java.sql.Timestamp;
 
 public class OfertaEmpleoEspecificaciones {
 
@@ -89,6 +92,22 @@ public class OfertaEmpleoEspecificaciones {
             }
 
             return criteriaBuilder.equal(root.get("estatus"), estatus);
+        };
+    }
+
+    public static Specification<OfertaEmpleo> ordenarPorFecha(boolean ascendente) {
+        return (root, query, criteriaBuilder) -> {
+
+            Path<Timestamp> fechaPublicacion = root.get("fechaPublicacion");
+
+
+            if (ascendente) {
+                query.orderBy(criteriaBuilder.asc(fechaPublicacion));
+            } else {
+                query.orderBy(criteriaBuilder.desc(fechaPublicacion));
+            }
+
+            return criteriaBuilder.conjunction();
         };
     }
 }
