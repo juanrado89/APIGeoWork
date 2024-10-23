@@ -23,7 +23,7 @@ public class OfertaEmpleoEspecificaciones {
     public static Specification<OfertaEmpleo> tieneCiudad(String ciudad) {
         return (root, query, criteriaBuilder) -> {
             if (ciudad == null || ciudad.isEmpty()) {
-                return criteriaBuilder.conjunction();  // No agregar condición si el parámetro es nulo
+                return criteriaBuilder.conjunction();
             }
             return criteriaBuilder.like(root.get("ciudad"),"%" +  ciudad + "%");
         };

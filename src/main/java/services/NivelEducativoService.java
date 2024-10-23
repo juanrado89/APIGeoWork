@@ -24,8 +24,8 @@ public class NivelEducativoService {
     }
 
     public List<NivelEducativoDto> buscarPortitulo(String titulo) {
-        List<NivelEducativoDto> resultado = nivelEducativoRepository.findByTitulo(titulo);
-        return resultado;
+        return nivelEducativoRepository.findByTitulo(titulo);
+
     }
 
     public NivelEducativoDto crearNivelEducativo(NivelEducativo nivelEducativo) {
