@@ -2,8 +2,10 @@ package controllers;
 
 import dtos.DescripcionExperienciaDto;
 import entities.DescripcionExperiencia;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import services.AutenticacionService;
 import services.DescripcionExperienciaSerice;
 
 @RestController
@@ -11,13 +13,25 @@ import services.DescripcionExperienciaSerice;
 public class DescripcionExperienciaController {
 
     private final DescripcionExperienciaSerice descripcionExperienciaSerice;
+    private final AutenticacionService autenticacionService;
 
-    public DescripcionExperienciaController(DescripcionExperienciaSerice descripcionExperienciaSerice) {
+    public DescripcionExperienciaController(DescripcionExperienciaSerice descripcionExperienciaSerice, AutenticacionService autenticacionService) {
         this.descripcionExperienciaSerice = descripcionExperienciaSerice;
+        this.autenticacionService = autenticacionService;
+    }
+
+    private boolean validarToken(String autorizacion) {
+        String token = autorizacion.replace("Bearer ", "");
+        return autenticacionService.validarToken(token);
     }
 
     @GetMapping("/buscardescripcionexperienciaporid/{id}")
-    public ResponseEntity<DescripcionExperienciaDto> buscarDescripcionExperienciaPorId(@PathVariable int id){
+    public ResponseEntity<DescripcionExperienciaDto> buscarDescripcionExperienciaPorId(@RequestHeader("Authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DescripcionExperienciaDto resultado = descripcionExperienciaSerice.buscarPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -27,7 +41,12 @@ public class DescripcionExperienciaController {
     }
 
     @PostMapping("/creardescripcionexperiencia")
-    public ResponseEntity<DescripcionExperienciaDto> crearDescripcionExperiencia(@RequestParam DescripcionExperiencia descripcionExperiencia){
+    public ResponseEntity<DescripcionExperienciaDto> crearDescripcionExperiencia(@RequestHeader("Authorization") String autorizacion, @RequestParam DescripcionExperiencia descripcionExperiencia){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DescripcionExperienciaDto resultado = descripcionExperienciaSerice.crearDescripcionExperiencia(descripcionExperiencia);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -37,7 +56,12 @@ public class DescripcionExperienciaController {
     }
 
     @PutMapping("actualizardescripcionexperiencia/{id}")
-    public ResponseEntity<DescripcionExperienciaDto> actualizarDescripcionExperiencia(@PathVariable int id, @RequestParam DescripcionExperiencia descripcionExperiencia){
+    public ResponseEntity<DescripcionExperienciaDto> actualizarDescripcionExperiencia(@RequestHeader("Authorization") String autorizacion, @PathVariable int id, @RequestParam DescripcionExperiencia descripcionExperiencia){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DescripcionExperienciaDto resultado = descripcionExperienciaSerice.actualizarDescripcionExperiencia(id,descripcionExperiencia);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -47,7 +71,12 @@ public class DescripcionExperienciaController {
     }
 
     @DeleteMapping("/borrardescripcionexperiencia/{id}")
-    public ResponseEntity<Void> borrarDescripcionExperiencia(@PathVariable int id){
+    public ResponseEntity<Void> borrarDescripcionExperiencia(@RequestHeader("Authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         descripcionExperienciaSerice.borrarDescripcionExperiencia(id);
         return ResponseEntity.noContent().build();
     }

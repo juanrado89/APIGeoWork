@@ -1,0 +1,111 @@
+package services;
+
+import dtos.PerfilEmpresaPDto;
+import dtos.PerfilUsuarioPDto;
+import entities.Autenticacion;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import repositories.AutenticacionRepository;
+import repositories.PerfilEmpresaRepository;
+import repositories.PerfilUsuarioRepository;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+import java.util.Optional;
+
+@Service
+public class AutenticacionService {
+
+    private final PerfilUsuarioRepository perfilUsuarioRepository;
+    private final PerfilEmpresaRepository perfilEmpresaRepository;
+    private final AutenticacionRepository autenticacionRepository;
+    private final PasswordEncoder passwordEncoder;
+    @Value("${jwt.secret}")
+    private String SECRET_KEY;
+
+    public AutenticacionService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilEmpresaRepository perfilEmpresaRepository, PasswordEncoder passwordEncoder, AutenticacionRepository autenticacionRepository) {
+        this.perfilUsuarioRepository = perfilUsuarioRepository;
+        this.perfilEmpresaRepository = perfilEmpresaRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.autenticacionRepository = autenticacionRepository;
+    }
+
+    public String generarToken(int idUsuario, String rol) {
+        Date expiracion = Date.from(LocalDateTime.now().plusDays(7).toInstant(ZoneOffset.of(ZoneOffset.UTC.toString())));
+
+        return Jwts.builder()
+                .setSubject(String.valueOf(idUsuario))
+                .claim("role", rol)
+                .setIssuedAt(new Date())
+                .setExpiration(expiracion)
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
+    }
+
+    public Autenticacion authenticacionUsuario(String email, String password, boolean tipoPerfil) throws Exception {
+
+        if (tipoPerfil) {
+            Optional<PerfilUsuarioPDto> perfilUsuario = perfilUsuarioRepository.findByEmailContainsIgnoreCase(email);
+            if (perfilUsuario.isPresent() && passwordEncoder.matches(password, perfilUsuario.get().getPassword())) {
+                return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
+            }
+        } else {
+            Optional<PerfilEmpresaPDto> perfilEmpresa = perfilEmpresaRepository.findByEmailContainsIgnoreCase(email);
+            if (perfilEmpresa.isPresent() && passwordEncoder.matches(password, perfilEmpresa.get().getPassword())) {
+                return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
+            }
+        }
+        throw new Exception("Credenciales incorrectas");
+    }
+
+    private Autenticacion generarTokenAutenticacion(int idUsuario, String tipoPerfil, String rol) {
+        Optional<Autenticacion> autenticacionExistente = autenticacionRepository.findByIdUsuarioAndTipoUsuario(idUsuario, tipoPerfil);
+
+        String token = generarToken(idUsuario, rol);
+        LocalDateTime fechaExpiracion = LocalDateTime.now().plusDays(7);
+
+        if (autenticacionExistente.isPresent()) {
+
+            Autenticacion autenticacion = autenticacionExistente.get();
+            autenticacion.setRefreshToken(token);
+            autenticacion.setFechaExpiracion(fechaExpiracion);
+            autenticacion.setRevocado(false);
+            return autenticacionRepository.save(autenticacion);
+        } else {
+            Autenticacion nuevaAutenticacion = new Autenticacion();
+            nuevaAutenticacion.setIdUsuario(idUsuario);
+            nuevaAutenticacion.setTipoUsuario(tipoPerfil);
+            nuevaAutenticacion.setRefreshToken(token);
+            nuevaAutenticacion.setFechaExpiracion(fechaExpiracion);
+            nuevaAutenticacion.setRol(rol);
+            nuevaAutenticacion.setRevocado(false);
+            return autenticacionRepository.save(nuevaAutenticacion);
+        }
+    }
+
+
+    public boolean validarToken(String token) {
+        Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(token);
+        if (autenticacionOpt.isPresent()) {
+            Autenticacion autenticacion = autenticacionOpt.get();
+
+            if (autenticacion.getFechaExpiracion().isAfter(LocalDateTime.now()) && !autenticacion.isRevocado()) {
+
+                try {
+                    Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+                    return true;
+                } catch (SignatureException e) {
+                    System.err.println("Firma del token inválida: " + e.getMessage());
+                }
+            }
+        }
+        return false;
+    }
+
+}

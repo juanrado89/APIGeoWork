@@ -1,11 +1,10 @@
 package controllers;
 
 import dtos.NivelDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import services.AutenticacionService;
 import services.NivelService;
 
 @RestController
@@ -13,13 +12,24 @@ import services.NivelService;
 public class NivelController {
 
     private final NivelService nivelService;
+    private final AutenticacionService autenticacionService;
 
-    public NivelController(NivelService nivelService) {
+    public NivelController(NivelService nivelService, AutenticacionService autenticacionService) {
         this.nivelService = nivelService;
+        this.autenticacionService = autenticacionService;
+    }
+
+    private boolean validarToken(String autorizacion) {
+        String token = autorizacion.replace("Bearer ", "");
+        return autenticacionService.validarToken(token);
     }
 
     @GetMapping("/buscarporid/{id}")
-    public ResponseEntity<NivelDto> buscarPorId(@PathVariable int id) {
+    public ResponseEntity<NivelDto> buscarPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
 
         NivelDto resultado = nivelService.buscarPorId(id);
         if (resultado != null) {
@@ -31,7 +41,11 @@ public class NivelController {
     }
 
     @GetMapping("/buscarpornombre/{nombre}")
-    public ResponseEntity<NivelDto> buscarPorId(@PathVariable String nombre) {
+    public ResponseEntity<NivelDto> buscarPorId(@RequestHeader("authorization") String autorizacion, @PathVariable String nombre) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
 
         NivelDto resultado = nivelService.buscarPorNombre(nombre);
         if (resultado != null) {

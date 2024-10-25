@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +39,12 @@ public class PerfilEmpresa {
 
     @OneToMany(mappedBy = "idEmpresa")
     private List<OfertaEmpleo> ofertas;
+
+    @PrePersist
+    private void encriptarPassword() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(this.password);
+    }
 
     @Override
     public int hashCode() {

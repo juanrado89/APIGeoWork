@@ -2,8 +2,10 @@ package controllers;
 
 import dtos.PerfilUsuarioDto;
 import entities.PerfilUsuario;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import services.AutenticacionService;
 import services.PerfilUsuarioService;
 
 
@@ -12,14 +14,26 @@ import services.PerfilUsuarioService;
 public class PerfilUsuarioController {
 
     private final PerfilUsuarioService perfilUsuarioService;
+    private final AutenticacionService autenticacionService;
 
-    public PerfilUsuarioController(PerfilUsuarioService perfilUsuarioService) {
+    public PerfilUsuarioController(PerfilUsuarioService perfilUsuarioService, AutenticacionService autenticacionService) {
         this.perfilUsuarioService = perfilUsuarioService;
+        this.autenticacionService = autenticacionService;
+    }
+
+    private boolean validarToken(String autorizacion) {
+        String token = autorizacion.replace("Bearer ", "");
+        return autenticacionService.validarToken(token);
     }
 
 
     @GetMapping("/buscarperfilu/{id}")
-    public ResponseEntity<PerfilUsuarioDto> buscarPerfilUPorId(@PathVariable int id) {
+    public ResponseEntity<PerfilUsuarioDto> buscarPerfilUPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         PerfilUsuarioDto perfil = perfilUsuarioService.buscarPerfilUPorId(id);
         if(perfil != null) {
             return ResponseEntity.ok(perfil);
@@ -29,7 +43,12 @@ public class PerfilUsuarioController {
     }
 
     @PostMapping("/crearperfilu")
-    public ResponseEntity<PerfilUsuarioDto> crearPerfilU(@RequestBody PerfilUsuario perfilUsuario) {
+    public ResponseEntity<PerfilUsuarioDto> crearPerfilU(@RequestHeader("authorization") String autorizacion, @RequestBody PerfilUsuario perfilUsuario) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         PerfilUsuarioDto nuevoPerfil = perfilUsuarioService.crearPerfilU(perfilUsuario);
         if(nuevoPerfil != null) {
             return ResponseEntity.ok(nuevoPerfil);
@@ -40,7 +59,12 @@ public class PerfilUsuarioController {
     }
 
     @PutMapping("/actualizarperfilu/{id}")
-    public ResponseEntity<PerfilUsuarioDto> actualizarPerfilU(@PathVariable int id, @RequestBody PerfilUsuario perfilUsuario) {
+    public ResponseEntity<PerfilUsuarioDto> actualizarPerfilU(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestBody PerfilUsuario perfilUsuario) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         PerfilUsuarioDto perfilActualizado = perfilUsuarioService.actualizarPerfilU(id, perfilUsuario);
         if(perfilActualizado != null) {
             return ResponseEntity.ok(perfilActualizado);
@@ -51,7 +75,12 @@ public class PerfilUsuarioController {
     }
 
     @DeleteMapping("/borrarperfilu/{id}")
-    public ResponseEntity<Void> eliminarPerfilU(@PathVariable int id) {
+    public ResponseEntity<Void> eliminarPerfilU(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         perfilUsuarioService.eliminarPerfilU(id);
         return ResponseEntity.noContent().build();
     }

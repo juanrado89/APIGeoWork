@@ -1,8 +1,10 @@
 package controllers;
 
 import dtos.PaisDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import services.AutenticacionService;
 import services.PaisService;
 
 
@@ -11,13 +13,25 @@ import services.PaisService;
 public class PaisController {
 
     private final PaisService paisService;
+    private final AutenticacionService autenticacionService;
 
-    public PaisController(PaisService paisService) {
+    public PaisController(PaisService paisService, AutenticacionService autenticacionService) {
         this.paisService = paisService;
+        this.autenticacionService = autenticacionService;
+    }
+
+    private boolean validarToken(String autorizacion) {
+        String token = autorizacion.replace("Bearer ", "");
+        return autenticacionService.validarToken(token);
     }
 
     @GetMapping("/buscarpaisporid/{id}")
-    public ResponseEntity<PaisDto> buscarPorId(@PathVariable int id){
+    public ResponseEntity<PaisDto> buscarPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         PaisDto resultado = paisService.getPaisPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -27,7 +41,12 @@ public class PaisController {
     }
 
     @GetMapping("/buscarpaispornombre/{nombre}")
-    public  ResponseEntity<PaisDto> buscarPorNombre(@PathVariable String nombre){
+    public  ResponseEntity<PaisDto> buscarPorNombre(@RequestHeader("authorization") String autorizacion, @PathVariable String nombre){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         PaisDto resultado = paisService.getPaisPorNombre(nombre);
         if(resultado != null){
             return ResponseEntity.ok(resultado);

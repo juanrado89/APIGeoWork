@@ -2,8 +2,10 @@ package controllers;
 
 import dtos.DatosDto;
 import entities.Datos;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import services.AutenticacionService;
 import services.DatosService;
 
 @RestController
@@ -11,13 +13,25 @@ import services.DatosService;
 public class DatosController {
 
     private final DatosService datosService;
+    private final AutenticacionService autenticacionService;
 
-    public DatosController(DatosService datosService) {
+    public DatosController(DatosService datosService, AutenticacionService autenticacionService) {
         this.datosService = datosService;
+        this.autenticacionService = autenticacionService;
+    }
+
+    private boolean validarToken(String autorizacion) {
+        String token = autorizacion.replace("Bearer ", "");
+        return autenticacionService.validarToken(token);
     }
 
     @GetMapping("/buscardatosusuarioporid/{id}")
-    public ResponseEntity<DatosDto> buscarDatosPorId(@PathVariable int id){
+    public ResponseEntity<DatosDto> buscarDatosPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DatosDto resultado = datosService.buscarPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -27,7 +41,12 @@ public class DatosController {
     }
 
     @PostMapping("/creardatosusuario")
-    public ResponseEntity<DatosDto> crearDatos(@RequestParam Datos datos){
+    public ResponseEntity<DatosDto> crearDatos(@RequestHeader("authorization") String autorizacion, @RequestParam Datos datos){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DatosDto resultado = datosService.crearDatos(datos);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -37,7 +56,12 @@ public class DatosController {
     }
 
     @PutMapping("actualizardatosusuario/{id}")
-    public ResponseEntity<DatosDto> actualizarDatos(@PathVariable int id, @RequestParam Datos datos){
+    public ResponseEntity<DatosDto> actualizarDatos(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestParam Datos datos){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DatosDto resultado = datosService.actualizarDatos(id,datos);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -47,7 +71,12 @@ public class DatosController {
     }
 
     @DeleteMapping("/borrardatosusuario/{id}")
-    public ResponseEntity<Void> borrarDatos(@PathVariable int id){
+    public ResponseEntity<Void> borrarDatos(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         datosService.borrarDatos(id);
         return ResponseEntity.noContent().build();
     }

@@ -2,8 +2,10 @@ package controllers;
 
 import dtos.DireccionDto;
 import entities.Direccion;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import services.AutenticacionService;
 import services.DireccionService;
 
 @RestController
@@ -11,13 +13,25 @@ import services.DireccionService;
 public class DireccionController {
 
     private final DireccionService direccionService;
+    private final AutenticacionService autenticacionService;
 
-    public DireccionController(DireccionService direccionService) {
+    public DireccionController(DireccionService direccionService, AutenticacionService autenticacionService) {
         this.direccionService = direccionService;
+        this.autenticacionService = autenticacionService;
+    }
+
+    private boolean validarToken(String autorizacion) {
+        String token = autorizacion.replace("Bearer ", "");
+        return autenticacionService.validarToken(token);
     }
 
     @PostMapping("/creardireccion")
-    public ResponseEntity<DireccionDto> crearDireccion(@RequestParam Direccion direccion){
+    public ResponseEntity<DireccionDto> crearDireccion(@RequestHeader("authorization") String autorizacion, @RequestParam Direccion direccion){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DireccionDto resultado = direccionService.crearDireccion(direccion);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -26,7 +40,12 @@ public class DireccionController {
         }
     }
     @GetMapping("/buscardireccionporid/{id}")
-    public ResponseEntity<DireccionDto> buscarDireccionPorId(@PathVariable int id){
+    public ResponseEntity<DireccionDto> buscarDireccionPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DireccionDto resultado = direccionService.direccionPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -36,7 +55,12 @@ public class DireccionController {
     }
 
     @PutMapping("/actualizardireccion/{id}")
-    public ResponseEntity<DireccionDto> actualizarDireccion(@PathVariable int id, @RequestParam Direccion direccion){
+    public ResponseEntity<DireccionDto> actualizarDireccion(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestParam Direccion direccion){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         DireccionDto resultado = direccionService.actualizarDireccion(id,direccion);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -46,7 +70,12 @@ public class DireccionController {
     }
 
     @DeleteMapping("/borrardireccionporid/{id}")
-    public ResponseEntity<Void> borrarDireccionPorId(@PathVariable int id){
+    public ResponseEntity<Void> borrarDireccionPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         direccionService.borrarPorId(id);
         return ResponseEntity.noContent().build();
     }

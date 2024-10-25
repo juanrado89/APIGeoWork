@@ -2,8 +2,10 @@ package controllers;
 
 import dtos.FotoDto;
 import entities.Foto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import services.AutenticacionService;
 import services.FotoService;
 
 
@@ -11,13 +13,25 @@ import services.FotoService;
 @RequestMapping("/foto")
 public class FotoController {
     private final FotoService fotoService;
+    private final AutenticacionService autenticacionService;
 
-    public FotoController(FotoService fotoService) {
+    public FotoController(FotoService fotoService, AutenticacionService autenticacionService) {
         this.fotoService = fotoService;
+        this.autenticacionService = autenticacionService;
+    }
+
+    private boolean validarToken(String autorizacion) {
+        String token = autorizacion.replace("Bearer ", "");
+        return autenticacionService.validarToken(token);
     }
 
     @GetMapping("/buscarfotoporid/{id}")
-    public ResponseEntity<FotoDto> buscarFotoPorId(@PathVariable int id){
+    public ResponseEntity<FotoDto> buscarFotoPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         FotoDto resultado = fotoService.buscarPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -27,7 +41,12 @@ public class FotoController {
     }
 
     @PostMapping("/crearfoto")
-    public ResponseEntity<FotoDto> crearFoto(@RequestParam Foto foto){
+    public ResponseEntity<FotoDto> crearFoto(@RequestHeader("authorization") String autorizacion, @RequestParam Foto foto){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         FotoDto resultado = fotoService.crearFoto(foto);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -37,7 +56,12 @@ public class FotoController {
     }
 
     @PutMapping("actualizarfoto/{id}")
-    public ResponseEntity<FotoDto> actualizarFoto(@PathVariable int id,@RequestParam Foto foto){
+    public ResponseEntity<FotoDto> actualizarFoto(@RequestHeader("authorization") String autorizacion, @PathVariable int id,@RequestParam Foto foto){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         FotoDto resultado = fotoService.actualizarFoto(id,foto);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -47,7 +71,12 @@ public class FotoController {
     }
 
     @DeleteMapping("/borrarfoto/{id}")
-    public ResponseEntity<Void> borrarFoto(@PathVariable int id){
+    public ResponseEntity<Void> borrarFoto(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         fotoService.borrarFoto(id);
         return ResponseEntity.noContent().build();
     }

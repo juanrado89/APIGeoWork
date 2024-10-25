@@ -1,10 +1,10 @@
 package controllers;
 
-import dtos.FotoDto;
 import dtos.SectorDto;
-import entities.Foto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import services.AutenticacionService;
 import services.SectorService;
 
 @RestController
@@ -12,13 +12,25 @@ import services.SectorService;
 public class SectorController {
 
     private final SectorService sectorService;
+    private final AutenticacionService autenticacionService;
 
-    public SectorController(SectorService sectorService) {
+    public SectorController(SectorService sectorService, AutenticacionService autenticacionService) {
         this.sectorService = sectorService;
+        this.autenticacionService = autenticacionService;
+    }
+
+    private boolean validarToken(String autorizacion) {
+        String token = autorizacion.replace("Bearer ", "");
+        return autenticacionService.validarToken(token);
     }
 
     @GetMapping("/buscarsectorporid/{id}")
-    public ResponseEntity<SectorDto> buscarSectorPorId(@PathVariable int id){
+    public ResponseEntity<SectorDto> buscarSectorPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         SectorDto resultado = sectorService.buscarPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -28,7 +40,12 @@ public class SectorController {
     }
 
     @GetMapping("/buscarsectorpornombre/{nombre}")
-    public ResponseEntity<SectorDto> buscarSectorPorNombre(@PathVariable String sector){
+    public ResponseEntity<SectorDto> buscarSectorPorNombre(@RequestHeader("authorization") String autorizacion, @PathVariable String sector){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         SectorDto resultado = sectorService.buscarPorNombre(sector);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
