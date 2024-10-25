@@ -26,7 +26,7 @@ public class DocumentoController {
         }
     }
 
-    @PostMapping("/crearDocumento")
+    @PostMapping("/creardocumento")
     public ResponseEntity<DocumentoDto> crearDocumento(@RequestParam Documento documento){
         DocumentoDto resultado = documentoService.crearDocumento(documento);
         if(resultado != null){

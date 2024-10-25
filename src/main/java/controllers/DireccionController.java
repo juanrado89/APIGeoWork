@@ -25,8 +25,8 @@ public class DireccionController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/direccionporid/{id}")
-    public ResponseEntity<DireccionDto> getDireccionPorId(@PathVariable int id){
+    @GetMapping("/buscardireccionporid/{id}")
+    public ResponseEntity<DireccionDto> buscarDireccionPorId(@PathVariable int id){
         DireccionDto resultado = direccionService.direccionPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);

@@ -14,9 +14,10 @@ public class EstadoController {
     public EstadoController(EstadoService estadoService) {
         this.estadoService = estadoService;
     }
-    @GetMapping("/estadoporid/{id}")
-    public ResponseEntity<EstadoDto> getEstadoPorId(@PathVariable int id){
-        EstadoDto resultado = estadoService.getEstadoPorId(id);
+
+    @GetMapping("/buscarestadoporid/{id}")
+    public ResponseEntity<EstadoDto> buscarEstadoPorId(@PathVariable int id){
+        EstadoDto resultado = estadoService.buscarEstadoPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
         }else{
@@ -24,9 +25,9 @@ public class EstadoController {
         }
     }
 
-    @GetMapping("/estadopornombre/{nombre}")
-    public ResponseEntity<EstadoDto> getEstadoPorNombre(@PathVariable String nombre){
-        EstadoDto resultado = estadoService.getEstadoPorNombre(nombre);
+    @GetMapping("/buscarestadopornombre/{nombre}")
+    public ResponseEntity<EstadoDto> buscarEstadoPorNombre(@PathVariable String nombre){
+        EstadoDto resultado = estadoService.buscarEstadoPorNombre(nombre);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
         }else{

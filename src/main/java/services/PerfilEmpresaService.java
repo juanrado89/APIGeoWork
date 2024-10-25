@@ -19,17 +19,17 @@ public class PerfilEmpresaService {
         this.perfilEmpresaMapper = perfilEmpresaMapper;
     }
 
-    public PerfilEmpresaDto obtenerPerfilPorId(int id) {
+    public PerfilEmpresaDto buscarPerfilEPorId(int id) {
         Optional<PerfilEmpresaDto> perfil = perfilEmpresaRepository.findByIdUsuario(id);
         return perfil.orElseGet(null);
     }
 
-    public PerfilEmpresaDto crearPerfil(PerfilEmpresa perfilEmpresa) {
+    public PerfilEmpresaDto crearPerfilE(PerfilEmpresa perfilEmpresa) {
         PerfilEmpresa creado = perfilEmpresaRepository.save(perfilEmpresa);
         return perfilEmpresaMapper.toDto(creado);
     }
 
-    public PerfilEmpresaDto actualizarPerfil(int id, PerfilEmpresa perfilEmpresa) {
+    public PerfilEmpresaDto actualizarPerfilE(int id, PerfilEmpresa perfilEmpresa) {
         Optional<PerfilEmpresaDto> busqueda = perfilEmpresaRepository.findByIdUsuario(id);
         if(busqueda.isPresent()){
             perfilEmpresaRepository.save(perfilEmpresa);
@@ -40,7 +40,7 @@ public class PerfilEmpresaService {
         }
     }
 
-    public void eliminarPerfil(int id) {
+    public void eliminarPerfilE(int id) {
         perfilEmpresaRepository.deletePerfilEmpresaByIdEmpresa(id);
     }
 }

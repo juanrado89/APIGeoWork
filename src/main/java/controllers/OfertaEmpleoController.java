@@ -18,7 +18,7 @@ public class OfertaEmpleoController {
         this.ofertaEmpleoService = ofertaEmpleoService;
     }
 
-    @GetMapping("/buscarporid/{id}")
+    @GetMapping("/buscarofertaporid/{id}")
     public ResponseEntity<OfertaEmpleoDto> buscarPorId(@PathVariable int id) {
         OfertaEmpleoDto resultado = ofertaEmpleoService.buscarPorId(id);
         if (resultado != null) {

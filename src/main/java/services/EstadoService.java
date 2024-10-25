@@ -15,14 +15,14 @@ public class EstadoService {
         this.estadoRepository = estadoRepository;
     }
 
-    public EstadoDto getEstadoPorId(int id) {
+    public EstadoDto buscarEstadoPorId(int id) {
 
         Optional<EstadoDto> resultado = estadoRepository.findByIdEstado(id);
         return resultado.orElseGet(null);
 
     }
 
-    public EstadoDto getEstadoPorNombre(String nombre) {
+    public EstadoDto buscarEstadoPorNombre(String nombre) {
 
         Optional<EstadoDto> resultado = estadoRepository.findByEstadoContainsIgnoreCase(nombre);
         return resultado.orElseGet(null);

@@ -15,8 +15,8 @@ public class CiudadController {
         this.ciudadService = ciudadService;
     }
 
-    @GetMapping("/ciudadporid/{id}")
-    public ResponseEntity<CiudadDto> getCiudadPorId(@PathVariable int id){
+    @GetMapping("/buscarciudadporid/{id}")
+    public ResponseEntity<CiudadDto> buscarCiudadPorId(@PathVariable int id){
         CiudadDto resultado = ciudadService.buscarCiudadPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -25,8 +25,8 @@ public class CiudadController {
         }
     }
 
-    @GetMapping("/ciudadpornombre/{nombre}")
-    public ResponseEntity<CiudadDto> getCiudadPorId(@PathVariable String nombre){
+    @GetMapping("/buscarciudadpornombre/{nombre}")
+    public ResponseEntity<CiudadDto> buscarCiudadPorId(@PathVariable String nombre){
         CiudadDto resultado = ciudadService.buscarCiudadPorNombre(nombre);
         if(resultado != null){
             return ResponseEntity.ok(resultado);

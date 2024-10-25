@@ -17,7 +17,7 @@ public class EmpresaController {
     }
 
     @PostMapping("/crearempresa")
-    public ResponseEntity<EmpresaDto> crearTrabajador(@RequestParam Empresa empresa){
+    public ResponseEntity<EmpresaDto> crearEmpresa(@RequestParam Empresa empresa){
         EmpresaDto resultado = empresaService.crearEmpresa(empresa);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -27,7 +27,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/buscarEmpresa/{id}")
-    public ResponseEntity<EmpresaDto> buscarTrabajadorPorId(@PathVariable int id){
+    public ResponseEntity<EmpresaDto> buscarEmpresaPorId(@PathVariable int id){
         EmpresaDto resultado = empresaService.buscarEmpresaPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -36,7 +36,7 @@ public class EmpresaController {
         }
     }
 
-    @PostMapping("/actualizartrabajador/{id}")
+    @PostMapping("/actualizarempresa/{id}")
     public ResponseEntity<EmpresaDto> actualizarEmpresa(@PathVariable int id,@RequestParam Empresa empresa){
         EmpresaDto resultado = empresaService.actualizarEmpresa(id,empresa);
         if(resultado != null){
@@ -46,7 +46,7 @@ public class EmpresaController {
         }
     }
 
-    @DeleteMapping("/borrartrabajador/{id}")
+    @DeleteMapping("/borrarempresa/{id}")
     public ResponseEntity<Void> borrarEmpresa(@PathVariable int id){
         empresaService.borrarEmpresa(id);
         return ResponseEntity.noContent().build();

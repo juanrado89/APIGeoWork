@@ -28,7 +28,7 @@ public class ExperienciaController {
         }
     }
 
-    @GetMapping("/buscarexperiencia/{id}")
+    @GetMapping("/buscarexperienciaporid/{id}")
     public ResponseEntity<ExperienciaDto> buscarExperienciaPorId(@PathVariable int id){
         ExperienciaDto resultado = experienciaService.buscarExperienciaPorId(id);
         if(resultado != null){

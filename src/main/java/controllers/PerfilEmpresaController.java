@@ -17,8 +17,8 @@ public class PerfilEmpresaController {
     }
 
     @GetMapping("/buscarperfile/{id}")
-    public ResponseEntity<PerfilEmpresaDto> obtenerPerfilPorId(@PathVariable int id) {
-        PerfilEmpresaDto perfil = perfilEmpresaService.obtenerPerfilPorId(id);
+    public ResponseEntity<PerfilEmpresaDto> buscarPerfilEPorId(@PathVariable int id) {
+        PerfilEmpresaDto perfil = perfilEmpresaService.buscarPerfilEPorId(id);
         if(perfil != null) {
             return ResponseEntity.ok(perfil);
         }else{
@@ -27,8 +27,8 @@ public class PerfilEmpresaController {
     }
 
     @PostMapping("crearperfile")
-    public ResponseEntity<PerfilEmpresaDto> crearPerfil(@RequestBody PerfilEmpresa perfilEmpresa) {
-        PerfilEmpresaDto nuevoPerfil = perfilEmpresaService.crearPerfil(perfilEmpresa);
+    public ResponseEntity<PerfilEmpresaDto> crearPerfilE(@RequestBody PerfilEmpresa perfilEmpresa) {
+        PerfilEmpresaDto nuevoPerfil = perfilEmpresaService.crearPerfilE(perfilEmpresa);
         if(nuevoPerfil != null) {
             return ResponseEntity.ok(nuevoPerfil);
         }else{
@@ -38,8 +38,8 @@ public class PerfilEmpresaController {
     }
 
     @PutMapping("/actualizarperfile/{id}")
-    public ResponseEntity<PerfilEmpresaDto> actualizarPerfil(@PathVariable int id, @RequestBody PerfilEmpresa perfilEmpresa) {
-        PerfilEmpresaDto perfilActualizado = perfilEmpresaService.actualizarPerfil(id, perfilEmpresa);
+    public ResponseEntity<PerfilEmpresaDto> actualizarPerfilE(@PathVariable int id, @RequestBody PerfilEmpresa perfilEmpresa) {
+        PerfilEmpresaDto perfilActualizado = perfilEmpresaService.actualizarPerfilE(id, perfilEmpresa);
         if(perfilActualizado != null) {
             return ResponseEntity.ok(perfilActualizado);
         }else{
@@ -49,8 +49,8 @@ public class PerfilEmpresaController {
     }
 
     @DeleteMapping("borrarperfile/{id}")
-    public ResponseEntity<Void> eliminarPerfil(@PathVariable int id) {
-        perfilEmpresaService.eliminarPerfil(id);
+    public ResponseEntity<Void> eliminarPerfilE(@PathVariable int id) {
+        perfilEmpresaService.eliminarPerfilE(id);
         return ResponseEntity.noContent().build();
     }
 }

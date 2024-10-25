@@ -19,18 +19,18 @@ public class PerfilUsuarioService {
         this.perfilUsuarioMapper = perfilUsuarioMapper;
     }
 
-    public PerfilUsuarioDto obtenerPerfilPorId(int id) {
+    public PerfilUsuarioDto buscarPerfilUPorId(int id) {
         Optional<PerfilUsuarioDto> resultado = perfilUsuarioRepository.findByIdUsuario(id);
 
         return resultado.orElseGet(null);
     }
 
-    public PerfilUsuarioDto crearPerfil(PerfilUsuario perfilUsuario) {
+    public PerfilUsuarioDto crearPerfilU(PerfilUsuario perfilUsuario) {
         PerfilUsuario creado = perfilUsuarioRepository.save(perfilUsuario);
         return perfilUsuarioMapper.toDto(creado);
     }
 
-    public PerfilUsuarioDto actualizarPerfil(int id, PerfilUsuario perfilUsuario) {
+    public PerfilUsuarioDto actualizarPerfilU(int id, PerfilUsuario perfilUsuario) {
         Optional<PerfilUsuarioDto> busqueda = perfilUsuarioRepository.findByIdUsuario(id);
         if(busqueda.isPresent()){
             perfilUsuarioRepository.save(perfilUsuario);
@@ -41,7 +41,7 @@ public class PerfilUsuarioService {
         }
     }
 
-    public void eliminarPerfil(int id) {
+    public void eliminarPerfilU(int id) {
         perfilUsuarioRepository.deleteByIdUsuario(id);
     }
 }

@@ -17,7 +17,7 @@ public class ExperienciaTotalController {
         this.experienciaTotalService = experienciaTotalService;
     }
 
-    @GetMapping("/buscaresperienciatotal/{id}")
+    @GetMapping("/buscaresperienciatotalporid/{id}")
     public ResponseEntity<ExperienciaTotalDto> buscarPorId(@PathVariable int id) {
 
         ExperienciaTotalDto resultado = experienciaTotalService.buscarPorId(id);
@@ -28,7 +28,8 @@ public class ExperienciaTotalController {
         }
     }
 
-    public ResponseEntity<ExperienciaTotalDto> crearExperienciaTotal(ExperienciaTotal experienciaTotal) {
+    @PostMapping("/crearexperienciatotal")
+    public ResponseEntity<ExperienciaTotalDto> crearExperienciaTotal(@RequestParam ExperienciaTotal experienciaTotal) {
 
         ExperienciaTotalDto resultado = experienciaTotalService.crearExperiencia(experienciaTotal);
         if(resultado != null) {

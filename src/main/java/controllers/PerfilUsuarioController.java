@@ -8,7 +8,7 @@ import services.PerfilUsuarioService;
 
 
 @RestController
-@RequestMapping("/perfilusuarios")
+@RequestMapping("/perfilusuario")
 public class PerfilUsuarioController {
 
     private final PerfilUsuarioService perfilUsuarioService;
@@ -19,8 +19,8 @@ public class PerfilUsuarioController {
 
 
     @GetMapping("/buscarperfilu/{id}")
-    public ResponseEntity<PerfilUsuarioDto> obtenerPerfilPorId(@PathVariable int id) {
-        PerfilUsuarioDto perfil = perfilUsuarioService.obtenerPerfilPorId(id);
+    public ResponseEntity<PerfilUsuarioDto> buscarPerfilUPorId(@PathVariable int id) {
+        PerfilUsuarioDto perfil = perfilUsuarioService.buscarPerfilUPorId(id);
         if(perfil != null) {
             return ResponseEntity.ok(perfil);
         }else{
@@ -28,9 +28,9 @@ public class PerfilUsuarioController {
         }
     }
 
-    @PostMapping("crearperfilu")
-    public ResponseEntity<PerfilUsuarioDto> crearPerfil(@RequestBody PerfilUsuario perfilUsuario) {
-        PerfilUsuarioDto nuevoPerfil = perfilUsuarioService.crearPerfil(perfilUsuario);
+    @PostMapping("/crearperfilu")
+    public ResponseEntity<PerfilUsuarioDto> crearPerfilU(@RequestBody PerfilUsuario perfilUsuario) {
+        PerfilUsuarioDto nuevoPerfil = perfilUsuarioService.crearPerfilU(perfilUsuario);
         if(nuevoPerfil != null) {
             return ResponseEntity.ok(nuevoPerfil);
         }else{
@@ -40,8 +40,8 @@ public class PerfilUsuarioController {
     }
 
     @PutMapping("/actualizarperfilu/{id}")
-    public ResponseEntity<PerfilUsuarioDto> actualizarPerfil(@PathVariable int id, @RequestBody PerfilUsuario perfilUsuario) {
-        PerfilUsuarioDto perfilActualizado = perfilUsuarioService.actualizarPerfil(id, perfilUsuario);
+    public ResponseEntity<PerfilUsuarioDto> actualizarPerfilU(@PathVariable int id, @RequestBody PerfilUsuario perfilUsuario) {
+        PerfilUsuarioDto perfilActualizado = perfilUsuarioService.actualizarPerfilU(id, perfilUsuario);
         if(perfilActualizado != null) {
             return ResponseEntity.ok(perfilActualizado);
         }else{
@@ -50,9 +50,9 @@ public class PerfilUsuarioController {
 
     }
 
-    @DeleteMapping("borrarperfilu/{id}")
-    public ResponseEntity<Void> eliminarPerfil(@PathVariable int id) {
-        perfilUsuarioService.eliminarPerfil(id);
+    @DeleteMapping("/borrarperfilu/{id}")
+    public ResponseEntity<Void> eliminarPerfilU(@PathVariable int id) {
+        perfilUsuarioService.eliminarPerfilU(id);
         return ResponseEntity.noContent().build();
     }
 }

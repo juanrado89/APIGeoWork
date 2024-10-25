@@ -16,7 +16,7 @@ public class PaisController {
         this.paisService = paisService;
     }
 
-    @GetMapping("/buscarpais/{id}")
+    @GetMapping("/buscarpaisporid/{id}")
     public ResponseEntity<PaisDto> buscarPorId(@PathVariable int id){
         PaisDto resultado = paisService.getPaisPorId(id);
         if(resultado != null){
@@ -26,7 +26,7 @@ public class PaisController {
         }
     }
 
-    @GetMapping("/buscarpais/{nombre}")
+    @GetMapping("/buscarpaispornombre/{nombre}")
     public  ResponseEntity<PaisDto> buscarPorNombre(@PathVariable String nombre){
         PaisDto resultado = paisService.getPaisPorNombre(nombre);
         if(resultado != null){
