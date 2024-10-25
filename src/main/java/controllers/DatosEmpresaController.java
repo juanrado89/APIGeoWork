@@ -16,7 +16,7 @@ public class DatosEmpresaController {
         this.datosEmpresaService = datosEmpresaService;
     }
 
-    @GetMapping("/buscardocumentoporid/{id}")
+    @GetMapping("/buscardatosempresaporid/{id}")
     public ResponseEntity<DatosEmpresaDto> buscarDatosEmpresaPorId(@PathVariable int id){
         DatosEmpresaDto resultado = datosEmpresaService.buscarPorId(id);
         if(resultado != null){
@@ -26,7 +26,7 @@ public class DatosEmpresaController {
         }
     }
 
-    @PostMapping("/crearDocumento")
+    @PostMapping("/creardatosempresa")
     public ResponseEntity<DatosEmpresaDto> crearDatosEmpresa(@RequestParam DatosEmpresa datosEmpresa){
         DatosEmpresaDto resultado = datosEmpresaService.crearDatosEmpresa(datosEmpresa);
         if(resultado != null){
@@ -36,7 +36,7 @@ public class DatosEmpresaController {
         }
     }
 
-    @PutMapping("actualizardocumento/{id}")
+    @PutMapping("actualizardatosempresa/{id}")
     public ResponseEntity<DatosEmpresaDto> actualizarDatosEmpresa(@PathVariable int id, @RequestParam DatosEmpresa datosEmpresa){
         DatosEmpresaDto resultado = datosEmpresaService.actualizarDatosEmpresa(id,datosEmpresa);
         if(resultado != null){
@@ -46,7 +46,7 @@ public class DatosEmpresaController {
         }
     }
 
-    @DeleteMapping("/borrardocumento/{id}")
+    @DeleteMapping("/borrardatosempresa/{id}")
     public ResponseEntity<Void> borrarDatosEmpresa(@PathVariable int id){
         datosEmpresaService.borrarDatosEmpresa(id);
         return ResponseEntity.noContent().build();

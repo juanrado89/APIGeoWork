@@ -17,7 +17,7 @@ public class FotoController {
     }
 
     @GetMapping("/buscarfotoporid/{id}")
-    public ResponseEntity<FotoDto> buscarDocumentoPorId(@PathVariable int id){
+    public ResponseEntity<FotoDto> buscarFotoPorId(@PathVariable int id){
         FotoDto resultado = fotoService.buscarPorId(id);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -27,7 +27,7 @@ public class FotoController {
     }
 
     @PostMapping("/crearfoto")
-    public ResponseEntity<FotoDto> crearDocumento(@RequestParam Foto foto){
+    public ResponseEntity<FotoDto> crearFoto(@RequestParam Foto foto){
         FotoDto resultado = fotoService.crearFoto(foto);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -37,7 +37,7 @@ public class FotoController {
     }
 
     @PutMapping("actualizarfoto/{id}")
-    public ResponseEntity<FotoDto> actualizarDocumento(@PathVariable int id,@RequestParam Foto foto){
+    public ResponseEntity<FotoDto> actualizarFoto(@PathVariable int id,@RequestParam Foto foto){
         FotoDto resultado = fotoService.actualizarFoto(id,foto);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
@@ -47,7 +47,7 @@ public class FotoController {
     }
 
     @DeleteMapping("/borrarfoto/{id}")
-    public ResponseEntity<Void> borrarDocumento(@PathVariable int id){
+    public ResponseEntity<Void> borrarFoto(@PathVariable int id){
         fotoService.borrarFoto(id);
         return ResponseEntity.noContent().build();
     }
