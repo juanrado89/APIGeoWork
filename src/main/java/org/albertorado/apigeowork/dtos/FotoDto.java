@@ -5,4 +5,5 @@ public interface FotoDto {
     String getNombre();
     String getTipoContenido();
     byte[] getDatos();
+
 }

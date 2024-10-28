@@ -8,6 +8,8 @@ public interface PerfilEmpresaDto {
 
     EmpresaDto getIdEmpresa();
 
+    List<SectorDto> getSector();
+
     String getEmail();
 
     List<OfertaEmpleoDto> getOfertas();
