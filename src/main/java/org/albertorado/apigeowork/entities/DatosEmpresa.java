@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -33,7 +34,7 @@ public class DatosEmpresa {
 
     @NotNull
     @ManyToMany(mappedBy = "datosEmpresa")
-    private Sector sector;
+    private List<Sector> sector;
 
     @NotNull
     @ManyToOne()
