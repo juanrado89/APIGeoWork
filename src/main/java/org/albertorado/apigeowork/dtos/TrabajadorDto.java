@@ -1,13 +1,17 @@
 package org.albertorado.apigeowork.dtos;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-public interface TrabajadorDto {
-    int getIdTrabajador();
 
-    DatosDto GetDatosUsuario();
+@Getter
+@Setter
+public class TrabajadorDto {
 
-    ExperienciaDto GetDatosExperiencia();
+    private int idTrabajador;
 
-    List<HorarioEntrevistaDto> getHorarios();
+    private DatosDto datosUsuario;
+
+    private ExperienciaDto datosExperiencia;
+
 }

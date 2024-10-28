@@ -1,12 +1,19 @@
 package org.albertorado.apigeowork.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Timestamp;
+import java.util.List;
 
-public interface DescripcionExperienciaDto {
+@Getter
+@Setter
+public class DescripcionExperienciaDto {
 
-    public int getIdDescripcionExperiencia();
-    public String getNombreEmpresa();
-    public String getDescripcion();
-    public Timestamp getFechaInicio();
-    public Timestamp getFechaFin();
+    private int idDescripcionExperiencia;
+    private String nombreEmpresa;
+    private String descripcion;
+    private Timestamp fechaInicio;
+    private Timestamp fechaFin;
+    private List<ExperienciaTotalDto> experienciaTotal;
 }

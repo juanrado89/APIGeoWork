@@ -1,22 +1,27 @@
 package org.albertorado.apigeowork.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface OfertaEmpleoDto {
+@Getter
+@Setter
+public class OfertaEmpleoDto {
 
-    int getIdOferta();
-    EmpresaDto getEmpresa();
-    String getTitulo();
-    int getCantidad();
-    String getDescripcion();
-    SectorDto getSector();
-    String getRequisitos();
-    String getNivelEducativoRequerido();
-    float getSalarioMin();
-    float getSalarioMax();
-    DireccionDto getDireccion();
-    Timestamp fechaPublicaion();
-    int getEstado();
-    List<HorarioEntrevistaDto> getHorarios();
+    private int idOferta;
+    private EmpresaDto empresa;
+    private String titulo;
+    private int cantidad;
+    private String descripcion;
+    private SectorDto sector;
+    private String requisitos;
+    private NivelEducativoDto nivelEducativoRequerido;
+    private float salarioMin;
+    private float salarioMax;
+    private DireccionDto direccion;
+    private Timestamp fechaPublicaion;
+    private int estado;
+
 }

@@ -44,12 +44,6 @@ public class Experiencia {
     @Column(name = "fecha_registro",nullable = false)
     private Timestamp fecha_registro;
 
-    @NotNull
-    @Digits(integer = 1,fraction = 0)
-    @Basic
-    @Column(name = "estado",precision = 1,nullable = false)
-    private int estado;
-
 
     @Override
     public int hashCode() {

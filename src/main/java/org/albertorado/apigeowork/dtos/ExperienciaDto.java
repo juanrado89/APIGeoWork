@@ -1,21 +1,25 @@
 package org.albertorado.apigeowork.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface ExperienciaDto {
+@Getter
+@Setter
+public class ExperienciaDto {
 
-    int getIdExperiencia();
+    private int idExperiencia;
 
-    NivelEducativoDto getNivelEducativo();
+    private NivelEducativoDto nivelEducativo;
 
-    List<SectorDto> getSector();
+    private List<SectorDto> sector;
 
-    ExperienciaTotalDto getExperienciaTotal();
+    private ExperienciaTotalDto experienciaTotal;
 
-    DocumentoDto getCvUrl();
+    private DocumentoDto cvUrl;
 
-    Timestamp getFecha_registro();
+    private Timestamp fechaRegistro;
 
-    int getEstado();
 }

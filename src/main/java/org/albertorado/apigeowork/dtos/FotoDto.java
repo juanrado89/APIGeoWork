@@ -1,9 +1,14 @@
 package org.albertorado.apigeowork.dtos;
 
-public interface FotoDto {
-    Long getIdFoto();
-    String getNombre();
-    String getTipoContenido();
-    byte[] getDatos();
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class FotoDto {
+    private Long idFoto;
+    private String nombre;
+    private String tipoContenido;
+    private byte[] datos;
 
 }

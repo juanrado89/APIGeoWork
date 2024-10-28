@@ -1,12 +1,17 @@
 package org.albertorado.apigeowork.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Timestamp;
 
-public interface DatosDto {
+@Getter
+@Setter
+public class DatosDto {
 
-    int getIdDatos();
-    String getNombre();
-    String getApellidos();
-    Timestamp getFechaEdad();
-    DireccionDto getDireccion();
+    private int idDatos;
+    private String nombre;
+    private String apellidos;
+    private Timestamp fechaEdad;
+    private DireccionDto direccion;
 }

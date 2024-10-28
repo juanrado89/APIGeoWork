@@ -1,9 +1,14 @@
 package org.albertorado.apigeowork.dtos;
 
-public interface CiudadDto {
+import lombok.Getter;
+import lombok.Setter;
 
-    int getIdCiudad();
-    String getCiudad();
+@Getter
+@Setter
+public class CiudadDto {
 
-    EstadoDto getEstado();
+    private int idCiudad;
+    private String ciudad;
+
+    private EstadoDto estado;
 }

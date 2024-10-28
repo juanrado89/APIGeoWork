@@ -12,5 +12,5 @@ public interface PerfilEmpresaDto {
 
     String getEmail();
 
-    List<OfertaEmpleoDto> getOfertas();
+
 }
