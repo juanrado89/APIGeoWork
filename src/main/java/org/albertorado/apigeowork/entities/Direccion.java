@@ -1,6 +1,9 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,24 +24,33 @@ public class Direccion {
     @Column(name = "id_direccion",nullable = false)
     private int idDireccion;
 
+    @NotNull
+    @Size(min = 0,max = 255)
     @Basic
-    @Column(name = "direccion_texto",nullable = false)
+    @Column(name = "direccion_texto",length = 255,nullable = false)
     private String direccion;
 
+    @NotNull
+    @Digits(integer = 3,fraction = 0)
     @Basic
-    @Column(name = "piso",nullable = false)
+    @Column(name = "piso",precision = 3,nullable = false)
     private int piso;
 
+    @NotNull
+    @Size(min = 0,max = 50)
     @Basic
-    @Column(name = "puerta",nullable = false)
+    @Column(name = "puerta",length = 50,nullable = false)
     private String puerta;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Ciudad ciudad;
 
+    @NotNull
+    @Digits(integer = 9,fraction = 0)
     @Basic
-    @Column(name = "codigo_postal",nullable = false)
+    @Column(name = "codigo_postal",precision = 9,nullable = false)
     private int codigoPostal;
 
 

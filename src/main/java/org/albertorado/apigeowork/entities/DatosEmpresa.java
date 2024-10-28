@@ -1,6 +1,10 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,40 +25,53 @@ public class DatosEmpresa {
     @Column(name = "id_datos_empresa",nullable = false)
     private int idDatosEmpresa;
 
+    @NotNull
+    @Size(min = 0,max = 200)
     @Basic
-    @Column(name = "nombre_empresa",nullable = false)
+    @Column(name = "nombre_empresa",length = 200,nullable = false)
     private String nombreEmpresa;
 
-    @Basic
-    @Column(name = "sector",nullable = false)
-    private String sector;
+    @NotNull
+    @ManyToMany(mappedBy = "datosEmpresa")
+    private Sector sector;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Direccion direccion;
 
+    @NotNull
+    @Size(min = 0,max = 255)
     @Basic
-    @Column(name = "contacto_nombre",nullable = false)
+    @Column(name = "contacto_nombre",length = 255,nullable = false)
     private String contactoNombre;
 
+    @NotNull
+    @Size(min = 0,max = 255)
+    @Email
     @Basic
-    @Column(name = "contacto_email",nullable = false)
+    @Column(name = "contacto_email",length = 255,nullable = false)
     private String contactoEmail;
 
+    @NotNull
+    @Digits(integer = 12,fraction = 0)
     @Basic
-    @Column(name = "contacto_telefono",nullable = false)
+    @Column(name = "contacto_telefono",precision = 12,nullable = false)
     private String contactoTelefono;
 
+    @Size(min = 0,max = 255)
     @Basic
-    @Column(name = "sitio_web",nullable = false)
+    @Column(name = "sitio_web",length = 255,nullable = false)
     private String sitioWeb;
 
     @Basic
     @Column(name = "fecha_registro",nullable = false)
     private Timestamp fechaRegistro;
 
+    @NotNull
+    @Digits(integer = 1,fraction = 0)
     @Basic
-    @Column(name = "estado",nullable = false)
+    @Column(name = "estado",precision = 1,nullable = false)
     private int estado;
 
     @Override

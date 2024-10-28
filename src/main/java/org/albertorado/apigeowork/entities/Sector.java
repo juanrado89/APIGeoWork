@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,9 @@ public class Sector {
     @Column(name = "id_sector",nullable = false)
     private int idSector;
 
+    @Size(min = 1, max = 255)
     @Basic
-    @Column(name = "sector",nullable = false)
+    @Column(name = "sector",length = 255,nullable = false)
     private String sector;
 
     @OneToMany(mappedBy = "sector")

@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class Empresa {
     @Column(name = "id_empresa",nullable = false)
     private int idEmpresa;
 
+    @NotNull
     @OneToOne(mappedBy = "id_datos_empresa")
     private DatosEmpresa datosEmpresa;
 

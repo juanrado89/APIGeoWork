@@ -1,6 +1,8 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +24,9 @@ public class Pais {
     private int idPais;
 
     @Basic
-    @Column(name = "pais",nullable = false)
+    @NotNull
+    @Size(min = 2,max = 120)
+    @Column(name = "pais",length = 120,nullable = false)
     private String pais;
 
     @OneToMany(mappedBy = "pais")

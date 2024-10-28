@@ -1,6 +1,8 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +24,12 @@ public class Experiencia {
     @Column(name = "id_experiencia",nullable = false)
     private int idExperiencia;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_experiencia", referencedColumnName = "id_experiencia", nullable = false, updatable = false)
     private NivelEducativo nivelEducativo;
 
+    @NotNull
     @ManyToMany(mappedBy = "sectores")
     private List<Sector> sector;
 
@@ -35,12 +39,15 @@ public class Experiencia {
     @OneToOne(mappedBy = "id_documento")
     private Documento cvUrl;
 
+    @NotNull
     @Basic
     @Column(name = "fecha_registro",nullable = false)
     private Timestamp fecha_registro;
 
+    @NotNull
+    @Digits(integer = 1,fraction = 0)
     @Basic
-    @Column(name = "estado",nullable = false)
+    @Column(name = "estado",precision = 1,nullable = false)
     private int estado;
 
 

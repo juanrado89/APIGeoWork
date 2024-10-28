@@ -1,6 +1,8 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,18 +23,24 @@ public class Datos {
     @Column(name = "id_datos",nullable = false)
     private int idDatos;
 
+    @NotNull
+    @Size(min = 0,max = 120)
     @Basic
-    @Column(name = "nombre",nullable = false)
+    @Column(name = "nombre",length = 120,nullable = false)
     private String nombre;
 
+    @NotNull
+    @Size(min = 0,max = 200)
     @Basic
-    @Column(name = "apellidos",nullable = false)
+    @Column(name = "apellidos",length = 200,nullable = false)
     private String apellidos;
 
+    @NotNull
     @Basic
     @Column(name = "fecha_edad",nullable = false)
     private Timestamp fechaEdad;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Direccion direccion;

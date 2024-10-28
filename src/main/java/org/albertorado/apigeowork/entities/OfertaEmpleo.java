@@ -1,6 +1,9 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,28 +25,35 @@ public class OfertaEmpleo {
     @Column(name = "id_oferta",nullable = false)
     private int idOferta;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_oferta", referencedColumnName = "id_oferta", nullable = false, updatable = false)
     private Empresa idEmpresa;
 
     @Basic
-    @Column(name = "titulo",nullable = false)
+    @Size(min = 0,max = 255)
+    @Column(name = "titulo",length = 255,nullable = false)
     private String titulo;
 
     @Basic
-    @Column(name = "cantidad",nullable = false)
+    @Digits(integer = 3,fraction = 0)
+    @Column(name = "cantidad",precision = 3,nullable = false)
     private int cantidad;
 
+    @NotNull
+    @Size(min = 0,max = 3000)
     @Basic
-    @Column(name = "descripcion",nullable = false)
+    @Column(name = "descripcion",length = 3000,nullable = false)
     private String descripcion;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_oferta_empleo", referencedColumnName = "id_oferta_empleo", nullable = false, updatable = false)
     private Sector sector;
 
+    @Size(min = 0,max = 3000)
     @Basic
-    @Column(name = "requisitos",nullable = false)
+    @Column(name = "requisitos",length = 3000,nullable = false)
     private String requisitos;
 
     @ManyToOne()
@@ -51,23 +61,29 @@ public class OfertaEmpleo {
     private NivelEducativo nivelEducativo;
 
     @Basic
-    @Column(name = "salario_min",nullable = false)
+    @Digits(integer = 6, fraction = 2)
+    @Column(name = "salario_min",precision = 8,scale = 2,nullable = false)
     private float salarioMin;
 
     @Basic
-    @Column(name = "salario_max",nullable = false)
+    @Digits(integer = 6, fraction = 2)
+    @Column(name = "salario_max",precision = 8,scale = 2,nullable = false)
     private float salarioMax;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Direccion direccion;
 
+    @NotNull
     @Basic
     @Column(name = "fecha_publicacion",nullable = false)
     private Timestamp fechaPublicacion;
 
     @Basic
-    @Column(name = "estado",nullable = false)
+    @NotNull
+    @Digits(integer = 1,fraction = 0)
+    @Column(name = "estado",precision = 1,nullable = false)
     private int estado;
 
     @OneToMany(mappedBy = "ofertaEmpleo", cascade = CascadeType.ALL)

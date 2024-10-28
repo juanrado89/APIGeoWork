@@ -1,6 +1,8 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +23,10 @@ public class NivelEducativo {
     @Column(name = "id_nivel_educativo",nullable = false)
     private int idNivelEducativo;
 
+    @NotNull
+    @Size(min = 0,max = 255)
     @Basic
-    @Column(name = "titulo_nivel_educativo",nullable = false)
+    @Column(name = "titulo_nivel_educativo",length = 255,nullable = false)
     private String tituloNivelEducativo;
 
     @Basic
@@ -33,6 +37,7 @@ public class NivelEducativo {
     @Column(name = "fecha_fin",nullable = false)
     private Timestamp fechaFin;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_nivel_educativo", referencedColumnName = "id_nivel_educativo", nullable = true, updatable = false)
     private Nivel nivel;

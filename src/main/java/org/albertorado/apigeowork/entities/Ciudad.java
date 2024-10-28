@@ -1,6 +1,8 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,10 +23,13 @@ public class Ciudad {
     @Column(name = "id_ciudad",nullable = false)
     private int idCiudad;
 
+    @NotNull
+    @Size(min = 0,max = 100)
     @Basic
-    @Column(name = "ciudad",nullable = false)
+    @Column(name = "ciudad",length = 100,nullable = false)
     private String ciudad;
 
+    @NotNull
     @ManyToOne()
     @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad", nullable = false, updatable = false)
     private Estado estado;

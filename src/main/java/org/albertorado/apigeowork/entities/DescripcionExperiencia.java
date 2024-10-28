@@ -1,6 +1,8 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,12 +22,16 @@ public class DescripcionExperiencia {
     @Column(name = "id_descripcion_experiencia",nullable = false)
     private int idDescripcionExperiencia;
 
+    @NotNull
+    @Size(min = 0,max = 255)
     @Basic
-    @Column(name = "nombre_empresa",nullable = false)
+    @Column(name = "nombre_empresa",length = 255,nullable = false)
     private String nombreEmpresa;
 
+    @NotNull
+    @Size(min = 0,max = 3000)
     @Basic
-    @Column(name = "descripcion",nullable = false)
+    @Column(name = "descripcion",length = 3000,nullable = false)
     private String descripcion;
 
     @Basic

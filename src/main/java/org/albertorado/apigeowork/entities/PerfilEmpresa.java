@@ -1,6 +1,9 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,14 +27,20 @@ public class PerfilEmpresa {
     private int idUsuario;
 
     @Basic
-    @Column(name = "password",nullable = false)
+    @Size(min = 12, max = 50)
+    @NotNull
+    @Column(name = "password",length = 50,nullable = false)
     private String password;
 
+    @NotNull
     @OneToOne(mappedBy = "id_empresa")
     private Empresa idEmpresa;
 
     @Basic
-    @Column(name = "email",nullable = false)
+    @Size(min = 20, max = 255)
+    @Email
+    @NotNull
+    @Column(name = "email",length = 255,nullable = false)
     private String email;
 
     @OneToOne(mappedBy = "id_foto")
