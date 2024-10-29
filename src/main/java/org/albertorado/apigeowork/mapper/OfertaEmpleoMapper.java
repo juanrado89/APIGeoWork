@@ -12,19 +12,19 @@ import java.util.List;
 public interface OfertaEmpleoMapper {
 
     @Mapping(source = "idOferta", target = "idOferta")
-    @Mapping(source = "idEmpresa", target = "empresaDto")
+    @Mapping(source = "idEmpresa", target = "empresa")
     @Mapping(source = "titulo", target = "titulo")
     @Mapping(source = "cantidad", target = "cantidad")
     @Mapping(source = "descripcion", target = "descripcion")
-    @Mapping(source = "sector", target = "sectorDto")
+    @Mapping(source = "sector", target = "sector")
     @Mapping(source = "requisitos", target = "requisitos")
     @Mapping(source = "salarioMin", target = "salarioMin")
     @Mapping(source = "salarioMax", target = "salarioMax")
-    @Mapping(source = "fechaPublicacion", target = "fechaPublicacion")
+    @Mapping(source = "fechaPublicaion", target = "fechaPublicaion")
     @Mapping(source = "estado", target = "estado")
-    @Mapping(source = "direccion", target = "direccionDto")
-    @Mapping(source = "nivelEducativo", target = "nivelEducativoDto")
-    @Mapping(source = "horarios", target = "horarioEntrevistaDto")
+    @Mapping(source = "direccion", target = "direccion")
+    @Mapping(source = "nivelEducativo", target = "nivelEducativo")
+    @Mapping(source = "horarios", target = "horarioEntrevista")
 
     OfertaEmpleoDto toDto(OfertaEmpleo ofertaEmpleo);
     OfertaEmpleo toEntity(OfertaEmpleoDto ofertaEmpleoDto);

@@ -1,9 +1,14 @@
 package org.albertorado.apigeowork.dtos;
 
-public interface DocumentoDto {
+import lombok.Getter;
+import lombok.Setter;
 
-    Long getIdDocumento();
-    String getNombre();
-    String getTipoContenido();
-    byte[] getContenido();
+@Getter
+@Setter
+public class DocumentoDto {
+
+    private Long idDocumento;
+    private String nombre;
+    private String tipoContenido;
+    private byte[] contenido;
 }

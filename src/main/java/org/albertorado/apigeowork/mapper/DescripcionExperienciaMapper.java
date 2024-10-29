@@ -14,7 +14,7 @@ public interface DescripcionExperienciaMapper {
     @Mapping(source = "descripcion", target = "descripcion")
     @Mapping(source = "fechaInicio", target = "fechaInicio")
     @Mapping(source = "fechaFin", target = "fechaFin")
-    @Mapping(source = "experienciaTotal", target = "experienciaTotalDto")
+    @Mapping(source = "experienciaTotal", target = "experienciaTotal")
 
     DescripcionExperienciaDto toDto(DescripcionExperiencia descripcionExperiencia);
     DescripcionExperiencia toEntity(DescripcionExperienciaDto descripcionExperienciaDto);

@@ -1,16 +1,22 @@
 package org.albertorado.apigeowork.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
-public interface PerfilEmpresaDto {
+@Getter
+@Setter
+public class PerfilEmpresaDto {
 
-    int getIdUsuario();
+    private int idUsuario;
 
-    EmpresaDto getIdEmpresa();
+    private EmpresaDto idEmpresa;
 
-    List<SectorDto> getSector();
+    private List<SectorDto> sector;
 
-    String getEmail();
+    private String email;
+    private FotoDto foto;
 
 
 }

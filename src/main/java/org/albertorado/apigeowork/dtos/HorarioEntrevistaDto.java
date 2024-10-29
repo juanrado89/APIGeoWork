@@ -1,22 +1,27 @@
 package org.albertorado.apigeowork.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public interface HorarioEntrevistaDto {
+@Getter
+@Setter
+public class HorarioEntrevistaDto {
 
-    int getIdHorario();
+    private int idHorario;
 
-    OfertaEmpleoDto getOfertaEmpleo();
+    private OfertaEmpleoDto ofertaEmpleo;
 
-    LocalDate getDia();  // Fecha del horario
+    private LocalDate dia;
 
-    LocalTime getHora();  // Hora específica
+    private LocalTime hora;
 
-    int getCandidatosDisponibles();
+    private int candidatosDisponibles;
 
-    int getCandidatosAsignados();
+    private int candidatosAsignados;
 
-    List<TrabajadorDto> getTrabajadores();
+    private List<TrabajadorDto> trabajadores;
 }

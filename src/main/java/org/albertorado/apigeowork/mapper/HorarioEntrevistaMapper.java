@@ -11,12 +11,12 @@ import java.util.List;
 public interface HorarioEntrevistaMapper {
 
     @Mapping(source = "idHorario", target = "idHorario")
-    @Mapping(source = "ofertaEmpleo", target = "ofertaEmpleoDto")
+    @Mapping(source = "ofertaEmpleo", target = "ofertaEmpleo")
     @Mapping(source = "dia", target = "dia")
     @Mapping(source = "hora", target = "hora")
     @Mapping(source = "candidatosDisponibles", target = "candidatosDisponibles")
     @Mapping(source = "candidatosAsignados", target = "candidatosAsignados")
-    @Mapping(source = "trabajadores", target = "trabajadorDto")
+    @Mapping(source = "trabajador", target = "trabajadores")
 
     HorarioEntrevistaDto toDto(HorarioEntrevista horarioEntrevista);
     HorarioEntrevista toEntity(HorarioEntrevistaDto horarioEntrevistaDto);

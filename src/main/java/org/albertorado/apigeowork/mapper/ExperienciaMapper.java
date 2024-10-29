@@ -9,10 +9,10 @@ import org.mapstruct.Mapping;
 public interface ExperienciaMapper {
 
     @Mapping(source = "idExperiencia", target = "idExperiencia")
-    @Mapping(source = "nivelEducativo", target = "nivelEducativoDto")
-    @Mapping(source = "sector", target = "sectorDto")
-    @Mapping(source = "experienciaTotal", target = "experienciaTotalDto")
-    @Mapping(source = "documento", target = "documentoDto")
+    @Mapping(source = "nivelEducativo", target = "nivelEducativo")
+    @Mapping(source = "sector", target = "sector")
+    @Mapping(source = "experienciaTotal", target = "experienciaTotal")
+    @Mapping(source = "documento", target = "documento")
     @Mapping(source = "fechaRegistro", target = "fechaRegistro")
 
     ExperienciaDto toDto(Experiencia experiencia);

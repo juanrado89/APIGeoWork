@@ -1,9 +1,14 @@
 package org.albertorado.apigeowork.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
-public interface ExperienciaTotalDto {
+@Getter
+@Setter
+public class ExperienciaTotalDto {
 
-    public int getIdExperienciaTotal();
-    public List<DescripcionExperienciaDto> getDescripcionExperiencia();
+    private int idExperienciaTotal;
+    private List<DescripcionExperienciaDto> descripcionExperiencia;
 }

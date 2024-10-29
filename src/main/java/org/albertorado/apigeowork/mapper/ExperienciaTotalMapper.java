@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 public interface ExperienciaTotalMapper {
 
     @Mapping(source = "idExperienciaTotal", target = "idExperienciaTotal")
-    @Mapping(source = "descripcionExperiencia", target = "descripcionExperienciaDto")
+    @Mapping(source = "descripcionExperiencia", target = "descripcionExperiencia")
 
     ExperienciaTotalDto toDto(ExperienciaTotal experienciaTotal);
     ExperienciaTotal toEntity(ExperienciaTotalDto experienciaTotalDto);

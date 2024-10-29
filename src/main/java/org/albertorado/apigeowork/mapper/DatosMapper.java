@@ -12,7 +12,7 @@ public interface DatosMapper {
     @Mapping(source = "nombre", target = "nombre")
     @Mapping(source = "apellidos", target = "apellidos")
     @Mapping(source = "fechaEdad", target = "fechaEdad")
-    @Mapping(source = "direccion", target = "direccionDto")
+    @Mapping(source = "direccion", target = "direccion")
 
     DatosDto toDto(Datos datos);
     Datos toEntity(DatosDto dto);

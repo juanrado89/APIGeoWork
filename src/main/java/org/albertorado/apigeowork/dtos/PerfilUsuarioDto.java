@@ -1,12 +1,17 @@
 package org.albertorado.apigeowork.dtos;
 
-public interface PerfilUsuarioDto {
+import lombok.Getter;
+import lombok.Setter;
 
-    int getIdPerfil();
+@Getter
+@Setter
+public class PerfilUsuarioDto {
 
-    TrabajadorDto getIdTrabajador();
+    private int idPerfil;
 
-    String getEmail();
+    private TrabajadorDto idTrabajador;
 
-    FotoDto getFoto();
+    private String email;
+
+    private FotoDto foto;
 }

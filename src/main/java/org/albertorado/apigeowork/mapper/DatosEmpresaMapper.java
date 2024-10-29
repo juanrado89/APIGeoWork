@@ -15,7 +15,8 @@ public interface DatosEmpresaMapper {
     @Mapping(source = "contactoTelefono", target = "contactoTelefono")
     @Mapping(source = "sitioWeb", target = "sitioWeb")
     @Mapping(source = "fechaRegistro", target = "fechaRegistro")
-    @Mapping(source = "direccion", target = "direccionDto")
+    @Mapping(source = "direccion", target = "direccion")
+    @Mapping(source = "sector", target = "sector")
 
     DatosEmpresaDto toDto(DatosEmpresa entity);
     DatosEmpresa toEntity(DatosEmpresaDto dto);

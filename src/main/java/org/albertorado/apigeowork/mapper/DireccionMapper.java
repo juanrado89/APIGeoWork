@@ -13,7 +13,7 @@ public interface DireccionMapper {
     @Mapping(source = "piso", target = "piso")
     @Mapping(source = "puerta", target = "puerta")
     @Mapping(source = "codigoPostal", target = "codigoPostal")
-    @Mapping(source = "ciudad", target = "ciudadIdDto")
+    @Mapping(source = "ciudad", target = "ciudad")
 
     DireccionDto toDto(Direccion direccion);
     Direccion toEntity(DireccionDto direccionDto);

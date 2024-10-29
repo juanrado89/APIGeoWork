@@ -1,6 +1,11 @@
 package org.albertorado.apigeowork.dtos;
 
-public interface NivelDto {
-    public int getIdNivel();
-    public String getNombreNivel();
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class NivelDto {
+    private int idNivel;
+    private String nombreNivel;
 }

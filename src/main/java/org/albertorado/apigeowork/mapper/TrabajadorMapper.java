@@ -9,8 +9,8 @@ import org.mapstruct.Mapping;
 public interface TrabajadorMapper {
 
     @Mapping(source = "idTrabajador", target = "idTrabajador")
-    @Mapping(source = "datosUsuario", target = "datosUsuarioDto")
-    @Mapping(source = "datosExperiencia", target = "datosExperienciaDto")
+    @Mapping(source = "datos", target = "datos")
+    @Mapping(source = "experiencia", target = "experiencia")
 
     TrabajadorDto toDto(Trabajador trabajador);
     Trabajador toEntity(TrabajadorDto trabajadorDto);

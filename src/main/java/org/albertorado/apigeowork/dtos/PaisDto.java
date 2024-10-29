@@ -1,6 +1,11 @@
 package org.albertorado.apigeowork.dtos;
 
-public interface PaisDto {
-    int getIdPais();
-    String getPais();
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class PaisDto {
+    private int idPais;
+    private String pais;
 }

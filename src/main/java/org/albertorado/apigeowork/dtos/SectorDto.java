@@ -1,7 +1,12 @@
 package org.albertorado.apigeowork.dtos;
 
-public interface SectorDto {
+import lombok.Getter;
+import lombok.Setter;
 
-    public int getId();
-    public String sector();
+@Getter
+@Setter
+public class SectorDto {
+
+    private int idSector;
+    private String sector;
 }

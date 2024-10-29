@@ -1,8 +1,13 @@
 package org.albertorado.apigeowork.dtos;
 
-public interface EmpresaDto {
+import lombok.Getter;
+import lombok.Setter;
 
-    int getIdEmpresa();
-    DatosEmpresaDto getDatosEmpresa();
+@Getter
+@Setter
+public class EmpresaDto {
+
+    private int idEmpresa;
+    private DatosEmpresaDto datosEmpresa;
 
 }
