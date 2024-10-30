@@ -40,6 +40,9 @@ public class Documento {
     @Column(name = "contenido",nullable = false)
     private byte[] contenido;
 
+    @OneToOne(mappedBy = "cvUrl")
+    private Experiencia experiencia;
+
     @Override
     public int hashCode() {
         return Objects.hashCode(getIdDocumento());

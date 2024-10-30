@@ -33,8 +33,9 @@ public class PerfilEmpresa {
     private String password;
 
     @NotNull
-    @OneToOne(mappedBy = "id_empresa")
-    private Empresa idEmpresa;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
+    private Empresa empresa;
 
     @Basic
     @Size(min = 20, max = 255)
@@ -43,11 +44,10 @@ public class PerfilEmpresa {
     @Column(name = "email",length = 255,nullable = false)
     private String email;
 
-    @OneToOne(mappedBy = "id_foto")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_foto", referencedColumnName = "id_foto")
     private Foto foto;
 
-    @OneToMany(mappedBy = "idEmpresa")
-    private List<OfertaEmpleo> ofertas;
 
     @PrePersist
     private void encriptarPassword() {

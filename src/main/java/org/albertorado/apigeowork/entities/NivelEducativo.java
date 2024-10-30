@@ -39,7 +39,7 @@ public class NivelEducativo {
 
     @NotNull
     @ManyToOne()
-    @JoinColumn(name = "id_nivel_educativo", referencedColumnName = "id_nivel_educativo", nullable = true, updatable = false)
+    @JoinColumn(name = "id_nivel", referencedColumnName = "id_nivel", nullable = true, updatable = false)
     private Nivel nivel;
 
     @OneToMany(mappedBy = "nivelEducativo")

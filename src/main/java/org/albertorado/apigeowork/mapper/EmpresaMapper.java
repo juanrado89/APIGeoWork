@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 public interface EmpresaMapper {
 
     @Mapping(source = "idEmpresa", target = "idEmpresa")
-    @Mapping(source = "datosEmpresa", target = "datosEmpresaDto")
+    @Mapping(source = "datosEmpresa", target = "datosEmpresa")
 
     EmpresaDto toDto(Empresa empresa);
     Empresa toEntity(EmpresaDto empresaDto);

@@ -5,7 +5,7 @@ import org.albertorado.apigeowork.entities.DatosEmpresa;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {DireccionMapper.class})
+@Mapper(componentModel = "spring", uses = {DireccionMapper.class, SectorMapper.class})
 public interface DatosEmpresaMapper {
 
     @Mapping(source = "idDatosEmpresa", target = "idDatosEmpresa")

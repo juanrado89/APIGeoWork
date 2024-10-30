@@ -29,8 +29,6 @@ public class Pais {
     @Column(name = "pais",length = 120,nullable = false)
     private String pais;
 
-    @OneToMany(mappedBy = "pais")
-    private List<Direccion> direcciones;
 
     @OneToMany(mappedBy = "pais")
     private List<Estado> estados;

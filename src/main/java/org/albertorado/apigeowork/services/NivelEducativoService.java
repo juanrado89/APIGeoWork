@@ -4,10 +4,12 @@ import org.albertorado.apigeowork.dtos.NivelEducativoDto;
 import org.albertorado.apigeowork.entities.NivelEducativo;
 import org.albertorado.apigeowork.mapper.NivelEducativoMapper;
 import org.albertorado.apigeowork.repositories.NivelEducativoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class NivelEducativoService {
 
     private final NivelEducativoRepository nivelEducativoRepository;
@@ -24,7 +26,7 @@ public class NivelEducativoService {
     }
 
     public List<NivelEducativoDto> buscarPortitulo(String titulo) {
-        return nivelEducativoRepository.findByTitulo(titulo);
+        return nivelEducativoRepository.findAllByTituloNivelEducativoContainingIgnoreCase(titulo);
 
     }
 

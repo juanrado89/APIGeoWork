@@ -12,5 +12,5 @@ public interface NivelEducativoRepository extends JpaRepository<NivelEducativo, 
 
 
     Optional<NivelEducativoDto> findById(@Param("id") int id);
-    List<NivelEducativoDto> findByTitulo(@Param("titulo") String titulo);
+    List<NivelEducativoDto> findAllByTituloNivelEducativoContainingIgnoreCase(@Param("titulo") String titulo);
 }

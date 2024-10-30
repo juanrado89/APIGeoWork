@@ -26,7 +26,7 @@ public class FotoService {
     public FotoDto crearFoto(Foto foto) {
 
         Foto creada = fotoRepository.save(foto);
-        return fotoMapper.ToDto(creada);
+        return fotoMapper.toDto(creada);
 
     }
 

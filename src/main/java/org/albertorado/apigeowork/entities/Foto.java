@@ -38,4 +38,10 @@ public class Foto {
     @Basic
     @Column(name = "datos",nullable = false)
     private byte[] datos;
+
+    @OneToOne(mappedBy = "foto")
+    private PerfilEmpresa perfilEmpresa;
+
+    @OneToOne(mappedBy = "foto")
+    private PerfilUsuario perfilUsuario;
 }

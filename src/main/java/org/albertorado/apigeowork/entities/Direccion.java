@@ -44,7 +44,7 @@ public class Direccion {
 
     @NotNull
     @ManyToOne()
-    @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
+    @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad", nullable = false, updatable = false)
     private Ciudad ciudad;
 
     @NotNull

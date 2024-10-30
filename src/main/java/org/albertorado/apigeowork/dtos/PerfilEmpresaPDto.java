@@ -13,9 +13,11 @@ public class PerfilEmpresaPDto {
 
     private String password;
 
-    private EmpresaDto idEmpresa;
+    private EmpresaDto empresa;
+
+    private List<SectorDto> sector;
 
     private String email;
 
-    private List<SectorDto> sector;
+
 }

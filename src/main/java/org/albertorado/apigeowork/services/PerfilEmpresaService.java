@@ -41,6 +41,6 @@ public class PerfilEmpresaService {
     }
 
     public void eliminarPerfilE(int id) {
-        perfilEmpresaRepository.deletePerfilEmpresaByIdEmpresa(id);
+        perfilEmpresaRepository.deletePerfilEmpresaByIdUsuario(id);
     }
 }

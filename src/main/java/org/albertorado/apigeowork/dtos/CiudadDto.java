@@ -9,6 +9,6 @@ public class CiudadDto {
 
     private int idCiudad;
     private String ciudad;
-
     private EstadoDto estado;
+
 }

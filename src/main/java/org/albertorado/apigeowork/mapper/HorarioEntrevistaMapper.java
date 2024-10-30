@@ -16,7 +16,7 @@ public interface HorarioEntrevistaMapper {
     @Mapping(source = "hora", target = "hora")
     @Mapping(source = "candidatosDisponibles", target = "candidatosDisponibles")
     @Mapping(source = "candidatosAsignados", target = "candidatosAsignados")
-    @Mapping(source = "trabajador", target = "trabajadores")
+    @Mapping(source = "trabajadores", target = "trabajadores")
 
     HorarioEntrevistaDto toDto(HorarioEntrevista horarioEntrevista);
     HorarioEntrevista toEntity(HorarioEntrevistaDto horarioEntrevistaDto);

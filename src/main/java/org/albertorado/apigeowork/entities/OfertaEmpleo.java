@@ -27,8 +27,8 @@ public class OfertaEmpleo {
 
     @NotNull
     @ManyToOne()
-    @JoinColumn(name = "id_oferta", referencedColumnName = "id_oferta", nullable = false, updatable = false)
-    private Empresa idEmpresa;
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa", nullable = false, updatable = false)
+    private Empresa empresa;
 
     @Basic
     @Size(min = 0,max = 255)
@@ -48,7 +48,7 @@ public class OfertaEmpleo {
 
     @NotNull
     @ManyToOne()
-    @JoinColumn(name = "id_oferta_empleo", referencedColumnName = "id_oferta_empleo", nullable = false, updatable = false)
+    @JoinColumn(name = "id_sector", referencedColumnName = "id_sector", nullable = false, updatable = false)
     private Sector sector;
 
     @Size(min = 0,max = 3000)
@@ -57,17 +57,17 @@ public class OfertaEmpleo {
     private String requisitos;
 
     @ManyToOne()
-    @JoinColumn(name = "id_oferta_empleo", referencedColumnName = "id_oferta_empleo", nullable = true, updatable = false)
+    @JoinColumn(name = "id_nivel_educativo", referencedColumnName = "id_nivel_educativo", nullable = true, updatable = false)
     private NivelEducativo nivelEducativo;
 
     @Basic
     @Digits(integer = 6, fraction = 2)
-    @Column(name = "salario_min",precision = 8,scale = 2,nullable = false)
+    @Column(name = "salario_min",precision = 8,nullable = false)
     private float salarioMin;
 
     @Basic
     @Digits(integer = 6, fraction = 2)
-    @Column(name = "salario_max",precision = 8,scale = 2,nullable = false)
+    @Column(name = "salario_max",precision = 8,nullable = false)
     private float salarioMax;
 
     @NotNull

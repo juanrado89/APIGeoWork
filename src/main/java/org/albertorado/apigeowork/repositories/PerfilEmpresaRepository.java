@@ -16,7 +16,6 @@ public interface PerfilEmpresaRepository extends JpaRepository<PerfilEmpresa, In
 
     Optional<PerfilEmpresaDto> findPerfilEmpresaByEmailContainingIgnoreCase(@Param("email") String email);
 
-    int updatePerfilUsuarioByIdPerfilIs(@Param("id") int id,@Param("perfil") PerfilEmpresa perfil);
 
-    int deletePerfilEmpresaByIdEmpresa(@Param("id") int id);
+    int deletePerfilEmpresaByIdUsuario(@Param("id") int id);
 }

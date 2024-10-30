@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.albertorado.apigeowork.entities.Sector;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,7 +13,7 @@ public class DatosEmpresaDto {
 
     private int idDatosEmpresa;
     private String nombreEmpresa;
-    private SectorDto sector;
+    private List<SectorDto> sector;
     private DireccionDto direccion;
     private String contactoNombre;
     private String contactoEmail;

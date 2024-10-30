@@ -17,11 +17,11 @@ public class OfertaEmpleoDto {
     private String descripcion;
     private SectorDto sector;
     private String requisitos;
-    private NivelEducativoDto nivelEducativoRequerido;
+    private NivelEducativoDto nivelEducativo;
     private float salarioMin;
     private float salarioMax;
     private DireccionDto direccion;
-    private Timestamp fechaPublicaion;
+    private Timestamp fechaPublicacion;
     private int estado;
 
 }

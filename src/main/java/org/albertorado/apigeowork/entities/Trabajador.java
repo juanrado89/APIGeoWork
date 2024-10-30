@@ -23,14 +23,20 @@ public class Trabajador {
     private int idTrabajador;
 
     @NotNull
-    @OneToOne(mappedBy = "id_datos")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_datos", referencedColumnName = "id_datos")
     private Datos datosUsuario;
 
-    @OneToOne(mappedBy = "id_experiencia")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_experiencia", referencedColumnName = "id_experiencia")
     private Experiencia datosExperiencia;
 
     @ManyToMany(mappedBy = "trabajadores")
     private List<HorarioEntrevista> horarios;
+
+    @OneToOne(mappedBy = "trabajador")
+    private PerfilUsuario perfilUsuario;
+
     @Override
     public int hashCode() {
         return Objects.hashCode(getIdTrabajador());

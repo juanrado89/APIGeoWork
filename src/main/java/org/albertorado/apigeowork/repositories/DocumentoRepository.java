@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface DocumentoRepository extends JpaRepository<Documento,Integer> {
 
     Optional<DocumentoDto> findByIdDocumento(@Param("documento") int idDocumento);
-    Optional<DocumentoDto> findByNombreLikeIgnoreCaseAndContenidoContainingIgnoreCase(@Param("documento") String nombre, @Param("contenido") byte[] contenido);
+
     @Modifying
     @Transactional
     int deleteDocumentoByIdDocumento(@Param("documento") int idDocumento);

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,8 +23,15 @@ public class Empresa {
     private int idEmpresa;
 
     @NotNull
-    @OneToOne(mappedBy = "id_datos_empresa")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_datos_empresa", referencedColumnName = "id_datos_empresa")
     private DatosEmpresa datosEmpresa;
+
+    @OneToOne(mappedBy = "empresa")
+    private PerfilEmpresa perfilEmpresa;
+
+    @OneToMany(mappedBy = "empresa")
+    private List<OfertaEmpleo> ofertas;
 
     @Override
     public int hashCode() {

@@ -22,6 +22,9 @@ public class ExperienciaTotal {
     private int idExperienciaTotal;
 
     @NotNull
-    @OneToMany(mappedBy = "experienciaTotal")
+    @OneToMany(mappedBy = "experienciaTotal", cascade = CascadeType.REMOVE)
     private List<DescripcionExperiencia> descripcionExperiencia;
+
+    @OneToOne(mappedBy = "experienciaTotal")
+    private Experiencia experiencia;
 }

@@ -32,8 +32,9 @@ public class PerfilUsuario {
     private String password;
 
     @NotNull
-    @OneToOne(mappedBy = "id_trabajador")
-    private Trabajador idTrabajador;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_trabajador", referencedColumnName = "id_trabajador")
+    private Trabajador trabajador;
 
     @Basic
     @Size(min = 20, max = 255)
@@ -42,7 +43,8 @@ public class PerfilUsuario {
     @Column(name = "email",length = 255,nullable = false)
     private String email;
 
-    @OneToOne(mappedBy = "id_foto")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_foto", referencedColumnName = "id_foto")
     private Foto foto;
 
     @PrePersist

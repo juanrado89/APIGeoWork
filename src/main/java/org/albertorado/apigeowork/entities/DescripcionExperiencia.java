@@ -43,6 +43,6 @@ public class DescripcionExperiencia {
     private Timestamp fechaFin;
 
     @ManyToOne
-    @JoinColumn(name = "id_descripcion_experiencia", referencedColumnName = "id_descripcion_experiencia", nullable = false, updatable = false)
+    @JoinColumn(name = "id_experiencia_total", referencedColumnName = "id_experiencia_total", nullable = false, updatable = false)
     private ExperienciaTotal experienciaTotal;
 }

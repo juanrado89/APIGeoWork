@@ -11,7 +11,7 @@ public class PerfilUsuarioPDto {
 
     private String password;
 
-    private TrabajadorDto idTrabajador;
+    private TrabajadorDto trabajador;
 
     private String email;
 

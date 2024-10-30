@@ -13,7 +13,6 @@ import java.util.Optional;
 public interface FotoRepository extends JpaRepository<Foto,Integer> {
 
     Optional<FotoDto> findByIdFoto(@Param("foto") int idFoto);
-    Optional<FotoDto> findByNombreLikeIgnoreCaseAndDatos(@Param("foto") String nombre,@Param("datos") byte[] datos);
     @Modifying
     @Transactional
     int deleteFotoByIdFoto(@Param("foto") int idFoto);

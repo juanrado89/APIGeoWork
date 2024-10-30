@@ -41,9 +41,12 @@ public class Datos {
     private Timestamp fechaEdad;
 
     @NotNull
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Direccion direccion;
+
+    @OneToOne(mappedBy = "datosUsuario")
+    private Trabajador trabajador;
 
     @Override
     public int hashCode() {

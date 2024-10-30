@@ -26,23 +26,29 @@ public class Experiencia {
 
     @NotNull
     @ManyToOne()
-    @JoinColumn(name = "id_experiencia", referencedColumnName = "id_experiencia", nullable = false, updatable = false)
+    @JoinColumn(name = "id_nivel_educativo", referencedColumnName = "id_nivel_educativo", nullable = false, updatable = false)
     private NivelEducativo nivelEducativo;
 
     @NotNull
-    @ManyToMany(mappedBy = "sectores")
+    @ManyToMany
+    @JoinTable(name = "experiencia_sector", joinColumns = @JoinColumn(name = "id_experiencia"), inverseJoinColumns = @JoinColumn(name = "id_sector"))
     private List<Sector> sector;
 
-    @OneToOne(mappedBy = "experienciaTotal")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_experiencia_total", referencedColumnName = "id_experiencia_total")
     private ExperienciaTotal experienciaTotal;
 
-    @OneToOne(mappedBy = "id_documento")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_documento", referencedColumnName = "id_documento")
     private Documento cvUrl;
 
     @NotNull
     @Basic
     @Column(name = "fecha_registro",nullable = false)
-    private Timestamp fecha_registro;
+    private Timestamp fechaRegistro;
+
+    @OneToOne(mappedBy = "datosExperiencia")
+    private Trabajador trabajador;
 
 
     @Override

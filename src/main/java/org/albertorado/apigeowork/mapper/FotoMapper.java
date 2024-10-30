@@ -12,6 +12,6 @@ public interface FotoMapper {
     @Mapping(source = "nombre", target = "nombre")
     @Mapping(source = "tipoContenido", target = "tipoContenido")
     @Mapping(source = "datos", target = "datos")
-    FotoDto ToDto(Foto foto);
-    Foto ToEntity(FotoDto fotoDto);
+    FotoDto toDto(Foto foto);
+    Foto toEntity(FotoDto fotoDto);
 }

@@ -15,5 +15,4 @@ public class DescripcionExperienciaDto {
     private String descripcion;
     private Timestamp fechaInicio;
     private Timestamp fechaFin;
-    private List<ExperienciaTotalDto> experienciaTotal;
 }

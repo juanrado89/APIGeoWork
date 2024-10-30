@@ -31,7 +31,7 @@ public class Ciudad {
 
     @NotNull
     @ManyToOne()
-    @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad", nullable = false, updatable = false)
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado", nullable = false, updatable = false)
     private Estado estado;
 
     @OneToMany(mappedBy = "ciudad")

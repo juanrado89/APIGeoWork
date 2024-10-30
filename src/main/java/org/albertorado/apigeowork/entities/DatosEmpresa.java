@@ -33,11 +33,12 @@ public class DatosEmpresa {
     private String nombreEmpresa;
 
     @NotNull
-    @ManyToMany(mappedBy = "datosEmpresa")
+    @ManyToMany
+    @JoinTable(name = "sector", joinColumns = @JoinColumn(name = "id_datos_empresa"), inverseJoinColumns = @JoinColumn(name = "id_sector"))
     private List<Sector> sector;
 
     @NotNull
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion", nullable = false, updatable = false)
     private Direccion direccion;
 
@@ -68,6 +69,9 @@ public class DatosEmpresa {
     @Basic
     @Column(name = "fecha_registro",nullable = false)
     private Timestamp fechaRegistro;
+
+    @OneToOne(mappedBy = "datosEmpresa")
+    private Empresa empresa;
 
     @Override
     public int hashCode() {

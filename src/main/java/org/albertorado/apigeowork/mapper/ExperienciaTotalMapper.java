@@ -5,6 +5,9 @@ import org.albertorado.apigeowork.entities.ExperienciaTotal;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.Collections;
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {DescripcionExperienciaMapper.class})
 public interface ExperienciaTotalMapper {
 
@@ -13,4 +16,5 @@ public interface ExperienciaTotalMapper {
 
     ExperienciaTotalDto toDto(ExperienciaTotal experienciaTotal);
     ExperienciaTotal toEntity(ExperienciaTotalDto experienciaTotalDto);
+
 }

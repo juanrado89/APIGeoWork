@@ -20,7 +20,7 @@ public class PerfilUsuarioService {
     }
 
     public PerfilUsuarioDto buscarPerfilUPorId(int id) {
-        Optional<PerfilUsuarioDto> resultado = perfilUsuarioRepository.findByIdUsuario(id);
+        Optional<PerfilUsuarioDto> resultado = perfilUsuarioRepository.findByIdPerfil(id);
 
         return resultado.orElseGet(null);
     }
@@ -31,10 +31,10 @@ public class PerfilUsuarioService {
     }
 
     public PerfilUsuarioDto actualizarPerfilU(int id, PerfilUsuario perfilUsuario) {
-        Optional<PerfilUsuarioDto> busqueda = perfilUsuarioRepository.findByIdUsuario(id);
+        Optional<PerfilUsuarioDto> busqueda = perfilUsuarioRepository.findByIdPerfil(id);
         if(busqueda.isPresent()){
             perfilUsuarioRepository.save(perfilUsuario);
-            Optional<PerfilUsuarioDto> resultado = perfilUsuarioRepository.findByIdUsuario(id);
+            Optional<PerfilUsuarioDto> resultado = perfilUsuarioRepository.findByIdPerfil(id);
             return resultado.orElseGet(null);
         }else{
             return null;
@@ -42,6 +42,6 @@ public class PerfilUsuarioService {
     }
 
     public void eliminarPerfilU(int id) {
-        perfilUsuarioRepository.deleteByIdUsuario(id);
+        perfilUsuarioRepository.deleteByIdPerfil(id);
     }
 }

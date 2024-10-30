@@ -43,6 +43,6 @@ public class ExperienciaService {
     }
 
     public List<ExperienciaDto> buscarExperienciaPorSector(String sector) {
-        return experienciaRepository.findAllBySectorContainsIgnoreCase(sector);
+        return experienciaRepository.findAllBySector_SectorContainsIgnoreCase(sector);
     }
 }

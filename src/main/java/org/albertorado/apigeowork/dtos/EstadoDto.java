@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class EstadoDto {
 
-    private int dEstado;
+    private int idEstado;
     private String estado;
     private PaisDto pais;
 }

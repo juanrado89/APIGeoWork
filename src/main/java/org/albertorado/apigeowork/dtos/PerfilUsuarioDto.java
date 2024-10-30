@@ -9,7 +9,7 @@ public class PerfilUsuarioDto {
 
     private int idPerfil;
 
-    private TrabajadorDto idTrabajador;
+    private TrabajadorDto trabajador;
 
     private String email;
 

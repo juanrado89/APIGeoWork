@@ -16,7 +16,7 @@ public interface DatosEmpresaRepository extends JpaRepository<DatosEmpresa,Integ
 
     Optional<DatosEmpresaDto> findDatosEmpresaByNombreEmpresaContainsIgnoreCaseAndDireccion_IdDireccion(@Param("nombre") String nombreEmpresa,@Param("idDireccion") int idDireccion);
 
-    List<DatosEmpresaDto> findAllBySectorContainsIgnoreCase(@Param("sector") String sector);
+    List<DatosEmpresaDto> findAllBySector_Sector(@Param("sector") String sector);
 
     @Modifying
     @Transactional

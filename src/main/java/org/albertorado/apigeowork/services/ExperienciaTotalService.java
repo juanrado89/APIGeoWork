@@ -4,9 +4,11 @@ import org.albertorado.apigeowork.dtos.ExperienciaTotalDto;
 import org.albertorado.apigeowork.entities.ExperienciaTotal;
 import org.albertorado.apigeowork.mapper.ExperienciaTotalMapper;
 import org.albertorado.apigeowork.repositories.ExperienciaTotalRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class ExperienciaTotalService {
 
     private final ExperienciaTotalRepository experienciaTotalRepository;

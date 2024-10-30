@@ -5,7 +5,7 @@ import org.albertorado.apigeowork.entities.Direccion;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = {CiudadMapper.class})
 public interface DireccionMapper {
 
     @Mapping(source = "idDireccion", target = "idDireccion")

@@ -2,9 +2,11 @@ package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.SectorDto;
 import org.albertorado.apigeowork.repositories.SectorRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class SectorService {
 
     private final SectorRepository sectorRepository;

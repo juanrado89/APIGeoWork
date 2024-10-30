@@ -12,6 +12,6 @@ public interface ExperienciaRepository extends JpaRepository<Experiencia,Integer
 
     Optional<ExperienciaDto> findByIdExperiencia(@Param("id") int idExperiencia);
 
-    List<ExperienciaDto> findAllBySectorContainsIgnoreCase(@Param("sector") String sector);
+    List<ExperienciaDto> findAllBySector_SectorContainsIgnoreCase(@Param("sector") String sector);
     int deleteByIdExperiencia(@Param("id") int idExperiencia);
 }
