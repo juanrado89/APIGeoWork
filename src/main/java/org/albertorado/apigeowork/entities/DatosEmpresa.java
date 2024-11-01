@@ -34,7 +34,7 @@ public class DatosEmpresa {
 
     @NotNull
     @ManyToMany
-    @JoinTable(name = "sector", joinColumns = @JoinColumn(name = "id_datos_empresa"), inverseJoinColumns = @JoinColumn(name = "id_sector"))
+    @JoinTable(name = "datos_empresa_sector", joinColumns = @JoinColumn(name = "id_datos_empresa"), inverseJoinColumns = @JoinColumn(name = "id_sector"))
     private List<Sector> sector;
 
     @NotNull
