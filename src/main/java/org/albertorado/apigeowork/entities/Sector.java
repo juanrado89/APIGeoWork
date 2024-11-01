@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Sector {
     @Column(name = "id_sector",nullable = false)
     private int idSector;
 
+    @NotNull
     @Size(min = 1, max = 255)
     @Basic
     @Column(name = "sector",length = 255,nullable = false)
@@ -28,4 +30,5 @@ public class Sector {
 
     @OneToMany(mappedBy = "sector")
     private List<OfertaEmpleo> ofertas;
+
 }
