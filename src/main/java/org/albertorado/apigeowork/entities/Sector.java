@@ -31,4 +31,7 @@ public class Sector {
     @OneToMany(mappedBy = "sector")
     private List<OfertaEmpleo> ofertas;
 
+    @ManyToMany(mappedBy = "sector")
+    private List<DatosEmpresa> datosEmpresas;
+
 }
