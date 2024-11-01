@@ -10,6 +10,7 @@ public interface NivelEducativoMapper {
 
     @Mapping(source = "idNivelEducativo", target = "idNivelEducativo")
     @Mapping(source = "tituloNivelEducativo", target = "tituloNivelEducativo")
+    @Mapping(source = "centroEducativo", target = "centroEducativo")
     @Mapping(source = "fechaInicio", target = "fechaInicio")
     @Mapping(source = "fechaFin", target = "fechaFin")
     @Mapping(source = "nivel", target = "nivel")

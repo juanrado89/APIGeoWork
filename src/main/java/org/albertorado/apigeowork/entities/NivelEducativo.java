@@ -29,6 +29,12 @@ public class NivelEducativo {
     @Column(name = "titulo_nivel_educativo",length = 255,nullable = false)
     private String tituloNivelEducativo;
 
+    @NotNull
+    @Size(min = 0,max = 255)
+    @Basic
+    @Column(name = "centro_educativo",length = 255,nullable = false)
+    private String centroEducativo;
+
     @Basic
     @Column(name = "fecha_inicio",nullable = false)
     private Timestamp fechaInicio;

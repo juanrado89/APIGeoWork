@@ -11,6 +11,7 @@ public class NivelEducativoDto {
 
     private int idNivelEducativo;
     private String tituloNivelEducativo;
+    private String centroEducativo;
     private Timestamp fechaInicio;
     private Timestamp fechaFin;
     private NivelDto nivel;
