@@ -21,7 +21,6 @@ public class ExperienciaTotal {
     @Column(name = "id_experiencia_total",nullable = true)
     private int idExperienciaTotal;
 
-    @NotNull
     @OneToMany(mappedBy = "experienciaTotal", cascade = CascadeType.REMOVE)
     private List<DescripcionExperiencia> descripcionExperiencia;
 

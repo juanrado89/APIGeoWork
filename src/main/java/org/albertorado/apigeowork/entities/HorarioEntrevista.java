@@ -49,7 +49,7 @@ public class HorarioEntrevista {
     @Column(name = "candidatos_asignados",precision = 3, nullable = false)
     private int candidatosAsignados;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "trabajador_horario", joinColumns = @JoinColumn(name = "horario_id"), inverseJoinColumns = @JoinColumn(name = "trabajador_id"))
     private List<Trabajador> trabajadores;
 

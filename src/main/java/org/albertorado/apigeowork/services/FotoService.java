@@ -19,8 +19,11 @@ public class FotoService {
     }
 
     public FotoDto buscarPorId(int id) {
-        Optional<FotoDto> resultado = fotoRepository.findByIdFoto(id);
-        return resultado.orElseGet(null);
+        Optional<Foto> resultado = fotoRepository.findByIdFoto(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return fotoMapper.toDto(resultado.get());
     }
 
     public FotoDto crearFoto(Foto foto) {
@@ -30,18 +33,27 @@ public class FotoService {
 
     }
 
-    public FotoDto actualizarFoto(int id,Foto foto) {
+    public FotoDto actualizarFoto(int id, Foto foto) {
+        Optional<Foto> busqueda = fotoRepository.findByIdFoto(id);
 
-        Optional<FotoDto> busqueda = fotoRepository.findByIdFoto(id);
-        if(busqueda.isPresent()){
-            fotoRepository.save(foto);
-            Optional<FotoDto> resultado = fotoRepository.findByIdFoto(id);
-            return resultado.orElseGet(null);
-        }else{
+        if (busqueda.isPresent()) {
+            Foto fotoExistente = busqueda.get();
+            if (foto.getNombre() != null) {
+                fotoExistente.setNombre(foto.getNombre());
+            }
+            if (foto.getTipoContenido() != null) {
+                fotoExistente.setTipoContenido(foto.getTipoContenido());
+            }
+            if (foto.getDatos() != null) {
+                fotoExistente.setDatos(foto.getDatos());
+            }
+            Foto actualizada = fotoRepository.save(fotoExistente);
+            return fotoMapper.toDto(actualizada);
+        } else {
             return null;
         }
-
     }
+
 
     public void borrarFoto(int id) {
 

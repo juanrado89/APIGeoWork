@@ -19,7 +19,7 @@ public class DescripcionExperiencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_descripcion_experiencia",nullable = false)
+    @Column(name = "id_descripcion_experiencia",nullable = true)
     private int idDescripcionExperiencia;
 
     @NotNull
@@ -43,6 +43,6 @@ public class DescripcionExperiencia {
     private Timestamp fechaFin;
 
     @ManyToOne
-    @JoinColumn(name = "id_experiencia_total", referencedColumnName = "id_experiencia_total", nullable = false, updatable = false)
+    @JoinColumn(name = "id_experiencia_total", referencedColumnName = "id_experiencia_total", nullable = true, updatable = false)
     private ExperienciaTotal experienciaTotal;
 }

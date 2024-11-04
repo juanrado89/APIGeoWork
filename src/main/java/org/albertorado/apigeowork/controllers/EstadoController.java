@@ -25,7 +25,8 @@ public class EstadoController {
     }
 
     @GetMapping("/buscarestadoporid/{id}")
-    public ResponseEntity<EstadoDto> buscarEstadoPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<EstadoDto> buscarEstadoPorId(@RequestHeader("authorization") String autorizacion,
+                                                       @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -40,7 +41,8 @@ public class EstadoController {
     }
 
     @GetMapping("/buscarestadopornombre/{nombre}")
-    public ResponseEntity<EstadoDto> buscarEstadoPorNombre(@RequestHeader("authorization") String autorizacion, @PathVariable String nombre){
+    public ResponseEntity<EstadoDto> buscarEstadoPorNombre(@RequestHeader("authorization") String autorizacion,
+                                                           @PathVariable String nombre){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

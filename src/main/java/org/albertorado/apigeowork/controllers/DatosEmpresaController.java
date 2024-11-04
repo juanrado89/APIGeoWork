@@ -39,7 +39,7 @@ public class DatosEmpresaController {
 
     @PostMapping("/creardatosempresa")
     public ResponseEntity<DatosEmpresaDto> crearDatosEmpresa(@RequestHeader("Authorization") String autorizacion,
-                                                             @RequestParam DatosEmpresa datosEmpresa) {
+                                                             @RequestBody DatosEmpresa datosEmpresa) {
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -51,7 +51,7 @@ public class DatosEmpresaController {
     @PutMapping("actualizardatosempresa/{id}")
     public ResponseEntity<DatosEmpresaDto> actualizarDatosEmpresa(@RequestHeader("Authorization") String autorizacion,
                                                                   @PathVariable int id,
-                                                                  @RequestParam DatosEmpresa datosEmpresa) {
+                                                                  @RequestBody DatosEmpresa datosEmpresa) {
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

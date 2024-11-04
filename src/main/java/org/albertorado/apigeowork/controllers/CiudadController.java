@@ -25,7 +25,8 @@ public class CiudadController {
     }
 
     @GetMapping("/buscarciudadporid/{id}")
-    public ResponseEntity<CiudadDto> buscarCiudadPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<CiudadDto> buscarCiudadPorId(@RequestHeader("authorization") String autorizacion,
+                                                       @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -40,7 +41,8 @@ public class CiudadController {
     }
 
     @GetMapping("/buscarciudadpornombre/{nombre}")
-    public ResponseEntity<CiudadDto> buscarCiudadPorId(@RequestHeader("authorization") String autorizacion, @PathVariable String nombre){
+    public ResponseEntity<CiudadDto> buscarCiudadPorId(@RequestHeader("authorization") String autorizacion,
+                                                       @PathVariable String nombre){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

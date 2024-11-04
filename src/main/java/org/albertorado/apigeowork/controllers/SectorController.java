@@ -25,7 +25,8 @@ public class SectorController {
     }
 
     @GetMapping("/buscarsectorporid/{id}")
-    public ResponseEntity<SectorDto> buscarSectorPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<SectorDto> buscarSectorPorId(@RequestHeader("authorization") String autorizacion,
+                                                       @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -39,8 +40,9 @@ public class SectorController {
         }
     }
 
-    @GetMapping("/buscarsectorpornombre/{nombre}")
-    public ResponseEntity<SectorDto> buscarSectorPorNombre(@RequestHeader("authorization") String autorizacion, @PathVariable String sector){
+    @GetMapping("/buscarsectorpornombre/{sector}")
+    public ResponseEntity<SectorDto> buscarSectorPorNombre(@RequestHeader("authorization") String autorizacion,
+                                                           @PathVariable String sector){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

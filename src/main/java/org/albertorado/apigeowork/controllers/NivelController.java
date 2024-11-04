@@ -41,7 +41,8 @@ public class NivelController {
     }
 
     @GetMapping("/buscarpornombre/{nombre}")
-    public ResponseEntity<NivelDto> buscarPorId(@RequestHeader("authorization") String autorizacion, @PathVariable String nombre) {
+    public ResponseEntity<NivelDto> buscarPorId(@RequestHeader("authorization") String autorizacion,
+                                                @PathVariable String nombre) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

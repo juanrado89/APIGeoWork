@@ -20,8 +20,11 @@ public class DatosService {
     }
 
     public DatosDto buscarPorId(int id) {
-        Optional<DatosDto> resultado = datosRepository.findDatosByIdDatos(id);
-        return resultado.orElseGet(null);
+        Optional<Datos> resultado = datosRepository.findDatosByIdDatos(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return datosMapper.toDto(resultado.get());
     }
 
     public DatosDto crearDatos(Datos datos) {
@@ -32,17 +35,30 @@ public class DatosService {
     }
 
     public DatosDto actualizarDatos(int id, Datos datos) {
+        Optional<Datos> busqueda = datosRepository.findDatosByIdDatos(id);
 
-        Optional<DatosDto> busqueda = datosRepository.findDatosByIdDatos(id);
-        if(busqueda.isPresent()){
-            datosRepository.save(datos);
-            Optional<DatosDto> resultado = datosRepository.findDatosByIdDatos(id);
-            return resultado.orElseGet(null);
-        }else{
+        if (busqueda.isPresent()) {
+            Datos datosExistentes = busqueda.get();
+            if (datos.getNombre() != null) {
+                datosExistentes.setNombre(datos.getNombre());
+            }
+            if (datos.getApellidos() != null) {
+                datosExistentes.setApellidos(datos.getApellidos());
+            }
+            if (datos.getFechaEdad() != null) {
+                datosExistentes.setFechaEdad(datos.getFechaEdad());
+            }
+            if (datos.getDireccion() != null) {
+                datosExistentes.setDireccion(datos.getDireccion());
+            }
+
+            Datos actualizados = datosRepository.save(datosExistentes);
+            return datosMapper.toDto(actualizados);
+        } else {
             return null;
         }
-
     }
+
 
     public void borrarDatos(int id) {
 

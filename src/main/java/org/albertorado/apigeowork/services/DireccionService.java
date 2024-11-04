@@ -20,20 +20,41 @@ public class DireccionService {
 
 
     public DireccionDto direccionPorId(int id) {
-        Optional<DireccionDto> resultado = direccionReposirory.findDireccionByIdDireccion(id);
-        return resultado.orElseGet(null);
+        Optional<Direccion> resultado = direccionReposirory.findDireccionByIdDireccion(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return direccionMapper.toDto(resultado.get());
     }
 
-    public DireccionDto actualizarDireccion(int id, Direccion direccion){
-        Optional<DireccionDto> busqueda = direccionReposirory.findDireccionByIdDireccion(id);
-        if(busqueda.isPresent()){
-            direccionReposirory.save(direccion);
-            Optional<DireccionDto> resultado = direccionReposirory.findDireccionByIdDireccion(id);
-            return resultado.orElseGet(null);
-        }else{
+    public DireccionDto actualizarDireccion(int id, Direccion direccion) {
+        Optional<Direccion> busqueda = direccionReposirory.findDireccionByIdDireccion(id);
+
+        if (busqueda.isPresent()) {
+            Direccion direccionExistente = busqueda.get();
+
+            if (direccion.getDireccion() != null) {
+                direccionExistente.setDireccion(direccion.getDireccion());
+            }
+            if (direccion.getPiso() != -1) {
+                direccionExistente.setPiso(direccion.getPiso());
+            }
+            if (direccion.getPuerta() != null) {
+                direccionExistente.setPuerta(direccion.getPuerta());
+            }
+            if (direccion.getCodigoPostal() != 0) {
+                direccionExistente.setCodigoPostal(direccion.getCodigoPostal());
+            }
+            if (direccion.getCiudad() != null) {
+                direccionExistente.setCiudad(direccion.getCiudad());
+            }
+            Direccion actualizada = direccionReposirory.save(direccionExistente);
+            return direccionMapper.toDto(actualizada);
+        } else {
             return null;
         }
     }
+
 
     public void borrarPorId(int id) {
         direccionReposirory.deleteDireccionByIdDireccion(id);

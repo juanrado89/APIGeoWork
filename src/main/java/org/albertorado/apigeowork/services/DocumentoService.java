@@ -19,8 +19,11 @@ public class DocumentoService {
     }
 
     public DocumentoDto buscarPorId(int id) {
-        Optional<DocumentoDto> resultado = documentoRepository.findByIdDocumento(id);
-        return resultado.orElseGet(null);
+        Optional<Documento> resultado = documentoRepository.findByIdDocumento(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return documentoMapper.toDto(resultado.get());
     }
 
     public DocumentoDto crearDocumento(Documento documento) {
@@ -30,18 +33,27 @@ public class DocumentoService {
 
     }
 
-    public DocumentoDto actualizarDocumento(int id,Documento documento) {
+    public DocumentoDto actualizarDocumento(int id, Documento documento) {
+        Optional<Documento> busqueda = documentoRepository.findByIdDocumento(id);
 
-        Optional<DocumentoDto> busqueda = documentoRepository.findByIdDocumento(id);
-        if(busqueda.isPresent()){
-            documentoRepository.save(documento);
-            Optional<DocumentoDto> resultado = documentoRepository.findByIdDocumento(id);
-            return resultado.orElseGet(null);
-        }else{
+        if (busqueda.isPresent()) {
+            Documento documentoExistente = busqueda.get();
+            if (documento.getNombre() != null) {
+                documentoExistente.setNombre(documento.getNombre());
+            }
+            if (documento.getTipoContenido() != null) {
+                documentoExistente.setTipoContenido(documento.getTipoContenido());
+            }
+            if (documento.getContenido() != null) {
+                documentoExistente.setContenido(documento.getContenido());
+            }
+            Documento actualizado = documentoRepository.save(documentoExistente);
+            return documentoMapper.toDto(actualizado);
+        } else {
             return null;
         }
-
     }
+
 
     public void borrarDocumento(int id) {
 

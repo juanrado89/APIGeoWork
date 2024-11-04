@@ -28,7 +28,8 @@ public class NivelEducativoController {
     }
 
     @GetMapping("/buscarporidniveleducativo/{id}")
-    public ResponseEntity<NivelEducativoDto> buscarPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+    public ResponseEntity<NivelEducativoDto> buscarPorId(@RequestHeader("authorization") String autorizacion,
+                                                         @PathVariable int id) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -43,7 +44,8 @@ public class NivelEducativoController {
     }
 
     @GetMapping("/buscarportitulo")
-    public ResponseEntity<List<NivelEducativoDto>> buscarPortitulo(@RequestHeader("authorization") String autorizacion, @RequestParam String titulo) {
+    public ResponseEntity<List<NivelEducativoDto>> buscarPortitulo(@RequestHeader("authorization") String autorizacion,
+                                                                   @RequestBody String titulo) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -58,7 +60,8 @@ public class NivelEducativoController {
     }
 
     @PostMapping("/crearniveleducativo")
-    public ResponseEntity<NivelEducativoDto> crearNivelEducativo(@RequestHeader("authorization") String autorizacion, @RequestParam NivelEducativo nivelEducativo) {
+    public ResponseEntity<NivelEducativoDto> crearNivelEducativo(@RequestHeader("authorization") String autorizacion,
+                                                                 @RequestBody NivelEducativo nivelEducativo) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -73,7 +76,9 @@ public class NivelEducativoController {
     }
 
     @PutMapping("/actualizarniveleducativo/{id}")
-    public ResponseEntity<NivelEducativoDto> actualizarHorario(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestParam NivelEducativo nivelEducativo) {
+    public ResponseEntity<NivelEducativoDto> actualizarHorario(@RequestHeader("authorization") String autorizacion,
+                                                               @PathVariable int id,
+                                                               @RequestBody NivelEducativo nivelEducativo) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

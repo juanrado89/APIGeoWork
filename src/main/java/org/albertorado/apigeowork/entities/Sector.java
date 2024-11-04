@@ -34,4 +34,7 @@ public class Sector {
     @ManyToMany(mappedBy = "sector")
     private List<DatosEmpresa> datosEmpresas;
 
+    @ManyToMany(mappedBy = "sector")
+    private List<Experiencia> experiencias;
+
 }

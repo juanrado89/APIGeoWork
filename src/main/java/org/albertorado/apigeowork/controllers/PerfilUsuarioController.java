@@ -28,7 +28,8 @@ public class PerfilUsuarioController {
 
 
     @GetMapping("/buscarperfilu/{id}")
-    public ResponseEntity<PerfilUsuarioDto> buscarPerfilUPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+    public ResponseEntity<PerfilUsuarioDto> buscarPerfilUPorId(@RequestHeader("authorization") String autorizacion,
+                                                               @PathVariable int id) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -43,7 +44,8 @@ public class PerfilUsuarioController {
     }
 
     @PostMapping("/crearperfilu")
-    public ResponseEntity<PerfilUsuarioDto> crearPerfilU(@RequestHeader("authorization") String autorizacion, @RequestBody PerfilUsuario perfilUsuario) {
+    public ResponseEntity<PerfilUsuarioDto> crearPerfilU(@RequestHeader("authorization") String autorizacion,
+                                                         @RequestBody PerfilUsuario perfilUsuario) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -59,7 +61,9 @@ public class PerfilUsuarioController {
     }
 
     @PutMapping("/actualizarperfilu/{id}")
-    public ResponseEntity<PerfilUsuarioDto> actualizarPerfilU(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestBody PerfilUsuario perfilUsuario) {
+    public ResponseEntity<PerfilUsuarioDto> actualizarPerfilU(@RequestHeader("authorization") String autorizacion,
+                                                              @PathVariable int id,
+                                                              @RequestBody PerfilUsuario perfilUsuario) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -75,7 +79,8 @@ public class PerfilUsuarioController {
     }
 
     @DeleteMapping("/borrarperfilu/{id}")
-    public ResponseEntity<Void> eliminarPerfilU(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+    public ResponseEntity<Void> eliminarPerfilU(@RequestHeader("authorization") String autorizacion,
+                                                @PathVariable int id) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

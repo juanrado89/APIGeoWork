@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 
-    Optional<EmpresaDto> findByIdEmpresa(@Param("id") int idEmpresa);
+    Optional<Empresa> findByIdEmpresa(@Param("id") int idEmpresa);
 
     Optional<EmpresaDto> findByDatosEmpresa_IdDatosEmpresa(@Param("idDatos") int idDatos);
 

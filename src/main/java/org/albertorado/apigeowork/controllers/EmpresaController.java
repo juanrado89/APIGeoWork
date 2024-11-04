@@ -26,7 +26,8 @@ public class EmpresaController {
     }
 
     @PostMapping("/crearempresa")
-    public ResponseEntity<EmpresaDto> crearEmpresa(@RequestHeader("authorization") String autorizacion, @RequestParam Empresa empresa){
+    public ResponseEntity<EmpresaDto> crearEmpresa(@RequestHeader("authorization") String autorizacion,
+                                                   @RequestBody Empresa empresa){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -41,7 +42,8 @@ public class EmpresaController {
     }
 
     @GetMapping("/buscarEmpresa/{id}")
-    public ResponseEntity<EmpresaDto> buscarEmpresaPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<EmpresaDto> buscarEmpresaPorId(@RequestHeader("authorization") String autorizacion,
+                                                         @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -56,7 +58,8 @@ public class EmpresaController {
     }
 
     @PostMapping("/actualizarempresa/{id}")
-    public ResponseEntity<EmpresaDto> actualizarEmpresa(@RequestHeader("authorization") String autorizacion, @PathVariable int id,@RequestParam Empresa empresa){
+    public ResponseEntity<EmpresaDto> actualizarEmpresa(@RequestHeader("authorization") String autorizacion,
+                                                        @PathVariable int id,@RequestBody Empresa empresa){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -71,7 +74,8 @@ public class EmpresaController {
     }
 
     @DeleteMapping("/borrarempresa/{id}")
-    public ResponseEntity<Void> borrarEmpresa(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<Void> borrarEmpresa(@RequestHeader("authorization") String autorizacion,
+                                              @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

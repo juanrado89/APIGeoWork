@@ -21,12 +21,16 @@ public class NivelEducativoService {
     }
 
     public NivelEducativoDto buscarPorId(int id) {
-        Optional<NivelEducativoDto> resultado = nivelEducativoRepository.findById(id);
-        return resultado.orElse(null);
+        Optional<NivelEducativo> resultado = nivelEducativoRepository.findById(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return nivelEducativoMapper.toDto(resultado.get());
     }
 
     public List<NivelEducativoDto> buscarPortitulo(String titulo) {
-        return nivelEducativoRepository.findAllByTituloNivelEducativoContainingIgnoreCase(titulo);
+        List<NivelEducativo> resultado = nivelEducativoRepository.findAllByTituloNivelEducativoContainingIgnoreCase(titulo);
+        return nivelEducativoMapper.toDto(resultado);
 
     }
 
@@ -36,13 +40,32 @@ public class NivelEducativoService {
     }
 
     public NivelEducativoDto actualizarNivelEducativo(int id, NivelEducativo nivelEducativo) {
-        Optional<NivelEducativoDto> resultado = nivelEducativoRepository.findById(id);
-        if(resultado.isPresent()){
-            NivelEducativo actualizado = nivelEducativoRepository.save(nivelEducativo);
+        Optional<NivelEducativo> busqueda = nivelEducativoRepository.findById(id);
+
+        if (busqueda.isPresent()) {
+            NivelEducativo nivelExistente = busqueda.get();
+            if (nivelEducativo.getTituloNivelEducativo() != null) {
+                nivelExistente.setTituloNivelEducativo(nivelEducativo.getTituloNivelEducativo());
+            }
+            if (nivelEducativo.getCentroEducativo() != null) {
+                nivelExistente.setCentroEducativo(nivelEducativo.getCentroEducativo());
+            }
+            if (nivelEducativo.getFechaInicio() != null) {
+                nivelExistente.setFechaInicio(nivelEducativo.getFechaInicio());
+            }
+            if (nivelEducativo.getFechaFin() != null) {
+                nivelExistente.setFechaFin(nivelEducativo.getFechaFin());
+            }
+            if (nivelEducativo.getNivel() != null) {
+                nivelExistente.setNivel(nivelEducativo.getNivel());
+            }
+            NivelEducativo actualizado = nivelEducativoRepository.save(nivelExistente);
             return nivelEducativoMapper.toDto(actualizado);
+        } else {
+            return null;
         }
-        return null;
     }
+
 
     public void borrarNivelEducativo(int id) {
         nivelEducativoRepository.deleteById(id);

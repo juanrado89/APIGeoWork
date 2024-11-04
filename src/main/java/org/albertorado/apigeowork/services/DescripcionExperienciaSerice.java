@@ -20,8 +20,11 @@ public class DescripcionExperienciaSerice {
     }
 
     public DescripcionExperienciaDto buscarPorId(int id) {
-        Optional<DescripcionExperienciaDto> resultado = descripcionExperienciaRepository.findByIdDescripcionExperiencia(id);
-        return resultado.orElseGet(null);
+        Optional<DescripcionExperiencia> resultado = descripcionExperienciaRepository.findByIdDescripcionExperiencia(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return descripcionExperienciaMapper.toDto(resultado.get());
     }
 
     public DescripcionExperienciaDto crearDescripcionExperiencia(DescripcionExperiencia descripcionExperiencia) {
@@ -30,14 +33,32 @@ public class DescripcionExperienciaSerice {
     }
 
     public DescripcionExperienciaDto actualizarDescripcionExperiencia(int id, DescripcionExperiencia descripcionExperiencia) {
-        Optional<DescripcionExperienciaDto> busqueda = descripcionExperienciaRepository.findByIdDescripcionExperiencia(id);
-        if(busqueda.isPresent()){
-            DescripcionExperiencia actualizada = descripcionExperienciaRepository.save(descripcionExperiencia);
+        Optional<DescripcionExperiencia> busqueda = descripcionExperienciaRepository.findByIdDescripcionExperiencia(id);
+
+        if (busqueda.isPresent()) {
+            DescripcionExperiencia descripcionExistente = busqueda.get();
+            if (descripcionExperiencia.getNombreEmpresa() != null) {
+                descripcionExistente.setNombreEmpresa(descripcionExperiencia.getNombreEmpresa());
+            }
+            if (descripcionExperiencia.getDescripcion() != null) {
+                descripcionExistente.setDescripcion(descripcionExperiencia.getDescripcion());
+            }
+            if (descripcionExperiencia.getFechaInicio() != null) {
+                descripcionExistente.setFechaInicio(descripcionExperiencia.getFechaInicio());
+            }
+            if (descripcionExperiencia.getFechaFin() != null) {
+                descripcionExistente.setFechaFin(descripcionExperiencia.getFechaFin());
+            }
+            if (descripcionExperiencia.getExperienciaTotal() != null) {
+                descripcionExistente.setExperienciaTotal(descripcionExperiencia.getExperienciaTotal());
+            }
+            DescripcionExperiencia actualizada = descripcionExperienciaRepository.save(descripcionExistente);
             return descripcionExperienciaMapper.toDto(actualizada);
-        }else{
+        } else {
             return null;
         }
     }
+
 
     public void borrarDescripcionExperiencia(int id) {
         descripcionExperienciaRepository.deleteById(id);

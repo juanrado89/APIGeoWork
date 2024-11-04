@@ -30,8 +30,10 @@ public class Experiencia {
     private NivelEducativo nivelEducativo;
 
     @NotNull
-    @ManyToMany
-    @JoinTable(name = "experiencia_sector", joinColumns = @JoinColumn(name = "id_experiencia"), inverseJoinColumns = @JoinColumn(name = "id_sector"))
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "experiencia_sector",
+            joinColumns = @JoinColumn(name = "id_experiencia"),
+            inverseJoinColumns = @JoinColumn(name = "id_sector"))
     private List<Sector> sector;
 
     @OneToOne(cascade = CascadeType.REMOVE)

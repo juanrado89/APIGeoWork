@@ -27,7 +27,8 @@ public class ExperienciaTotalController {
     }
 
     @GetMapping("/buscaresperienciatotalporid/{id}")
-    public ResponseEntity<ExperienciaTotalDto> buscarPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+    public ResponseEntity<ExperienciaTotalDto> buscarPorId(@RequestHeader("authorization") String autorizacion,
+                                                           @PathVariable int id) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -42,7 +43,8 @@ public class ExperienciaTotalController {
     }
 
     @PostMapping("/crearexperienciatotal")
-    public ResponseEntity<ExperienciaTotalDto> crearExperienciaTotal(@RequestHeader("authorization") String autorizacion, @RequestParam ExperienciaTotal experienciaTotal) {
+    public ResponseEntity<ExperienciaTotalDto> crearExperienciaTotal(@RequestHeader("authorization") String autorizacion,
+                                                                     @RequestBody ExperienciaTotal experienciaTotal) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -57,7 +59,9 @@ public class ExperienciaTotalController {
     }
 
     @PostMapping("/actualizarexperiencia/{id}")
-    public ResponseEntity<ExperienciaTotalDto> actualizarExperiencia(@RequestHeader("authorization") String autorizacion, @PathVariable int id,@RequestParam ExperienciaTotal experiencia){
+    public ResponseEntity<ExperienciaTotalDto> actualizarExperiencia(@RequestHeader("authorization") String autorizacion,
+                                                                     @PathVariable int id,
+                                                                     @RequestBody ExperienciaTotal experiencia){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

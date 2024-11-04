@@ -26,7 +26,8 @@ public class PerfilEmpresaController {
     }
 
     @GetMapping("/buscarperfile/{id}")
-    public ResponseEntity<PerfilEmpresaDto> buscarPerfilEPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+    public ResponseEntity<PerfilEmpresaDto> buscarPerfilEPorId(@RequestHeader("authorization") String autorizacion,
+                                                               @PathVariable int id) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -41,7 +42,8 @@ public class PerfilEmpresaController {
     }
 
     @PostMapping("crearperfile")
-    public ResponseEntity<PerfilEmpresaDto> crearPerfilE(@RequestHeader("authorization") String autorizacion, @RequestBody PerfilEmpresa perfilEmpresa) {
+    public ResponseEntity<PerfilEmpresaDto> crearPerfilE(@RequestHeader("authorization") String autorizacion,
+                                                         @RequestBody PerfilEmpresa perfilEmpresa) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -57,7 +59,9 @@ public class PerfilEmpresaController {
     }
 
     @PutMapping("/actualizarperfile/{id}")
-    public ResponseEntity<PerfilEmpresaDto> actualizarPerfilE(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestBody PerfilEmpresa perfilEmpresa) {
+    public ResponseEntity<PerfilEmpresaDto> actualizarPerfilE(@RequestHeader("authorization") String autorizacion,
+                                                              @PathVariable int id,
+                                                              @RequestBody PerfilEmpresa perfilEmpresa) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

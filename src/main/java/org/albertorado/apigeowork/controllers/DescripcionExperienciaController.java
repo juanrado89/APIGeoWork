@@ -26,7 +26,8 @@ public class DescripcionExperienciaController {
     }
 
     @GetMapping("/buscardescripcionexperienciaporid/{id}")
-    public ResponseEntity<DescripcionExperienciaDto> buscarDescripcionExperienciaPorId(@RequestHeader("Authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<DescripcionExperienciaDto> buscarDescripcionExperienciaPorId(
+            @RequestHeader("Authorization") String autorizacion, @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -41,7 +42,8 @@ public class DescripcionExperienciaController {
     }
 
     @PostMapping("/creardescripcionexperiencia")
-    public ResponseEntity<DescripcionExperienciaDto> crearDescripcionExperiencia(@RequestHeader("Authorization") String autorizacion, @RequestParam DescripcionExperiencia descripcionExperiencia){
+    public ResponseEntity<DescripcionExperienciaDto> crearDescripcionExperiencia(
+            @RequestHeader("Authorization") String autorizacion, @RequestBody DescripcionExperiencia descripcionExperiencia){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -56,7 +58,9 @@ public class DescripcionExperienciaController {
     }
 
     @PutMapping("actualizardescripcionexperiencia/{id}")
-    public ResponseEntity<DescripcionExperienciaDto> actualizarDescripcionExperiencia(@RequestHeader("Authorization") String autorizacion, @PathVariable int id, @RequestParam DescripcionExperiencia descripcionExperiencia){
+    public ResponseEntity<DescripcionExperienciaDto> actualizarDescripcionExperiencia(
+            @RequestHeader("Authorization") String autorizacion, @PathVariable int id,
+            @RequestBody DescripcionExperiencia descripcionExperiencia){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -71,7 +75,8 @@ public class DescripcionExperienciaController {
     }
 
     @DeleteMapping("/borrardescripcionexperiencia/{id}")
-    public ResponseEntity<Void> borrarDescripcionExperiencia(@RequestHeader("Authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<Void> borrarDescripcionExperiencia(@RequestHeader("Authorization") String autorizacion,
+                                                             @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

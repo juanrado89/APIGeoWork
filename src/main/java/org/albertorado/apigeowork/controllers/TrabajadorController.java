@@ -26,7 +26,8 @@ public class TrabajadorController {
     }
 
     @PostMapping("/creartrabajador")
-    public ResponseEntity<TrabajadorDto> crearTrabajador(@RequestHeader("authorization") String autorizacion, @RequestParam Trabajador trabajador){
+    public ResponseEntity<TrabajadorDto> crearTrabajador(@RequestHeader("authorization") String autorizacion,
+                                                         @RequestBody Trabajador trabajador){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -41,7 +42,8 @@ public class TrabajadorController {
     }
 
     @GetMapping("/buscartrabajador/{id}")
-    public ResponseEntity<TrabajadorDto> buscarTrabajadorPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<TrabajadorDto> buscarTrabajadorPorId(@RequestHeader("authorization") String autorizacion,
+                                                               @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -56,7 +58,9 @@ public class TrabajadorController {
     }
 
     @PostMapping("/actualizartrabajador/{id}")
-    public ResponseEntity<TrabajadorDto> actualizarTrabajador(@RequestHeader("authorization") String autorizacion, @PathVariable int id,@RequestParam Trabajador trabajador){
+    public ResponseEntity<TrabajadorDto> actualizarTrabajador(@RequestHeader("authorization") String autorizacion,
+                                                              @PathVariable int id,
+                                                              @RequestBody Trabajador trabajador){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -71,7 +75,8 @@ public class TrabajadorController {
     }
 
     @DeleteMapping("/borrartrabajador/{id}")
-    public ResponseEntity<Void> borrarTrabajador(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<Void> borrarTrabajador(@RequestHeader("authorization") String autorizacion,
+                                                 @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

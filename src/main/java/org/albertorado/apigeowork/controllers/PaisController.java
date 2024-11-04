@@ -41,7 +41,8 @@ public class PaisController {
     }
 
     @GetMapping("/buscarpaispornombre/{nombre}")
-    public  ResponseEntity<PaisDto> buscarPorNombre(@RequestHeader("authorization") String autorizacion, @PathVariable String nombre){
+    public  ResponseEntity<PaisDto> buscarPorNombre(@RequestHeader("authorization") String autorizacion,
+                                                    @PathVariable String nombre){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

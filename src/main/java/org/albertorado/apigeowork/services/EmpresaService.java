@@ -25,19 +25,28 @@ public class EmpresaService {
     }
 
     public EmpresaDto buscarEmpresaPorId(int id) {
-        Optional<EmpresaDto> resultado = empresaRepository.findByIdEmpresa(id);
-        return resultado.orElseGet(null);
+        Optional<Empresa> resultado = empresaRepository.findByIdEmpresa(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return empresaMapper.toDto(resultado.get());
     }
 
     public EmpresaDto actualizarEmpresa(int id, Empresa empresa) {
-        Optional<EmpresaDto> resultado = empresaRepository.findByIdEmpresa(id);
-        if(resultado.isPresent()){
-            empresaRepository.save(empresa);
-            Optional<EmpresaDto> actualizado = empresaRepository.findByIdEmpresa(id);
-            return actualizado.orElseGet(null);
+        Optional<Empresa> resultado = empresaRepository.findByIdEmpresa(id);
+
+        if (resultado.isPresent()) {
+            Empresa empresaExistente = resultado.get();
+            if (empresa.getDatosEmpresa() != null) {
+                empresaExistente.setDatosEmpresa(empresa.getDatosEmpresa());
+            }
+            Empresa actualizada = empresaRepository.save(empresaExistente);
+            return empresaMapper.toDto(actualizada);
+        } else {
+            return null;
         }
-        return null;
     }
+
 
     public void borrarEmpresa(int id) {
         empresaRepository.deleteByIdEmpresa(id);

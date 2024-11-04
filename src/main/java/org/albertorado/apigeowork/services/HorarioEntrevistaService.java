@@ -1,13 +1,16 @@
 package org.albertorado.apigeowork.services;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.HorarioEntrevistaDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
+import org.albertorado.apigeowork.entities.Trabajador;
 import org.albertorado.apigeowork.especificaciones.HorarioEntrevistaEspecificaciones;
 import org.albertorado.apigeowork.mapper.HorarioEntrevistaMapper;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.HorarioEntrevistaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,12 +26,16 @@ public class HorarioEntrevistaService {
     }
 
     public HorarioEntrevistaDto buscarPorId(int id) {
-        Optional<HorarioEntrevistaDto> oferta = horarioEntrevistaRepository.findByIdHorario(id);
-        return oferta.orElseGet(null);
+        Optional<HorarioEntrevista> horario = horarioEntrevistaRepository.findByIdHorario(id);
+        if(horario.isEmpty()){
+            return null;
+        }
+        return horarioEntrevistaMapper.toDto(horario.get());
     }
 
     public List<HorarioEntrevistaDto> buscarPorIdOferta(int id) {
-        return horarioEntrevistaRepository.findAllByOfertaEmpleo_IdOferta(id);
+        List<HorarioEntrevista> horarios = horarioEntrevistaRepository.findAllByOfertaEmpleo_IdOferta(id);
+        return horarioEntrevistaMapper.toDto(horarios);
     }
 
     public HorarioEntrevistaDto crearHorarioEntrevista(HorarioEntrevista horarioEntrevista) {
@@ -41,16 +48,41 @@ public class HorarioEntrevistaService {
         return horarioEntrevistaMapper.toDto(creado);
     }
 
+    @Transactional
     public HorarioEntrevistaDto actualizarHorario(int id, HorarioEntrevista horarioEntrevista) {
-        Optional<HorarioEntrevistaDto> busqueda = horarioEntrevistaRepository.findByIdHorario(id);
-        if(busqueda.isPresent()){
-            horarioEntrevistaRepository.save(horarioEntrevista);
-            Optional<HorarioEntrevistaDto> resultado = horarioEntrevistaRepository.findByIdHorario(id);
-            return resultado.orElseGet(null);
-        }else{
+        Optional<HorarioEntrevista> busqueda = horarioEntrevistaRepository.findByIdHorario(id);
+
+        if (busqueda.isEmpty()) {
             return null;
         }
+        HorarioEntrevista horarioExistente = busqueda.get();
+
+        if (horarioEntrevista.getOfertaEmpleo() != null) {
+            horarioExistente.setOfertaEmpleo(horarioEntrevista.getOfertaEmpleo());
+        }
+        if (horarioEntrevista.getDia() != null) {
+            horarioExistente.setDia(horarioEntrevista.getDia());
+        }
+        if (horarioEntrevista.getHora() != null) {
+            horarioExistente.setHora(horarioEntrevista.getHora());
+        }
+        if (horarioEntrevista.getCandidatosDisponibles() != 0) {
+            horarioExistente.setCandidatosDisponibles(horarioEntrevista.getCandidatosDisponibles());
+        }
+        if (horarioEntrevista.getCandidatosAsignados() != 0) {
+            horarioExistente.setCandidatosAsignados(horarioEntrevista.getCandidatosAsignados());
+        }
+        if(!horarioEntrevista.getTrabajadores().isEmpty()){
+            List<Trabajador> trabajadores = new ArrayList<>();
+            for(Trabajador trabajador : horarioEntrevista.getTrabajadores()){
+                trabajadores.add(trabajador);
+            }
+            horarioExistente.setTrabajadores(trabajadores);
+        }
+        HorarioEntrevista actualizado = horarioEntrevistaRepository.save(horarioExistente);
+        return horarioEntrevistaMapper.toDto(actualizado);
     }
+
 
     public void borrarHorario(int id) {
         horarioEntrevistaRepository.deleteById(id);

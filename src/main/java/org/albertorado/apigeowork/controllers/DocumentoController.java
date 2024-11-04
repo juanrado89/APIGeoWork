@@ -26,7 +26,8 @@ public class DocumentoController {
     }
 
     @GetMapping("/buscardocumentoporid/{id}")
-    public ResponseEntity<DocumentoDto> buscarDocumentoPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<DocumentoDto> buscarDocumentoPorId(@RequestHeader("authorization") String autorizacion,
+                                                             @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -41,7 +42,8 @@ public class DocumentoController {
     }
 
     @PostMapping("/creardocumento")
-    public ResponseEntity<DocumentoDto> crearDocumento(@RequestHeader("authorization") String autorizacion, @RequestParam Documento documento){
+    public ResponseEntity<DocumentoDto> crearDocumento(@RequestHeader("authorization") String autorizacion,
+                                                       @RequestBody Documento documento){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -56,7 +58,8 @@ public class DocumentoController {
     }
 
     @PutMapping("actualizardocumento/{id}")
-    public ResponseEntity<DocumentoDto> actualizarDocumento(@RequestHeader("authorization") String autorizacion, @PathVariable int id,@RequestParam Documento documento){
+    public ResponseEntity<DocumentoDto> actualizarDocumento(@RequestHeader("authorization") String autorizacion,
+                                                            @PathVariable int id,@RequestBody Documento documento){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -71,7 +74,8 @@ public class DocumentoController {
     }
 
     @DeleteMapping("/borrardocumento/{id}")
-    public ResponseEntity<Void> borrarDocumento(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<Void> borrarDocumento(@RequestHeader("authorization") String autorizacion,
+                                                @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

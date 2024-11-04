@@ -20,8 +20,11 @@ public class ExperienciaTotalService {
     }
 
     public ExperienciaTotalDto buscarPorId(int id) {
-        Optional<ExperienciaTotalDto> resultado = experienciaTotalRepository.findById(id);
-        return resultado.orElse(null);
+        Optional<ExperienciaTotal> resultado = experienciaTotalRepository.findById(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return experienciaTotalMapper.toDto(resultado.get());
     }
 
     public ExperienciaTotalDto crearExperiencia(ExperienciaTotal experienciaTotal) {
@@ -31,7 +34,7 @@ public class ExperienciaTotalService {
 
     public ExperienciaTotalDto actualizarExperiencia(int id, ExperienciaTotal experiencia) {
 
-        Optional<ExperienciaTotalDto> busqueda = experienciaTotalRepository.findById(id);
+        Optional<ExperienciaTotal> busqueda = experienciaTotalRepository.findById(id);
         if(busqueda.isPresent()){
             ExperienciaTotal actualizada = experienciaTotalRepository.save(experiencia);
             return experienciaTotalMapper.toDto(actualizada);

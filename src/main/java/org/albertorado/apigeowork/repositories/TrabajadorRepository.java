@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface TrabajadorRepository extends JpaRepository<Trabajador,Integer> {
 
-    Optional<TrabajadorDto> findTrabajadorByIdTrabajador(@Param("trabajador") int idTrabajador);
+    Optional<Trabajador> findTrabajadorByIdTrabajador(@Param("trabajador") int idTrabajador);
 
     Optional<TrabajadorDto> findTrabajadorByDatosUsuario_IdDatos(@Param("idDatos") int idDatos);
 

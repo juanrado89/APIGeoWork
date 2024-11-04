@@ -5,6 +5,8 @@ import org.albertorado.apigeowork.entities.NivelEducativo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {NivelMapper.class})
 public interface NivelEducativoMapper {
 
@@ -17,4 +19,6 @@ public interface NivelEducativoMapper {
 
     NivelEducativoDto toDto(NivelEducativo nivelEducativo);
     NivelEducativo toEntity(NivelEducativoDto nivelEducativoDto);
+
+    List<NivelEducativoDto> toDto(List<NivelEducativo> nivelEducativo);
 }

@@ -26,7 +26,8 @@ public class FotoController {
     }
 
     @GetMapping("/buscarfotoporid/{id}")
-    public ResponseEntity<FotoDto> buscarFotoPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<FotoDto> buscarFotoPorId(@RequestHeader("authorization") String autorizacion,
+                                                   @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -41,7 +42,8 @@ public class FotoController {
     }
 
     @PostMapping("/crearfoto")
-    public ResponseEntity<FotoDto> crearFoto(@RequestHeader("authorization") String autorizacion, @RequestParam Foto foto){
+    public ResponseEntity<FotoDto> crearFoto(@RequestHeader("authorization") String autorizacion,
+                                             @RequestBody Foto foto){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -56,7 +58,8 @@ public class FotoController {
     }
 
     @PutMapping("actualizarfoto/{id}")
-    public ResponseEntity<FotoDto> actualizarFoto(@RequestHeader("authorization") String autorizacion, @PathVariable int id,@RequestParam Foto foto){
+    public ResponseEntity<FotoDto> actualizarFoto(@RequestHeader("authorization") String autorizacion,
+                                                  @PathVariable int id,@RequestBody Foto foto){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

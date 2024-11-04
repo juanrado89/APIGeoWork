@@ -28,7 +28,7 @@ public class PerfilUsuario {
     @Basic
     @Size(min = 12, max = 50)
     @NotNull
-    @Column(name = "password",length = 50,nullable = false)
+    @Column(name = "password",nullable = false)
     private String password;
 
     @NotNull

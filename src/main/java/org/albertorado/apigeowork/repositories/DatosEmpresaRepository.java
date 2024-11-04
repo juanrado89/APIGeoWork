@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface DatosEmpresaRepository extends JpaRepository<DatosEmpresa,Integer> {
 
-    Optional<DatosEmpresaDto> findDatosEmpresaByIdDatosEmpresa(@Param("id") int idDatosEmpresa);
+    Optional<DatosEmpresa> findDatosEmpresaByIdDatosEmpresa(@Param("id") int idDatosEmpresa);
 
     Optional<DatosEmpresaDto> findDatosEmpresaByNombreEmpresaContainsIgnoreCaseAndDireccion_IdDireccion(@Param("nombre") String nombreEmpresa,@Param("idDireccion") int idDireccion);
 

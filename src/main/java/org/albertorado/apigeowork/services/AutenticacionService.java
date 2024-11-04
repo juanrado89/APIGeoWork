@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.services;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.PerfilEmpresaPDto;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.Autenticacion;
@@ -7,6 +8,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
+import org.albertorado.apigeowork.entities.PerfilEmpresa;
+import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +29,7 @@ public class AutenticacionService {
     private final PerfilEmpresaRepository perfilEmpresaRepository;
     private final AutenticacionRepository autenticacionRepository;
     private final PasswordEncoder passwordEncoder;
+
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
@@ -48,15 +52,16 @@ public class AutenticacionService {
                 .compact();
     }
 
-    public Autenticacion authenticacionUsuario(String email, String password, boolean tipoPerfil) throws Exception {
+    @Transactional
+    public Autenticacion autenticacionUsuario(String email, String password, boolean tipoPerfil) throws Exception {
 
         if (tipoPerfil) {
-            Optional<PerfilUsuarioPDto> perfilUsuario = perfilUsuarioRepository.findByEmailContainsIgnoreCase(email);
+            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findByEmailContainsIgnoreCase(email);
             if (perfilUsuario.isPresent() && passwordEncoder.matches(password, perfilUsuario.get().getPassword())) {
                 return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
             }
         } else {
-            Optional<PerfilEmpresaPDto> perfilEmpresa = perfilEmpresaRepository.findByEmailContainsIgnoreCase(email);
+            Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.findByEmailContainsIgnoreCase(email);
             if (perfilEmpresa.isPresent() && passwordEncoder.matches(password, perfilEmpresa.get().getPassword())) {
                 return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
             }

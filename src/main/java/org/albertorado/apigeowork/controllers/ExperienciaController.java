@@ -28,7 +28,8 @@ public class ExperienciaController {
     }
 
     @PostMapping("/crearexperiencia")
-    public ResponseEntity<ExperienciaDto> crearExperiencia(@RequestHeader("authorization") String autorizacion, @RequestParam Experiencia experiencia){
+    public ResponseEntity<ExperienciaDto> crearExperiencia(@RequestHeader("authorization") String autorizacion,
+                                                           @RequestBody Experiencia experiencia){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -43,7 +44,8 @@ public class ExperienciaController {
     }
 
     @GetMapping("/buscarexperienciaporid/{id}")
-    public ResponseEntity<ExperienciaDto> buscarExperienciaPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<ExperienciaDto> buscarExperienciaPorId(@RequestHeader("authorization") String autorizacion,
+                                                                 @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -58,7 +60,8 @@ public class ExperienciaController {
     }
 
     @GetMapping("/buscarexperienciaporsector/{sector}")
-    public ResponseEntity<List<ExperienciaDto>> buscarExperienciaPorSector(@RequestHeader("authorization") String autorizacion, @PathVariable String sector){
+    public ResponseEntity<List<ExperienciaDto>> buscarExperienciaPorSector(
+            @RequestHeader("authorization") String autorizacion, @PathVariable String sector){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -73,7 +76,8 @@ public class ExperienciaController {
     }
 
     @PostMapping("/actualizarexperiencia/{id}")
-    public ResponseEntity<ExperienciaDto> actualizarExperiencia(@RequestHeader("authorization") String autorizacion, @PathVariable int id,@RequestParam Experiencia experiencia){
+    public ResponseEntity<ExperienciaDto> actualizarExperiencia(@RequestHeader("authorization") String autorizacion,
+                                                                @PathVariable int id,@RequestBody Experiencia experiencia){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

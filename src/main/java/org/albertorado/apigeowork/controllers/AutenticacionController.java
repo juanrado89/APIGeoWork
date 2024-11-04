@@ -1,12 +1,14 @@
 package org.albertorado.apigeowork.controllers;
 
-import org.albertorado.apigeowork.dtos.PerfilEmpresaPDto;
-import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.Autenticacion;
+import org.albertorado.apigeowork.entities.PerfilEmpresa;
+import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/autenticacion")
@@ -16,23 +18,26 @@ public class AutenticacionController {
 
     public AutenticacionController(AutenticacionService autenticacionService) {
         this.autenticacionService = autenticacionService;
+
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticacion(@RequestParam Object perfilUsuario, @RequestParam boolean tipoPerfil) {
+    @PostMapping("/login/usuario")
+    public ResponseEntity<?> autenticarUsuario(@RequestBody PerfilUsuario perfilUsuario) {
         try {
-            Autenticacion autenticacion;
-            if (tipoPerfil) {
-                PerfilUsuarioPDto usuarioDto = (PerfilUsuarioPDto) perfilUsuario;
-                autenticacion = autenticacionService.authenticacionUsuario(usuarioDto.getEmail(), usuarioDto.getPassword(), true);
-            } else {
-                PerfilEmpresaPDto empresaDto = (PerfilEmpresaPDto) perfilUsuario;
-                autenticacion = autenticacionService.authenticacionUsuario(empresaDto.getEmail(), empresaDto.getPassword(), false);
-            }
-
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(perfilUsuario.getEmail(),perfilUsuario.getPassword(),true);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de usuario inválidas: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/login/empresa")
+    public ResponseEntity<?> autenticarEmpresa(@RequestBody PerfilEmpresa perfilEmpresa) {
+        try {
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(perfilEmpresa.getEmail(),perfilEmpresa.getPassword(), false);
+            return ResponseEntity.ok(autenticacion);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de empresa inválidas: " + e.getMessage());
         }
     }
 }

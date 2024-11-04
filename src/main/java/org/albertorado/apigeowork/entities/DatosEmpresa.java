@@ -33,7 +33,7 @@ public class DatosEmpresa {
     private String nombreEmpresa;
 
     @NotNull
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "datos_empresa_sector", joinColumns = @JoinColumn(name = "id_datos_empresa"), inverseJoinColumns = @JoinColumn(name = "id_sector"))
     private List<Sector> sector;
 

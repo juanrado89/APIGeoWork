@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.repositories;
 
-import org.albertorado.apigeowork.dtos.DocumentoDto;
 import org.albertorado.apigeowork.entities.Documento;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +10,7 @@ import java.util.Optional;
 
 public interface DocumentoRepository extends JpaRepository<Documento,Integer> {
 
-    Optional<DocumentoDto> findByIdDocumento(@Param("documento") int idDocumento);
+    Optional<Documento> findByIdDocumento(@Param("documento") int idDocumento);
 
     @Modifying
     @Transactional

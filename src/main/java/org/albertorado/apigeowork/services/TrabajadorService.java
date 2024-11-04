@@ -1,11 +1,14 @@
 package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.TrabajadorDto;
+import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.Trabajador;
 import org.albertorado.apigeowork.mapper.TrabajadorMapper;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.TrabajadorRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,18 +28,37 @@ public class TrabajadorService {
     }
 
     public TrabajadorDto buscarTrabajadorPorId(int id) {
-        Optional<TrabajadorDto> resultado = trabajadorRepository.findTrabajadorByIdTrabajador(id);
-        return resultado.orElseGet(null);
+        Optional<Trabajador> resultado = trabajadorRepository.findTrabajadorByIdTrabajador(id);
+        if(resultado.isEmpty()){
+            return null;
+        }else{
+            return trabajadorMapper.toDto(resultado.get());
+        }
     }
 
     public TrabajadorDto actualizarTrabajador(int id, Trabajador trabajador) {
-        Optional<TrabajadorDto> resultado = trabajadorRepository.findTrabajadorByIdTrabajador(id);
-        if(resultado.isPresent()){
-            trabajadorRepository.save(trabajador);
-            Optional<TrabajadorDto> actualizado = trabajadorRepository.findTrabajadorByIdTrabajador(id);
-            return actualizado.orElseGet(null);
+        Optional<Trabajador> resultado = trabajadorRepository.findTrabajadorByIdTrabajador(id);
+
+        if (resultado.isPresent()) {
+            Trabajador trabajadorExistente = resultado.get();
+            if (trabajador.getDatosUsuario() != null) {
+                trabajadorExistente.setDatosUsuario(trabajador.getDatosUsuario());
+            }
+            if (trabajador.getDatosExperiencia() != null) {
+                trabajadorExistente.setDatosExperiencia(trabajador.getDatosExperiencia());
+            }
+            if (trabajador.getHorarios() != null && !trabajador.getHorarios().isEmpty()) {
+                List<HorarioEntrevista> horariosActualizados = new ArrayList<>();
+                for(HorarioEntrevista horarios : trabajador.getHorarios()){
+                    horariosActualizados.add(horarios);
+                }
+                trabajadorExistente.setHorarios(horariosActualizados);
+            }
+            Trabajador actualizado = trabajadorRepository.save(trabajadorExistente);
+            return trabajadorMapper.toDto(actualizado);
+        } else {
+            return null;
         }
-        return null;
     }
 
     public void borrarTrabajador(int id) {

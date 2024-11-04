@@ -27,7 +27,8 @@ public class HorarioEntrevistaController {
     }
 
     @GetMapping("/buscarporidhorario/{id}")
-    public ResponseEntity<HorarioEntrevistaDto> buscarPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+    public ResponseEntity<HorarioEntrevistaDto> buscarPorId(@RequestHeader("authorization") String autorizacion,
+                                                            @PathVariable int id) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -42,7 +43,8 @@ public class HorarioEntrevistaController {
     }
 
     @GetMapping("/buscarporidoferta/{id}")
-    public ResponseEntity<List<HorarioEntrevistaDto>> buscarPorIdOferta(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
+    public ResponseEntity<List<HorarioEntrevistaDto>> buscarPorIdOferta(
+            @RequestHeader("authorization") String autorizacion, @PathVariable int id) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -57,7 +59,8 @@ public class HorarioEntrevistaController {
     }
 
     @GetMapping("/buscarporparametros")
-    public ResponseEntity<List<HorarioEntrevistaDto>> buscarPorParametros(@RequestHeader("authorization") String autorizacion, @RequestParam HorarioEntrevista parametros) {
+    public ResponseEntity<List<HorarioEntrevistaDto>> buscarPorParametros(
+            @RequestHeader("authorization") String autorizacion, @RequestBody HorarioEntrevista parametros) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -72,7 +75,8 @@ public class HorarioEntrevistaController {
     }
 
     @PostMapping("/crearhorario")
-    public ResponseEntity<HorarioEntrevistaDto> crearHorario(@RequestHeader("authorization") String autorizacion, @RequestParam HorarioEntrevista horarioEntrevista) {
+    public ResponseEntity<HorarioEntrevistaDto> crearHorario(@RequestHeader("authorization") String autorizacion,
+                                                             @RequestBody HorarioEntrevista horarioEntrevista) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -87,7 +91,8 @@ public class HorarioEntrevistaController {
     }
 
     @PostMapping("/crearvarioshorarios")
-    public ResponseEntity<List<HorarioEntrevistaDto>> crearHorarios(@RequestHeader("authorization") String autorizacion, @RequestParam List<HorarioEntrevista> horariosEntrevista) {
+    public ResponseEntity<List<HorarioEntrevistaDto>> crearHorarios(@RequestHeader("authorization") String autorizacion,
+                                                                    @RequestBody List<HorarioEntrevista> horariosEntrevista) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -101,7 +106,9 @@ public class HorarioEntrevistaController {
         }
     }
     @PutMapping("/actualizarHorario/{id}")
-    public ResponseEntity<HorarioEntrevistaDto> actualizarHorario(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestParam HorarioEntrevista horarioEntrevista) {
+    public ResponseEntity<HorarioEntrevistaDto> actualizarHorario(@RequestHeader("authorization") String autorizacion,
+                                                                  @PathVariable int id,
+                                                                  @RequestBody HorarioEntrevista horarioEntrevista) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

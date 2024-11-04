@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
+import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.OfertaEmpleo;
 import org.albertorado.apigeowork.especificaciones.OfertaEmpleoEspecificaciones;
 import org.albertorado.apigeowork.mapper.OfertaEmpleoMapper;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.OfertaEmpleoRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +25,11 @@ public class OfertaEmpleoService {
     }
 
     public OfertaEmpleoDto buscarPorId(int id) {
-        Optional<OfertaEmpleoDto> oferta = ofertaEmpleoRepository.findByIdOferta(id);
-        return oferta.orElseGet(null);
+        Optional<OfertaEmpleo> oferta = ofertaEmpleoRepository.findByIdOferta(id);
+        if(oferta.isEmpty()){
+            return null;
+        }
+        return ofertaEmpleoMapper.toDto(oferta.get());
     }
 
     public OfertaEmpleoDto crearOfertaEmpleo(OfertaEmpleo ofertaEmpleo) {
@@ -33,15 +38,61 @@ public class OfertaEmpleoService {
     }
 
     public OfertaEmpleoDto actualizarOferta(int id, OfertaEmpleo ofertaEmpleo) {
-        Optional<OfertaEmpleoDto> busqueda = ofertaEmpleoRepository.findByIdOferta(id);
-        if(busqueda.isPresent()){
-            ofertaEmpleoRepository.save(ofertaEmpleo);
-            Optional<OfertaEmpleoDto> resultado = ofertaEmpleoRepository.findByIdOferta(id);
-            return resultado.orElseGet(null);
-        }else{
+        Optional<OfertaEmpleo> busqueda = ofertaEmpleoRepository.findByIdOferta(id);
+
+        if (busqueda.isPresent()) {
+            OfertaEmpleo ofertaExistente = busqueda.get();
+
+            if (ofertaEmpleo.getTitulo() != null) {
+                ofertaExistente.setTitulo(ofertaEmpleo.getTitulo());
+            }
+            if (ofertaEmpleo.getCantidad() != 0) {
+                ofertaExistente.setCantidad(ofertaEmpleo.getCantidad());
+            }
+            if (ofertaEmpleo.getDescripcion() != null) {
+                ofertaExistente.setDescripcion(ofertaEmpleo.getDescripcion());
+            }
+            if (ofertaEmpleo.getRequisitos() != null) {
+                ofertaExistente.setRequisitos(ofertaEmpleo.getRequisitos());
+            }
+            if (ofertaEmpleo.getSalarioMin() != 0) {
+                ofertaExistente.setSalarioMin(ofertaEmpleo.getSalarioMin());
+            }
+            if (ofertaEmpleo.getSalarioMax() != 0) {
+                ofertaExistente.setSalarioMax(ofertaEmpleo.getSalarioMax());
+            }
+            if (ofertaEmpleo.getFechaPublicacion() != null) {
+                ofertaExistente.setFechaPublicacion(ofertaEmpleo.getFechaPublicacion());
+            }
+            if (ofertaEmpleo.getEstado() != 0) {
+                ofertaExistente.setEstado(ofertaEmpleo.getEstado());
+            }
+            if (ofertaEmpleo.getEmpresa() != null) {
+                ofertaExistente.setEmpresa(ofertaEmpleo.getEmpresa());
+            }
+            if (ofertaEmpleo.getSector() != null) {
+                ofertaExistente.setSector(ofertaEmpleo.getSector());
+            }
+            if (ofertaEmpleo.getNivelEducativo() != null) {
+                ofertaExistente.setNivelEducativo(ofertaEmpleo.getNivelEducativo());
+            }
+            if (ofertaEmpleo.getDireccion() != null) {
+                ofertaExistente.setDireccion(ofertaEmpleo.getDireccion());
+            }
+            if (ofertaEmpleo.getHorarios() != null && !ofertaEmpleo.getHorarios().isEmpty()) {
+                List<HorarioEntrevista> horariosActualizados = new ArrayList<>();
+                for(HorarioEntrevista horario : ofertaEmpleo.getHorarios()){
+                    horariosActualizados.add(horario);
+                }
+                ofertaExistente.setHorarios(horariosActualizados);
+            }
+            OfertaEmpleo actualizada = ofertaEmpleoRepository.save(ofertaExistente);
+            return ofertaEmpleoMapper.toDto(actualizada);
+        } else {
             return null;
         }
     }
+
 
     public void borrarOferta(int id) {
         ofertaEmpleoRepository.deleteById(id);

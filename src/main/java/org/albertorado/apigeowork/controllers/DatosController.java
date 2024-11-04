@@ -41,7 +41,7 @@ public class DatosController {
     }
 
     @PostMapping("/creardatosusuario")
-    public ResponseEntity<DatosDto> crearDatos(@RequestHeader("authorization") String autorizacion, @RequestParam Datos datos){
+    public ResponseEntity<DatosDto> crearDatos(@RequestHeader("authorization") String autorizacion, @RequestBody Datos datos){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -56,7 +56,7 @@ public class DatosController {
     }
 
     @PutMapping("actualizardatosusuario/{id}")
-    public ResponseEntity<DatosDto> actualizarDatos(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestParam Datos datos){
+    public ResponseEntity<DatosDto> actualizarDatos(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestBody Datos datos){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

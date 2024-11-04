@@ -43,7 +43,8 @@ public class OfertaEmpleoController {
     }
 
     @GetMapping("/buscarporparametros/")
-    public ResponseEntity<List<OfertaEmpleoDto>> buscarPorParametros(@RequestHeader("authorization") String autorizacion, @RequestParam OfertaEmpleo parametros) {
+    public ResponseEntity<List<OfertaEmpleoDto>> buscarPorParametros(@RequestHeader("authorization") String autorizacion,
+                                                                     @RequestBody OfertaEmpleo parametros) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -58,7 +59,8 @@ public class OfertaEmpleoController {
     }
 
     @PostMapping("/creaoferta")
-    public ResponseEntity<OfertaEmpleoDto> crearOferta(@RequestHeader("authorization") String autorizacion, @RequestParam OfertaEmpleo ofertaEmpleo) {
+    public ResponseEntity<OfertaEmpleoDto> crearOferta(@RequestHeader("authorization") String autorizacion,
+                                                       @RequestBody OfertaEmpleo ofertaEmpleo) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -73,7 +75,9 @@ public class OfertaEmpleoController {
     }
 
     @PutMapping("/actualizarOferta/{id}")
-    public ResponseEntity<OfertaEmpleoDto> actualizarOferta(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestParam OfertaEmpleo ofertaEmpleo) {
+    public ResponseEntity<OfertaEmpleoDto> actualizarOferta(@RequestHeader("authorization") String autorizacion,
+                                                            @PathVariable int id,
+                                                            @RequestBody OfertaEmpleo ofertaEmpleo) {
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

@@ -25,8 +25,9 @@ public class DireccionController {
         return autenticacionService.validarToken(token);
     }
 
-    @PostMapping("/creardireccion")
-    public ResponseEntity<DireccionDto> crearDireccion(@RequestHeader("authorization") String autorizacion, @RequestParam Direccion direccion){
+    @PostMapping("/creardireccion/")
+    public ResponseEntity<DireccionDto> crearDireccion(@RequestHeader("authorization") String autorizacion,
+                                                       @RequestBody Direccion direccion){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -40,7 +41,8 @@ public class DireccionController {
         }
     }
     @GetMapping("/buscardireccionporid/{id}")
-    public ResponseEntity<DireccionDto> buscarDireccionPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<DireccionDto> buscarDireccionPorId(@RequestHeader("authorization") String autorizacion,
+                                                             @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -55,7 +57,8 @@ public class DireccionController {
     }
 
     @PutMapping("/actualizardireccion/{id}")
-    public ResponseEntity<DireccionDto> actualizarDireccion(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestParam Direccion direccion){
+    public ResponseEntity<DireccionDto> actualizarDireccion(@RequestHeader("authorization") String autorizacion,
+                                                            @PathVariable int id, @RequestBody Direccion direccion){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -70,7 +73,8 @@ public class DireccionController {
     }
 
     @DeleteMapping("/borrardireccionporid/{id}")
-    public ResponseEntity<Void> borrarDireccionPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id){
+    public ResponseEntity<Void> borrarDireccionPorId(@RequestHeader("authorization") String autorizacion,
+                                                     @PathVariable int id){
 
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

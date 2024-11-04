@@ -1,7 +1,6 @@
 package org.albertorado.apigeowork.repositories;
 
 import org.albertorado.apigeowork.dtos.PerfilUsuarioDto;
-import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -10,9 +9,9 @@ import java.util.Optional;
 
 public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Integer> {
 
-    Optional<PerfilUsuarioDto> findByIdPerfil(@Param("id") int idUsuario);
+    Optional<PerfilUsuario> findByIdPerfil(@Param("id") int idUsuario);
 
-    Optional<PerfilUsuarioPDto> findByEmailContainsIgnoreCase(@Param("email") String email);
+    Optional<PerfilUsuario> findByEmailContainsIgnoreCase(@Param("email") String email);
 
     Optional<PerfilUsuarioDto> findPerfilUsuarioByEmailContainsIgnoreCase(@Param("email") String email);
 
