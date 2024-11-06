@@ -3,18 +3,71 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Foto {
 
+    public Foto(Long idFoto, String nombre, String tipoContenido, @NotNull byte[] datos, PerfilEmpresa perfilEmpresa, PerfilUsuario perfilUsuario) {
+        this.idFoto = idFoto;
+        this.nombre = nombre;
+        this.tipoContenido = tipoContenido;
+        this.datos = datos;
+        this.perfilEmpresa = perfilEmpresa;
+        this.perfilUsuario = perfilUsuario;
+    }
+
+    public Foto() {
+    }
+
+    public Long getIdFoto() {
+        return idFoto;
+    }
+
+    public void setIdFoto(Long idFoto) {
+        this.idFoto = idFoto;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(@NotNull @Size(min = 0, max = 255) String nombre) {
+        this.nombre = nombre;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getTipoContenido() {
+        return tipoContenido;
+    }
+
+    public void setTipoContenido(@NotNull @Size(min = 0, max = 255) String tipoContenido) {
+        this.tipoContenido = tipoContenido;
+    }
+
+    @NotNull
+    public byte[] getDatos() {
+        return datos;
+    }
+
+    public void setDatos(@NotNull byte[] datos) {
+        this.datos = datos;
+    }
+
+    public PerfilEmpresa getPerfilEmpresa() {
+        return perfilEmpresa;
+    }
+
+    public void setPerfilEmpresa(PerfilEmpresa perfilEmpresa) {
+        this.perfilEmpresa = perfilEmpresa;
+    }
+
+    public PerfilUsuario getPerfilUsuario() {
+        return perfilUsuario;
+    }
+
+    public void setPerfilUsuario(PerfilUsuario perfilUsuario) {
+        this.perfilUsuario = perfilUsuario;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

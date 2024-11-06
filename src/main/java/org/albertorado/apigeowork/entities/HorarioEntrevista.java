@@ -3,21 +3,86 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class HorarioEntrevista {
+
+    public HorarioEntrevista(int idHorario, OfertaEmpleo ofertaEmpleo, LocalDate dia, LocalTime hora, int candidatosDisponibles, int candidatosAsignados, List<Trabajador> trabajadores) {
+        this.idHorario = idHorario;
+        this.ofertaEmpleo = ofertaEmpleo;
+        this.dia = dia;
+        this.hora = hora;
+        this.candidatosDisponibles = candidatosDisponibles;
+        this.candidatosAsignados = candidatosAsignados;
+        this.trabajadores = trabajadores;
+    }
+
+    public HorarioEntrevista() {
+    }
+
+    public int getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(int idHorario) {
+        this.idHorario = idHorario;
+    }
+
+    public @NotNull OfertaEmpleo getOfertaEmpleo() {
+        return ofertaEmpleo;
+    }
+
+    public void setOfertaEmpleo(@NotNull OfertaEmpleo ofertaEmpleo) {
+        this.ofertaEmpleo = ofertaEmpleo;
+    }
+
+    public LocalDate getDia() {
+        return dia;
+    }
+
+    public void setDia(LocalDate dia) {
+        this.dia = dia;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
+    @NotNull
+    @Digits(integer = 3, fraction = 0)
+    public int getCandidatosDisponibles() {
+        return candidatosDisponibles;
+    }
+
+    public void setCandidatosDisponibles(@NotNull @Digits(integer = 3, fraction = 0) int candidatosDisponibles) {
+        this.candidatosDisponibles = candidatosDisponibles;
+    }
+
+    @NotNull
+    @Digits(integer = 3, fraction = 0)
+    public int getCandidatosAsignados() {
+        return candidatosAsignados;
+    }
+
+    public void setCandidatosAsignados(@NotNull @Digits(integer = 3, fraction = 0) int candidatosAsignados) {
+        this.candidatosAsignados = candidatosAsignados;
+    }
+
+    public List<Trabajador> getTrabajadores() {
+        return trabajadores;
+    }
+
+    public void setTrabajadores(List<Trabajador> trabajadores) {
+        this.trabajadores = trabajadores;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

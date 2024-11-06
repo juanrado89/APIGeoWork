@@ -3,19 +3,44 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Nivel {
+
+    public Nivel(int idNivel, String nombreNivel, List<NivelEducativo> nivelesEducativos) {
+        this.idNivel = idNivel;
+        this.nombreNivel = nombreNivel;
+        this.nivelesEducativos = nivelesEducativos;
+    }
+
+    public Nivel() {
+    }
+
+    public int getIdNivel() {
+        return idNivel;
+    }
+
+    public void setIdNivel(int idNivel) {
+        this.idNivel = idNivel;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getNombreNivel() {
+        return nombreNivel;
+    }
+
+    public void setNombreNivel(@NotNull @Size(min = 0, max = 255) String nombreNivel) {
+        this.nombreNivel = nombreNivel;
+    }
+
+    public List<NivelEducativo> getNivelesEducativos() {
+        return nivelesEducativos;
+    }
+
+    public void setNivelesEducativos(List<NivelEducativo> nivelesEducativos) {
+        this.nivelesEducativos = nivelesEducativos;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

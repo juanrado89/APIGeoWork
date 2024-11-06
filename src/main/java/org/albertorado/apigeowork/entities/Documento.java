@@ -3,19 +3,64 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Documento {
+
+    public Documento(int idDocumento, String nombre, String tipoContenido, @NotNull byte[] contenido, Experiencia experiencia) {
+        this.idDocumento = idDocumento;
+        this.nombre = nombre;
+        this.tipoContenido = tipoContenido;
+        this.contenido = contenido;
+        this.experiencia = experiencia;
+    }
+
+    public Documento() {
+    }
+
+    public int getIdDocumento() {
+        return idDocumento;
+    }
+
+    public void setIdDocumento(int idDocumento) {
+        this.idDocumento = idDocumento;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(@NotNull @Size(min = 0, max = 255) String nombre) {
+        this.nombre = nombre;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getTipoContenido() {
+        return tipoContenido;
+    }
+
+    public void setTipoContenido(@NotNull @Size(min = 0, max = 255) String tipoContenido) {
+        this.tipoContenido = tipoContenido;
+    }
+
+    @NotNull
+    public byte[] getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(@NotNull byte[] contenido) {
+        this.contenido = contenido;
+    }
+
+    public Experiencia getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(Experiencia experiencia) {
+        this.experiencia = experiencia;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

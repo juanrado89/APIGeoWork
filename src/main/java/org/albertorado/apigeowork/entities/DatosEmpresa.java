@@ -5,21 +5,111 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class DatosEmpresa {
+
+    public DatosEmpresa(int idDatosEmpresa, String nombreEmpresa, List<Sector> sector, Direccion direccion, String contactoNombre, String contactoEmail, String contactoTelefono, String sitioWeb, Timestamp fechaRegistro, Empresa empresa) {
+        this.idDatosEmpresa = idDatosEmpresa;
+        this.nombreEmpresa = nombreEmpresa;
+        this.sector = sector;
+        this.direccion = direccion;
+        this.contactoNombre = contactoNombre;
+        this.contactoEmail = contactoEmail;
+        this.contactoTelefono = contactoTelefono;
+        this.sitioWeb = sitioWeb;
+        this.fechaRegistro = fechaRegistro;
+        this.empresa = empresa;
+    }
+
+    public DatosEmpresa() {
+    }
+
+    public int getIdDatosEmpresa() {
+        return idDatosEmpresa;
+    }
+
+    public void setIdDatosEmpresa(int idDatosEmpresa) {
+        this.idDatosEmpresa = idDatosEmpresa;
+    }
+
+    public @NotNull @Size(min = 0, max = 200) String getNombreEmpresa() {
+        return nombreEmpresa;
+    }
+
+    public void setNombreEmpresa(@NotNull @Size(min = 0, max = 200) String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
+    }
+
+    public @NotNull List<Sector> getSector() {
+        return sector;
+    }
+
+    public void setSector(@NotNull List<Sector> sector) {
+        this.sector = sector;
+    }
+
+    public @NotNull Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(@NotNull Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getContactoNombre() {
+        return contactoNombre;
+    }
+
+    public void setContactoNombre(@NotNull @Size(min = 0, max = 255) String contactoNombre) {
+        this.contactoNombre = contactoNombre;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) @Email String getContactoEmail() {
+        return contactoEmail;
+    }
+
+    public void setContactoEmail(@NotNull @Size(min = 0, max = 255) @Email String contactoEmail) {
+        this.contactoEmail = contactoEmail;
+    }
+
+    public @NotNull @Digits(integer = 12, fraction = 0) String getContactoTelefono() {
+        return contactoTelefono;
+    }
+
+    public void setContactoTelefono(@NotNull @Digits(integer = 12, fraction = 0) String contactoTelefono) {
+        this.contactoTelefono = contactoTelefono;
+    }
+
+    public @Size(min = 0, max = 255) String getSitioWeb() {
+        return sitioWeb;
+    }
+
+    public void setSitioWeb(@Size(min = 0, max = 255) String sitioWeb) {
+        this.sitioWeb = sitioWeb;
+    }
+
+    public Timestamp getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

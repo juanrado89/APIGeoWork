@@ -2,20 +2,63 @@ package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Trabajador {
+
+    public Trabajador(int idTrabajador, Datos datosUsuario, Experiencia datosExperiencia, List<HorarioEntrevista> horarios, PerfilUsuario perfilUsuario) {
+        this.idTrabajador = idTrabajador;
+        this.datosUsuario = datosUsuario;
+        this.datosExperiencia = datosExperiencia;
+        this.horarios = horarios;
+        this.perfilUsuario = perfilUsuario;
+    }
+
+    public Trabajador() {
+    }
+
+    public int getIdTrabajador() {
+        return idTrabajador;
+    }
+
+    public void setIdTrabajador(int idTrabajador) {
+        this.idTrabajador = idTrabajador;
+    }
+
+    public @NotNull Datos getDatosUsuario() {
+        return datosUsuario;
+    }
+
+    public void setDatosUsuario(@NotNull Datos datosUsuario) {
+        this.datosUsuario = datosUsuario;
+    }
+
+    public Experiencia getDatosExperiencia() {
+        return datosExperiencia;
+    }
+
+    public void setDatosExperiencia(Experiencia datosExperiencia) {
+        this.datosExperiencia = datosExperiencia;
+    }
+
+    public List<HorarioEntrevista> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<HorarioEntrevista> horarios) {
+        this.horarios = horarios;
+    }
+
+    public PerfilUsuario getPerfilUsuario() {
+        return perfilUsuario;
+    }
+
+    public void setPerfilUsuario(PerfilUsuario perfilUsuario) {
+        this.perfilUsuario = perfilUsuario;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

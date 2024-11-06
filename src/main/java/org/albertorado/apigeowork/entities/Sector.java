@@ -3,19 +3,62 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Sector {
+
+    public Sector(int idSector, String sector, List<OfertaEmpleo> ofertas, List<DatosEmpresa> datosEmpresas, List<Experiencia> experiencias) {
+        this.idSector = idSector;
+        this.sector = sector;
+        this.ofertas = ofertas;
+        this.datosEmpresas = datosEmpresas;
+        this.experiencias = experiencias;
+    }
+
+    public Sector() {
+    }
+
+    public int getIdSector() {
+        return idSector;
+    }
+
+    public void setIdSector(int idSector) {
+        this.idSector = idSector;
+    }
+
+    public @NotNull @Size(min = 1, max = 255) String getSector() {
+        return sector;
+    }
+
+    public void setSector(@NotNull @Size(min = 1, max = 255) String sector) {
+        this.sector = sector;
+    }
+
+    public List<OfertaEmpleo> getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(List<OfertaEmpleo> ofertas) {
+        this.ofertas = ofertas;
+    }
+
+    public List<DatosEmpresa> getDatosEmpresas() {
+        return datosEmpresas;
+    }
+
+    public void setDatosEmpresas(List<DatosEmpresa> datosEmpresas) {
+        this.datosEmpresas = datosEmpresas;
+    }
+
+    public List<Experiencia> getExperiencias() {
+        return experiencias;
+    }
+
+    public void setExperiencias(List<Experiencia> experiencias) {
+        this.experiencias = experiencias;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

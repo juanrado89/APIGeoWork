@@ -1,11 +1,5 @@
 package org.albertorado.apigeowork.dtos;
 
-import lombok.Getter;
-import lombok.Setter;
-
-
-@Getter
-@Setter
 public class TrabajadorDto {
 
     private int idTrabajador;
@@ -14,4 +8,27 @@ public class TrabajadorDto {
 
     private ExperienciaDto datosExperiencia;
 
+    public int getIdTrabajador() {
+        return idTrabajador;
+    }
+
+    public void setIdTrabajador(int idTrabajador) {
+        this.idTrabajador = idTrabajador;
+    }
+
+    public DatosDto getDatosUsuario() {
+        return datosUsuario;
+    }
+
+    public void setDatosUsuario(DatosDto datosUsuario) {
+        this.datosUsuario = datosUsuario;
+    }
+
+    public ExperienciaDto getDatosExperiencia() {
+        return datosExperiencia;
+    }
+
+    public void setDatosExperiencia(ExperienciaDto datosExperiencia) {
+        this.datosExperiencia = datosExperiencia;
+    }
 }

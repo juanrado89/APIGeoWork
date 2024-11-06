@@ -3,19 +3,72 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import java.sql.Timestamp;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class DescripcionExperiencia {
+    public DescripcionExperiencia(int idDescripcionExperiencia, String nombreEmpresa, String descripcion, Timestamp fechaInicio, Timestamp fechaFin, ExperienciaTotal experienciaTotal) {
+        this.idDescripcionExperiencia = idDescripcionExperiencia;
+        this.nombreEmpresa = nombreEmpresa;
+        this.descripcion = descripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.experienciaTotal = experienciaTotal;
+    }
+
+    public DescripcionExperiencia() {
+    }
+
+    public int getIdDescripcionExperiencia() {
+        return idDescripcionExperiencia;
+    }
+
+    public void setIdDescripcionExperiencia(int idDescripcionExperiencia) {
+        this.idDescripcionExperiencia = idDescripcionExperiencia;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getNombreEmpresa() {
+        return nombreEmpresa;
+    }
+
+    public void setNombreEmpresa(@NotNull @Size(min = 0, max = 255) String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
+    }
+
+    public @NotNull @Size(min = 0, max = 3000) String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(@NotNull @Size(min = 0, max = 3000) String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Timestamp getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Timestamp fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Timestamp getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Timestamp fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public ExperienciaTotal getExperienciaTotal() {
+        return experienciaTotal;
+    }
+
+    public void setExperienciaTotal(ExperienciaTotal experienciaTotal) {
+        this.experienciaTotal = experienciaTotal;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

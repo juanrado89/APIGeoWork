@@ -1,23 +1,83 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Experiencia {
+
+    public Experiencia(int idExperiencia, NivelEducativo nivelEducativo, List<Sector> sector, ExperienciaTotal experienciaTotal, Documento cvUrl, Timestamp fechaRegistro, Trabajador trabajador) {
+        this.idExperiencia = idExperiencia;
+        this.nivelEducativo = nivelEducativo;
+        this.sector = sector;
+        this.experienciaTotal = experienciaTotal;
+        this.cvUrl = cvUrl;
+        this.fechaRegistro = fechaRegistro;
+        this.trabajador = trabajador;
+    }
+
+    public Experiencia() {
+    }
+
+    public int getIdExperiencia() {
+        return idExperiencia;
+    }
+
+    public void setIdExperiencia(int idExperiencia) {
+        this.idExperiencia = idExperiencia;
+    }
+
+    public @NotNull NivelEducativo getNivelEducativo() {
+        return nivelEducativo;
+    }
+
+    public void setNivelEducativo(@NotNull NivelEducativo nivelEducativo) {
+        this.nivelEducativo = nivelEducativo;
+    }
+
+    public @NotNull List<Sector> getSector() {
+        return sector;
+    }
+
+    public void setSector(@NotNull List<Sector> sector) {
+        this.sector = sector;
+    }
+
+    public ExperienciaTotal getExperienciaTotal() {
+        return experienciaTotal;
+    }
+
+    public void setExperienciaTotal(ExperienciaTotal experienciaTotal) {
+        this.experienciaTotal = experienciaTotal;
+    }
+
+    public Documento getCvUrl() {
+        return cvUrl;
+    }
+
+    public void setCvUrl(Documento cvUrl) {
+        this.cvUrl = cvUrl;
+    }
+
+    public @NotNull Timestamp getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(@NotNull Timestamp fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Trabajador getTrabajador() {
+        return trabajador;
+    }
+
+    public void setTrabajador(Trabajador trabajador) {
+        this.trabajador = trabajador;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,20 +3,74 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Datos {
+
+    public Datos(String nombre, int idDatos, String apellidos, Timestamp fechaEdad, Direccion direccion, Trabajador trabajador) {
+        this.nombre = nombre;
+        this.idDatos = idDatos;
+        this.apellidos = apellidos;
+        this.fechaEdad = fechaEdad;
+        this.direccion = direccion;
+        this.trabajador = trabajador;
+    }
+
+    public Datos() {
+    }
+
+    public int getIdDatos() {
+        return idDatos;
+    }
+
+    public void setIdDatos(int idDatos) {
+        this.idDatos = idDatos;
+    }
+
+    public @NotNull @Size(min = 0, max = 120) String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(@NotNull @Size(min = 0, max = 120) String nombre) {
+        this.nombre = nombre;
+    }
+
+    public @NotNull @Size(min = 0, max = 200) String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(@NotNull @Size(min = 0, max = 200) String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public @NotNull Timestamp getFechaEdad() {
+        return fechaEdad;
+    }
+
+    public void setFechaEdad(@NotNull Timestamp fechaEdad) {
+        this.fechaEdad = fechaEdad;
+    }
+
+    public @NotNull Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(@NotNull Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public Trabajador getTrabajador() {
+        return trabajador;
+    }
+
+    public void setTrabajador(Trabajador trabajador) {
+        this.trabajador = trabajador;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

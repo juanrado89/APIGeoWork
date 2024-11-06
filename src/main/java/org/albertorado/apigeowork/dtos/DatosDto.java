@@ -1,12 +1,6 @@
 package org.albertorado.apigeowork.dtos;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.sql.Timestamp;
-
-@Getter
-@Setter
 public class DatosDto {
 
     private int idDatos;
@@ -14,4 +8,44 @@ public class DatosDto {
     private String apellidos;
     private Timestamp fechaEdad;
     private DireccionDto direccion;
+
+    public int getIdDatos() {
+        return idDatos;
+    }
+
+    public void setIdDatos(int idDatos) {
+        this.idDatos = idDatos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public Timestamp getFechaEdad() {
+        return fechaEdad;
+    }
+
+    public void setFechaEdad(Timestamp fechaEdad) {
+        this.fechaEdad = fechaEdad;
+    }
+
+    public DireccionDto getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(DireccionDto direccion) {
+        this.direccion = direccion;
+    }
 }

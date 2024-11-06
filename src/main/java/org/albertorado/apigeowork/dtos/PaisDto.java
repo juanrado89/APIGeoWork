@@ -1,11 +1,22 @@
 package org.albertorado.apigeowork.dtos;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class PaisDto {
     private int idPais;
     private String pais;
+
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
 }

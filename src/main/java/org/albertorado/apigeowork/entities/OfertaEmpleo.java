@@ -4,21 +4,150 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class OfertaEmpleo {
+
+    public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector, String requisitos, NivelEducativo nivelEducativo, float salarioMin, float salarioMax, Direccion direccion, Timestamp fechaPublicacion, int estado, List<HorarioEntrevista> horarios) {
+        this.idOferta = idOferta;
+        this.empresa = empresa;
+        this.titulo = titulo;
+        this.cantidad = cantidad;
+        this.descripcion = descripcion;
+        this.sector = sector;
+        this.requisitos = requisitos;
+        this.nivelEducativo = nivelEducativo;
+        this.salarioMin = salarioMin;
+        this.salarioMax = salarioMax;
+        this.direccion = direccion;
+        this.fechaPublicacion = fechaPublicacion;
+        this.estado = estado;
+        this.horarios = horarios;
+    }
+
+    public OfertaEmpleo() {
+    }
+
+    public int getIdOferta() {
+        return idOferta;
+    }
+
+    public void setIdOferta(int idOferta) {
+        this.idOferta = idOferta;
+    }
+
+    public @NotNull Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(@NotNull Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public @Size(min = 0, max = 255) String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(@Size(min = 0, max = 255) String titulo) {
+        this.titulo = titulo;
+    }
+
+    @Digits(integer = 3, fraction = 0)
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(@Digits(integer = 3, fraction = 0) int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public @NotNull @Size(min = 0, max = 3000) String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(@NotNull @Size(min = 0, max = 3000) String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public @NotNull Sector getSector() {
+        return sector;
+    }
+
+    public void setSector(@NotNull Sector sector) {
+        this.sector = sector;
+    }
+
+    public @Size(min = 0, max = 3000) String getRequisitos() {
+        return requisitos;
+    }
+
+    public void setRequisitos(@Size(min = 0, max = 3000) String requisitos) {
+        this.requisitos = requisitos;
+    }
+
+    public NivelEducativo getNivelEducativo() {
+        return nivelEducativo;
+    }
+
+    public void setNivelEducativo(NivelEducativo nivelEducativo) {
+        this.nivelEducativo = nivelEducativo;
+    }
+
+    @Digits(integer = 6, fraction = 2)
+    public float getSalarioMin() {
+        return salarioMin;
+    }
+
+    public void setSalarioMin(@Digits(integer = 6, fraction = 2) float salarioMin) {
+        this.salarioMin = salarioMin;
+    }
+
+    @Digits(integer = 6, fraction = 2)
+    public float getSalarioMax() {
+        return salarioMax;
+    }
+
+    public void setSalarioMax(@Digits(integer = 6, fraction = 2) float salarioMax) {
+        this.salarioMax = salarioMax;
+    }
+
+    public @NotNull Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(@NotNull Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public @NotNull Timestamp getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(@NotNull Timestamp fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    @NotNull
+    @Digits(integer = 1, fraction = 0)
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(@NotNull @Digits(integer = 1, fraction = 0) int estado) {
+        this.estado = estado;
+    }
+
+    public List<HorarioEntrevista> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<HorarioEntrevista> horarios) {
+        this.horarios = horarios;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

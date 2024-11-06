@@ -2,20 +2,55 @@ package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Empresa {
+
+    public Empresa(int idEmpresa, DatosEmpresa datosEmpresa, PerfilEmpresa perfilEmpresa, List<OfertaEmpleo> ofertas) {
+        this.idEmpresa = idEmpresa;
+        this.datosEmpresa = datosEmpresa;
+        this.perfilEmpresa = perfilEmpresa;
+        this.ofertas = ofertas;
+    }
+
+    public Empresa() {
+    }
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public @NotNull DatosEmpresa getDatosEmpresa() {
+        return datosEmpresa;
+    }
+
+    public void setDatosEmpresa(@NotNull DatosEmpresa datosEmpresa) {
+        this.datosEmpresa = datosEmpresa;
+    }
+
+    public PerfilEmpresa getPerfilEmpresa() {
+        return perfilEmpresa;
+    }
+
+    public void setPerfilEmpresa(PerfilEmpresa perfilEmpresa) {
+        this.perfilEmpresa = perfilEmpresa;
+    }
+
+    public List<OfertaEmpleo> getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(List<OfertaEmpleo> ofertas) {
+        this.ofertas = ofertas;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

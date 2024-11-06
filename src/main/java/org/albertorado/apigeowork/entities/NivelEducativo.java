@@ -3,20 +3,90 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class NivelEducativo {
+
+    public NivelEducativo(int idNivelEducativo, String tituloNivelEducativo, String centroEducativo, Timestamp fechaInicio, Timestamp fechaFin, Nivel nivel, List<Experiencia> experiencias, List<OfertaEmpleo> ofertas) {
+        this.idNivelEducativo = idNivelEducativo;
+        this.tituloNivelEducativo = tituloNivelEducativo;
+        this.centroEducativo = centroEducativo;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.nivel = nivel;
+        this.experiencias = experiencias;
+        this.ofertas = ofertas;
+    }
+
+    public NivelEducativo() {
+    }
+
+    public int getIdNivelEducativo() {
+        return idNivelEducativo;
+    }
+
+    public void setIdNivelEducativo(int idNivelEducativo) {
+        this.idNivelEducativo = idNivelEducativo;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getTituloNivelEducativo() {
+        return tituloNivelEducativo;
+    }
+
+    public void setTituloNivelEducativo(@NotNull @Size(min = 0, max = 255) String tituloNivelEducativo) {
+        this.tituloNivelEducativo = tituloNivelEducativo;
+    }
+
+    public @NotNull @Size(min = 0, max = 255) String getCentroEducativo() {
+        return centroEducativo;
+    }
+
+    public void setCentroEducativo(@NotNull @Size(min = 0, max = 255) String centroEducativo) {
+        this.centroEducativo = centroEducativo;
+    }
+
+    public Timestamp getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Timestamp fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Timestamp getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Timestamp fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public @NotNull Nivel getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(@NotNull Nivel nivel) {
+        this.nivel = nivel;
+    }
+
+    public List<Experiencia> getExperiencias() {
+        return experiencias;
+    }
+
+    public void setExperiencias(List<Experiencia> experiencias) {
+        this.experiencias = experiencias;
+    }
+
+    public List<OfertaEmpleo> getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(List<OfertaEmpleo> ofertas) {
+        this.ofertas = ofertas;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
