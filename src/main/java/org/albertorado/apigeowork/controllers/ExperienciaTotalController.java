@@ -43,12 +43,8 @@ public class ExperienciaTotalController {
     }
 
     @PostMapping("/crearexperienciatotal")
-    public ResponseEntity<ExperienciaTotalDto> crearExperienciaTotal(@RequestHeader("authorization") String autorizacion,
-                                                                     @RequestBody ExperienciaTotal experienciaTotal) {
+    public ResponseEntity<ExperienciaTotalDto> crearExperienciaTotal(@RequestBody ExperienciaTotal experienciaTotal) {
 
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
         ExperienciaTotalDto resultado = experienciaTotalService.crearExperiencia(experienciaTotal);
         if(resultado != null) {

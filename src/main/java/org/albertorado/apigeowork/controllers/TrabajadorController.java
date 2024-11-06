@@ -26,12 +26,8 @@ public class TrabajadorController {
     }
 
     @PostMapping("/creartrabajador")
-    public ResponseEntity<TrabajadorDto> crearTrabajador(@RequestHeader("authorization") String autorizacion,
-                                                         @RequestBody Trabajador trabajador){
+    public ResponseEntity<TrabajadorDto> crearTrabajador(@RequestBody Trabajador trabajador){
 
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
         TrabajadorDto resultado = trabajadorService.crearTrabajador(trabajador);
         if(resultado != null){

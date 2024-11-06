@@ -42,12 +42,8 @@ public class DescripcionExperienciaController {
     }
 
     @PostMapping("/creardescripcionexperiencia")
-    public ResponseEntity<DescripcionExperienciaDto> crearDescripcionExperiencia(
-            @RequestHeader("Authorization") String autorizacion, @RequestBody DescripcionExperiencia descripcionExperiencia){
+    public ResponseEntity<DescripcionExperienciaDto> crearDescripcionExperiencia(@RequestBody DescripcionExperiencia descripcionExperiencia){
 
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
         DescripcionExperienciaDto resultado = descripcionExperienciaSerice.crearDescripcionExperiencia(descripcionExperiencia);
         if(resultado != null){

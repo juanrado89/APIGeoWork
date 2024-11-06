@@ -42,12 +42,8 @@ public class PerfilEmpresaController {
     }
 
     @PostMapping("crearperfile")
-    public ResponseEntity<PerfilEmpresaDto> crearPerfilE(@RequestHeader("authorization") String autorizacion,
-                                                         @RequestBody PerfilEmpresa perfilEmpresa) {
+    public ResponseEntity<PerfilEmpresaDto> crearPerfilE(@RequestBody PerfilEmpresa perfilEmpresa) {
 
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
         PerfilEmpresaDto nuevoPerfil = perfilEmpresaService.crearPerfilE(perfilEmpresa);
         if(nuevoPerfil != null) {

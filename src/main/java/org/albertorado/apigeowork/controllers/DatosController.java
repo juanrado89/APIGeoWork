@@ -41,11 +41,8 @@ public class DatosController {
     }
 
     @PostMapping("/creardatosusuario")
-    public ResponseEntity<DatosDto> crearDatos(@RequestHeader("authorization") String autorizacion, @RequestBody Datos datos){
+    public ResponseEntity<DatosDto> crearDatos(@RequestBody Datos datos){
 
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
         DatosDto resultado = datosService.crearDatos(datos);
         if(resultado != null){

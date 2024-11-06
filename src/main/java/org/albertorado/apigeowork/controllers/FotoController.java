@@ -42,12 +42,8 @@ public class FotoController {
     }
 
     @PostMapping("/crearfoto")
-    public ResponseEntity<FotoDto> crearFoto(@RequestHeader("authorization") String autorizacion,
-                                             @RequestBody Foto foto){
+    public ResponseEntity<FotoDto> crearFoto(@RequestBody Foto foto){
 
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
         FotoDto resultado = fotoService.crearFoto(foto);
         if(resultado != null){

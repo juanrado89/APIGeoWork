@@ -60,12 +60,8 @@ public class NivelEducativoController {
     }
 
     @PostMapping("/crearniveleducativo")
-    public ResponseEntity<NivelEducativoDto> crearNivelEducativo(@RequestHeader("authorization") String autorizacion,
-                                                                 @RequestBody NivelEducativo nivelEducativo) {
+    public ResponseEntity<NivelEducativoDto> crearNivelEducativo(@RequestBody NivelEducativo nivelEducativo) {
 
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
         NivelEducativoDto resultado = nivelEducativoService.crearNivelEducativo(nivelEducativo);
         if (resultado != null) {

@@ -38,11 +38,7 @@ public class DatosEmpresaController {
     }
 
     @PostMapping("/creardatosempresa")
-    public ResponseEntity<DatosEmpresaDto> crearDatosEmpresa(@RequestHeader("Authorization") String autorizacion,
-                                                             @RequestBody DatosEmpresa datosEmpresa) {
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    public ResponseEntity<DatosEmpresaDto> crearDatosEmpresa(@RequestBody DatosEmpresa datosEmpresa) {
 
         DatosEmpresaDto resultado = datosEmpresaService.crearDatosEmpresa(datosEmpresa);
         return resultado != null ? ResponseEntity.ok(resultado) : ResponseEntity.notFound().build();

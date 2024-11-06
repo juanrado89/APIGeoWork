@@ -26,12 +26,7 @@ public class DireccionController {
     }
 
     @PostMapping("/creardireccion/")
-    public ResponseEntity<DireccionDto> crearDireccion(@RequestHeader("authorization") String autorizacion,
-                                                       @RequestBody Direccion direccion){
-
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    public ResponseEntity<DireccionDto> crearDireccion(@RequestBody Direccion direccion){
 
         DireccionDto resultado = direccionService.crearDireccion(direccion);
         if(resultado != null){

@@ -44,12 +44,7 @@ public class PerfilUsuarioController {
     }
 
     @PostMapping("/crearperfilu")
-    public ResponseEntity<PerfilUsuarioDto> crearPerfilU(@RequestHeader("authorization") String autorizacion,
-                                                         @RequestBody PerfilUsuario perfilUsuario) {
-
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    public ResponseEntity<PerfilUsuarioDto> crearPerfilU(@RequestBody PerfilUsuario perfilUsuario) {
 
         PerfilUsuarioDto nuevoPerfil = perfilUsuarioService.crearPerfilU(perfilUsuario);
         if(nuevoPerfil != null) {

@@ -42,12 +42,8 @@ public class DocumentoController {
     }
 
     @PostMapping("/creardocumento")
-    public ResponseEntity<DocumentoDto> crearDocumento(@RequestHeader("authorization") String autorizacion,
-                                                       @RequestBody Documento documento){
+    public ResponseEntity<DocumentoDto> crearDocumento(@RequestBody Documento documento){
 
-        if (!validarToken(autorizacion)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
         DocumentoDto resultado = documentoService.crearDocumento(documento);
         if(resultado != null){
