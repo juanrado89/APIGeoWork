@@ -91,6 +91,7 @@ public class PerfilUsuario {
     private Foto foto;
 
     @PrePersist
+    @PreUpdate
     private void encriptarPassword() {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(this.password);

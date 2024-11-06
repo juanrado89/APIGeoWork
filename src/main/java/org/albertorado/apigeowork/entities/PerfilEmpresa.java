@@ -92,6 +92,7 @@ public class PerfilEmpresa {
 
 
     @PrePersist
+    @PreUpdate
     private void encriptarPassword() {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(this.password);
