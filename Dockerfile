@@ -1,14 +1,13 @@
-# Usa la imagen base de OpenJDK 17
-FROM openjdk:17-jdk-alpine
-
-# Configura el directorio de trabajo
+FROM maven:3.8.4-openjdk-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copia el archivo JAR de tu aplicación a la imagen
-COPY target/APIGeoWork.jar app.jar
-
-# Expone el puerto en el que se ejecutará la aplicación (usualmente 8080 para Spring Boot)
+FROM openjdk:17-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/target/APIGeoWork-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Comando para iniciar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
+
