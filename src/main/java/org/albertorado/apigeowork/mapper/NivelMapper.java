@@ -5,6 +5,8 @@ import org.albertorado.apigeowork.entities.Nivel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface NivelMapper {
 
@@ -14,4 +16,5 @@ public interface NivelMapper {
     NivelDto toDto(Nivel nivel);
     Nivel toEntity(NivelDto nivelDto);
 
+    List<NivelDto> toDto(List<Nivel> resultado);
 }

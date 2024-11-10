@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
 import org.albertorado.apigeowork.services.PaisService;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/pais")
@@ -23,6 +25,16 @@ public class PaisController {
     private boolean validarToken(String autorizacion) {
         String token = autorizacion.replace("Bearer ", "");
         return autenticacionService.validarToken(token);
+    }
+
+    @GetMapping("/paises")
+    public ResponseEntity<List<PaisDto>> bucarPaises() {
+        List<PaisDto> resultado = paisService.buscarTodos();
+        if (resultado.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }else{
+            return ResponseEntity.ok(resultado);
+        }
     }
 
     @GetMapping("/buscarpaisporid/{id}")

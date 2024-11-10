@@ -6,6 +6,7 @@ import org.albertorado.apigeowork.mapper.PaisMapper;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.PaisRepository;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class PaisService {
@@ -36,5 +37,10 @@ public class PaisService {
         }
         return paisMapper.toDto(resultado.get());
 
+    }
+
+    public List<PaisDto> buscarTodos() {
+        List<Pais> resultado = paisRepository.findAll();
+        return paisMapper.toDto(resultado);
     }
 }

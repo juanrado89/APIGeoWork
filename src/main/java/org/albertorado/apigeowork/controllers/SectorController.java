@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
 import org.albertorado.apigeowork.services.SectorService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/sector")
 public class SectorController {
@@ -24,10 +26,19 @@ public class SectorController {
         return autenticacionService.validarToken(token);
     }
 
+    @GetMapping("/sectores")
+    public ResponseEntity<List<SectorDto>> todosLosSectores(){
+        List<SectorDto> sectores = sectorService.buscarTodos();
+        if(sectores.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }else{
+            return ResponseEntity.ok(sectores);
+        }
+    }
+
     @GetMapping("/buscarsectorporid/{id}")
     public ResponseEntity<SectorDto> buscarSectorPorId(@RequestHeader("authorization") String autorizacion,
                                                        @PathVariable int id){
-
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

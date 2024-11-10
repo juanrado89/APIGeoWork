@@ -6,6 +6,7 @@ import org.albertorado.apigeowork.mapper.EstadoMapper;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.EstadoRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,5 +38,10 @@ public class EstadoService {
         }
         return estadoMapper.toDto(resultado.get());
 
+    }
+
+    public List<EstadoDto> buscarTodos() {
+        List<Estado> resultado = estadoRepository.findAll();
+        return estadoMapper.toDto(resultado);
     }
 }

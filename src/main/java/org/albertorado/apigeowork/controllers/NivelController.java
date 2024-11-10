@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
 import org.albertorado.apigeowork.services.NivelService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/nivel")
 public class NivelController {
@@ -22,6 +24,17 @@ public class NivelController {
     private boolean validarToken(String autorizacion) {
         String token = autorizacion.replace("Bearer ", "");
         return autenticacionService.validarToken(token);
+    }
+
+    @GetMapping("/niveles")
+    public ResponseEntity<List<NivelDto>> buscarNiveles() {
+        List<NivelDto> resultado = nivelService.buscarTodos();
+        if(resultado.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }else{
+            return ResponseEntity.ok(resultado);
+        }
+
     }
 
     @GetMapping("/buscarporid/{id}")

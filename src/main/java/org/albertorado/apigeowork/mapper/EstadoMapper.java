@@ -5,6 +5,8 @@ import org.albertorado.apigeowork.entities.Estado;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {PaisMapper.class})
 public interface EstadoMapper {
 
@@ -15,4 +17,5 @@ public interface EstadoMapper {
     EstadoDto toDto(Estado estado);
     Estado toEntity(EstadoDto estadoDto);
 
+    List<EstadoDto> toDto(List<Estado> resultado);
 }

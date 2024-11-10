@@ -6,6 +6,7 @@ import org.albertorado.apigeowork.mapper.NivelMapper;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.NivelRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,5 +34,10 @@ public class NivelService {
             return null;
         }
         return nivelMapper.toDto(resultado.get());
+    }
+
+    public List<NivelDto> buscarTodos() {
+        List<Nivel> resultado = nivelRepository.findAll();
+        return nivelMapper.toDto(resultado);
     }
 }

@@ -6,6 +6,7 @@ import org.albertorado.apigeowork.mapper.CiudadMapper;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.CiudadRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +39,10 @@ public class CiudadService {
         }
         return ciudadMapper.toDto(resultado.get());
 
+    }
+
+    public List<CiudadDto> buscarTodos() {
+        List<Ciudad> resultado = ciudadRepository.findAll();
+        return ciudadMapper.toDto(resultado);
     }
 }

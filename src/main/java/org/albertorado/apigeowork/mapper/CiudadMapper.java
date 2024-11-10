@@ -5,6 +5,8 @@ import org.albertorado.apigeowork.entities.Ciudad;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {EstadoMapper.class})
 public interface CiudadMapper {
 
@@ -14,4 +16,6 @@ public interface CiudadMapper {
 
     CiudadDto toDto(Ciudad ciudad);
     Ciudad toEntity(CiudadDto ciudadDto);
+
+    List<CiudadDto> toDto(List<Ciudad> resultado);
 }

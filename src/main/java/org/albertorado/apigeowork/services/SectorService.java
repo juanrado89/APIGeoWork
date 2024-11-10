@@ -6,6 +6,7 @@ import org.albertorado.apigeowork.mapper.SectorMapper;
 import org.albertorado.apigeowork.repositories.SectorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,5 +38,10 @@ public class SectorService {
         }
         return sectorMapper.toDto(reusltado.get());
 
+    }
+
+    public List<SectorDto> buscarTodos() {
+        List<Sector> resultado = sectorRepository.findAll();
+        return sectorMapper.toDto(resultado);
     }
 }

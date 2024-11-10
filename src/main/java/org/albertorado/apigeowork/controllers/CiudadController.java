@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
 import org.albertorado.apigeowork.services.CiudadService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ciudad")
 public class CiudadController {
@@ -22,6 +24,17 @@ public class CiudadController {
     private boolean validarToken(String autorizacion) {
         String token = autorizacion.replace("Bearer ", "");
         return autenticacionService.validarToken(token);
+    }
+
+    @GetMapping("/ciudades")
+    public ResponseEntity<List<CiudadDto>> buscarCiudades() {
+        List<CiudadDto> resultado = ciudadService.buscarTodos();
+        if(resultado.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }else{
+            return ResponseEntity.ok(resultado);
+        }
+
     }
 
     @GetMapping("/buscarciudadporid/{id}")
