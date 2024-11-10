@@ -40,6 +40,15 @@ public class AutenticacionController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de empresa inválidas: " + e.getMessage());
         }
     }
+
+    @PostMapping("/login/validartoken")
+    public ResponseEntity<Void> validarToken(@RequestBody String token) {
+        if(autenticacionService.validarToken(token)){
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }
 
 
