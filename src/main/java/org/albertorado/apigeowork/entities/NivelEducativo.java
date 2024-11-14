@@ -10,7 +10,8 @@ import java.util.List;
 @Entity
 public class NivelEducativo {
 
-    public NivelEducativo(int idNivelEducativo, String tituloNivelEducativo, String centroEducativo, Timestamp fechaInicio, Timestamp fechaFin, Nivel nivel, List<Experiencia> experiencias, List<OfertaEmpleo> ofertas) {
+    public NivelEducativo(int idNivelEducativo, String tituloNivelEducativo, String centroEducativo,
+                          String fechaInicio, String fechaFin, Nivel nivel, List<Experiencia> experiencias, List<OfertaEmpleo> ofertas) {
         this.idNivelEducativo = idNivelEducativo;
         this.tituloNivelEducativo = tituloNivelEducativo;
         this.centroEducativo = centroEducativo;
@@ -48,19 +49,19 @@ public class NivelEducativo {
         this.centroEducativo = centroEducativo;
     }
 
-    public Timestamp getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Timestamp fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Timestamp getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Timestamp fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -107,11 +108,11 @@ public class NivelEducativo {
 
     @Basic
     @Column(name = "fecha_inicio",nullable = false)
-    private Timestamp fechaInicio;
+    private String fechaInicio;
 
     @Basic
     @Column(name = "fecha_fin",nullable = false)
-    private Timestamp fechaFin;
+    private String fechaFin;
 
     @NotNull
     @ManyToOne()

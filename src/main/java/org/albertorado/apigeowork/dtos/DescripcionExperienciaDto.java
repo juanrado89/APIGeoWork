@@ -7,8 +7,8 @@ public class DescripcionExperienciaDto {
     private int idDescripcionExperiencia;
     private String nombreEmpresa;
     private String descripcion;
-    private Timestamp fechaInicio;
-    private Timestamp fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
 
     public int getIdDescripcionExperiencia() {
         return idDescripcionExperiencia;
@@ -34,19 +34,19 @@ public class DescripcionExperienciaDto {
         this.descripcion = descripcion;
     }
 
-    public Timestamp getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Timestamp fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Timestamp getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Timestamp fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 }

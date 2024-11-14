@@ -7,8 +7,8 @@ public class NivelEducativoDto {
     private int idNivelEducativo;
     private String tituloNivelEducativo;
     private String centroEducativo;
-    private Timestamp fechaInicio;
-    private Timestamp fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
     private NivelDto nivel;
 
     public int getIdNivelEducativo() {
@@ -35,19 +35,19 @@ public class NivelEducativoDto {
         this.centroEducativo = centroEducativo;
     }
 
-    public Timestamp getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Timestamp fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Timestamp getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Timestamp fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 

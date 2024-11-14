@@ -10,7 +10,8 @@ import java.sql.Timestamp;
 @Entity
 
 public class DescripcionExperiencia {
-    public DescripcionExperiencia(int idDescripcionExperiencia, String nombreEmpresa, String descripcion, Timestamp fechaInicio, Timestamp fechaFin, ExperienciaTotal experienciaTotal) {
+    public DescripcionExperiencia(int idDescripcionExperiencia, String nombreEmpresa, String descripcion,
+                                  String fechaInicio, String fechaFin, ExperienciaTotal experienciaTotal) {
         this.idDescripcionExperiencia = idDescripcionExperiencia;
         this.nombreEmpresa = nombreEmpresa;
         this.descripcion = descripcion;
@@ -46,19 +47,19 @@ public class DescripcionExperiencia {
         this.descripcion = descripcion;
     }
 
-    public Timestamp getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Timestamp fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Timestamp getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Timestamp fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -89,11 +90,11 @@ public class DescripcionExperiencia {
 
     @Basic
     @Column(name = "fecha_inicio",nullable = false)
-    private Timestamp fechaInicio;
+    private String fechaInicio;
 
     @Basic
     @Column(name = "fecha_fin",nullable = false)
-    private Timestamp fechaFin;
+    private String fechaFin;
 
     @ManyToOne
     @JoinColumn(name = "id_experiencia_total", referencedColumnName = "id_experiencia_total", nullable = true, updatable = false)
