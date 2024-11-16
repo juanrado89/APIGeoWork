@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -12,10 +13,11 @@ import java.util.Objects;
 
 public class Datos {
 
-    public Datos(String nombre, int idDatos, String apellidos, Timestamp fechaEdad, Direccion direccion, Trabajador trabajador) {
+    public Datos(String nombre, int idDatos, String apellidos,int telefono, Timestamp fechaEdad, Direccion direccion, Trabajador trabajador) {
         this.nombre = nombre;
         this.idDatos = idDatos;
         this.apellidos = apellidos;
+        this.telefono = telefono;
         this.fechaEdad = fechaEdad;
         this.direccion = direccion;
         this.trabajador = trabajador;
@@ -72,6 +74,16 @@ public class Datos {
         this.trabajador = trabajador;
     }
 
+    @NotNull
+    @Digits(integer = 9, fraction = 0)
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(@NotNull @Digits(integer = 9, fraction = 0) int telefono) {
+        this.telefono = telefono;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_datos",nullable = false)
@@ -88,6 +100,12 @@ public class Datos {
     @Basic
     @Column(name = "apellidos",length = 200,nullable = false)
     private String apellidos;
+
+    @NotNull
+    @Basic
+    @Digits(integer = 9,fraction = 0)
+    @Column(name = "telefono",precision = 12,nullable = false)
+    private int telefono;
 
     @NotNull
     @Basic

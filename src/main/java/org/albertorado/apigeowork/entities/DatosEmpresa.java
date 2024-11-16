@@ -146,7 +146,7 @@ public class DatosEmpresa {
     private String contactoEmail;
 
     @NotNull
-    @Digits(integer = 12,fraction = 0)
+    @Digits(integer = 9,fraction = 0)
     @Basic
     @Column(name = "contacto_telefono",precision = 12,nullable = false)
     private String contactoTelefono;

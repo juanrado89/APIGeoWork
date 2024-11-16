@@ -11,6 +11,7 @@ public interface DatosMapper {
     @Mapping(source = "idDatos", target = "idDatos")
     @Mapping(source = "nombre", target = "nombre")
     @Mapping(source = "apellidos", target = "apellidos")
+    @Mapping(source = "telefono", target = "telefono")
     @Mapping(source = "fechaEdad", target = "fechaEdad")
     @Mapping(source = "direccion", target = "direccion")
 

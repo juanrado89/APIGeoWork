@@ -6,6 +6,7 @@ public class DatosDto {
     private int idDatos;
     private String nombre;
     private String apellidos;
+    private int telefono;
     private Timestamp fechaEdad;
     private DireccionDto direccion;
 
@@ -47,5 +48,13 @@ public class DatosDto {
 
     public void setDireccion(DireccionDto direccion) {
         this.direccion = direccion;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 }
