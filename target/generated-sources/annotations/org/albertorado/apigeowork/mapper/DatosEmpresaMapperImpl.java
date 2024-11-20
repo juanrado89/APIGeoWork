@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-06T21:49:39+0100",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2024-11-14T12:00:20+0100",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
 public class DatosEmpresaMapperImpl implements DatosEmpresaMapper {
@@ -39,7 +39,7 @@ public class DatosEmpresaMapperImpl implements DatosEmpresaMapper {
         datosEmpresaDto.setSitioWeb( entity.getSitioWeb() );
         datosEmpresaDto.setFechaRegistro( entity.getFechaRegistro() );
         datosEmpresaDto.setDireccion( direccionMapper.toDto( entity.getDireccion() ) );
-        datosEmpresaDto.setSector( sectorListToSectorDtoList( entity.getSector() ) );
+        datosEmpresaDto.setSector( sectorMapper.toDto( entity.getSector() ) );
 
         return datosEmpresaDto;
     }
@@ -63,19 +63,6 @@ public class DatosEmpresaMapperImpl implements DatosEmpresaMapper {
         datosEmpresa.setFechaRegistro( dto.getFechaRegistro() );
 
         return datosEmpresa;
-    }
-
-    protected List<SectorDto> sectorListToSectorDtoList(List<Sector> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<SectorDto> list1 = new ArrayList<SectorDto>( list.size() );
-        for ( Sector sector : list ) {
-            list1.add( sectorMapper.toDto( sector ) );
-        }
-
-        return list1;
     }
 
     protected List<Sector> sectorDtoListToSectorList(List<SectorDto> list) {

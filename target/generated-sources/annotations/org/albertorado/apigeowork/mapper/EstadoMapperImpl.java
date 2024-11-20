@@ -1,5 +1,7 @@
 package org.albertorado.apigeowork.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.albertorado.apigeowork.dtos.EstadoDto;
 import org.albertorado.apigeowork.entities.Estado;
@@ -8,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-06T21:49:39+0100",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2024-11-14T12:00:21+0100",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
 public class EstadoMapperImpl implements EstadoMapper {
@@ -45,5 +47,19 @@ public class EstadoMapperImpl implements EstadoMapper {
         estado.setPais( paisMapper.toEntity( estadoDto.getPais() ) );
 
         return estado;
+    }
+
+    @Override
+    public List<EstadoDto> toDto(List<Estado> resultado) {
+        if ( resultado == null ) {
+            return null;
+        }
+
+        List<EstadoDto> list = new ArrayList<EstadoDto>( resultado.size() );
+        for ( Estado estado : resultado ) {
+            list.add( toDto( estado ) );
+        }
+
+        return list;
     }
 }

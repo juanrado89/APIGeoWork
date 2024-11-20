@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-06T21:49:39+0100",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2024-11-18T11:22:49+0100",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
 public class DatosMapperImpl implements DatosMapper {
@@ -28,6 +28,7 @@ public class DatosMapperImpl implements DatosMapper {
         datosDto.setIdDatos( datos.getIdDatos() );
         datosDto.setNombre( datos.getNombre() );
         datosDto.setApellidos( datos.getApellidos() );
+        datosDto.setTelefono( datos.getTelefono() );
         datosDto.setFechaEdad( datos.getFechaEdad() );
         datosDto.setDireccion( direccionMapper.toDto( datos.getDireccion() ) );
 
@@ -47,6 +48,7 @@ public class DatosMapperImpl implements DatosMapper {
         datos.setApellidos( dto.getApellidos() );
         datos.setFechaEdad( dto.getFechaEdad() );
         datos.setDireccion( direccionMapper.toEntity( dto.getDireccion() ) );
+        datos.setTelefono( dto.getTelefono() );
 
         return datos;
     }

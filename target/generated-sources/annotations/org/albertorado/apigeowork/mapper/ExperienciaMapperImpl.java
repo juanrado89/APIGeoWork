@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-06T21:49:38+0100",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2024-11-14T12:00:20+0100",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
 public class ExperienciaMapperImpl implements ExperienciaMapper {
@@ -39,7 +39,7 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
 
         experienciaDto.setIdExperiencia( experiencia.getIdExperiencia() );
         experienciaDto.setNivelEducativo( nivelEducativoMapper.toDto( experiencia.getNivelEducativo() ) );
-        experienciaDto.setSector( sectorListToSectorDtoList( experiencia.getSector() ) );
+        experienciaDto.setSector( sectorMapper.toDto( experiencia.getSector() ) );
         experienciaDto.setExperienciaTotal( experienciaTotalToExperienciaTotalDto( experiencia.getExperienciaTotal() ) );
         experienciaDto.setCvUrl( documentoMapper.toDto( experiencia.getCvUrl() ) );
         experienciaDto.setFechaRegistro( experiencia.getFechaRegistro() );
@@ -63,19 +63,6 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
         experiencia.setFechaRegistro( experienciaDto.getFechaRegistro() );
 
         return experiencia;
-    }
-
-    protected List<SectorDto> sectorListToSectorDtoList(List<Sector> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<SectorDto> list1 = new ArrayList<SectorDto>( list.size() );
-        for ( Sector sector : list ) {
-            list1.add( sectorMapper.toDto( sector ) );
-        }
-
-        return list1;
     }
 
     protected DescripcionExperienciaDto descripcionExperienciaToDescripcionExperienciaDto(DescripcionExperiencia descripcionExperiencia) {

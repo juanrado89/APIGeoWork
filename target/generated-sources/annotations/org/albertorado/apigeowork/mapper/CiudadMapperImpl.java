@@ -1,5 +1,7 @@
 package org.albertorado.apigeowork.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.albertorado.apigeowork.dtos.CiudadDto;
 import org.albertorado.apigeowork.entities.Ciudad;
@@ -8,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-06T21:49:39+0100",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
+    date = "2024-11-14T12:00:21+0100",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
 public class CiudadMapperImpl implements CiudadMapper {
@@ -45,5 +47,19 @@ public class CiudadMapperImpl implements CiudadMapper {
         ciudad.setEstado( estadoMapper.toEntity( ciudadDto.getEstado() ) );
 
         return ciudad;
+    }
+
+    @Override
+    public List<CiudadDto> toDto(List<Ciudad> resultado) {
+        if ( resultado == null ) {
+            return null;
+        }
+
+        List<CiudadDto> list = new ArrayList<CiudadDto>( resultado.size() );
+        for ( Ciudad ciudad : resultado ) {
+            list.add( toDto( ciudad ) );
+        }
+
+        return list;
     }
 }
