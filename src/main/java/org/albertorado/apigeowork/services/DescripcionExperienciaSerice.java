@@ -6,6 +6,7 @@ import org.albertorado.apigeowork.mapper.DescripcionExperienciaMapper;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.DescripcionExperienciaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,4 +65,8 @@ public class DescripcionExperienciaSerice {
         descripcionExperienciaRepository.deleteById(id);
     }
 
+    public List<DescripcionExperienciaDto> crearDescripcionesExperiencia(List<DescripcionExperiencia> descripcionExperiencia) {
+        List<DescripcionExperiencia> creada = descripcionExperienciaRepository.saveAll(descripcionExperiencia);
+        return descripcionExperienciaMapper.toDto(creada);
+    }
 }

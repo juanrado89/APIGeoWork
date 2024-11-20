@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
 import org.albertorado.apigeowork.services.DescripcionExperienciaSerice;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/descripcionexperiencia")
 public class DescripcionExperienciaController {
@@ -46,6 +48,18 @@ public class DescripcionExperienciaController {
 
 
         DescripcionExperienciaDto resultado = descripcionExperienciaSerice.crearDescripcionExperiencia(descripcionExperiencia);
+        if(resultado != null){
+            return ResponseEntity.ok(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/creardescripcionesexperiencia")
+    public ResponseEntity<List<DescripcionExperienciaDto>> crearDescripcionExperiencia(@RequestBody List<DescripcionExperiencia> descripcionExperiencia){
+
+
+        List<DescripcionExperienciaDto> resultado = descripcionExperienciaSerice.crearDescripcionesExperiencia(descripcionExperiencia);
         if(resultado != null){
             return ResponseEntity.ok(resultado);
         }else{

@@ -23,4 +23,5 @@ public interface DescripcionExperienciaMapper {
     DescripcionExperienciaDto toDto(DescripcionExperiencia descripcionExperiencia);
     DescripcionExperiencia toEntity(DescripcionExperienciaDto descripcionExperienciaDto);
 
+    List<DescripcionExperienciaDto> toDto(List<DescripcionExperiencia> creada);
 }
