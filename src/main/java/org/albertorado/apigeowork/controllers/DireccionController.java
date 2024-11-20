@@ -25,7 +25,7 @@ public class DireccionController {
         return autenticacionService.validarToken(token);
     }
 
-    @PostMapping("/creardireccion/")
+    @PostMapping("/creardireccion")
     public ResponseEntity<DireccionDto> crearDireccion(@RequestBody Direccion direccion){
 
         DireccionDto resultado = direccionService.crearDireccion(direccion);
