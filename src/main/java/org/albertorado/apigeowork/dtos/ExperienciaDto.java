@@ -15,7 +15,7 @@ public class ExperienciaDto {
 
     private DocumentoDto cvUrl;
 
-    private Timestamp fechaRegistro;
+    private String fechaRegistro;
 
     public int getIdExperiencia() {
         return idExperiencia;
@@ -57,11 +57,11 @@ public class ExperienciaDto {
         this.cvUrl = cvUrl;
     }
 
-    public Timestamp getFechaRegistro() {
+    public String getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
+    public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 }

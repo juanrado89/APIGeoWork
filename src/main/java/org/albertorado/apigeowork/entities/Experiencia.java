@@ -10,7 +10,7 @@ import java.util.Objects;
 @Entity
 public class Experiencia {
 
-    public Experiencia(int idExperiencia, NivelEducativo nivelEducativo, List<Sector> sector, ExperienciaTotal experienciaTotal, Documento cvUrl, Timestamp fechaRegistro, Trabajador trabajador) {
+    public Experiencia(int idExperiencia, NivelEducativo nivelEducativo, List<Sector> sector, ExperienciaTotal experienciaTotal, Documento cvUrl, String fechaRegistro, Trabajador trabajador) {
         this.idExperiencia = idExperiencia;
         this.nivelEducativo = nivelEducativo;
         this.sector = sector;
@@ -63,11 +63,11 @@ public class Experiencia {
         this.cvUrl = cvUrl;
     }
 
-    public @NotNull Timestamp getFechaRegistro() {
+    public @NotNull String getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(@NotNull Timestamp fechaRegistro) {
+    public void setFechaRegistro(@NotNull String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -107,7 +107,7 @@ public class Experiencia {
     @NotNull
     @Basic
     @Column(name = "fecha_registro",nullable = false)
-    private Timestamp fechaRegistro;
+    private String fechaRegistro;
 
     @OneToOne(mappedBy = "datosExperiencia")
     private Trabajador trabajador;

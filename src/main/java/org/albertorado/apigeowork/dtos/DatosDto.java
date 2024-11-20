@@ -7,7 +7,7 @@ public class DatosDto {
     private String nombre;
     private String apellidos;
     private int telefono;
-    private Timestamp fechaEdad;
+    private String fechaEdad;
     private DireccionDto direccion;
 
     public int getIdDatos() {
@@ -34,11 +34,11 @@ public class DatosDto {
         this.apellidos = apellidos;
     }
 
-    public Timestamp getFechaEdad() {
+    public String getFechaEdad() {
         return fechaEdad;
     }
 
-    public void setFechaEdad(Timestamp fechaEdad) {
+    public void setFechaEdad(String fechaEdad) {
         this.fechaEdad = fechaEdad;
     }
 

@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class Datos {
 
-    public Datos(String nombre, int idDatos, String apellidos,int telefono, Timestamp fechaEdad, Direccion direccion, Trabajador trabajador) {
+    public Datos(String nombre, int idDatos, String apellidos,int telefono, String fechaEdad, Direccion direccion, Trabajador trabajador) {
         this.nombre = nombre;
         this.idDatos = idDatos;
         this.apellidos = apellidos;
@@ -50,11 +50,11 @@ public class Datos {
         this.apellidos = apellidos;
     }
 
-    public @NotNull Timestamp getFechaEdad() {
+    public @NotNull String getFechaEdad() {
         return fechaEdad;
     }
 
-    public void setFechaEdad(@NotNull Timestamp fechaEdad) {
+    public void setFechaEdad(@NotNull String fechaEdad) {
         this.fechaEdad = fechaEdad;
     }
 
@@ -110,7 +110,7 @@ public class Datos {
     @NotNull
     @Basic
     @Column(name = "fecha_edad",nullable = false)
-    private Timestamp fechaEdad;
+    private String fechaEdad;
 
     @NotNull
     @ManyToOne(cascade = CascadeType.REMOVE)

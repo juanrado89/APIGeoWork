@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 
 import java.util.List;
@@ -52,4 +53,9 @@ public class ExperienciaTotal {
 
     @OneToOne(mappedBy = "experienciaTotal")
     private Experiencia experiencia;
+
+    @NotNull
+    @Basic
+    @Column(name = "fecha_registro",nullable = false)
+    private String fechaRegistro;
 }
