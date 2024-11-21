@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +14,9 @@ import java.util.Objects;
 
 public class DatosEmpresa {
 
-    public DatosEmpresa(int idDatosEmpresa, String nombreEmpresa, List<Sector> sector, Direccion direccion, String contactoNombre, String contactoEmail, String contactoTelefono, String sitioWeb, Timestamp fechaRegistro, Empresa empresa) {
+    public DatosEmpresa(int idDatosEmpresa, String nombreEmpresa, List<Sector> sector, Direccion direccion,
+                        String contactoNombre, String contactoEmail, String contactoTelefono,
+                        String sitioWeb, String fechaRegistro, Empresa empresa) {
         this.idDatosEmpresa = idDatosEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.sector = sector;
@@ -95,11 +96,11 @@ public class DatosEmpresa {
         this.sitioWeb = sitioWeb;
     }
 
-    public Timestamp getFechaRegistro() {
+    public String getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
+    public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -158,7 +159,7 @@ public class DatosEmpresa {
 
     @Basic
     @Column(name = "fecha_registro",nullable = false)
-    private Timestamp fechaRegistro;
+    private String fechaRegistro;
 
     @OneToOne(mappedBy = "datosEmpresa")
     private Empresa empresa;

@@ -88,9 +88,11 @@ public class DescripcionExperiencia {
     @Column(name = "descripcion",length = 3000,nullable = false)
     private String descripcion;
 
+    @NotNull
     @Basic
     @Column(name = "fecha_inicio",nullable = false)
     private String fechaInicio;
+
 
     @Basic
     @Column(name = "fecha_fin",nullable = false)
