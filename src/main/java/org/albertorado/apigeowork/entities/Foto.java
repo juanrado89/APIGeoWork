@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 public class Foto {
 
-    public Foto(Long idFoto, String nombre, String tipoContenido, @NotNull byte[] datos, PerfilEmpresa perfilEmpresa, PerfilUsuario perfilUsuario) {
+    public Foto(Long idFoto, String nombre, String tipoContenido, @NotNull String datos, PerfilEmpresa perfilEmpresa, PerfilUsuario perfilUsuario) {
         this.idFoto = idFoto;
         this.nombre = nombre;
         this.tipoContenido = tipoContenido;
@@ -45,11 +45,11 @@ public class Foto {
     }
 
     @NotNull
-    public byte[] getDatos() {
+    public String getDatos() {
         return datos;
     }
 
-    public void setDatos(@NotNull byte[] datos) {
+    public void setDatos(@NotNull String datos) {
         this.datos = datos;
     }
 
@@ -89,12 +89,13 @@ public class Foto {
     @NotNull
     @Lob
     @Basic
-    @Column(name = "datos",nullable = false)
-    private byte[] datos;
+    @Column(name = "datos",columnDefinition = "TEXT",nullable = false)
+    private String datos;
 
     @OneToOne(mappedBy = "foto")
     private PerfilEmpresa perfilEmpresa;
 
     @OneToOne(mappedBy = "foto")
     private PerfilUsuario perfilUsuario;
+
 }

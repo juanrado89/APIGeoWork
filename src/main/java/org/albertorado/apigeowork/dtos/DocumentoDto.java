@@ -5,7 +5,7 @@ public class DocumentoDto {
     private Long idDocumento;
     private String nombre;
     private String tipoContenido;
-    private byte[] contenido;
+    private String contenido;
 
     public Long getIdDocumento() {
         return idDocumento;
@@ -31,11 +31,11 @@ public class DocumentoDto {
         this.tipoContenido = tipoContenido;
     }
 
-    public byte[] getContenido() {
+    public String getContenido() {
         return contenido;
     }
 
-    public void setContenido(byte[] contenido) {
+    public void setContenido(String contenido) {
         this.contenido = contenido;
     }
 }

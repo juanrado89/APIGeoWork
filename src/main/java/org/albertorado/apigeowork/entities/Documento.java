@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class Documento {
 
-    public Documento(int idDocumento, String nombre, String tipoContenido, @NotNull byte[] contenido, Experiencia experiencia) {
+    public Documento(int idDocumento, String nombre, String tipoContenido, @NotNull String contenido, Experiencia experiencia) {
         this.idDocumento = idDocumento;
         this.nombre = nombre;
         this.tipoContenido = tipoContenido;
@@ -46,11 +46,11 @@ public class Documento {
     }
 
     @NotNull
-    public byte[] getContenido() {
+    public String getContenido() {
         return contenido;
     }
 
-    public void setContenido(@NotNull byte[] contenido) {
+    public void setContenido(@NotNull String contenido) {
         this.contenido = contenido;
     }
 
@@ -82,8 +82,8 @@ public class Documento {
     @NotNull
     @Lob
     @Basic
-    @Column(name = "contenido",nullable = false)
-    private byte[] contenido;
+    @Column(name = "contenido",columnDefinition = "TEXT", nullable = false)
+    private String contenido;
 
     @OneToOne(mappedBy = "cvUrl")
     private Experiencia experiencia;

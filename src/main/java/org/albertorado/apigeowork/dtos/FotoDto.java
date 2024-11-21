@@ -4,7 +4,7 @@ public class FotoDto {
     private Long idFoto;
     private String nombre;
     private String tipoContenido;
-    private byte[] datos;
+    private String datos;
 
 
     public Long getIdFoto() {
@@ -31,11 +31,11 @@ public class FotoDto {
         this.tipoContenido = tipoContenido;
     }
 
-    public byte[] getDatos() {
+    public String getDatos() {
         return datos;
     }
 
-    public void setDatos(byte[] datos) {
+    public void setDatos(String datos) {
         this.datos = datos;
     }
 }
