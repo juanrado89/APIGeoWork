@@ -11,13 +11,12 @@ import java.sql.Timestamp;
 
 public class DescripcionExperiencia {
     public DescripcionExperiencia(int idDescripcionExperiencia, String nombreEmpresa, String descripcion,
-                                  String fechaInicio, String fechaFin, ExperienciaTotal experienciaTotal) {
+                                  String fechaInicio, String fechaFin) {
         this.idDescripcionExperiencia = idDescripcionExperiencia;
         this.nombreEmpresa = nombreEmpresa;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.experienciaTotal = experienciaTotal;
     }
 
     public DescripcionExperiencia() {
@@ -63,13 +62,6 @@ public class DescripcionExperiencia {
         this.fechaFin = fechaFin;
     }
 
-    public ExperienciaTotal getExperienciaTotal() {
-        return experienciaTotal;
-    }
-
-    public void setExperienciaTotal(ExperienciaTotal experienciaTotal) {
-        this.experienciaTotal = experienciaTotal;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
