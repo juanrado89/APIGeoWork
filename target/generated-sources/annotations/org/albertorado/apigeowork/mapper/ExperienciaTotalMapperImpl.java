@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-14T12:00:21+0100",
+    date = "2024-11-21T15:17:07+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
@@ -30,7 +30,7 @@ public class ExperienciaTotalMapperImpl implements ExperienciaTotalMapper {
         ExperienciaTotalDto experienciaTotalDto = new ExperienciaTotalDto();
 
         experienciaTotalDto.setIdExperienciaTotal( experienciaTotal.getIdExperienciaTotal() );
-        experienciaTotalDto.setDescripcionExperiencia( descripcionExperienciaListToDescripcionExperienciaDtoList( experienciaTotal.getDescripcionExperiencia() ) );
+        experienciaTotalDto.setDescripcionExperiencia( descripcionExperienciaMapper.toDto( experienciaTotal.getDescripcionExperiencia() ) );
 
         return experienciaTotalDto;
     }
@@ -47,19 +47,6 @@ public class ExperienciaTotalMapperImpl implements ExperienciaTotalMapper {
         experienciaTotal.setDescripcionExperiencia( descripcionExperienciaDtoListToDescripcionExperienciaList( experienciaTotalDto.getDescripcionExperiencia() ) );
 
         return experienciaTotal;
-    }
-
-    protected List<DescripcionExperienciaDto> descripcionExperienciaListToDescripcionExperienciaDtoList(List<DescripcionExperiencia> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<DescripcionExperienciaDto> list1 = new ArrayList<DescripcionExperienciaDto>( list.size() );
-        for ( DescripcionExperiencia descripcionExperiencia : list ) {
-            list1.add( descripcionExperienciaMapper.toDto( descripcionExperiencia ) );
-        }
-
-        return list1;
     }
 
     protected List<DescripcionExperiencia> descripcionExperienciaDtoListToDescripcionExperienciaList(List<DescripcionExperienciaDto> list) {

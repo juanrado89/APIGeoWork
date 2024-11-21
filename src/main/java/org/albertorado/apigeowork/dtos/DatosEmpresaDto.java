@@ -13,7 +13,7 @@ public class DatosEmpresaDto {
     private String contactoEmail;
     private String contactoTelefono;
     private String sitioWeb;
-    private Timestamp fechaRegistro;
+    private String fechaRegistro;
 
     public int getIdDatosEmpresa() {
         return idDatosEmpresa;
@@ -79,11 +79,11 @@ public class DatosEmpresaDto {
         this.sitioWeb = sitioWeb;
     }
 
-    public Timestamp getFechaRegistro() {
+    public String getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Timestamp fechaRegistro) {
+    public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 }

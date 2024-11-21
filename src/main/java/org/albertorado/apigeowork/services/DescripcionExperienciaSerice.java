@@ -50,9 +50,6 @@ public class DescripcionExperienciaSerice {
             if (descripcionExperiencia.getFechaFin() != null) {
                 descripcionExistente.setFechaFin(descripcionExperiencia.getFechaFin());
             }
-            if (descripcionExperiencia.getExperienciaTotal() != null) {
-                descripcionExistente.setExperienciaTotal(descripcionExperiencia.getExperienciaTotal());
-            }
             DescripcionExperiencia actualizada = descripcionExperienciaRepository.save(descripcionExistente);
             return descripcionExperienciaMapper.toDto(actualizada);
         } else {
