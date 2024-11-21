@@ -7,6 +7,7 @@ import org.albertorado.apigeowork.entities.Experiencia;
 import org.albertorado.apigeowork.entities.Sector;
 import org.albertorado.apigeowork.mapper.ExperienciaMapper;
 import org.albertorado.apigeowork.repositories.ExperienciaTotalRepository;
+import org.albertorado.apigeowork.repositories.SectorRepository;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.ExperienciaRepository;
 
@@ -19,9 +20,9 @@ import java.util.stream.Collectors;
 public class ExperienciaService {
     private final ExperienciaRepository experienciaRepository;
     private final ExperienciaMapper experienciaMapper;
-    private final ExperienciaTotalRepository sectorRepository;
+    private final SectorRepository sectorRepository;
 
-    public ExperienciaService(ExperienciaRepository experienciaRepository, ExperienciaMapper experienciaMapper, ExperienciaTotalRepository sectorRepository) {
+    public ExperienciaService(ExperienciaRepository experienciaRepository, ExperienciaMapper experienciaMapper, SectorRepository sectorRepository) {
         this.experienciaRepository = experienciaRepository;
         this.experienciaMapper = experienciaMapper;
         this.sectorRepository = sectorRepository;
@@ -36,6 +37,11 @@ public class ExperienciaService {
     }
 
     public ExperienciaDto crearExperiencia(Experiencia experiencia) {
+        List<Sector> sectoresAniadir = new ArrayList<>();
+        for(Sector sector :experiencia.getSector()){
+            sectoresAniadir.add(sectorRepository.findSectorByIdSector(sector.getIdSector()).get());
+        }
+        experiencia.setSector(sectoresAniadir);
         Experiencia creada = experienciaRepository.save(experiencia);
         return experienciaMapper.toDto(creada);
     }
@@ -70,9 +76,6 @@ public class ExperienciaService {
             return null;
         }
     }
-
-
-
 
     public void borrarExperiencia(int id) {
         experienciaRepository.deleteByIdExperiencia(id);
