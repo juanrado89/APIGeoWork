@@ -104,6 +104,7 @@ public class Experiencia {
     @JoinColumn(name = "id_documento", referencedColumnName = "id_documento")
     private Documento cvUrl;
 
+
     @NotNull
     @Basic
     @Column(name = "fecha_registro",length = 3000,nullable = false)
