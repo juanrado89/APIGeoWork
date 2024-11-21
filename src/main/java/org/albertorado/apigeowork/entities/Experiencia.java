@@ -106,7 +106,7 @@ public class Experiencia {
 
     @NotNull
     @Basic
-    @Column(name = "fecha_registro",nullable = false)
+    @Column(name = "fecha_registro",length = 3000,nullable = false)
     private String fechaRegistro;
 
     @OneToOne(mappedBy = "datosExperiencia")
