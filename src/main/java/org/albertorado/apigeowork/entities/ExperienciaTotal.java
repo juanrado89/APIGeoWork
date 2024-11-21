@@ -47,7 +47,7 @@ public class ExperienciaTotal {
     @Column(name = "id_experiencia_total",nullable = true)
     private int idExperienciaTotal;
 
-    @OneToMany(mappedBy = "experienciaTotal", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "experienciaTotal", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<DescripcionExperiencia> descripcionExperiencia;
 
     @OneToOne(mappedBy = "experienciaTotal")
