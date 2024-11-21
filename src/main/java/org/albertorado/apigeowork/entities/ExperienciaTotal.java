@@ -53,8 +53,4 @@ public class ExperienciaTotal {
     @OneToOne(mappedBy = "experienciaTotal")
     private Experiencia experiencia;
 
-
-    @Basic
-    @Column(name = "fecha_registro",nullable = false)
-    private String fechaRegistro;
 }
