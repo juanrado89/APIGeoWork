@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.repositories;
 
-import org.albertorado.apigeowork.dtos.PerfilEmpresaDto;
 import org.albertorado.apigeowork.entities.PerfilEmpresa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +12,7 @@ public interface PerfilEmpresaRepository extends JpaRepository<PerfilEmpresa, In
 
     Optional<PerfilEmpresa> findByEmailContainsIgnoreCase(@Param("email") String email);
 
-    Optional<PerfilEmpresaDto> findPerfilEmpresaByEmailContainingIgnoreCase(@Param("email") String email);
+    Optional<PerfilEmpresa> findPerfilEmpresaByEmailContainingIgnoreCase(@Param("email") String email);
 
 
     int deletePerfilEmpresaByIdUsuario(@Param("id") int id);

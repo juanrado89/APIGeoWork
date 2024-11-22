@@ -3,7 +3,6 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 

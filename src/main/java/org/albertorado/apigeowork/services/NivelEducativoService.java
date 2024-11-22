@@ -66,7 +66,6 @@ public class NivelEducativoService {
         }
     }
 
-
     public void borrarNivelEducativo(int id) {
         nivelEducativoRepository.deleteById(id);
     }

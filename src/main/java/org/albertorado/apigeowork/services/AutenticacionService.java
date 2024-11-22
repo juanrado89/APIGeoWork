@@ -1,8 +1,6 @@
 package org.albertorado.apigeowork.services;
 
 import jakarta.transaction.Transactional;
-import org.albertorado.apigeowork.dtos.PerfilEmpresaPDto;
-import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.Autenticacion;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -111,6 +109,14 @@ public class AutenticacionService {
             }
         }
         return false;
+    }
+
+    public void revocarToken(String token) {
+        Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(token);
+        if (autenticacionOpt.isPresent()) {
+            Autenticacion autenticacion = autenticacionOpt.get();
+            autenticacion.setRevocado(true);
+        }
     }
 
 }

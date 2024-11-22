@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Sector {
@@ -80,4 +81,16 @@ public class Sector {
     @ManyToMany(mappedBy = "sector")
     private List<Experiencia> experiencias;
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdSector());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Sector sector1 = (Sector) obj;
+        return idSector == sector1.idSector;
+    }
 }

@@ -58,9 +58,6 @@ public class Pais {
     @OneToMany(mappedBy = "pais")
     private List<Estado> estados;
 
-
-
-
     @Override
     public int hashCode() {
         return Objects.hashCode(getIdPais());

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class HorarioEntrevista {
@@ -117,5 +118,18 @@ public class HorarioEntrevista {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "trabajador_horario", joinColumns = @JoinColumn(name = "horario_id"), inverseJoinColumns = @JoinColumn(name = "trabajador_id"))
     private List<Trabajador> trabajadores;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdHorario());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        HorarioEntrevista horario = (HorarioEntrevista) obj;
+        return idHorario == horario.idHorario;
+    }
 
 }

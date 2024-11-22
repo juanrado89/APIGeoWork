@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.mapper;
 
-import org.albertorado.apigeowork.dtos.EstadoDto;
 import org.albertorado.apigeowork.dtos.SectorDto;
 import org.albertorado.apigeowork.entities.Sector;
 import org.mapstruct.Mapper;

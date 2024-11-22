@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.Objects;
 
-import java.sql.Timestamp;
 
 @Entity
 
@@ -93,4 +93,17 @@ public class DescripcionExperiencia {
     @ManyToOne
     @JoinColumn(name = "id_experiencia_total", referencedColumnName = "id_experiencia_total", nullable = true, updatable = false)
     private ExperienciaTotal experienciaTotal;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdDescripcionExperiencia());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        DescripcionExperiencia descripcion = (DescripcionExperiencia) obj;
+        return idDescripcionExperiencia == descripcion.idDescripcionExperiencia;
+    }
 }

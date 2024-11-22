@@ -60,7 +60,6 @@ public class PerfilUsuarioService {
         }
     }
 
-
     public void eliminarPerfilU(int id) {
         perfilUsuarioRepository.deleteByIdPerfil(id);
     }

@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.repositories;
 
-import org.albertorado.apigeowork.dtos.DatosEmpresaDto;
 import org.albertorado.apigeowork.entities.DatosEmpresa;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,9 +13,9 @@ public interface DatosEmpresaRepository extends JpaRepository<DatosEmpresa,Integ
 
     Optional<DatosEmpresa> findDatosEmpresaByIdDatosEmpresa(@Param("id") int idDatosEmpresa);
 
-    Optional<DatosEmpresaDto> findDatosEmpresaByNombreEmpresaContainsIgnoreCaseAndDireccion_IdDireccion(@Param("nombre") String nombreEmpresa,@Param("idDireccion") int idDireccion);
+    Optional<DatosEmpresa> findDatosEmpresaByNombreEmpresaContainsIgnoreCaseAndDireccion_IdDireccion(@Param("nombre") String nombreEmpresa,@Param("idDireccion") int idDireccion);
 
-    List<DatosEmpresaDto> findAllBySector_Sector(@Param("sector") String sector);
+    List<DatosEmpresa> findAllBySector_Sector(@Param("sector") String sector);
 
     @Modifying
     @Transactional

@@ -1,12 +1,10 @@
 package org.albertorado.apigeowork.services;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.ExperienciaDto;
 import org.albertorado.apigeowork.entities.Experiencia;
 import org.albertorado.apigeowork.entities.Sector;
 import org.albertorado.apigeowork.mapper.ExperienciaMapper;
-import org.albertorado.apigeowork.repositories.ExperienciaTotalRepository;
 import org.albertorado.apigeowork.repositories.SectorRepository;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.ExperienciaRepository;
@@ -14,7 +12,6 @@ import org.albertorado.apigeowork.repositories.ExperienciaRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ExperienciaService {
@@ -82,6 +79,6 @@ public class ExperienciaService {
     }
 
     public List<ExperienciaDto> buscarExperienciaPorSector(String sector) {
-        return experienciaRepository.findAllBySector_SectorContainsIgnoreCase(sector);
+        return experienciaMapper.toDto(experienciaRepository.findAllBySector_SectorContainsIgnoreCase(sector));
     }
 }

@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.dtos;
 
-import java.sql.Timestamp;
 public class DatosDto {
 
     private int idDatos;

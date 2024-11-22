@@ -5,6 +5,7 @@ import org.albertorado.apigeowork.dtos.DatosEmpresaDto;
 import org.albertorado.apigeowork.entities.DatosEmpresa;
 import org.albertorado.apigeowork.entities.Sector;
 import org.albertorado.apigeowork.mapper.DatosEmpresaMapper;
+import org.albertorado.apigeowork.repositories.SectorRepository;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.DatosEmpresaRepository;
 
@@ -16,10 +17,12 @@ public class DatosEmpresaService {
 
     private final DatosEmpresaRepository datosEmpresaRepository;
     private final DatosEmpresaMapper datosEmpresaMapper;
+    private final SectorRepository sectorRepository;
 
-    public DatosEmpresaService(DatosEmpresaRepository datosEmpresaRepository, DatosEmpresaMapper datosEmpresaMapper) {
+    public DatosEmpresaService(DatosEmpresaRepository datosEmpresaRepository, DatosEmpresaMapper datosEmpresaMapper, SectorRepository sectorRepository) {
         this.datosEmpresaRepository = datosEmpresaRepository;
         this.datosEmpresaMapper = datosEmpresaMapper;
+        this.sectorRepository = sectorRepository;
     }
 
     public DatosEmpresaDto buscarPorId(int id) {
@@ -31,7 +34,11 @@ public class DatosEmpresaService {
     }
 
     public DatosEmpresaDto crearDatosEmpresa(DatosEmpresa datosEmpresa) {
-
+        List<Sector> sectoresAniadir = new ArrayList<>();
+        for(Sector sector :datosEmpresa.getSector()){
+            sectoresAniadir.add(sectorRepository.findSectorByIdSector(sector.getIdSector()).get());
+        }
+        datosEmpresa.setSector(sectoresAniadir);
         DatosEmpresa creada = datosEmpresaRepository.save(datosEmpresa);
         return datosEmpresaMapper.toDto(creada);
 

@@ -1,13 +1,10 @@
 package org.albertorado.apigeowork.mapper;
 
 import org.albertorado.apigeowork.dtos.DescripcionExperienciaDto;
-import org.albertorado.apigeowork.dtos.ExperienciaTotalDto;
 import org.albertorado.apigeowork.entities.DescripcionExperiencia;
-import org.albertorado.apigeowork.entities.ExperienciaTotal;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.Collections;
 import java.util.List;
 
 @Mapper(componentModel = "spring")

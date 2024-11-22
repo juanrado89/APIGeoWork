@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.Objects;
+
 @Entity
 
 public class Foto {
@@ -98,4 +100,16 @@ public class Foto {
     @OneToOne(mappedBy = "foto")
     private PerfilUsuario perfilUsuario;
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdFoto());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Foto foto = (Foto) obj;
+        return idFoto == foto.idFoto;
+    }
 }

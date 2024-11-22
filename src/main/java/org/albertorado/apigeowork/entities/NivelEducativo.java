@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class NivelEducativo {
@@ -124,4 +124,17 @@ public class NivelEducativo {
 
     @OneToMany(mappedBy = "nivelEducativo")
     private List<OfertaEmpleo> ofertas;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdNivelEducativo());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        NivelEducativo nivel = (NivelEducativo) obj;
+        return idNivelEducativo == nivel.idNivelEducativo;
+    }
 }

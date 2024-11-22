@@ -3,6 +3,7 @@ package org.albertorado.apigeowork.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 
@@ -110,4 +111,17 @@ public class Autenticacion {
 
     @Column
     private String ipAddress;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdAutenticacion());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Autenticacion autenticacion = (Autenticacion) obj;
+        return idAutenticacion == autenticacion.idAutenticacion && idUsuario == autenticacion.idUsuario;
+    }
 }

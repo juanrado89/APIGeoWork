@@ -83,7 +83,7 @@ public class PerfilUsuario {
     @Size(min = 20, max = 255)
     @Email
     @NotNull
-    @Column(name = "email",length = 255,nullable = false)
+    @Column(name = "email",unique = true,length = 255,nullable = false)
     private String email;
 
     @OneToOne(cascade = CascadeType.REMOVE)

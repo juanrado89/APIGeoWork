@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.repositories;
 
-import org.albertorado.apigeowork.dtos.DatosDto;
 import org.albertorado.apigeowork.entities.Datos;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +11,7 @@ import java.util.Optional;
 public interface DatosRepository extends JpaRepository<Datos,Integer> {
 
     Optional<Datos> findDatosByIdDatos(@Param("datos") int idDatos);
-    Optional<DatosDto> findDatosByNombreContainsIgnoreCaseAndApellidosContainsIgnoreCaseAndDireccion_IdDireccion(@Param("nombre") String nombre,@Param("apellidos") String apellidos, @Param("idDireccion") int idDireccion);
+    Optional<Datos> findDatosByNombreContainsIgnoreCaseAndApellidosContainsIgnoreCaseAndDireccion_IdDireccion(@Param("nombre") String nombre,@Param("apellidos") String apellidos, @Param("idDireccion") int idDireccion);
 
     @Modifying
     @Transactional

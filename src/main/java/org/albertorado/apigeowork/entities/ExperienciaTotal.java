@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 
@@ -53,4 +54,16 @@ public class ExperienciaTotal {
     @OneToOne(mappedBy = "experienciaTotal")
     private Experiencia experiencia;
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdExperienciaTotal());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ExperienciaTotal experiencia = (ExperienciaTotal) obj;
+        return idExperienciaTotal == experiencia.idExperienciaTotal;
+    }
 }

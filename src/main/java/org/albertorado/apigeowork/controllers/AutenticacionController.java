@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
 
-import java.util.Map;
 
 @RestController
 @RequestMapping("/autenticacion")
@@ -48,6 +47,12 @@ public class AutenticacionController {
         }else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+    }
+
+    @PostMapping("/login/validartoken")
+    public ResponseEntity<Void> revocarToken(@RequestBody String token) {
+        autenticacionService.revocarToken(token);
+        return ResponseEntity.ok().build();
     }
 }
 

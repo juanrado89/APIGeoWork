@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.repositories;
 
-import org.albertorado.apigeowork.dtos.TrabajadorDto;
 import org.albertorado.apigeowork.entities.Trabajador;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +12,7 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador,Integer> 
 
     Optional<Trabajador> findTrabajadorByIdTrabajador(@Param("trabajador") int idTrabajador);
 
-    Optional<TrabajadorDto> findTrabajadorByDatosUsuario_IdDatos(@Param("idDatos") int idDatos);
+    Optional<Trabajador> findTrabajadorByDatosUsuario_IdDatos(@Param("idDatos") int idDatos);
 
 
     @Modifying

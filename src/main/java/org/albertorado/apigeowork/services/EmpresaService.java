@@ -47,7 +47,6 @@ public class EmpresaService {
         }
     }
 
-
     public void borrarEmpresa(int id) {
         empresaRepository.deleteByIdEmpresa(id);
     }

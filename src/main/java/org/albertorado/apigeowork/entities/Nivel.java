@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Nivel {
@@ -55,4 +56,17 @@ public class Nivel {
 
     @OneToMany(mappedBy = "nivel")
     private List<NivelEducativo> nivelesEducativos;
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getIdNivel());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Nivel nivel = (Nivel) obj;
+        return idNivel == nivel.idNivel;
+    }
 }
