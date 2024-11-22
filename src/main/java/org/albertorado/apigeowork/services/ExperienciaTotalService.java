@@ -35,11 +35,14 @@ public class ExperienciaTotalService {
 
     public ExperienciaTotalDto crearExperiencia(ExperienciaTotal experienciaTotal) {
         List<DescripcionExperiencia> experienciasAniadir = new ArrayList<DescripcionExperiencia>();
+        ExperienciaTotal creada = experienciaTotalRepository.save(experienciaTotal);
         for(DescripcionExperiencia descripcionExperiencia : experienciaTotal.getDescripcionExperiencia()){
+            descripcionExperiencia.setExperienciaTotal(creada);
             experienciasAniadir.add(descripcionExperienciaRepository.saveAndFlush(descripcionExperiencia));
         }
         experienciaTotal.setDescripcionExperiencia(experienciasAniadir);
-        ExperienciaTotal creada = experienciaTotalRepository.save(experienciaTotal);
+        experienciaTotalRepository.save(experienciaTotal);
+
         return experienciaTotalMapper.toDto(creada);
     }
 

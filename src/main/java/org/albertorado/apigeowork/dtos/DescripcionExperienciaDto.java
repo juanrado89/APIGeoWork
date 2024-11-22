@@ -8,6 +8,7 @@ public class DescripcionExperienciaDto {
     private String descripcion;
     private String fechaInicio;
     private String fechaFin;
+    private ExperienciaTotalDto experienciaTotal;
 
     public int getIdDescripcionExperiencia() {
         return idDescripcionExperiencia;
@@ -47,5 +48,13 @@ public class DescripcionExperienciaDto {
 
     public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public ExperienciaTotalDto getExperienciaTotal() {
+        return experienciaTotal;
+    }
+
+    public void setExperienciaTotal(ExperienciaTotalDto experienciaTotal) {
+        this.experienciaTotal = experienciaTotal;
     }
 }

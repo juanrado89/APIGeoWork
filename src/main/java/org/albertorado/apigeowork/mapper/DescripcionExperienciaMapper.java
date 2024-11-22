@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ExperienciaTotalMapper.class})
 public interface DescripcionExperienciaMapper {
 
 
@@ -16,6 +16,7 @@ public interface DescripcionExperienciaMapper {
     @Mapping(source = "descripcion", target = "descripcion")
     @Mapping(source = "fechaInicio", target = "fechaInicio")
     @Mapping(source = "fechaFin", target = "fechaFin")
+    @Mapping(source = "experienciaTotal", target = "experienciaTotal")
 
     DescripcionExperienciaDto toDto(DescripcionExperiencia descripcionExperiencia);
     DescripcionExperiencia toEntity(DescripcionExperienciaDto descripcionExperienciaDto);
