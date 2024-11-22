@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.mapper;
 
-import java.util.Arrays;
 import javax.annotation.processing.Generated;
 import org.albertorado.apigeowork.dtos.FotoDto;
 import org.albertorado.apigeowork.entities.Foto;
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-14T12:00:21+0100",
+    date = "2024-11-22T08:49:32+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
@@ -25,10 +24,7 @@ public class FotoMapperImpl implements FotoMapper {
         fotoDto.setIdFoto( foto.getIdFoto() );
         fotoDto.setNombre( foto.getNombre() );
         fotoDto.setTipoContenido( foto.getTipoContenido() );
-        byte[] datos = foto.getDatos();
-        if ( datos != null ) {
-            fotoDto.setDatos( Arrays.copyOf( datos, datos.length ) );
-        }
+        fotoDto.setDatos( foto.getDatos() );
 
         return fotoDto;
     }
@@ -44,10 +40,7 @@ public class FotoMapperImpl implements FotoMapper {
         foto.setIdFoto( fotoDto.getIdFoto() );
         foto.setNombre( fotoDto.getNombre() );
         foto.setTipoContenido( fotoDto.getTipoContenido() );
-        byte[] datos = fotoDto.getDatos();
-        if ( datos != null ) {
-            foto.setDatos( Arrays.copyOf( datos, datos.length ) );
-        }
+        foto.setDatos( fotoDto.getDatos() );
 
         return foto;
     }

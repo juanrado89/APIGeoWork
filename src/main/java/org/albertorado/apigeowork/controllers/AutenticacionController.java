@@ -49,7 +49,7 @@ public class AutenticacionController {
         }
     }
 
-    @PostMapping("/login/validartoken")
+    @PostMapping("/login/revocartoken")
     public ResponseEntity<Void> revocarToken(@RequestBody String token) {
         autenticacionService.revocarToken(token);
         return ResponseEntity.ok().build();

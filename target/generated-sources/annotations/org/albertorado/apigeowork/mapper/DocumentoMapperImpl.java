@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.mapper;
 
-import java.util.Arrays;
 import javax.annotation.processing.Generated;
 import org.albertorado.apigeowork.dtos.DocumentoDto;
 import org.albertorado.apigeowork.entities.Documento;
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-21T15:17:06+0100",
+    date = "2024-11-22T08:49:32+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
@@ -25,10 +24,7 @@ public class DocumentoMapperImpl implements DocumentoMapper {
         documentoDto.setIdDocumento( (long) documento.getIdDocumento() );
         documentoDto.setNombre( documento.getNombre() );
         documentoDto.setTipoContenido( documento.getTipoContenido() );
-        byte[] contenido = documento.getContenido();
-        if ( contenido != null ) {
-            documentoDto.setContenido( Arrays.copyOf( contenido, contenido.length ) );
-        }
+        documentoDto.setContenido( documento.getContenido() );
 
         return documentoDto;
     }
@@ -46,10 +42,7 @@ public class DocumentoMapperImpl implements DocumentoMapper {
         }
         documento.setNombre( documentoDto.getNombre() );
         documento.setTipoContenido( documentoDto.getTipoContenido() );
-        byte[] contenido = documentoDto.getContenido();
-        if ( contenido != null ) {
-            documento.setContenido( Arrays.copyOf( contenido, contenido.length ) );
-        }
+        documento.setContenido( documentoDto.getContenido() );
 
         return documento;
     }

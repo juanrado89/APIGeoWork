@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-21T15:17:07+0100",
+    date = "2024-11-22T08:49:32+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
@@ -63,6 +63,20 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
         experiencia.setFechaRegistro( experienciaDto.getFechaRegistro() );
 
         return experiencia;
+    }
+
+    @Override
+    public List<ExperienciaDto> toDto(List<Experiencia> allBySectorSectorContainsIgnoreCase) {
+        if ( allBySectorSectorContainsIgnoreCase == null ) {
+            return null;
+        }
+
+        List<ExperienciaDto> list = new ArrayList<ExperienciaDto>( allBySectorSectorContainsIgnoreCase.size() );
+        for ( Experiencia experiencia : allBySectorSectorContainsIgnoreCase ) {
+            list.add( toDto( experiencia ) );
+        }
+
+        return list;
     }
 
     protected DescripcionExperienciaDto descripcionExperienciaToDescripcionExperienciaDto(DescripcionExperiencia descripcionExperiencia) {
