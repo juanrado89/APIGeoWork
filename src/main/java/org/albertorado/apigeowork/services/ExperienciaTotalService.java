@@ -1,11 +1,15 @@
 package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.ExperienciaTotalDto;
+import org.albertorado.apigeowork.entities.DescripcionExperiencia;
 import org.albertorado.apigeowork.entities.ExperienciaTotal;
 import org.albertorado.apigeowork.mapper.ExperienciaTotalMapper;
+import org.albertorado.apigeowork.repositories.DescripcionExperienciaRepository;
 import org.albertorado.apigeowork.repositories.ExperienciaTotalRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,10 +17,12 @@ public class ExperienciaTotalService {
 
     private final ExperienciaTotalRepository experienciaTotalRepository;
     private final ExperienciaTotalMapper experienciaTotalMapper;
+    private final DescripcionExperienciaRepository descripcionExperienciaRepository;
 
-    public ExperienciaTotalService(ExperienciaTotalRepository experienciaTotalRepository, ExperienciaTotalMapper experienciaTotalMapper) {
+    public ExperienciaTotalService(ExperienciaTotalRepository experienciaTotalRepository, ExperienciaTotalMapper experienciaTotalMapper, DescripcionExperienciaRepository descripcionExperienciaRepository) {
         this.experienciaTotalRepository = experienciaTotalRepository;
         this.experienciaTotalMapper = experienciaTotalMapper;
+        this.descripcionExperienciaRepository = descripcionExperienciaRepository;
     }
 
     public ExperienciaTotalDto buscarPorId(int id) {
@@ -28,6 +34,11 @@ public class ExperienciaTotalService {
     }
 
     public ExperienciaTotalDto crearExperiencia(ExperienciaTotal experienciaTotal) {
+        List<DescripcionExperiencia> experienciasAniadir = new ArrayList<DescripcionExperiencia>();
+        for(DescripcionExperiencia descripcionExperiencia : experienciaTotal.getDescripcionExperiencia()){
+            experienciasAniadir.add(descripcionExperienciaRepository.saveAndFlush(descripcionExperiencia));
+        }
+        experienciaTotal.setDescripcionExperiencia(experienciasAniadir);
         ExperienciaTotal creada = experienciaTotalRepository.save(experienciaTotal);
         return experienciaTotalMapper.toDto(creada);
     }
