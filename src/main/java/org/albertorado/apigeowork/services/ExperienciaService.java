@@ -1,6 +1,6 @@
 package org.albertorado.apigeowork.services;
 
-import jakarta.transaction.Transactional;
+
 import org.albertorado.apigeowork.dtos.ExperienciaDto;
 import org.albertorado.apigeowork.entities.Experiencia;
 import org.albertorado.apigeowork.entities.Sector;
@@ -8,6 +8,7 @@ import org.albertorado.apigeowork.mapper.ExperienciaMapper;
 import org.albertorado.apigeowork.repositories.SectorRepository;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.ExperienciaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class ExperienciaService {
         this.experienciaMapper = experienciaMapper;
         this.sectorRepository = sectorRepository;
     }
-
+    @Transactional(readOnly = true)
     public ExperienciaDto buscarExperienciaPorId(int id) {
         Optional<Experiencia> resultado = experienciaRepository.findByIdExperiencia(id);
         if(resultado.isEmpty()){
@@ -33,6 +34,7 @@ public class ExperienciaService {
         return experienciaMapper.toDto(resultado.get());
     }
 
+    @Transactional
     public ExperienciaDto crearExperiencia(Experiencia experiencia) {
         List<Sector> sectoresAniadir = new ArrayList<>();
         for(Sector sector :experiencia.getSector()){
@@ -77,7 +79,7 @@ public class ExperienciaService {
     public void borrarExperiencia(int id) {
         experienciaRepository.deleteByIdExperiencia(id);
     }
-
+    @Transactional(readOnly = true)
     public List<ExperienciaDto> buscarExperienciaPorSector(String sector) {
         return experienciaMapper.toDto(experienciaRepository.findAllBySector_SectorContainsIgnoreCase(sector));
     }

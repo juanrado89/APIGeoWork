@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.PerfilEmpresaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class PerfilEmpresaService {
         this.perfilEmpresaRepository = perfilEmpresaRepository;
         this.perfilEmpresaMapper = perfilEmpresaMapper;
     }
-
+    @Transactional(readOnly = true)
     public PerfilEmpresaDto buscarPerfilEPorId(int id) {
         Optional<PerfilEmpresa> perfil = perfilEmpresaRepository.findByIdUsuario(id);
         if(perfil.isEmpty()){
@@ -28,12 +29,12 @@ public class PerfilEmpresaService {
         }
         return perfilEmpresaMapper.toDto(perfil.get());
     }
-
+    @Transactional
     public PerfilEmpresaDto crearPerfilE(PerfilEmpresa perfilEmpresa) {
         PerfilEmpresa creado = perfilEmpresaRepository.save(perfilEmpresa);
         return perfilEmpresaMapper.toDto(creado);
     }
-
+    @Transactional
     public PerfilEmpresaDto actualizarPerfilE(int id, PerfilEmpresa perfilEmpresa) {
         Optional<PerfilEmpresa> busqueda = perfilEmpresaRepository.findByIdUsuario(id);
 
@@ -62,7 +63,7 @@ public class PerfilEmpresaService {
     public void eliminarPerfilE(int id) {
         perfilEmpresaRepository.deletePerfilEmpresaByIdUsuario(id);
     }
-
+    @Transactional(readOnly = true)
     public PerfilEmpresaDto buscarPorCorreo(String correo) {
         Optional<PerfilEmpresa> perfil = perfilEmpresaRepository.buscarPorMail(correo);
         if(perfil.isEmpty()){
@@ -70,7 +71,7 @@ public class PerfilEmpresaService {
         }
         return perfilEmpresaMapper.toDto(perfil.get());
     }
-
+    @Transactional(readOnly = true)
     public void actualizarContrasena(String mail, String contrasena) {
         Optional<PerfilEmpresa> busqueda = perfilEmpresaRepository.buscarPorMail(mail);
         if (busqueda.isPresent()) {

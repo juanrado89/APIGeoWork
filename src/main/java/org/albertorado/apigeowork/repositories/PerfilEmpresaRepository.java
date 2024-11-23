@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface PerfilEmpresaRepository extends JpaRepository<PerfilEmpresa, Integer> {
 
+
     Optional<PerfilEmpresa> findByIdUsuario(@Param("id") int idUsuario);
 
     Optional<PerfilEmpresa> findByEmailContainsIgnoreCase(@Param("email") String email);

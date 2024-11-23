@@ -6,6 +6,7 @@ import org.albertorado.apigeowork.entities.Trabajador;
 import org.albertorado.apigeowork.mapper.TrabajadorMapper;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.TrabajadorRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +22,12 @@ public class TrabajadorService {
         this.trabajadorRepository = trabajadorRepository;
         this.trabajadorMapper = trabajadorMapper;
     }
-
+    @Transactional
     public TrabajadorDto crearTrabajador(Trabajador trabajador) {
         Trabajador creado = trabajadorRepository.save(trabajador);
         return trabajadorMapper.toDto(creado);
     }
-
+    @Transactional(readOnly = true)
     public TrabajadorDto buscarTrabajadorPorId(int id) {
         Optional<Trabajador> resultado = trabajadorRepository.findTrabajadorByIdTrabajador(id);
         if(resultado.isEmpty()){
@@ -35,7 +36,7 @@ public class TrabajadorService {
             return trabajadorMapper.toDto(resultado.get());
         }
     }
-
+    @Transactional
     public TrabajadorDto actualizarTrabajador(int id, Trabajador trabajador) {
         Optional<Trabajador> resultado = trabajadorRepository.findTrabajadorByIdTrabajador(id);
 

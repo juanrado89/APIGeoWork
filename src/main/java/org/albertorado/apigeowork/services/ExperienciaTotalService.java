@@ -1,15 +1,12 @@
 package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.ExperienciaTotalDto;
-import org.albertorado.apigeowork.entities.DescripcionExperiencia;
 import org.albertorado.apigeowork.entities.ExperienciaTotal;
 import org.albertorado.apigeowork.mapper.ExperienciaTotalMapper;
 import org.albertorado.apigeowork.repositories.DescripcionExperienciaRepository;
 import org.albertorado.apigeowork.repositories.ExperienciaTotalRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service

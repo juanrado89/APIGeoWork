@@ -13,7 +13,6 @@ public class Empresa {
     public Empresa(int idEmpresa, DatosEmpresa datosEmpresa, PerfilEmpresa perfilEmpresa, List<OfertaEmpleo> ofertas) {
         this.idEmpresa = idEmpresa;
         this.datosEmpresa = datosEmpresa;
-        this.perfilEmpresa = perfilEmpresa;
         this.ofertas = ofertas;
     }
 
@@ -34,14 +33,6 @@ public class Empresa {
 
     public void setDatosEmpresa(@NotNull DatosEmpresa datosEmpresa) {
         this.datosEmpresa = datosEmpresa;
-    }
-
-    public PerfilEmpresa getPerfilEmpresa() {
-        return perfilEmpresa;
-    }
-
-    public void setPerfilEmpresa(PerfilEmpresa perfilEmpresa) {
-        this.perfilEmpresa = perfilEmpresa;
     }
 
     public List<OfertaEmpleo> getOfertas() {
