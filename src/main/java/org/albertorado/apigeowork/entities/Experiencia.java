@@ -96,7 +96,7 @@ public class Experiencia {
     private List<Sector> sector;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "id_experiencia_total", referencedColumnName = "id_experiencia_total")
+    @JoinColumn(name = "id_experiencia_total", referencedColumnName = "id_experiencia_total",nullable = true)
     private ExperienciaTotal experienciaTotal;
 
     @OneToOne(cascade = CascadeType.REMOVE)

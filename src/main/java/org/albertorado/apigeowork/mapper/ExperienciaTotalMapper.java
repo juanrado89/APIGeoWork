@@ -6,11 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 
-@Mapper(componentModel = "spring", uses = {DescripcionExperienciaMapper.class})
+@Mapper(componentModel = "spring")
 public interface ExperienciaTotalMapper {
 
     @Mapping(source = "idExperienciaTotal", target = "idExperienciaTotal")
-    @Mapping(source = "descripcionExperiencia", target = "descripcionExperiencia")
 
     ExperienciaTotalDto toDto(ExperienciaTotal experienciaTotal);
     ExperienciaTotal toEntity(ExperienciaTotalDto experienciaTotalDto);

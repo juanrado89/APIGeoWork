@@ -2,7 +2,9 @@ package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.DescripcionExperienciaDto;
 import org.albertorado.apigeowork.entities.DescripcionExperiencia;
+import org.albertorado.apigeowork.entities.ExperienciaTotal;
 import org.albertorado.apigeowork.mapper.DescripcionExperienciaMapper;
+import org.albertorado.apigeowork.repositories.ExperienciaTotalRepository;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.DescripcionExperienciaRepository;
 
@@ -14,10 +16,12 @@ public class DescripcionExperienciaSerice {
 
     private final DescripcionExperienciaRepository descripcionExperienciaRepository;
     private final DescripcionExperienciaMapper descripcionExperienciaMapper;
+    private final ExperienciaTotalRepository experienciaTotalRepository;
 
-    public DescripcionExperienciaSerice(DescripcionExperienciaRepository descripcionExperienciaRepository, DescripcionExperienciaMapper descripcionExperienciaMapper) {
+    public DescripcionExperienciaSerice(DescripcionExperienciaRepository descripcionExperienciaRepository, DescripcionExperienciaMapper descripcionExperienciaMapper, ExperienciaTotalRepository experienciaTotalRepository) {
         this.descripcionExperienciaRepository = descripcionExperienciaRepository;
         this.descripcionExperienciaMapper = descripcionExperienciaMapper;
+        this.experienciaTotalRepository = experienciaTotalRepository;
     }
 
     public DescripcionExperienciaDto buscarPorId(int id) {
@@ -29,6 +33,7 @@ public class DescripcionExperienciaSerice {
     }
 
     public DescripcionExperienciaDto crearDescripcionExperiencia(DescripcionExperiencia descripcionExperiencia) {
+
         DescripcionExperiencia creada = descripcionExperienciaRepository.save(descripcionExperiencia);
         return descripcionExperienciaMapper.toDto(creada);
     }
@@ -63,6 +68,10 @@ public class DescripcionExperienciaSerice {
     }
 
     public List<DescripcionExperienciaDto> crearDescripcionesExperiencia(List<DescripcionExperiencia> descripcionExperiencia) {
+        ExperienciaTotal experienciaTotal = experienciaTotalRepository.save(descripcionExperiencia.get(0).getExperienciaTotal());
+        for(DescripcionExperiencia experiencia : descripcionExperiencia){
+            experiencia.setExperienciaTotal(experienciaTotal);
+        }
         List<DescripcionExperiencia> creada = descripcionExperienciaRepository.saveAll(descripcionExperiencia);
         return descripcionExperienciaMapper.toDto(creada);
     }

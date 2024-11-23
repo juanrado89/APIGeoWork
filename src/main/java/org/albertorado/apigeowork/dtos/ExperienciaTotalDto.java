@@ -5,7 +5,6 @@ import java.util.List;
 public class ExperienciaTotalDto {
 
     private int idExperienciaTotal;
-    private List<DescripcionExperienciaDto> descripcionExperiencia;
 
     public int getIdExperienciaTotal() {
         return idExperienciaTotal;
@@ -15,11 +14,4 @@ public class ExperienciaTotalDto {
         this.idExperienciaTotal = idExperienciaTotal;
     }
 
-    public List<DescripcionExperienciaDto> getDescripcionExperiencia() {
-        return descripcionExperiencia;
-    }
-
-    public void setDescripcionExperiencia(List<DescripcionExperienciaDto> descripcionExperiencia) {
-        this.descripcionExperiencia = descripcionExperiencia;
-    }
 }

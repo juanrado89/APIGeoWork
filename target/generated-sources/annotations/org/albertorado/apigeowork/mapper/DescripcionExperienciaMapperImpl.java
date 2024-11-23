@@ -5,15 +5,19 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 import org.albertorado.apigeowork.dtos.DescripcionExperienciaDto;
 import org.albertorado.apigeowork.entities.DescripcionExperiencia;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-22T08:49:32+0100",
+    date = "2024-11-22T13:22:15+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
 public class DescripcionExperienciaMapperImpl implements DescripcionExperienciaMapper {
+
+    @Autowired
+    private ExperienciaTotalMapper experienciaTotalMapper;
 
     @Override
     public DescripcionExperienciaDto toDto(DescripcionExperiencia descripcionExperiencia) {
@@ -28,6 +32,7 @@ public class DescripcionExperienciaMapperImpl implements DescripcionExperienciaM
         descripcionExperienciaDto.setDescripcion( descripcionExperiencia.getDescripcion() );
         descripcionExperienciaDto.setFechaInicio( descripcionExperiencia.getFechaInicio() );
         descripcionExperienciaDto.setFechaFin( descripcionExperiencia.getFechaFin() );
+        descripcionExperienciaDto.setExperienciaTotal( experienciaTotalMapper.toDto( descripcionExperiencia.getExperienciaTotal() ) );
 
         return descripcionExperienciaDto;
     }
@@ -45,6 +50,7 @@ public class DescripcionExperienciaMapperImpl implements DescripcionExperienciaM
         descripcionExperiencia.setDescripcion( descripcionExperienciaDto.getDescripcion() );
         descripcionExperiencia.setFechaInicio( descripcionExperienciaDto.getFechaInicio() );
         descripcionExperiencia.setFechaFin( descripcionExperienciaDto.getFechaFin() );
+        descripcionExperiencia.setExperienciaTotal( experienciaTotalMapper.toEntity( descripcionExperienciaDto.getExperienciaTotal() ) );
 
         return descripcionExperiencia;
     }

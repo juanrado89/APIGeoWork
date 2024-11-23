@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-22T08:49:32+0100",
+    date = "2024-11-22T13:22:15+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
@@ -91,6 +91,7 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
         descripcionExperienciaDto.setDescripcion( descripcionExperiencia.getDescripcion() );
         descripcionExperienciaDto.setFechaInicio( descripcionExperiencia.getFechaInicio() );
         descripcionExperienciaDto.setFechaFin( descripcionExperiencia.getFechaFin() );
+        descripcionExperienciaDto.setExperienciaTotal( experienciaTotalToExperienciaTotalDto( descripcionExperiencia.getExperienciaTotal() ) );
 
         return descripcionExperienciaDto;
     }
@@ -146,6 +147,7 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
         descripcionExperiencia.setDescripcion( descripcionExperienciaDto.getDescripcion() );
         descripcionExperiencia.setFechaInicio( descripcionExperienciaDto.getFechaInicio() );
         descripcionExperiencia.setFechaFin( descripcionExperienciaDto.getFechaFin() );
+        descripcionExperiencia.setExperienciaTotal( experienciaTotalDtoToExperienciaTotal( descripcionExperienciaDto.getExperienciaTotal() ) );
 
         return descripcionExperiencia;
     }

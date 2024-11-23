@@ -10,10 +10,8 @@ import java.util.Objects;
 
 public class ExperienciaTotal {
 
-    public ExperienciaTotal(int idExperienciaTotal, List<DescripcionExperiencia> descripcionExperiencia, Experiencia experiencia) {
+    public ExperienciaTotal(int idExperienciaTotal) {
         this.idExperienciaTotal = idExperienciaTotal;
-        this.descripcionExperiencia = descripcionExperiencia;
-        this.experiencia = experiencia;
     }
 
     public ExperienciaTotal() {
@@ -27,21 +25,6 @@ public class ExperienciaTotal {
         this.idExperienciaTotal = idExperienciaTotal;
     }
 
-    public List<DescripcionExperiencia> getDescripcionExperiencia() {
-        return descripcionExperiencia;
-    }
-
-    public void setDescripcionExperiencia(List<DescripcionExperiencia> descripcionExperiencia) {
-        this.descripcionExperiencia = descripcionExperiencia;
-    }
-
-    public Experiencia getExperiencia() {
-        return experiencia;
-    }
-
-    public void setExperiencia(Experiencia experiencia) {
-        this.experiencia = experiencia;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
