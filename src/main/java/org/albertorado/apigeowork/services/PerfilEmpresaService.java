@@ -64,7 +64,7 @@ public class PerfilEmpresaService {
     }
 
     public PerfilEmpresaDto buscarPorCorreo(String correo) {
-        Optional<PerfilEmpresa> perfil = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(correo);
+        Optional<PerfilEmpresa> perfil = perfilEmpresaRepository.buscarPorMail(correo);
         if(perfil.isEmpty()){
             return null;
         }
@@ -72,7 +72,7 @@ public class PerfilEmpresaService {
     }
 
     public void actualizarContrasena(String mail, String contrasena) {
-        Optional<PerfilEmpresa> busqueda = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(mail);
+        Optional<PerfilEmpresa> busqueda = perfilEmpresaRepository.buscarPorMail(mail);
         if (busqueda.isPresent()) {
             PerfilEmpresa perfilExistente = busqueda.get();
             perfilExistente.setPassword(contrasena);

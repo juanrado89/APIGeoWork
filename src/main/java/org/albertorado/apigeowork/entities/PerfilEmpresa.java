@@ -74,7 +74,6 @@ public class PerfilEmpresa {
     @Column(name = "password",nullable = false)
     private String password;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")
     private Empresa empresa;

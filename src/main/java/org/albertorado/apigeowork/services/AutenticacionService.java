@@ -54,12 +54,12 @@ public class AutenticacionService {
     public Autenticacion autenticacionUsuario(String email, String password, boolean tipoPerfil) throws Exception {
 
         if (tipoPerfil) {
-            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findByEmailContainsIgnoreCase(email);
+            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.buscarPorMail(email);
             if (perfilUsuario.isPresent() && passwordEncoder.matches(password, perfilUsuario.get().getPassword())) {
                 return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
             }
         } else {
-            Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.findByEmailContainsIgnoreCase(email);
+            Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.buscarPorMail(email);
             if (perfilEmpresa.isPresent() && passwordEncoder.matches(password, perfilEmpresa.get().getPassword())) {
                 return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
             }
