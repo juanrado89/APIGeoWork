@@ -85,6 +85,7 @@ public class Documento {
     @Column(name = "contenido", columnDefinition = "BLOB",nullable = false)
     private String contenido;
 
+
     @OneToOne(mappedBy = "cvUrl")
     private Experiencia experiencia;
 

@@ -94,6 +94,7 @@ public class Foto {
     @Column(name = "datos", columnDefinition = "BLOB",nullable = false)
     private String datos;
 
+
     @OneToOne(mappedBy = "foto")
     private PerfilEmpresa perfilEmpresa;
 
