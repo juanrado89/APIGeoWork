@@ -81,8 +81,8 @@ public class Documento {
 
     @NotNull
     @Lob
-    @Basic
-    @Column(name = "contenido",columnDefinition = "TEXT", nullable = false)
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "contenido", columnDefinition = "BLOB",nullable = false)
     private String contenido;
 
     @OneToOne(mappedBy = "cvUrl")

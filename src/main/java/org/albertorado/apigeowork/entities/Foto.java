@@ -90,8 +90,8 @@ public class Foto {
 
     @NotNull
     @Lob
-    @Basic
-    @Column(name = "datos",columnDefinition = "TEXT",nullable = false)
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "datos", columnDefinition = "BLOB",nullable = false)
     private String datos;
 
     @OneToOne(mappedBy = "foto")
