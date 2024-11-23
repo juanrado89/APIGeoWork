@@ -143,7 +143,7 @@ public class DatosEmpresa {
     @Size(min = 0,max = 255)
     @Email
     @Basic
-    @Column(name = "contacto_email",unique = true,length = 255,nullable = false)
+    @Column(name = "contacto_email",length = 255,nullable = false)
     private String contactoEmail;
 
     @NotNull
