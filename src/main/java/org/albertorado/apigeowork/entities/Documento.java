@@ -82,7 +82,7 @@ public class Documento {
     @NotNull
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "contenido", columnDefinition = "BLOB",nullable = false)
+    @Column(name = "contenido", columnDefinition = "CLOB",nullable = false)
     private String contenido;
 
 

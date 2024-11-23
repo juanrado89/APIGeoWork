@@ -91,7 +91,7 @@ public class Foto {
     @NotNull
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "datos", columnDefinition = "BLOB",nullable = false)
+    @Column(name = "datos", columnDefinition = "CLOB",nullable = false)
     private String datos;
 
 
