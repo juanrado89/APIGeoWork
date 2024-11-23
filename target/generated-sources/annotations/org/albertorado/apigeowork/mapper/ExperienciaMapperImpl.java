@@ -3,11 +3,9 @@ package org.albertorado.apigeowork.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
-import org.albertorado.apigeowork.dtos.DescripcionExperienciaDto;
 import org.albertorado.apigeowork.dtos.ExperienciaDto;
 import org.albertorado.apigeowork.dtos.ExperienciaTotalDto;
 import org.albertorado.apigeowork.dtos.SectorDto;
-import org.albertorado.apigeowork.entities.DescripcionExperiencia;
 import org.albertorado.apigeowork.entities.Experiencia;
 import org.albertorado.apigeowork.entities.ExperienciaTotal;
 import org.albertorado.apigeowork.entities.Sector;
@@ -16,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-22T13:22:15+0100",
+    date = "2024-11-23T14:24:37+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
@@ -79,36 +77,6 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
         return list;
     }
 
-    protected DescripcionExperienciaDto descripcionExperienciaToDescripcionExperienciaDto(DescripcionExperiencia descripcionExperiencia) {
-        if ( descripcionExperiencia == null ) {
-            return null;
-        }
-
-        DescripcionExperienciaDto descripcionExperienciaDto = new DescripcionExperienciaDto();
-
-        descripcionExperienciaDto.setIdDescripcionExperiencia( descripcionExperiencia.getIdDescripcionExperiencia() );
-        descripcionExperienciaDto.setNombreEmpresa( descripcionExperiencia.getNombreEmpresa() );
-        descripcionExperienciaDto.setDescripcion( descripcionExperiencia.getDescripcion() );
-        descripcionExperienciaDto.setFechaInicio( descripcionExperiencia.getFechaInicio() );
-        descripcionExperienciaDto.setFechaFin( descripcionExperiencia.getFechaFin() );
-        descripcionExperienciaDto.setExperienciaTotal( experienciaTotalToExperienciaTotalDto( descripcionExperiencia.getExperienciaTotal() ) );
-
-        return descripcionExperienciaDto;
-    }
-
-    protected List<DescripcionExperienciaDto> descripcionExperienciaListToDescripcionExperienciaDtoList(List<DescripcionExperiencia> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<DescripcionExperienciaDto> list1 = new ArrayList<DescripcionExperienciaDto>( list.size() );
-        for ( DescripcionExperiencia descripcionExperiencia : list ) {
-            list1.add( descripcionExperienciaToDescripcionExperienciaDto( descripcionExperiencia ) );
-        }
-
-        return list1;
-    }
-
     protected ExperienciaTotalDto experienciaTotalToExperienciaTotalDto(ExperienciaTotal experienciaTotal) {
         if ( experienciaTotal == null ) {
             return null;
@@ -117,7 +85,6 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
         ExperienciaTotalDto experienciaTotalDto = new ExperienciaTotalDto();
 
         experienciaTotalDto.setIdExperienciaTotal( experienciaTotal.getIdExperienciaTotal() );
-        experienciaTotalDto.setDescripcionExperiencia( descripcionExperienciaListToDescripcionExperienciaDtoList( experienciaTotal.getDescripcionExperiencia() ) );
 
         return experienciaTotalDto;
     }
@@ -135,36 +102,6 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
         return list1;
     }
 
-    protected DescripcionExperiencia descripcionExperienciaDtoToDescripcionExperiencia(DescripcionExperienciaDto descripcionExperienciaDto) {
-        if ( descripcionExperienciaDto == null ) {
-            return null;
-        }
-
-        DescripcionExperiencia descripcionExperiencia = new DescripcionExperiencia();
-
-        descripcionExperiencia.setIdDescripcionExperiencia( descripcionExperienciaDto.getIdDescripcionExperiencia() );
-        descripcionExperiencia.setNombreEmpresa( descripcionExperienciaDto.getNombreEmpresa() );
-        descripcionExperiencia.setDescripcion( descripcionExperienciaDto.getDescripcion() );
-        descripcionExperiencia.setFechaInicio( descripcionExperienciaDto.getFechaInicio() );
-        descripcionExperiencia.setFechaFin( descripcionExperienciaDto.getFechaFin() );
-        descripcionExperiencia.setExperienciaTotal( experienciaTotalDtoToExperienciaTotal( descripcionExperienciaDto.getExperienciaTotal() ) );
-
-        return descripcionExperiencia;
-    }
-
-    protected List<DescripcionExperiencia> descripcionExperienciaDtoListToDescripcionExperienciaList(List<DescripcionExperienciaDto> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<DescripcionExperiencia> list1 = new ArrayList<DescripcionExperiencia>( list.size() );
-        for ( DescripcionExperienciaDto descripcionExperienciaDto : list ) {
-            list1.add( descripcionExperienciaDtoToDescripcionExperiencia( descripcionExperienciaDto ) );
-        }
-
-        return list1;
-    }
-
     protected ExperienciaTotal experienciaTotalDtoToExperienciaTotal(ExperienciaTotalDto experienciaTotalDto) {
         if ( experienciaTotalDto == null ) {
             return null;
@@ -173,7 +110,6 @@ public class ExperienciaMapperImpl implements ExperienciaMapper {
         ExperienciaTotal experienciaTotal = new ExperienciaTotal();
 
         experienciaTotal.setIdExperienciaTotal( experienciaTotalDto.getIdExperienciaTotal() );
-        experienciaTotal.setDescripcionExperiencia( descripcionExperienciaDtoListToDescripcionExperienciaList( experienciaTotalDto.getDescripcionExperiencia() ) );
 
         return experienciaTotal;
     }
