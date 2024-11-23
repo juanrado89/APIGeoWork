@@ -68,7 +68,7 @@ public class PerfilUsuarioService {
 
     @Transactional(readOnly = true)
     public PerfilUsuarioDto buscarPorCorreo(String correo) {
-        Optional<PerfilUsuario> resultado = perfilUsuarioRepository.buscarPorMail(correo);
+        Optional<PerfilUsuario> resultado = perfilUsuarioRepository.findByEmailContainsIgnoreCase(correo);
         if(resultado.isPresent()){
             return perfilUsuarioMapper.toDto(resultado.get());
         }
@@ -76,7 +76,7 @@ public class PerfilUsuarioService {
     }
     @Transactional(readOnly = true)
     public void cambiarContrsena(String mail, String password) {
-        Optional<PerfilUsuario> busqueda = perfilUsuarioRepository.buscarPorMail(mail);
+        Optional<PerfilUsuario> busqueda = perfilUsuarioRepository.findByEmailContainsIgnoreCase(mail);
         if(busqueda.isPresent()){
             PerfilUsuario perfilExistente = busqueda.get();
             perfilExistente.setPassword(password);
