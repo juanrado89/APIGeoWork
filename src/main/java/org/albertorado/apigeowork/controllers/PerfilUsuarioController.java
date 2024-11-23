@@ -42,6 +42,15 @@ public class PerfilUsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/buscarporcorreo")
+    public ResponseEntity<Void> buscarPerfilPorCorreo(@RequestBody String correo) {
+        PerfilUsuarioDto perfilEncontrado = perfilUsuarioService.buscarPorCorreo(correo);
+        if(perfilEncontrado != null) {
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping("/crearperfilu")
     public ResponseEntity<PerfilUsuarioDto> crearPerfilU(@RequestBody PerfilUsuario perfilUsuario) {

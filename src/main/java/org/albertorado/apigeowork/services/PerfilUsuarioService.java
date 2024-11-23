@@ -63,4 +63,12 @@ public class PerfilUsuarioService {
     public void eliminarPerfilU(int id) {
         perfilUsuarioRepository.deleteByIdPerfil(id);
     }
+
+    public PerfilUsuarioDto buscarPorCorreo(String correo) {
+        Optional<PerfilUsuario> resultado = perfilUsuarioRepository.findByEmailContainsIgnoreCase(correo);
+        if(resultado.isPresent()){
+            return perfilUsuarioMapper.toDto(resultado.get());
+        }
+        return null;
+    }
 }

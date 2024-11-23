@@ -28,7 +28,6 @@ public class PerfilEmpresaController {
     @GetMapping("/buscarperfile/{id}")
     public ResponseEntity<PerfilEmpresaDto> buscarPerfilEPorId(@RequestHeader("authorization") String autorizacion,
                                                                @PathVariable int id) {
-
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -36,6 +35,16 @@ public class PerfilEmpresaController {
         PerfilEmpresaDto perfil = perfilEmpresaService.buscarPerfilEPorId(id);
         if(perfil != null) {
             return ResponseEntity.ok(perfil);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/buscarporcorreo")
+    public ResponseEntity<Void> buscarPerfilPorCorreo(@RequestBody String correo) {
+        PerfilEmpresaDto perfilEncontrado = perfilEmpresaService.buscarPorCorreo(correo);
+        if(perfilEncontrado != null) {
+            return ResponseEntity.ok().build();
         }else{
             return ResponseEntity.notFound().build();
         }

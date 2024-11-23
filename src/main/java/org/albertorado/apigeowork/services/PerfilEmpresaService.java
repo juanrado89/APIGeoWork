@@ -62,4 +62,12 @@ public class PerfilEmpresaService {
     public void eliminarPerfilE(int id) {
         perfilEmpresaRepository.deletePerfilEmpresaByIdUsuario(id);
     }
+
+    public PerfilEmpresaDto buscarPorCorreo(String correo) {
+        Optional<PerfilEmpresa> perfil = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(correo);
+        if(perfil.isEmpty()){
+            return null;
+        }
+        return perfilEmpresaMapper.toDto(perfil.get());
+    }
 }
