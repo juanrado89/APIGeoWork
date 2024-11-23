@@ -71,4 +71,13 @@ public class PerfilUsuarioService {
         }
         return null;
     }
+
+    public void cambiarContrsena(String mail, String password) {
+        Optional<PerfilUsuario> busqueda = perfilUsuarioRepository.findByEmailContainsIgnoreCase(mail);
+        if(busqueda.isPresent()){
+            PerfilUsuario perfilExistente = busqueda.get();
+            perfilExistente.setPassword(password);
+            perfilUsuarioRepository.save(perfilExistente);
+        }
+    }
 }

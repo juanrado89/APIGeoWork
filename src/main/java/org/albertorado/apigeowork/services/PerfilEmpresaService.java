@@ -70,4 +70,13 @@ public class PerfilEmpresaService {
         }
         return perfilEmpresaMapper.toDto(perfil.get());
     }
+
+    public void actualizarContrasena(String mail, String contrasena) {
+        Optional<PerfilEmpresa> busqueda = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(mail);
+        if (busqueda.isPresent()) {
+            PerfilEmpresa perfilExistente = busqueda.get();
+            perfilExistente.setPassword(contrasena);
+            perfilEmpresaRepository.save(perfilExistente);
+        }
+    }
 }

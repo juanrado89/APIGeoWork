@@ -42,7 +42,7 @@ public class PerfilUsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/buscarporcorreo/{correo}")
+    @GetMapping("/bc/{correo}")
     public ResponseEntity<Void> buscarPerfilPorCorreo(@PathVariable String correo) {
         PerfilUsuarioDto perfilEncontrado = perfilUsuarioService.buscarPorCorreo(correo);
         if(perfilEncontrado != null) {
@@ -79,6 +79,14 @@ public class PerfilUsuarioController {
         }else{
             return ResponseEntity.notFound().build();
         }
+
+    }
+
+    @PutMapping("/cc/{mail}")
+    public ResponseEntity<Void> cambiarContrasena(@PathVariable String mail,
+                                                  @RequestBody String contrasena) {
+        perfilUsuarioService.cambiarContrsena(mail, contrasena);
+        return ResponseEntity.ok().build();
 
     }
 
