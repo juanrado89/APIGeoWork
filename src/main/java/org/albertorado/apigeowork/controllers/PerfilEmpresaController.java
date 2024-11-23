@@ -40,8 +40,8 @@ public class PerfilEmpresaController {
         }
     }
 
-    @GetMapping("/buscarporcorreo")
-    public ResponseEntity<Void> buscarPerfilPorCorreo(@RequestBody String correo) {
+    @GetMapping("/buscarporcorreo/{correo}")
+    public ResponseEntity<Void> buscarPerfilPorCorreo(@PathVariable String correo) {
         PerfilEmpresaDto perfilEncontrado = perfilEmpresaService.buscarPorCorreo(correo);
         if(perfilEncontrado != null) {
             return ResponseEntity.ok().build();
