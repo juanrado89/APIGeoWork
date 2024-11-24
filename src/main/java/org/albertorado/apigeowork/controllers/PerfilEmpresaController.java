@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.controllers;
 
 import org.albertorado.apigeowork.dtos.PerfilEmpresaDto;
+import org.albertorado.apigeowork.dtos.PerfilEmpresaPDto;
 import org.albertorado.apigeowork.entities.PerfilEmpresa;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,10 +42,10 @@ public class PerfilEmpresaController {
     }
 
     @PostMapping("/bc")
-    public ResponseEntity<Void> buscarPerfilPorCorreo(@RequestBody String correo) {
-        PerfilEmpresaDto perfilEncontrado = perfilEmpresaService.buscarPorCorreo(correo);
+    public ResponseEntity<PerfilEmpresaPDto> buscarPerfilPorCorreo(@RequestBody String correo) {
+        PerfilEmpresaPDto perfilEncontrado = perfilEmpresaService.buscarPorCorreo(correo);
         if(perfilEncontrado != null) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(perfilEncontrado);
         }else{
             return ResponseEntity.notFound().build();
         }

@@ -1,8 +1,10 @@
 package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.PerfilEmpresaDto;
+import org.albertorado.apigeowork.dtos.PerfilEmpresaPDto;
 import org.albertorado.apigeowork.entities.PerfilEmpresa;
 import org.albertorado.apigeowork.mapper.PerfilEmpresaMapper;
+import org.albertorado.apigeowork.mapper.PerfilEmpresaPMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,14 @@ public class PerfilEmpresaService {
 
     private final PerfilEmpresaRepository perfilEmpresaRepository;
     private final PerfilEmpresaMapper perfilEmpresaMapper;
+    private final PerfilEmpresaPMapper perfilEmpresaPMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public PerfilEmpresaService(PerfilEmpresaRepository perfilEmpresaRepository, PerfilEmpresaMapper perfilEmpresaMapper) {
+    public PerfilEmpresaService(PerfilEmpresaRepository perfilEmpresaRepository, PerfilEmpresaMapper perfilEmpresaMapper, PerfilEmpresaPMapper perfilEmpresaPMapper, PasswordEncoder passwordEncoder) {
         this.perfilEmpresaRepository = perfilEmpresaRepository;
         this.perfilEmpresaMapper = perfilEmpresaMapper;
+        this.perfilEmpresaPMapper = perfilEmpresaPMapper;
+        this.passwordEncoder = passwordEncoder;
     }
     @Transactional(readOnly = true)
     public PerfilEmpresaDto buscarPerfilEPorId(int id) {
@@ -63,14 +69,16 @@ public class PerfilEmpresaService {
     public void eliminarPerfilE(int id) {
         perfilEmpresaRepository.deletePerfilEmpresaByIdUsuario(id);
     }
+
     @Transactional(readOnly = true)
-    public PerfilEmpresaDto buscarPorCorreo(String correo) {
+    public PerfilEmpresaPDto buscarPorCorreo(String correo) {
         Optional<PerfilEmpresa> perfil = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(correo);
         if(perfil.isEmpty()){
             return null;
         }
-        return perfilEmpresaMapper.toDto(perfil.get());
+        return perfilEmpresaPMapper.toDto(perfil.get());
     }
+
     @Transactional(readOnly = true)
     public void actualizarContrasena(String mail, String contrasena) {
         Optional<PerfilEmpresa> busqueda = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(mail);

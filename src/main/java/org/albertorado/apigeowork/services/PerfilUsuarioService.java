@@ -1,8 +1,10 @@
 package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.PerfilUsuarioDto;
+import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.albertorado.apigeowork.mapper.PerfilUsuarioMapper;
+import org.albertorado.apigeowork.mapper.PerfilUsuarioPMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,12 @@ public class PerfilUsuarioService {
 
     private final PerfilUsuarioRepository perfilUsuarioRepository;
     private final PerfilUsuarioMapper perfilUsuarioMapper;
+    private final PerfilUsuarioPMapper perfilUsuarioPMapper;
 
-    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository,PerfilUsuarioMapper perfilUsuarioMapper) {
+    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper, PerfilUsuarioPMapper perfilUsuarioPMapper) {
         this.perfilUsuarioRepository = perfilUsuarioRepository;
         this.perfilUsuarioMapper = perfilUsuarioMapper;
+        this.perfilUsuarioPMapper = perfilUsuarioPMapper;
     }
 
     @Transactional(readOnly = true)
@@ -67,10 +71,10 @@ public class PerfilUsuarioService {
     }
 
     @Transactional(readOnly = true)
-    public PerfilUsuarioDto buscarPorCorreo(String correo) {
+    public PerfilUsuarioPDto buscarPorCorreo(String correo) {
         Optional<PerfilUsuario> resultado = perfilUsuarioRepository.findByEmailContainsIgnoreCase(correo);
         if(resultado.isPresent()){
-            return perfilUsuarioMapper.toDto(resultado.get());
+            return perfilUsuarioPMapper.toDto(resultado.get());
         }
         return null;
     }
