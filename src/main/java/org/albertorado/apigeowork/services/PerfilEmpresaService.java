@@ -80,8 +80,8 @@ public class PerfilEmpresaService {
     }
 
     @Transactional(readOnly = true)
-    public void actualizarContrasena(String mail, String contrasena) {
-        Optional<PerfilEmpresa> busqueda = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(mail);
+    public void actualizarContrasena(int id, String contrasena) {
+        Optional<PerfilEmpresa> busqueda = perfilEmpresaRepository.findByIdUsuario(id);
         if (busqueda.isPresent()) {
             PerfilEmpresa perfilExistente = busqueda.get();
             perfilExistente.setPassword(contrasena);

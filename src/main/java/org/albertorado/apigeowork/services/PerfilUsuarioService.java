@@ -79,8 +79,8 @@ public class PerfilUsuarioService {
         return null;
     }
     @Transactional(readOnly = true)
-    public void cambiarContrsena(String mail, String password) {
-        Optional<PerfilUsuario> busqueda = perfilUsuarioRepository.findByEmailContainsIgnoreCase(mail);
+    public void cambiarContrsena(int id, String password) {
+        Optional<PerfilUsuario> busqueda = perfilUsuarioRepository.findByIdPerfil(id);
         if(busqueda.isPresent()){
             PerfilUsuario perfilExistente = busqueda.get();
             perfilExistente.setPassword(password);

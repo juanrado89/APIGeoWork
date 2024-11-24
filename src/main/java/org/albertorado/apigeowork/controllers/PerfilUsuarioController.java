@@ -83,10 +83,10 @@ public class PerfilUsuarioController {
 
     }
 
-    @PutMapping("/cc/{mail}")
-    public ResponseEntity<Void> cambiarContrasena(@PathVariable String mail,
+    @PutMapping("/cc/{id}")
+    public ResponseEntity<Void> cambiarContrasena(@PathVariable int id,
                                                   @RequestBody String contrasena) {
-        perfilUsuarioService.cambiarContrsena(mail, contrasena);
+        perfilUsuarioService.cambiarContrsena(id, contrasena);
         return ResponseEntity.ok().build();
 
     }

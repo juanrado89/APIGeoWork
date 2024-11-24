@@ -82,10 +82,10 @@ public class PerfilEmpresaController {
 
     }
 
-    @PostMapping("/cc/{mail}")
-    public ResponseEntity<Void> actualizarContrasena(@PathVariable String mail,
+    @PostMapping("/cc/{id}")
+    public ResponseEntity<Void> actualizarContrasena(@PathVariable int id,
                                                               @RequestBody String contrasena) {
-        perfilEmpresaService.actualizarContrasena(mail, contrasena);
+        perfilEmpresaService.actualizarContrasena(id, contrasena);
         return ResponseEntity.ok().build();
     }
 

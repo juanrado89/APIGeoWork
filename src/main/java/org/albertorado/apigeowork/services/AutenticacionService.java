@@ -99,7 +99,6 @@ public class AutenticacionService {
             Autenticacion autenticacion = autenticacionOpt.get();
 
             if (autenticacion.getFechaExpiracion().isAfter(LocalDateTime.now()) && !autenticacion.isRevocado()) {
-
                 try {
                     Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
                     return true;
