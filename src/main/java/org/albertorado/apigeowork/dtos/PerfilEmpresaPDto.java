@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.dtos;
 
-import java.util.List;
 
 public class PerfilEmpresaPDto {
 
@@ -10,7 +9,7 @@ public class PerfilEmpresaPDto {
 
     private EmpresaDto empresa;
 
-    private List<SectorDto> sector;
+    private FotoDto foto;
 
     private String email;
 
@@ -38,12 +37,12 @@ public class PerfilEmpresaPDto {
         this.empresa = empresa;
     }
 
-    public List<SectorDto> getSector() {
-        return sector;
+    public FotoDto getFoto() {
+        return foto;
     }
 
-    public void setSector(List<SectorDto> sector) {
-        this.sector = sector;
+    public void setFoto(FotoDto foto) {
+        this.foto = foto;
     }
 
     public String getEmail() {
