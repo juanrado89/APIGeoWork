@@ -154,7 +154,7 @@ public class DatosEmpresa {
 
     @Size(min = 0,max = 255)
     @Basic
-    @Column(name = "sitio_web",length = 255,nullable = false)
+    @Column(name = "sitio_web",length = 255,nullable = true)
     private String sitioWeb;
 
     @Basic
