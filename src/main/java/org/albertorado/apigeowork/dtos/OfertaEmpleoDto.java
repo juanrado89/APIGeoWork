@@ -11,7 +11,7 @@ public class OfertaEmpleoDto {
     private String descripcion;
     private SectorDto sector;
     private String requisitos;
-    private NivelEducativoDto nivelEducativo;
+    private NivelDto nivel;
     private float salarioMin;
     private float salarioMax;
     private DireccionDto direccion;
@@ -74,12 +74,12 @@ public class OfertaEmpleoDto {
         this.requisitos = requisitos;
     }
 
-    public NivelEducativoDto getNivelEducativo() {
-        return nivelEducativo;
+    public NivelDto getNivel() {
+        return nivel;
     }
 
-    public void setNivelEducativo(NivelEducativoDto nivelEducativo) {
-        this.nivelEducativo = nivelEducativo;
+    public void setNivel(NivelDto nivel) {
+        this.nivel = nivel;
     }
 
     public float getSalarioMin() {

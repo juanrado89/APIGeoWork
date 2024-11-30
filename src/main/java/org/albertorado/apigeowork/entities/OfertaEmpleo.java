@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 public class OfertaEmpleo {
 
-    public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector, String requisitos, NivelEducativo nivelEducativo, float salarioMin, float salarioMax, Direccion direccion, Timestamp fechaPublicacion, int estado, List<HorarioEntrevista> horarios) {
+    public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector, String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion, Timestamp fechaPublicacion, int estado, List<HorarioEntrevista> horarios) {
         this.idOferta = idOferta;
         this.empresa = empresa;
         this.titulo = titulo;
@@ -20,7 +20,7 @@ public class OfertaEmpleo {
         this.descripcion = descripcion;
         this.sector = sector;
         this.requisitos = requisitos;
-        this.nivelEducativo = nivelEducativo;
+        this.nivel = nivel;
         this.salarioMin = salarioMin;
         this.salarioMax = salarioMax;
         this.direccion = direccion;
@@ -89,12 +89,12 @@ public class OfertaEmpleo {
         this.requisitos = requisitos;
     }
 
-    public NivelEducativo getNivelEducativo() {
-        return nivelEducativo;
+    public Nivel getNivel() {
+        return nivel;
     }
 
-    public void setNivelEducativo(NivelEducativo nivelEducativo) {
-        this.nivelEducativo = nivelEducativo;
+    public void setNivelEducativo(Nivel nivel) {
+        this.nivel = nivel;
     }
 
     @Digits(integer = 6, fraction = 2)
@@ -186,8 +186,8 @@ public class OfertaEmpleo {
     private String requisitos;
 
     @ManyToOne()
-    @JoinColumn(name = "id_nivel_educativo", referencedColumnName = "id_nivel_educativo", nullable = true, updatable = false)
-    private NivelEducativo nivelEducativo;
+    @JoinColumn(name = "id_nivel", referencedColumnName = "id_nivel", nullable = true, updatable = false)
+    private Nivel nivel;
 
     @Basic
     @Digits(integer = 6, fraction = 2)

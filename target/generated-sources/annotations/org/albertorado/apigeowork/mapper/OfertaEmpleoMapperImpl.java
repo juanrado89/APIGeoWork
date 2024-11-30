@@ -21,7 +21,7 @@ public class OfertaEmpleoMapperImpl implements OfertaEmpleoMapper {
     @Autowired
     private DireccionMapper direccionMapper;
     @Autowired
-    private NivelEducativoMapper nivelEducativoMapper;
+    private NivelMapper nivelMapper;
     @Autowired
     private SectorMapper sectorMapper;
 
@@ -45,7 +45,7 @@ public class OfertaEmpleoMapperImpl implements OfertaEmpleoMapper {
         ofertaEmpleoDto.setFechaPublicacion( ofertaEmpleo.getFechaPublicacion() );
         ofertaEmpleoDto.setEstado( ofertaEmpleo.getEstado() );
         ofertaEmpleoDto.setDireccion( direccionMapper.toDto( ofertaEmpleo.getDireccion() ) );
-        ofertaEmpleoDto.setNivelEducativo( nivelEducativoMapper.toDto( ofertaEmpleo.getNivelEducativo() ) );
+        ofertaEmpleoDto.setNivel( nivelMapper.toDto( ofertaEmpleo.getNivel() ) );
 
         return ofertaEmpleoDto;
     }
@@ -65,7 +65,7 @@ public class OfertaEmpleoMapperImpl implements OfertaEmpleoMapper {
         ofertaEmpleo.setDescripcion( ofertaEmpleoDto.getDescripcion() );
         ofertaEmpleo.setSector( sectorMapper.toEntity( ofertaEmpleoDto.getSector() ) );
         ofertaEmpleo.setRequisitos( ofertaEmpleoDto.getRequisitos() );
-        ofertaEmpleo.setNivelEducativo( nivelEducativoMapper.toEntity( ofertaEmpleoDto.getNivelEducativo() ) );
+        ofertaEmpleo.setNivelEducativo( nivelMapper.toEntity( ofertaEmpleoDto.getNivel() ) );
         ofertaEmpleo.setSalarioMin( ofertaEmpleoDto.getSalarioMin() );
         ofertaEmpleo.setSalarioMax( ofertaEmpleoDto.getSalarioMax() );
         ofertaEmpleo.setDireccion( direccionMapper.toEntity( ofertaEmpleoDto.getDireccion() ) );
