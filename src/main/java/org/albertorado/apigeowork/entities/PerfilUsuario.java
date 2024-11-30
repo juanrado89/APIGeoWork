@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -89,6 +90,8 @@ public class PerfilUsuario {
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_foto", referencedColumnName = "id_foto")
     private Foto foto;
+    @ManyToMany(mappedBy = "ofertas")
+    private List<OfertaEmpleo> ofertas;
 
     @PrePersist
     @PreUpdate
