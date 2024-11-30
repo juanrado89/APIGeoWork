@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.dtos;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class OfertaEmpleoDto {
 
@@ -17,6 +18,7 @@ public class OfertaEmpleoDto {
     private DireccionDto direccion;
     private Timestamp fechaPublicacion;
     private int estado;
+    private List<PerfilUsuarioDto> trabajadores;
 
     public int getIdOferta() {
         return idOferta;
@@ -120,5 +122,13 @@ public class OfertaEmpleoDto {
 
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    public List<PerfilUsuarioDto> getTrabajadores() {
+        return trabajadores;
+    }
+
+    public void setTrabajadores(List<PerfilUsuarioDto> trabajadores) {
+        this.trabajadores = trabajadores;
     }
 }

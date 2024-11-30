@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {EmpresaMapper.class,DireccionMapper.class, NivelMapper.class, HorarioEntrevistaMapper.class, SectorMapper.class})
+@Mapper(componentModel = "spring", uses = {EmpresaMapper.class,DireccionMapper.class, NivelMapper.class, HorarioEntrevistaMapper.class, SectorMapper.class, PerfilUsuarioMapper.class})
 public interface OfertaEmpleoMapper {
 
     @Mapping(source = "idOferta", target = "idOferta")
@@ -24,6 +24,7 @@ public interface OfertaEmpleoMapper {
     @Mapping(source = "estado", target = "estado")
     @Mapping(source = "direccion", target = "direccion")
     @Mapping(source = "nivel", target = "nivel")
+    @Mapping(source = "trabajadores", target = "trabajadores")
 
     OfertaEmpleoDto toDto(OfertaEmpleo ofertaEmpleo);
     OfertaEmpleo toEntity(OfertaEmpleoDto ofertaEmpleoDto);

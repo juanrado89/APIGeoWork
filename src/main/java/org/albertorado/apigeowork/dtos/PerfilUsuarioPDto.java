@@ -1,5 +1,7 @@
 package org.albertorado.apigeowork.dtos;
 
+import java.util.List;
+
 public class PerfilUsuarioPDto {
 
     private int idPerfil;
@@ -11,6 +13,7 @@ public class PerfilUsuarioPDto {
     private String email;
 
     private FotoDto foto;
+    private List<OfertaEmpleoDto> ofertas;
 
     public int getIdPerfil() {
         return idPerfil;
@@ -50,5 +53,13 @@ public class PerfilUsuarioPDto {
 
     public void setFoto(FotoDto foto) {
         this.foto = foto;
+    }
+
+    public List<OfertaEmpleoDto> getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(List<OfertaEmpleoDto> ofertas) {
+        this.ofertas = ofertas;
     }
 }

@@ -5,7 +5,7 @@ import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {TrabajadorMapper.class,FotoMapper.class})
+@Mapper(componentModel = "spring", uses = {TrabajadorMapper.class,FotoMapper.class, OfertaEmpleoMapper.class})
 public interface PerfilUsuarioPMapper {
 
 
@@ -14,6 +14,8 @@ public interface PerfilUsuarioPMapper {
     @Mapping(source = "email", target = "email")
     @Mapping(source = "trabajador", target = "trabajador")
     @Mapping(source = "foto", target = "foto")
+    @Mapping(source = "ofertas", target = "ofertas")
+
 
     PerfilUsuarioPDto toDto(PerfilUsuario perfilUsuario);
     PerfilUsuario toEntity(PerfilUsuarioPDto perfilUsuarioPDto);
