@@ -127,7 +127,6 @@ public class HorarioEntrevistaController {
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
         horarioEntrevistaService.borrarHorario(id);
         return ResponseEntity.noContent().build();
     }

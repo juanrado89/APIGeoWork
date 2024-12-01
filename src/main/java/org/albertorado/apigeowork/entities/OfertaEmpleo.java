@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 public class OfertaEmpleo {
 
-    public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector, String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion, Timestamp fechaPublicacion, int estado, List<HorarioEntrevista> horarios) {
+    public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector, String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion, Timestamp fechaPublicacion, Boolean estado, List<HorarioEntrevista> horarios) {
         this.idOferta = idOferta;
         this.empresa = empresa;
         this.titulo = titulo;
@@ -132,12 +132,11 @@ public class OfertaEmpleo {
     }
 
     @NotNull
-    @Digits(integer = 1, fraction = 0)
-    public int getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(@NotNull @Digits(integer = 1, fraction = 0) int estado) {
+    public void setEstado(@NotNull Boolean estado) {
         this.estado = estado;
     }
 
@@ -211,9 +210,8 @@ public class OfertaEmpleo {
 
     @Basic
     @NotNull
-    @Digits(integer = 1,fraction = 0)
-    @Column(name = "estado",precision = 1,nullable = false)
-    private int estado;
+    @Column(name = "estado",nullable = false)
+    private Boolean estado;
 
     @OneToMany(mappedBy = "ofertaEmpleo", cascade = CascadeType.ALL)
     private List<HorarioEntrevista> horarios;

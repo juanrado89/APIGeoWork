@@ -17,7 +17,7 @@ public class OfertaEmpleoDto {
     private float salarioMax;
     private DireccionDto direccion;
     private Timestamp fechaPublicacion;
-    private int estado;
+    private boolean estado;
     private List<PerfilUsuarioDto> trabajadores;
 
     public int getIdOferta() {
@@ -116,11 +116,11 @@ public class OfertaEmpleoDto {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
