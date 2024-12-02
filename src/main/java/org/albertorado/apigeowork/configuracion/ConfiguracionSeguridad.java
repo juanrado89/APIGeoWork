@@ -14,10 +14,13 @@ public class ConfiguracionSeguridad{
 
     @Value("${jwt.secret}")
     private String SECRET_KEY;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

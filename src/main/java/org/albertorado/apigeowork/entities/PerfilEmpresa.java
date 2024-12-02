@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -93,8 +94,10 @@ public class PerfilEmpresa {
     @PrePersist
     @PreUpdate
     private void encriptarPassword() {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(this.password);
+        if (this.password != null) {
+            PasswordEncoder passwordEncoder = PasswordEncoderProvider.getPasswordEncoder();
+            this.password = passwordEncoder.encode(this.password);
+        }
     }
 
     @Override

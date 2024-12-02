@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.services;
 
 import jakarta.transaction.Transactional;
+import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.entities.Autenticacion;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -26,15 +27,13 @@ public class AutenticacionService {
     private final PerfilUsuarioRepository perfilUsuarioRepository;
     private final PerfilEmpresaRepository perfilEmpresaRepository;
     private final AutenticacionRepository autenticacionRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    public AutenticacionService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilEmpresaRepository perfilEmpresaRepository, PasswordEncoder passwordEncoder, AutenticacionRepository autenticacionRepository) {
+    public AutenticacionService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilEmpresaRepository perfilEmpresaRepository, AutenticacionRepository autenticacionRepository) {
         this.perfilUsuarioRepository = perfilUsuarioRepository;
         this.perfilEmpresaRepository = perfilEmpresaRepository;
-        this.passwordEncoder = passwordEncoder;
         this.autenticacionRepository = autenticacionRepository;
     }
 
@@ -52,7 +51,7 @@ public class AutenticacionService {
 
     @Transactional
     public Autenticacion autenticacionUsuario(String email, String password, boolean tipoPerfil) throws Exception {
-
+        PasswordEncoder passwordEncoder = PasswordEncoderProvider.getPasswordEncoder();
         if (tipoPerfil) {
             Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.buscarPorMail(email);
             if (perfilUsuario.isPresent() && passwordEncoder.matches(password, perfilUsuario.get().getPassword())) {
