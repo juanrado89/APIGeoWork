@@ -53,7 +53,7 @@ public class DocumentoController {
         }
     }
 
-    @PutMapping("/actualizardocumento/{id}")
+    @PostMapping("/actualizardocumento/{id}")
     public ResponseEntity<DocumentoDto> actualizarDocumento(@RequestHeader("authorization") String autorizacion,
                                                             @PathVariable int id,@RequestBody Documento documento){
 

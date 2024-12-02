@@ -53,7 +53,7 @@ public class FotoController {
         }
     }
 
-    @PutMapping("/actualizarfoto/{id}")
+    @PostMapping("/actualizarfoto/{id}")
     public ResponseEntity<FotoDto> actualizarFoto(@RequestHeader("authorization") String autorizacion,
                                                   @PathVariable int id,@RequestBody Foto foto){
 

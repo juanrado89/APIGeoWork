@@ -71,7 +71,7 @@ public class NivelEducativoController {
         }
     }
 
-    @PutMapping("/actualizarniveleducativo/{id}")
+    @PostMapping("/actualizarniveleducativo/{id}")
     public ResponseEntity<NivelEducativoDto> actualizarHorario(@RequestHeader("authorization") String autorizacion,
                                                                @PathVariable int id,
                                                                @RequestBody NivelEducativo nivelEducativo) {

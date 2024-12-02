@@ -64,7 +64,7 @@ public class PerfilEmpresaController {
 
     }
 
-    @PutMapping("/actualizarperfile/{id}")
+    @PostMapping("/actualizarperfile/{id}")
     public ResponseEntity<PerfilEmpresaDto> actualizarPerfilE(@RequestHeader("authorization") String autorizacion,
                                                               @PathVariable int id,
                                                               @RequestBody PerfilEmpresa perfilEmpresa) {

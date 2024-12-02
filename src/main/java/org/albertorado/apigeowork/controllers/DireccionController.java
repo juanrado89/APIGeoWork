@@ -51,7 +51,7 @@ public class DireccionController {
         }
     }
 
-    @PutMapping("/actualizardireccion/{id}")
+    @PostMapping("/actualizardireccion/{id}")
     public ResponseEntity<DireccionDto> actualizarDireccion(@RequestHeader("authorization") String autorizacion,
                                                             @PathVariable int id, @RequestBody Direccion direccion){
 

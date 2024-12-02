@@ -87,7 +87,7 @@ public class OfertaEmpleoController {
         }
     }
 
-    @PutMapping("/actualizarOferta/{id}")
+    @PostMapping("/actualizarOferta/{id}")
     public ResponseEntity<OfertaEmpleoDto> actualizarOferta(@RequestHeader("authorization") String autorizacion,
                                                             @PathVariable int id,
                                                             @RequestBody OfertaEmpleo ofertaEmpleo) {

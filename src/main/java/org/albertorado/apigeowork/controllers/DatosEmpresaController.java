@@ -44,7 +44,7 @@ public class DatosEmpresaController {
         return resultado != null ? ResponseEntity.ok(resultado) : ResponseEntity.notFound().build();
     }
 
-    @PutMapping("actualizardatosempresa/{id}")
+    @PostMapping("actualizardatosempresa/{id}")
     public ResponseEntity<DatosEmpresaDto> actualizarDatosEmpresa(@RequestHeader("Authorization") String autorizacion,
                                                                   @PathVariable int id,
                                                                   @RequestBody DatosEmpresa datosEmpresa) {

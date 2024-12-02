@@ -67,7 +67,7 @@ public class DescripcionExperienciaController {
         }
     }
 
-    @PutMapping("actualizardescripcionexperiencia/{id}")
+    @PostMapping("actualizardescripcionexperiencia/{id}")
     public ResponseEntity<DescripcionExperienciaDto> actualizarDescripcionExperiencia(
             @RequestHeader("Authorization") String autorizacion, @PathVariable int id,
             @RequestBody DescripcionExperiencia descripcionExperiencia){

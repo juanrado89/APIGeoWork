@@ -105,7 +105,7 @@ public class HorarioEntrevistaController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping("/actualizarHorario/{id}")
+    @PostMapping("/actualizarHorario/{id}")
     public ResponseEntity<HorarioEntrevistaDto> actualizarHorario(@RequestHeader("authorization") String autorizacion,
                                                                   @PathVariable int id,
                                                                   @RequestBody HorarioEntrevista horarioEntrevista) {

@@ -82,7 +82,7 @@ public class PerfilUsuarioController {
 
     }
 
-    @PutMapping("/actualizarperfilu/{id}")
+    @PostMapping("/actualizarperfilu/{id}")
     public ResponseEntity<PerfilUsuarioDto> actualizarPerfilU(@RequestHeader("authorization") String autorizacion,
                                                               @PathVariable int id,
                                                               @RequestBody PerfilUsuario perfilUsuario) {
@@ -100,7 +100,7 @@ public class PerfilUsuarioController {
 
     }
 
-    @PutMapping("/cc/{id}")
+    @PostMapping("/cc/{id}")
     public ResponseEntity<Void> cambiarContrasena(@PathVariable int id,
                                                   @RequestBody String contrasena) {
         perfilUsuarioService.cambiarContrsena(id, contrasena);
