@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import org.albertorado.apigeowork.dtos.LoginDto;
 import org.albertorado.apigeowork.entities.Autenticacion;
 import org.albertorado.apigeowork.entities.PerfilEmpresa;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
@@ -21,9 +22,9 @@ public class AutenticacionController {
     }
 
     @PostMapping("/login/usuario")
-    public ResponseEntity<?> autenticarUsuario(@RequestParam String mail, @RequestParam String password) {
+    public ResponseEntity<?> autenticarUsuario(@RequestBody LoginDto loginDto) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail,password,true);
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(loginDto.getEmail(), loginDto.getPassword(), true);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de usuario inválidas: " + e.getMessage());
@@ -31,9 +32,9 @@ public class AutenticacionController {
     }
 
     @PostMapping("/login/empresa")
-    public ResponseEntity<?> autenticarEmpresa(@RequestParam String mail, @RequestParam String password) {
+    public ResponseEntity<?> autenticarEmpresa(@RequestBody LoginDto loginDto) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail,password, false);
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(loginDto.getEmail(), loginDto.getPassword(), false);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de empresa inválidas: " + e.getMessage());
