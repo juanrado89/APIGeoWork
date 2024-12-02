@@ -21,7 +21,7 @@ public class AutenticacionController {
     }
 
     @PostMapping("/login/usuario")
-    public ResponseEntity<?> autenticarUsuario(@RequestBody String mail, @RequestBody String password) {
+    public ResponseEntity<?> autenticarUsuario(@RequestParam String mail, @RequestParam String password) {
         try {
             Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail,password,true);
             return ResponseEntity.ok(autenticacion);
@@ -31,7 +31,7 @@ public class AutenticacionController {
     }
 
     @PostMapping("/login/empresa")
-    public ResponseEntity<?> autenticarEmpresa(@RequestBody String mail, @RequestBody String password) {
+    public ResponseEntity<?> autenticarEmpresa(@RequestParam String mail, @RequestParam String password) {
         try {
             Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail,password, false);
             return ResponseEntity.ok(autenticacion);
@@ -41,7 +41,7 @@ public class AutenticacionController {
     }
 
     @PostMapping("/login/validartoken")
-    public ResponseEntity<Void> validarToken(@RequestBody String token) {
+    public ResponseEntity<Void> validarToken(@RequestParam String token) {
         if(autenticacionService.validarToken(token)){
             return ResponseEntity.ok().build();
         }else{
@@ -50,7 +50,7 @@ public class AutenticacionController {
     }
 
     @PostMapping("/login/revocartoken")
-    public ResponseEntity<Void> revocarToken(@RequestBody String token) {
+    public ResponseEntity<Void> revocarToken(@RequestParam String token) {
         autenticacionService.revocarToken(token);
         return ResponseEntity.ok().build();
     }
