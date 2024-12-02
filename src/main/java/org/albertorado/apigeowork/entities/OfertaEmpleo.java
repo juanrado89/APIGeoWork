@@ -12,7 +12,10 @@ import java.util.Objects;
 @Entity
 public class OfertaEmpleo {
 
-    public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector, String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion, Timestamp fechaPublicacion, Boolean estado,List<PerfilUsuario>  trabajadores, List<HorarioEntrevista> horarios) {
+    public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector,
+                        String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion,
+                        Timestamp fechaPublicacion, Boolean estado,
+                        List<PerfilUsuario> trabajadores, List<HorarioEntrevista> horarios) {
         this.idOferta = idOferta;
         this.empresa = empresa;
         this.titulo = titulo;
@@ -27,10 +30,13 @@ public class OfertaEmpleo {
         this.fechaPublicacion = fechaPublicacion;
         this.estado = estado;
         this.horarios = horarios;
+        this.trabajadores = trabajadores;
     }
 
     public OfertaEmpleo() {
+
     }
+
 
     public int getIdOferta() {
         return idOferta;
@@ -147,7 +153,8 @@ public class OfertaEmpleo {
     public void setHorarios(List<HorarioEntrevista> horarios) {
         this.horarios = horarios;
     }
-
+    public List<PerfilUsuario> getTrabajadores() {return trabajadores;}
+    public void setTrabajadores(List<PerfilUsuario> trabajador) {this.trabajadores = trabajadores;}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

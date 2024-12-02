@@ -25,6 +25,7 @@ public interface OfertaEmpleoMapper {
     @Mapping(source = "direccion", target = "direccion")
     @Mapping(source = "nivel", target = "nivel")
     @Mapping(source = "trabajadores", target = "trabajadores")
+    @Mapping(source = "horarios", target = "horarios")
 
     OfertaEmpleoDto toDto(OfertaEmpleo ofertaEmpleo);
     OfertaEmpleo toEntity(OfertaEmpleoDto ofertaEmpleoDto);

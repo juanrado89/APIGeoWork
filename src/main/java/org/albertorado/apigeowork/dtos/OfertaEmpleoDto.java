@@ -129,7 +129,19 @@ public class OfertaEmpleoDto {
         return trabajadores;
     }
 
-    public void setTrabajadores(List<PerfilUsuarioDto> trabajadores) {
+    public void setTrabajador(List<PerfilUsuarioDto> trabajador) {
         this.trabajadores = trabajadores;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public List<HorarioEntrevistaDto> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<HorarioEntrevistaDto> horarios) {
+        this.horarios = horarios;
     }
 }

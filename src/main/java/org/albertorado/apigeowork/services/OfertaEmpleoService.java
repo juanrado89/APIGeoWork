@@ -116,7 +116,7 @@ public class OfertaEmpleoService {
     }
 
     public List<OfertaEmpleoDto> buscarPorIdEmpresa(int id) {
-        List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllByEmpresaId(id);
+        List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllByEmpresa_IdEmpresa(id);
         return ofertaEmpleoMapper.toDto(resultado);
     }
 }

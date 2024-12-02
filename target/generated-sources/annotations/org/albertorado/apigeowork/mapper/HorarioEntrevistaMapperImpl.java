@@ -12,14 +12,12 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-23T14:24:37+0100",
+    date = "2024-12-02T11:26:39+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
 public class HorarioEntrevistaMapperImpl implements HorarioEntrevistaMapper {
 
-    @Autowired
-    private OfertaEmpleoMapper ofertaEmpleoMapper;
     @Autowired
     private TrabajadorMapper trabajadorMapper;
 
@@ -32,7 +30,6 @@ public class HorarioEntrevistaMapperImpl implements HorarioEntrevistaMapper {
         HorarioEntrevistaDto horarioEntrevistaDto = new HorarioEntrevistaDto();
 
         horarioEntrevistaDto.setIdHorario( horarioEntrevista.getIdHorario() );
-        horarioEntrevistaDto.setOfertaEmpleo( ofertaEmpleoMapper.toDto( horarioEntrevista.getOfertaEmpleo() ) );
         horarioEntrevistaDto.setDia( horarioEntrevista.getDia() );
         horarioEntrevistaDto.setHora( horarioEntrevista.getHora() );
         horarioEntrevistaDto.setCandidatosDisponibles( horarioEntrevista.getCandidatosDisponibles() );
@@ -51,7 +48,6 @@ public class HorarioEntrevistaMapperImpl implements HorarioEntrevistaMapper {
         HorarioEntrevista horarioEntrevista = new HorarioEntrevista();
 
         horarioEntrevista.setIdHorario( horarioEntrevistaDto.getIdHorario() );
-        horarioEntrevista.setOfertaEmpleo( ofertaEmpleoMapper.toEntity( horarioEntrevistaDto.getOfertaEmpleo() ) );
         horarioEntrevista.setDia( horarioEntrevistaDto.getDia() );
         horarioEntrevista.setHora( horarioEntrevistaDto.getHora() );
         horarioEntrevista.setCandidatosDisponibles( horarioEntrevistaDto.getCandidatosDisponibles() );

@@ -13,12 +13,13 @@ import java.util.Objects;
 @Entity
 public class PerfilUsuario {
 
-    public PerfilUsuario(int idPerfil, String password, Trabajador trabajador, String email, Foto foto) {
+    public PerfilUsuario(int idPerfil, String password, Trabajador trabajador, String email, Foto foto, List<OfertaEmpleo> ofertas) {
         this.idPerfil = idPerfil;
         this.password = password;
         this.trabajador = trabajador;
         this.email = email;
         this.foto = foto;
+        this.ofertas = ofertas;
     }
 
     public PerfilUsuario() {
@@ -64,6 +65,14 @@ public class PerfilUsuario {
         this.foto = foto;
     }
 
+    public List<OfertaEmpleo> getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(List<OfertaEmpleo> ofertas) {
+        this.ofertas = ofertas;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_perfil",nullable = false)
@@ -90,7 +99,8 @@ public class PerfilUsuario {
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_foto", referencedColumnName = "id_foto")
     private Foto foto;
-    @ManyToMany(mappedBy = "ofertas")
+
+    @ManyToMany(mappedBy = "trabajadores")
     private List<OfertaEmpleo> ofertas;
 
     @PrePersist

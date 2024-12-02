@@ -8,8 +8,6 @@ public class HorarioEntrevistaDto {
 
     private int idHorario;
 
-    private OfertaEmpleoDto ofertaEmpleo;
-
     private LocalDate dia;
 
     private LocalTime hora;
@@ -28,13 +26,6 @@ public class HorarioEntrevistaDto {
         this.idHorario = idHorario;
     }
 
-    public OfertaEmpleoDto getOfertaEmpleo() {
-        return ofertaEmpleo;
-    }
-
-    public void setOfertaEmpleo(OfertaEmpleoDto ofertaEmpleo) {
-        this.ofertaEmpleo = ofertaEmpleo;
-    }
 
     public LocalDate getDia() {
         return dia;

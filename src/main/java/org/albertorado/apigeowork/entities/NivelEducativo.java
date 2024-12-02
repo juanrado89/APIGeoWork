@@ -11,7 +11,7 @@ import java.util.Objects;
 public class NivelEducativo {
 
     public NivelEducativo(int idNivelEducativo, String tituloNivelEducativo, String centroEducativo,
-                          String fechaInicio, String fechaFin, Nivel nivel, List<Experiencia> experiencias, List<OfertaEmpleo> ofertas) {
+                          String fechaInicio, String fechaFin, Nivel nivel, List<Experiencia> experiencias) {
         this.idNivelEducativo = idNivelEducativo;
         this.tituloNivelEducativo = tituloNivelEducativo;
         this.centroEducativo = centroEducativo;
@@ -19,7 +19,6 @@ public class NivelEducativo {
         this.fechaFin = fechaFin;
         this.nivel = nivel;
         this.experiencias = experiencias;
-        this.ofertas = ofertas;
     }
 
     public NivelEducativo() {
@@ -81,13 +80,6 @@ public class NivelEducativo {
         this.experiencias = experiencias;
     }
 
-    public List<OfertaEmpleo> getOfertas() {
-        return ofertas;
-    }
-
-    public void setOfertas(List<OfertaEmpleo> ofertas) {
-        this.ofertas = ofertas;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -122,8 +114,6 @@ public class NivelEducativo {
     @OneToMany(mappedBy = "nivelEducativo")
     private List<Experiencia> experiencias;
 
-    @OneToMany(mappedBy = "nivelEducativo")
-    private List<OfertaEmpleo> ofertas;
 
     @Override
     public int hashCode() {

@@ -11,7 +11,6 @@ import java.util.List;
 public interface HorarioEntrevistaMapper {
 
     @Mapping(source = "idHorario", target = "idHorario")
-    @Mapping(source = "ofertaEmpleo", target = "ofertaEmpleo")
     @Mapping(source = "dia", target = "dia")
     @Mapping(source = "hora", target = "hora")
     @Mapping(source = "candidatosDisponibles", target = "candidatosDisponibles")
