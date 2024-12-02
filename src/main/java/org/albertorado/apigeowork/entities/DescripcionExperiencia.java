@@ -10,10 +10,11 @@ import java.util.Objects;
 @Entity
 
 public class DescripcionExperiencia {
-    public DescripcionExperiencia(int idDescripcionExperiencia, String nombreEmpresa, String descripcion,
+    public DescripcionExperiencia(int idDescripcionExperiencia, String nombreEmpresa, String puesto, String descripcion,
                                   String fechaInicio, String fechaFin, ExperienciaTotal experienciaTotal) {
         this.idDescripcionExperiencia = idDescripcionExperiencia;
         this.nombreEmpresa = nombreEmpresa;
+        this.puesto = puesto;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -71,6 +72,14 @@ public class DescripcionExperiencia {
         this.experienciaTotal = experienciaTotal;
     }
 
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_descripcion_experiencia",nullable = true)
@@ -81,6 +90,12 @@ public class DescripcionExperiencia {
     @Basic
     @Column(name = "nombre_empresa",length = 255,nullable = false)
     private String nombreEmpresa;
+
+    @NotNull
+    @Size(min = 0,max = 255)
+    @Basic
+    @Column(name = "puesto",length = 255,nullable = false)
+    private String puesto;
 
     @NotNull
     @Size(min = 0,max = 3000)

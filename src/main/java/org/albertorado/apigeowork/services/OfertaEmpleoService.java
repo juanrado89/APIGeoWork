@@ -64,7 +64,7 @@ public class OfertaEmpleoService {
             if (ofertaEmpleo.getFechaPublicacion() != null) {
                 ofertaExistente.setFechaPublicacion(ofertaEmpleo.getFechaPublicacion());
             }
-            if (ofertaEmpleo.getEstado() != 0) {
+            if (!ofertaEmpleo.getEstado()) {
                 ofertaExistente.setEstado(ofertaEmpleo.getEstado());
             }
             if (ofertaEmpleo.getEmpresa() != null) {
@@ -73,8 +73,8 @@ public class OfertaEmpleoService {
             if (ofertaEmpleo.getSector() != null) {
                 ofertaExistente.setSector(ofertaEmpleo.getSector());
             }
-            if (ofertaEmpleo.getNivelEducativo() != null) {
-                ofertaExistente.setNivelEducativo(ofertaEmpleo.getNivelEducativo());
+            if (ofertaEmpleo.getNivel() != null) {
+                ofertaExistente.setNivelEducativo(ofertaEmpleo.getNivel());
             }
             if (ofertaEmpleo.getDireccion() != null) {
                 ofertaExistente.setDireccion(ofertaEmpleo.getDireccion());
@@ -105,13 +105,18 @@ public class OfertaEmpleoService {
                         .and(OfertaEmpleoEspecificaciones.tieneCiudad(parametros.getDireccion().getCiudad().getCiudad()))
                         .and(OfertaEmpleoEspecificaciones.tieneTitulo(parametros.getTitulo()))
                         .and(OfertaEmpleoEspecificaciones.tieneSector(parametros.getSector()))
-                        .and(OfertaEmpleoEspecificaciones.tieneNivelEducativo(parametros.getNivelEducativo().getTituloNivelEducativo()))
+                        .and(OfertaEmpleoEspecificaciones.tieneNivel(parametros.getNivel().getNombreNivel()))
                         .and(OfertaEmpleoEspecificaciones.salarioMayorQue(parametros.getSalarioMin()))
                         .and(OfertaEmpleoEspecificaciones.salarioMenorQue(parametros.getSalarioMax()))
                         .and(OfertaEmpleoEspecificaciones.tieneRequisitos(parametros.getRequisitos()))
                         .and(OfertaEmpleoEspecificaciones.estatus(parametros.getEstado()))
                         .and(OfertaEmpleoEspecificaciones.ordenarPorFecha(false)));
         List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAll(especificaciones);
+        return ofertaEmpleoMapper.toDto(resultado);
+    }
+
+    public List<OfertaEmpleoDto> buscarPorIdEmpresa(int id) {
+        List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllByEmpresaId(id);
         return ofertaEmpleoMapper.toDto(resultado);
     }
 }

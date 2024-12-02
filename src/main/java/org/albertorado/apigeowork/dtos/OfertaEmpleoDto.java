@@ -19,6 +19,7 @@ public class OfertaEmpleoDto {
     private Timestamp fechaPublicacion;
     private boolean estado;
     private List<PerfilUsuarioDto> trabajadores;
+    private List<HorarioEntrevistaDto> horarios;
 
     public int getIdOferta() {
         return idOferta;

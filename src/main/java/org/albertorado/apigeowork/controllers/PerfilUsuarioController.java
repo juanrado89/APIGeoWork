@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
 import org.albertorado.apigeowork.services.PerfilUsuarioService;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/perfilusuario")
@@ -28,6 +30,7 @@ public class PerfilUsuarioController {
     }
 
 
+
     @GetMapping("/buscarperfilu/{id}")
     public ResponseEntity<PerfilUsuarioDto> buscarPerfilUPorId(@RequestHeader("authorization") String autorizacion,
                                                                @PathVariable int id) {
@@ -39,6 +42,20 @@ public class PerfilUsuarioController {
         PerfilUsuarioDto perfil = perfilUsuarioService.buscarPerfilUPorId(id);
         if(perfil != null) {
             return ResponseEntity.ok(perfil);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/buscartodosperfilu")
+    public ResponseEntity<List<PerfilUsuarioDto>> buscarPerfilUPorId(@RequestHeader("authorization") String autorizacion) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        List<PerfilUsuarioDto> perfiles = perfilUsuarioService.buscarTodos();
+        if(perfiles != null) {
+            return ResponseEntity.ok(perfiles);
         }else{
             return ResponseEntity.notFound().build();
         }

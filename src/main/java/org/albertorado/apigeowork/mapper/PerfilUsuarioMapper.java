@@ -5,6 +5,8 @@ import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {TrabajadorMapper.class,FotoMapper.class, OfertaEmpleoMapper.class})
 public interface PerfilUsuarioMapper {
 
@@ -18,4 +20,5 @@ public interface PerfilUsuarioMapper {
     PerfilUsuarioDto toDto(PerfilUsuario perfilUsuario);
     PerfilUsuario toEntity(PerfilUsuarioDto perfilUsuarioDto);
 
+    List<PerfilUsuarioDto> toDto(List<PerfilUsuario> perfiles);
 }

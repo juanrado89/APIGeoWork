@@ -13,6 +13,7 @@ public interface DescripcionExperienciaMapper {
 
     @Mapping(source = "idDescripcionExperiencia", target = "idDescripcionExperiencia")
     @Mapping(source = "nombreEmpresa", target = "nombreEmpresa")
+    @Mapping(source = "puesto", target = "puesto")
     @Mapping(source = "descripcion", target = "descripcion")
     @Mapping(source = "fechaInicio", target = "fechaInicio")
     @Mapping(source = "fechaFin", target = "fechaFin")

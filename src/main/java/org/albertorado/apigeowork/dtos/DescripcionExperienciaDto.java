@@ -5,6 +5,7 @@ public class DescripcionExperienciaDto {
 
     private int idDescripcionExperiencia;
     private String nombreEmpresa;
+    private String puesto;
     private String descripcion;
     private String fechaInicio;
     private String fechaFin;
@@ -56,5 +57,13 @@ public class DescripcionExperienciaDto {
 
     public void setExperienciaTotal(ExperienciaTotalDto experienciaTotal) {
         this.experienciaTotal = experienciaTotal;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
 }

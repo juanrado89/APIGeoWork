@@ -68,12 +68,12 @@ public class OfertaEmpleoEspecificaciones {
     }
 
 
-    public static Specification<OfertaEmpleo> tieneNivelEducativo(String nivelEducativoRequerido) {
+    public static Specification<OfertaEmpleo> tieneNivel(String nivelRequerido) {
         return (root, query, criteriaBuilder) -> {
-            if (nivelEducativoRequerido == null || nivelEducativoRequerido.isEmpty()) {
+            if (nivelRequerido == null || nivelRequerido.isEmpty()) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.like(root.get("nivelEducativoRequerido"),"%" +  nivelEducativoRequerido + "%");
+            return criteriaBuilder.like(root.get("nivelRequerido"),"%" + nivelRequerido + "%");
         };
     }
 
@@ -94,10 +94,10 @@ public class OfertaEmpleoEspecificaciones {
             return criteriaBuilder.lessThanOrEqualTo(root.get("salarioMax"), salarioMax);
         };
     }
-    public static Specification<OfertaEmpleo> estatus(Integer estatus) {
+    public static Specification<OfertaEmpleo> estatus(Boolean estatus) {
         return (root, query, criteriaBuilder) -> {
 
-            if (estatus == null || estatus < 0 || estatus > 1) {
+            if (estatus == null) {
                 return criteriaBuilder.conjunction();
             }
 
