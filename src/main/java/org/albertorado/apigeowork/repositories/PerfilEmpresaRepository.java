@@ -16,7 +16,7 @@ public interface PerfilEmpresaRepository extends JpaRepository<PerfilEmpresa, In
 
     Optional<PerfilEmpresa> findPerfilEmpresaByEmailContainingIgnoreCase(@Param("email") String email);
 
-    @Query("SELECT d.email,d.idUsuario,d.password FROM PerfilEmpresa d WHERE d.email like lower(:mail) ")
+    @Query("SELECT d.email,d.idUsuario,d.password,d.foto FROM PerfilEmpresa d WHERE d.email like lower(:mail) ")
     Optional<PerfilEmpresa> buscarPorMail(@Param("mail") String mail);
 
 
