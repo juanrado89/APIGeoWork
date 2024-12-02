@@ -21,9 +21,9 @@ public class AutenticacionController {
     }
 
     @PostMapping("/login/usuario")
-    public ResponseEntity<?> autenticarUsuario(@RequestBody PerfilUsuario perfilUsuario) {
+    public ResponseEntity<?> autenticarUsuario(@RequestBody String mail, @RequestBody String password) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(perfilUsuario.getEmail(),perfilUsuario.getPassword(),true);
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail,password,true);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de usuario inválidas: " + e.getMessage());
@@ -31,9 +31,9 @@ public class AutenticacionController {
     }
 
     @PostMapping("/login/empresa")
-    public ResponseEntity<?> autenticarEmpresa(@RequestBody PerfilEmpresa perfilEmpresa) {
+    public ResponseEntity<?> autenticarEmpresa(@RequestBody String mail, @RequestBody String password) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(perfilEmpresa.getEmail(),perfilEmpresa.getPassword(), false);
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail,password, false);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de empresa inválidas: " + e.getMessage());
