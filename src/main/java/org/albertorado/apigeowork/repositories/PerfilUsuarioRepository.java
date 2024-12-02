@@ -13,7 +13,7 @@ public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Int
 
     Optional<PerfilUsuario> findByEmailContainsIgnoreCase(@Param("email") String email);
 
-    @Query("SELECT d.email,d.idPerfil,d.password FROM PerfilUsuario d WHERE d.email like lower(:email) ")
+    @Query("SELECT d.email,d.idPerfil,d.password,d.trabajador,d.foto FROM PerfilUsuario d WHERE d.email like lower(:email) ")
     Optional<PerfilUsuario> buscarPorMail(@Param("email") String email);
 
     int deleteByIdPerfil(@Param("id") int idPerfil);
