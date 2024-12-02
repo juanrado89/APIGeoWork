@@ -224,7 +224,7 @@ public class OfertaEmpleo {
     @OneToMany(mappedBy = "ofertaEmpleo", cascade = CascadeType.ALL)
     private List<HorarioEntrevista> horarios;
 
-    @ManyToMany()
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "trabajadores_oferta", joinColumns = @JoinColumn(name = "id_oferta"), inverseJoinColumns = @JoinColumn(name = "id_perfil"))
     private List<PerfilUsuario> trabajadores;
 
