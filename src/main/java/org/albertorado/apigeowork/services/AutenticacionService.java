@@ -19,6 +19,7 @@ import org.albertorado.apigeowork.repositories.PerfilUsuarioRepository;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 
@@ -87,12 +88,15 @@ public class AutenticacionService {
 
         String token = generarToken(idUsuario, rol);
         LocalDateTime fechaExpiracion = LocalDateTime.now().plusDays(7);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        LocalDateTime fechaFinal = LocalDateTime.parse(fechaExpiracion.toString(), formatter);
+
 
         if (autenticacionExistente.isPresent()) {
 
             Autenticacion autenticacion = autenticacionExistente.get();
             autenticacion.setRefreshToken(token);
-            autenticacion.setFechaExpiracion(fechaExpiracion);
+            autenticacion.setFechaExpiracion(fechaFinal);
             autenticacion.setRevocado(false);
             return autenticacionRepository.save(autenticacion);
         } else {
