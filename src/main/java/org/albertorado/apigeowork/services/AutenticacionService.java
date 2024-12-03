@@ -56,8 +56,8 @@ public class AutenticacionService {
 
         System.out.println(email);
         if (tipoPerfil) {
-            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findPerfilUsuariosByEmail(email);
-            if (perfilUsuario.isPresent() && hashedPassword.equals(perfilUsuario.get().getPassword())) {
+            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findPerfilUsuarioByEmail(email);
+            if (perfilUsuario.isPresent()) {
                 if(hashedPassword.equals(perfilUsuario.get().getPassword())){
                     return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
                 }else{
@@ -68,7 +68,7 @@ public class AutenticacionService {
             }
         } else {
             Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.findPerfilEmpresaByEmail(email);
-            if (perfilEmpresa != null && hashedPassword.equals(perfilEmpresa.get().getPassword())) {
+            if (perfilEmpresa.isPresent()) {
                 if(hashedPassword.equals(perfilEmpresa.get().getPassword())){
                     return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
                 }else{
