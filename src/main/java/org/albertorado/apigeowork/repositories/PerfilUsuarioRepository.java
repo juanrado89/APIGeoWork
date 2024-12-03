@@ -27,4 +27,6 @@ public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Int
     Optional<PerfilUsuario> findPerfilUsuariosByEmailContainsIgnoreCase(@Size(min = 20, max = 255) @Email @NotNull String email);
 
     Optional<PerfilUsuario> findPerfilUsuariosByEmailContains(@Param("email") String email);
+
+    Optional<PerfilUsuario> findPerfilUsuariosByEmail(@Size(min = 20, max = 255) @Email @NotNull String email);
 }

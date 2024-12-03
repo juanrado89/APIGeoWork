@@ -29,4 +29,6 @@ public interface PerfilEmpresaRepository extends JpaRepository<PerfilEmpresa, In
     int deletePerfilEmpresaByIdUsuario(@Param("id") int id);
 
     Optional<PerfilEmpresa> findPerfilEmpresaByEmailContains(@Size(min = 20, max = 255) @Email @NotNull String email);
+
+    Optional<PerfilEmpresa> findPerfilEmpresaByEmail(@Size(min = 20, max = 255) @Email @NotNull String email);
 }
