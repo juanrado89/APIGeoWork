@@ -24,7 +24,7 @@ public class AutenticacionController {
     @PostMapping("/login/usuario")
     public ResponseEntity<Autenticacion> autenticarUsuario(@RequestBody LoginDto loginDto) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(loginDto.getEmail(), loginDto.getPassword(), true);
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(loginDto.getMail(), loginDto.getPassword(), true);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -34,7 +34,7 @@ public class AutenticacionController {
     @PostMapping("/login/empresa")
     public ResponseEntity<Autenticacion> autenticarEmpresa(@RequestBody LoginDto loginDto) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(loginDto.getEmail(), loginDto.getPassword(), false);
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(loginDto.getMail(), loginDto.getPassword(), false);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
