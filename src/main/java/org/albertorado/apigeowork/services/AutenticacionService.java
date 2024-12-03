@@ -78,6 +78,7 @@ public class AutenticacionService {
                 System.out.println("No se encuentra el email");
             }
         }
+        throw new Exception("Credenciales incorrectas");
     }
 
     private Autenticacion generarTokenAutenticacion(int idUsuario, String tipoPerfil, String rol) {
