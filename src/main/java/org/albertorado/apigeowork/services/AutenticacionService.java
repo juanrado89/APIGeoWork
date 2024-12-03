@@ -54,6 +54,7 @@ public class AutenticacionService {
     public Autenticacion autenticacionUsuario(String email, String password, boolean tipoPerfil) throws Exception {
         String hashedPassword = MD5Util.hash(password);
 
+        System.out.println(email);
         if (tipoPerfil) {
             Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findPerfilUsuariosByEmail(email);
             if (perfilUsuario.isPresent() && hashedPassword.equals(perfilUsuario.get().getPassword())) {
