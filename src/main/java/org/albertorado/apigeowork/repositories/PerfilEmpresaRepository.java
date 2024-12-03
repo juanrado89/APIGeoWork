@@ -19,6 +19,9 @@ public interface PerfilEmpresaRepository extends JpaRepository<PerfilEmpresa, In
     @Query("SELECT d.email,d.idUsuario,d.password,d.foto,d.empresa FROM PerfilEmpresa d WHERE d.email like lower(:mail) ")
     Optional<PerfilEmpresa> buscarPorMail(@Param("mail") String mail);
 
+    @Query("SELECT d.email,d.idUsuario,d.password FROM PerfilEmpresa d WHERE d.email like lower(:mail) ")
+    Optional<PerfilEmpresa> buscarPorMailAutenticacion(@Param("mail") String mail);
+
 
     int deletePerfilEmpresaByIdUsuario(@Param("id") int id);
 }

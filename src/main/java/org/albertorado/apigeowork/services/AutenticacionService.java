@@ -55,12 +55,12 @@ public class AutenticacionService {
         String hashedPassword = MD5Util.hash(password);
 
         if (tipoPerfil) {
-            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.buscarPorMail(email);
+            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.buscarPorMailAutenticacion(email);
             if (perfilUsuario.isPresent() && hashedPassword.equals(perfilUsuario.get().getPassword())) {
                 return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
             }
         } else {
-            Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.buscarPorMail(email);
+            Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.buscarPorMailAutenticacion(email);
             if (perfilEmpresa.isPresent() && hashedPassword.equals(perfilEmpresa.get().getPassword())) {
                 return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
             }
