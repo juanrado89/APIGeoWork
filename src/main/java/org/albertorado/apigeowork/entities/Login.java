@@ -1,10 +1,15 @@
-package org.albertorado.apigeowork.dtos;
+package org.albertorado.apigeowork.entities;
 
-public class LoginDto {
+public class Login {
     private String mail;
     private String password;
 
-    public LoginDto() {
+    public Login(String mail, String password) {
+        this.mail = mail;
+        this.password = password;
+    }
+
+    public Login() {
     }
 
 
@@ -24,3 +29,4 @@ public class LoginDto {
         this.password = password;
     }
 }
+

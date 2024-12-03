@@ -2,6 +2,7 @@ package org.albertorado.apigeowork.controllers;
 
 import org.albertorado.apigeowork.dtos.LoginDto;
 import org.albertorado.apigeowork.entities.Autenticacion;
+import org.albertorado.apigeowork.entities.Login;
 import org.albertorado.apigeowork.entities.PerfilEmpresa;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,6 @@ import org.albertorado.apigeowork.services.AutenticacionService;
 
 
 @RestController
-@RequestMapping("/autenticacion")
 public class AutenticacionController {
 
     private final AutenticacionService autenticacionService;
@@ -21,20 +21,24 @@ public class AutenticacionController {
 
     }
 
-    @PostMapping("/login/usuario/{mail}")
-    public ResponseEntity<Autenticacion> autenticarUsuario(@PathVariable String mail, @RequestBody String password) {
+    @PostMapping("/login/usuario")
+    public ResponseEntity<Autenticacion> autenticarUsuario(@RequestBody Login login) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail, password, true);
+            System.out.println(login.getMail());
+            System.out.println(login.getPassword());
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(login.getMail(), login.getPassword(), true);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
-    @PostMapping("/login/empresa/{mail}")
-    public ResponseEntity<Autenticacion> autenticarEmpresa(@PathVariable String mail, @RequestBody String password) {
+    @PostMapping("/login/empresa")
+    public ResponseEntity<Autenticacion> autenticarEmpresa(@RequestBody Login login) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail, password, false);
+            System.out.println(login.getMail());
+            System.out.println(login.getPassword());
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(login.getMail(), login.getPassword(), false);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
