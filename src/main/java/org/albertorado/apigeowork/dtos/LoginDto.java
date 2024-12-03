@@ -1,18 +1,18 @@
 package org.albertorado.apigeowork.dtos;
 
 public class LoginDto {
-    private String email;
+    private String mail;
     private String password;
 
     public LoginDto() {
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String email) {
+        this.mail = mail;
     }
 
     public String getPassword() {
