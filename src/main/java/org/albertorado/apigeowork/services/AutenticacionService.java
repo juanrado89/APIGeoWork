@@ -55,7 +55,7 @@ public class AutenticacionService {
         String hashedPassword = MD5Util.hash(password);
 
         if (tipoPerfil) {
-            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findPerfilUsuariosByEmailContainsIgnoreCase(email);
+            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findPerfilUsuariosByEmailContains(email);
             if (perfilUsuario.isPresent() && hashedPassword.equals(perfilUsuario.get().getPassword())) {
                 if(hashedPassword.equals(perfilUsuario.get().getPassword())){
                     return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
@@ -66,7 +66,7 @@ public class AutenticacionService {
                 System.out.println("No se encuentra el email");
             }
         } else {
-            Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.findPerfilEmpresaByEmailContainingIgnoreCase(email);
+            Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.findPerfilEmpresaByEmailContains(email);
             if (perfilEmpresa != null && hashedPassword.equals(perfilEmpresa.get().getPassword())) {
                 if(hashedPassword.equals(perfilEmpresa.get().getPassword())){
                     return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
