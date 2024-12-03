@@ -21,20 +21,20 @@ public class AutenticacionController {
 
     }
 
-    @PostMapping("/login/usuario")
-    public ResponseEntity<Autenticacion> autenticarUsuario(@RequestBody LoginDto loginDto) {
+    @PostMapping("/login/usuario/{mail}")
+    public ResponseEntity<Autenticacion> autenticarUsuario(@PathVariable String mail, @RequestBody String password) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(loginDto.getMail(), loginDto.getPassword(), true);
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail, password, true);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
-    @PostMapping("/login/empresa")
-    public ResponseEntity<Autenticacion> autenticarEmpresa(@RequestBody LoginDto loginDto) {
+    @PostMapping("/login/empresa/{mail}")
+    public ResponseEntity<Autenticacion> autenticarEmpresa(@PathVariable String mail, @RequestBody String password) {
         try {
-            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(loginDto.getMail(), loginDto.getPassword(), false);
+            Autenticacion autenticacion = autenticacionService.autenticacionUsuario(mail, password, false);
             return ResponseEntity.ok(autenticacion);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
