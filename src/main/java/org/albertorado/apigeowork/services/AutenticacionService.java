@@ -60,10 +60,10 @@ public class AutenticacionService {
                 if(hashedPassword.equals(perfilUsuario.get().getPassword())){
                     return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
                 }else{
-                    throw new Exception("password incorrecta");
+                    System.out.println("password incorrecta");
                 }
             }else{
-                throw new Exception("No se encuentra el email");
+                System.out.println("No se encuentra el email");
             }
         } else {
             Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.buscarPorMailAutenticacion(email);
@@ -71,11 +71,11 @@ public class AutenticacionService {
                 if(hashedPassword.equals(perfilEmpresa.get().getPassword())){
                     return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
                 }else{
-                    throw new Exception("password incorrecta");
+                    System.out.println("password incorrecta");
                 }
 
             }else{
-                throw new Exception("No se encuentra el email");
+                System.out.println("No se encuentra el email");
             }
         }
     }
