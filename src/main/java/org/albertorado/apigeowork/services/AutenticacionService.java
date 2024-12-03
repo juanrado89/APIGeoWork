@@ -57,15 +57,27 @@ public class AutenticacionService {
         if (tipoPerfil) {
             Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.buscarPorMailAutenticacion(email);
             if (perfilUsuario.isPresent() && hashedPassword.equals(perfilUsuario.get().getPassword())) {
-                return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
+                if(hashedPassword.equals(perfilUsuario.get().getPassword())){
+                    return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
+                }else{
+                    throw new Exception("password incorrecta");
+                }
+            }else{
+                throw new Exception("No se encuentra el email");
             }
         } else {
             Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.buscarPorMailAutenticacion(email);
             if (perfilEmpresa.isPresent() && hashedPassword.equals(perfilEmpresa.get().getPassword())) {
-                return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
+                if(hashedPassword.equals(perfilEmpresa.get().getPassword())){
+                    return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
+                }else{
+                    throw new Exception("password incorrecta");
+                }
+
+            }else{
+                throw new Exception("No se encuentra el email");
             }
         }
-        throw new Exception("Credenciales incorrectas");
     }
 
     private Autenticacion generarTokenAutenticacion(int idUsuario, String tipoPerfil, String rol) {
