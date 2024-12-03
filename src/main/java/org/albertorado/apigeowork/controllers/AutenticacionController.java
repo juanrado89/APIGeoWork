@@ -12,6 +12,7 @@ import org.albertorado.apigeowork.services.AutenticacionService;
 
 
 @RestController
+@RequestMapping("/autenticacion")
 public class AutenticacionController {
 
     private final AutenticacionService autenticacionService;
