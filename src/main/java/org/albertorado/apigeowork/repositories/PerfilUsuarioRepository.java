@@ -1,5 +1,8 @@
 package org.albertorado.apigeowork.repositories;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +24,5 @@ public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Int
 
     int deleteByIdPerfil(@Param("id") int idPerfil);
 
+    Optional<PerfilUsuario> findPerfilUsuariosByEmailContainsIgnoreCase(@Size(min = 20, max = 255) @Email @NotNull String email);
 }

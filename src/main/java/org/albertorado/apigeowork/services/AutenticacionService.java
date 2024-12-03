@@ -55,7 +55,7 @@ public class AutenticacionService {
         String hashedPassword = MD5Util.hash(password);
 
         if (tipoPerfil) {
-            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findByEmailContainsIgnoreCase(email);
+            Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findPerfilUsuariosByEmailContainsIgnoreCase(email);
             if (perfilUsuario.isPresent() && hashedPassword.equals(perfilUsuario.get().getPassword())) {
                 if(hashedPassword.equals(perfilUsuario.get().getPassword())){
                     return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
