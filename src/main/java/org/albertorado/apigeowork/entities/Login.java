@@ -1,7 +1,13 @@
 package org.albertorado.apigeowork.entities;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
+
 public class Login {
+    @Size(min = 5, max = 255)
+    @Email
     private String mail;
+    @Size(min = 15, max = 50)
     private String password;
     private int id;
     public Login(int id,String mail, String password) {

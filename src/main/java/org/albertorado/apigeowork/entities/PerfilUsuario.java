@@ -92,7 +92,7 @@ public class PerfilUsuario {
     private Trabajador trabajador;
 
     @Basic
-    @Size(min = 20, max = 255)
+    @Size(min = 5, max = 255)
     @Email
     @NotNull
     @Column(name = "email",unique = true,length = 255,nullable = false)
