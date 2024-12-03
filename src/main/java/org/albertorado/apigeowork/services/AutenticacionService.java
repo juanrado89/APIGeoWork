@@ -88,7 +88,7 @@ public class AutenticacionService {
 
         String token = generarToken(idUsuario, rol);
         LocalDateTime fechaExpiracion = LocalDateTime.now().plusDays(7);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.nnnnnnnnn");
         LocalDateTime fechaFinal = LocalDateTime.parse(fechaExpiracion.toString(), formatter);
 
 
