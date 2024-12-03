@@ -3,8 +3,9 @@ package org.albertorado.apigeowork.entities;
 public class Login {
     private String mail;
     private String password;
-
-    public Login(String mail, String password) {
+    private int id;
+    public Login(int id,String mail, String password) {
+        this.id = id;
         this.mail = mail;
         this.password = password;
     }
@@ -12,6 +13,13 @@ public class Login {
     public Login() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMail() {
         return mail;
