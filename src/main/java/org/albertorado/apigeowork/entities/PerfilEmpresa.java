@@ -94,7 +94,7 @@ public class PerfilEmpresa {
     @PrePersist
     @PreUpdate
     private void encriptarPassword() {
-        if (this.password != null) {
+        if (this.password != null && !this.password.startsWith("$2a$")) {
             PasswordEncoder passwordEncoder = PasswordEncoderProvider.getPasswordEncoder();
             this.password = passwordEncoder.encode(this.password);
         }
