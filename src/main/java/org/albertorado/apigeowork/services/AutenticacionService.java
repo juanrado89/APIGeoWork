@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.services;
 
 import jakarta.transaction.Transactional;
+import org.albertorado.apigeowork.configuracion.MD5Util;
 import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.entities.Autenticacion;
 import io.jsonwebtoken.Claims;
@@ -51,15 +52,16 @@ public class AutenticacionService {
 
     @Transactional
     public Autenticacion autenticacionUsuario(String email, String password, boolean tipoPerfil) throws Exception {
-        PasswordEncoder passwordEncoder = PasswordEncoderProvider.getPasswordEncoder();
+        String hashedPassword = MD5Util.hash(password);
+
         if (tipoPerfil) {
             Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.buscarPorMail(email);
-            if (perfilUsuario.isPresent() && passwordEncoder.matches(password, perfilUsuario.get().getPassword())) {
+            if (perfilUsuario.isPresent() && hashedPassword.equals(perfilUsuario.get().getPassword())) {
                 return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
             }
         } else {
             Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.buscarPorMail(email);
-            if (perfilEmpresa.isPresent() && passwordEncoder.matches(password, perfilEmpresa.get().getPassword())) {
+            if (perfilEmpresa.isPresent() && hashedPassword.equals(perfilEmpresa.get().getPassword())) {
                 return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
             }
         }

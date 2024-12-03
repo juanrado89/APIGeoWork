@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.albertorado.apigeowork.configuracion.MD5Util;
 import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -94,9 +95,8 @@ public class PerfilEmpresa {
     @PrePersist
     @PreUpdate
     private void encriptarPassword() {
-        if (this.password != null && !this.password.startsWith("$2a$")) {
-            PasswordEncoder passwordEncoder = PasswordEncoderProvider.getPasswordEncoder();
-            this.password = passwordEncoder.encode(this.password);
+        if (this.password != null) {
+            this.password = MD5Util.hash(this.password);
         }
     }
 
