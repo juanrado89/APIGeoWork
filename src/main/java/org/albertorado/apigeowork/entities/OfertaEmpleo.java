@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ public class OfertaEmpleo {
 
     public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector,
                         String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion,
-                        Timestamp fechaPublicacion, Boolean estado,
+                        Date fechaPublicacion, Boolean estado,
                         List<PerfilUsuario> trabajadores, List<HorarioEntrevista> horarios) {
         this.idOferta = idOferta;
         this.empresa = empresa;
@@ -129,11 +129,11 @@ public class OfertaEmpleo {
         this.direccion = direccion;
     }
 
-    public @NotNull Timestamp getFechaPublicacion() {
+    public @NotNull Date getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(@NotNull Timestamp fechaPublicacion) {
+    public void setFechaPublicacion(@NotNull Date fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
@@ -214,7 +214,7 @@ public class OfertaEmpleo {
     @NotNull
     @Basic
     @Column(name = "fecha_publicacion",nullable = false)
-    private Timestamp fechaPublicacion;
+    private Date fechaPublicacion;
 
     @Basic
     @NotNull
