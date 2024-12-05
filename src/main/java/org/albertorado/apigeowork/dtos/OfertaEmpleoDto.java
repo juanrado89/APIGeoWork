@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.dtos;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class OfertaEmpleoDto {
     private float salarioMin;
     private float salarioMax;
     private DireccionDto direccion;
-    private Timestamp fechaPublicacion;
+    private Date fechaPublicacion;
     private boolean estado;
     private List<PerfilUsuarioDto> trabajadores;
     private List<HorarioEntrevistaDto> horarios;
@@ -109,11 +110,11 @@ public class OfertaEmpleoDto {
         this.direccion = direccion;
     }
 
-    public Timestamp getFechaPublicacion() {
+    public Date getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Timestamp fechaPublicacion) {
+    public void setFechaPublicacion(Date fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
