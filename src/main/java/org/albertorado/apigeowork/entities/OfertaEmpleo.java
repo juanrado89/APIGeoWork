@@ -135,7 +135,7 @@ public class OfertaEmpleo {
 
     public String getFechaPublicacion() {
         if (this.fechaPublicacion != null) {
-            return this.fechaPublicacion.format(DateTimeFormatter.ISO_DATE_TIME);
+            return this.fechaPublicacion.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
         return null;
     }
@@ -146,7 +146,7 @@ public class OfertaEmpleo {
 
     public void setFechaPublicacion(@NotNull String fechaPublicacion) {
         try {
-            this.fechaPublicacion = LocalDate.parse(fechaPublicacion, FORMATTER);
+            this.fechaPublicacion = LocalDate.parse(fechaPublicacion, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera ISO 8601.");
         }
