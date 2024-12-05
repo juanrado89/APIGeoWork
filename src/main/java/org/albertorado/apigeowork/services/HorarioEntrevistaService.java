@@ -93,7 +93,9 @@ public class HorarioEntrevistaService {
                 HorarioEntrevistaEspecificaciones.tieneIdOferta(parametros.getOfertaEmpleo().getIdOferta())
                 .and(HorarioEntrevistaEspecificaciones.tieneDia(parametros.getDia())
                         .and(HorarioEntrevistaEspecificaciones.tieneHora(parametros.getHora()))
-                        .and(HorarioEntrevistaEspecificaciones.tieneDisponibilidad())));
+                        .and(HorarioEntrevistaEspecificaciones.tieneDisponibilidad()))
+                        .and(HorarioEntrevistaEspecificaciones.ordenarPorDiaAscendente())
+                        .and(HorarioEntrevistaEspecificaciones.ordenarPorHoraAscendente()));
         List<HorarioEntrevista> resultado = horarioEntrevistaRepository.findAll(especificaciones);
         return horarioEntrevistaMapper.toDto(resultado);
     }

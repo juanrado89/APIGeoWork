@@ -1,5 +1,9 @@
 package org.albertorado.apigeowork.especificaciones;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.Sector;
 import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
@@ -119,4 +123,5 @@ public class OfertaEmpleoEspecificaciones {
             return criteriaBuilder.conjunction();
         };
     }
+
 }

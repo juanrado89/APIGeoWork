@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-05T09:33:01+0100",
+    date = "2024-12-05T21:24:02+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
@@ -48,8 +48,8 @@ public class HorarioEntrevistaMapperImpl implements HorarioEntrevistaMapper {
         HorarioEntrevista horarioEntrevista = new HorarioEntrevista();
 
         horarioEntrevista.setIdHorario( horarioEntrevistaDto.getIdHorario() );
-        horarioEntrevista.setDia( horarioEntrevistaDto.getDia() );
         horarioEntrevista.setHora( horarioEntrevistaDto.getHora() );
+        horarioEntrevista.setDia( horarioEntrevistaDto.getDia() );
         horarioEntrevista.setCandidatosDisponibles( horarioEntrevistaDto.getCandidatosDisponibles() );
         horarioEntrevista.setCandidatosAsignados( horarioEntrevistaDto.getCandidatosAsignados() );
         horarioEntrevista.setTrabajadores( trabajadorDtoListToTrabajadorList( horarioEntrevistaDto.getTrabajadores() ) );

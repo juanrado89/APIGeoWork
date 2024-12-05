@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,20 +43,44 @@ public class HorarioEntrevista {
         this.ofertaEmpleo = ofertaEmpleo;
     }
 
-    public LocalDate getDia() {
-        return dia;
+    public String getHora() {
+        if (this.hora != null) {
+            return this.hora.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        }
+        return null;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
+    public void setHora(String hora) {
+        try {
+            this.hora = LocalTime.parse(hora, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("El formato de la hora no es válido. Se espera 'HH:mm:ss'.", e);
+        }
+    }
+
+    // Métodos existentes para 'dia'
+
+    public String getDia() {
+        if (this.dia != null) {
+            return this.dia.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        return null;
     }
 
     public void setDia(LocalDate dia) {
         this.dia = dia;
     }
 
-    public LocalTime getHora() {
-        return hora;
-    }
-
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
+    public void setDia(String dia) {
+        try {
+            this.dia = LocalDate.parse(dia, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera 'yyyy-MM-dd'.", e);
+        }
     }
 
     @NotNull
