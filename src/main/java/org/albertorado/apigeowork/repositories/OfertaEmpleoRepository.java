@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface OfertaEmpleoRepository extends JpaRepository<OfertaEmpleo,Integer>, JpaSpecificationExecutor<OfertaEmpleo> {
     Optional<OfertaEmpleo> findByIdOferta(@Param("id") int idOferta);
 
-    List<OfertaEmpleo> findAllByEmpresa_IdEmpresa(@Param("id") int idEmpresa);
+    List<OfertaEmpleo> findAllByEmpresa_IdEmpresOrderByFechaPublicacionDesc(@Param("id") int idEmpresa);
 }
