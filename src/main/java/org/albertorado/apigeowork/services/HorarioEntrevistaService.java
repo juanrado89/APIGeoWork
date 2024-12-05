@@ -34,7 +34,7 @@ public class HorarioEntrevistaService {
     }
 
     public List<HorarioEntrevistaDto> buscarPorIdOferta(int id) {
-        List<HorarioEntrevista> horarios = horarioEntrevistaRepository.findAllByOfertaEmpleo_IdOfertOrderByOfertaEmpleoDiaAsc(id);
+        List<HorarioEntrevista> horarios = horarioEntrevistaRepository.findAllByOfertaEmpleo_IdOfertaOrderByDiaAsc(id);
         return horarioEntrevistaMapper.toDto(horarios);
     }
 

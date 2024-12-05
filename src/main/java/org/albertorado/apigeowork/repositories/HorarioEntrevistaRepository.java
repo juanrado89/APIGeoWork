@@ -12,7 +12,7 @@ public interface HorarioEntrevistaRepository extends JpaRepository<HorarioEntrev
 
     Optional<HorarioEntrevista> findByIdHorario(@Param("id") int idHorario);
 
-    List<HorarioEntrevista> findAllByOfertaEmpleo_IdOfertOrderByOfertaEmpleoDiaAsc(@Param("idOferta") int idOferta);
+    List<HorarioEntrevista> findAllByOfertaEmpleo_IdOfertaOrderByDiaAsc(@Param("idOferta") int idOferta);
 
 
 }
