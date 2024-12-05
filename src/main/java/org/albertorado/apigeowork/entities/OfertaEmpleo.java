@@ -5,16 +5,20 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class OfertaEmpleo {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
 
     public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector,
                         String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion,
-                        Date fechaPublicacion, Boolean estado,
+                        LocalDate fechaPublicacion, Boolean estado,
                         List<PerfilUsuario> trabajadores, List<HorarioEntrevista> horarios) {
         this.idOferta = idOferta;
         this.empresa = empresa;
@@ -129,13 +133,25 @@ public class OfertaEmpleo {
         this.direccion = direccion;
     }
 
-    public @NotNull Date getFechaPublicacion() {
-        return fechaPublicacion;
+    public String getFechaPublicacion() {
+        if (this.fechaPublicacion != null) {
+            return this.fechaPublicacion.format(DateTimeFormatter.ISO_DATE_TIME);
+        }
+        return null;
     }
 
-    public void setFechaPublicacion(@NotNull Date fechaPublicacion) {
+    public void setFechaPublicacion(@NotNull LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
+
+    public void setFechaPublicacion(@NotNull String fechaPublicacion) {
+        try {
+            this.fechaPublicacion = LocalDate.parse(fechaPublicacion, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera ISO 8601.");
+        }
+    }
+
 
     @NotNull
     public Boolean getEstado() {
@@ -214,7 +230,7 @@ public class OfertaEmpleo {
     @NotNull
     @Basic
     @Column(name = "fecha_publicacion",nullable = false)
-    private Date fechaPublicacion;
+    private LocalDate fechaPublicacion;
 
     @Basic
     @NotNull

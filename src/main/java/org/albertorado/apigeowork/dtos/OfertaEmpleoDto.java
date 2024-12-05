@@ -1,10 +1,13 @@
 package org.albertorado.apigeowork.dtos;
 
-import java.util.Date;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class OfertaEmpleoDto {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
 
     private int idOferta;
     private EmpresaDto empresa;
@@ -17,7 +20,7 @@ public class OfertaEmpleoDto {
     private float salarioMin;
     private float salarioMax;
     private DireccionDto direccion;
-    private Date fechaPublicacion;
+    private LocalDate fechaPublicacion;
     private boolean estado;
     private List<PerfilUsuarioDto> trabajadores;
     private List<HorarioEntrevistaDto> horarios;
@@ -110,11 +113,14 @@ public class OfertaEmpleoDto {
         this.direccion = direccion;
     }
 
-    public Date getFechaPublicacion() {
-        return fechaPublicacion;
+    public String getFechaPublicacion() {
+        if (this.fechaPublicacion != null) {
+            return this.fechaPublicacion.format(DateTimeFormatter.ISO_DATE_TIME);
+        }
+        return null;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
@@ -144,5 +150,13 @@ public class OfertaEmpleoDto {
 
     public void setHorarios(List<HorarioEntrevistaDto> horarios) {
         this.horarios = horarios;
+    }
+
+    public void setFechaPublicacion(String fechaPublicacion) {
+        try {
+            this.fechaPublicacion = LocalDate.parse(fechaPublicacion, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera ISO 8601.");
+        }
     }
 }
