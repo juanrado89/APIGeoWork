@@ -60,6 +60,15 @@ public class AutenticacionController {
         autenticacionService.revocarToken(autorizacion);
         return ResponseEntity.ok().build();
     }
+    @ControllerAdvice
+    public class GlobalExceptionHandler {
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", ex.getMessage()));
+        }
+    }
 
 }
 
