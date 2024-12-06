@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.DireccionDto;
 import org.albertorado.apigeowork.entities.Direccion;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,7 @@ public class DireccionController {
         }
     }
 
+    @Transactional
     @PostMapping("/actualizardireccion/{id}")
     public ResponseEntity<DireccionDto> actualizarDireccion(@RequestHeader("authorization") String autorizacion,
                                                             @PathVariable int id, @RequestBody Direccion direccion){

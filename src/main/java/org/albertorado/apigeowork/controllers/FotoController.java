@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.FotoDto;
 import org.albertorado.apigeowork.entities.Foto;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class FotoController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @Transactional
     @PostMapping("/actualizarfoto/{id}")
     public ResponseEntity<FotoDto> actualizarFoto(@RequestHeader("authorization") String autorizacion,
                                                   @PathVariable int id,@RequestBody Foto foto){

@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.TrabajadorDto;
 import org.albertorado.apigeowork.entities.Trabajador;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class TrabajadorController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @Transactional
     @PostMapping("/actualizartrabajador/{id}")
     public ResponseEntity<TrabajadorDto> actualizarTrabajador(@RequestHeader("authorization") String autorizacion,
                                                               @PathVariable int id,

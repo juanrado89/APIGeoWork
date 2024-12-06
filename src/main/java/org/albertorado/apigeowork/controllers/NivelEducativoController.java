@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.NivelEducativoDto;
 import org.albertorado.apigeowork.entities.NivelEducativo;
 import org.springframework.http.HttpStatus;
@@ -72,7 +73,7 @@ public class NivelEducativoController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @Transactional
     @PostMapping("/actualizarniveleducativo/{id}")
     public ResponseEntity<NivelEducativoDto> actualizarHorario(@RequestHeader("authorization") String autorizacion,
                                                                @PathVariable int id,

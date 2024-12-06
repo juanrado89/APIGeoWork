@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.PerfilEmpresaDto;
 import org.albertorado.apigeowork.dtos.PerfilEmpresaPDto;
 import org.albertorado.apigeowork.entities.PerfilEmpresa;
@@ -66,7 +67,7 @@ public class PerfilEmpresaController {
         }
 
     }
-
+    @Transactional
     @PostMapping("/actualizarperfile/{id}")
     public ResponseEntity<PerfilEmpresaDto> actualizarPerfilE(@RequestHeader("authorization") String autorizacion,
                                                               @PathVariable int id,
@@ -84,7 +85,7 @@ public class PerfilEmpresaController {
         }
 
     }
-
+    @Transactional
     @PostMapping("/cc/{id}")
     public ResponseEntity<Void> actualizarContrasena(@PathVariable int id,
                                                               @RequestBody String contrasena) {

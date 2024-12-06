@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.ExperienciaDto;
 import org.albertorado.apigeowork.entities.Experiencia;
 import org.springframework.http.HttpStatus;
@@ -73,6 +74,7 @@ public class ExperienciaController {
         }
     }
 
+    @Transactional
     @PostMapping("/actualizarexperiencia/{id}")
     public ResponseEntity<ExperienciaDto> actualizarExperiencia(@RequestHeader("authorization") String autorizacion,
                                                                 @PathVariable int id,@RequestBody Experiencia experiencia){

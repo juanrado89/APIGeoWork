@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
 import org.albertorado.apigeowork.entities.OfertaEmpleo;
 import org.springframework.http.HttpStatus;
@@ -88,7 +89,7 @@ public class OfertaEmpleoController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @Transactional
     @PostMapping("/actualizarOferta/{id}")
     public ResponseEntity<OfertaEmpleoDto> actualizarOferta(@RequestHeader("authorization") String autorizacion,
                                                             @PathVariable int id,

@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioDto;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
@@ -83,7 +84,7 @@ public class PerfilUsuarioController {
         }
 
     }
-
+    @Transactional
     @PostMapping("/actualizarperfilu/{id}")
     public ResponseEntity<PerfilUsuarioDto> actualizarPerfilU(@RequestHeader("authorization") String autorizacion,
                                                               @PathVariable int id,
@@ -101,7 +102,7 @@ public class PerfilUsuarioController {
         }
 
     }
-
+    @Transactional
     @PostMapping("/cc/{id}")
     public ResponseEntity<Void> cambiarContrasena(@PathVariable int id,
                                                   @RequestBody String contrasena) {

@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.DatosEmpresaDto;
 import org.albertorado.apigeowork.entities.DatosEmpresa;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,7 @@ public class DatosEmpresaController {
         return resultado != null ? ResponseEntity.ok(resultado) : ResponseEntity.notFound().build();
     }
 
+    @Transactional
     @PostMapping("actualizardatosempresa/{id}")
     public ResponseEntity<DatosEmpresaDto> actualizarDatosEmpresa(@RequestHeader("Authorization") String autorizacion,
                                                                   @PathVariable int id,

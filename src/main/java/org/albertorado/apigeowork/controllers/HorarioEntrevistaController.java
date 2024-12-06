@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.controllers;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.HorarioEntrevistaDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.springframework.http.HttpStatus;
@@ -107,6 +108,7 @@ public class HorarioEntrevistaController {
             return ResponseEntity.notFound().build();
         }
     }
+    @Transactional
     @PostMapping("/actualizarHorario/{id}")
     public ResponseEntity<HorarioEntrevistaDto> actualizarHorario(@RequestHeader("authorization") String autorizacion,
                                                                   @PathVariable int id,
