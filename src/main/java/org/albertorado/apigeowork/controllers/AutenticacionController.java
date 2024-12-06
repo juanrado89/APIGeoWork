@@ -43,7 +43,7 @@ public class AutenticacionController {
         }
     }
 
-    @PostMapping("/login/validartoken")
+    @GetMapping("/login/validartoken")
     public ResponseEntity<Void> validarToken(@RequestHeader("Authorization") String autorizacion) {
         if(autenticacionService.validarToken(autorizacion)){
             return ResponseEntity.ok().build();
