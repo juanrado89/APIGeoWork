@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.albertorado.apigeowork.services.AutenticacionService;
 import org.albertorado.apigeowork.services.HorarioEntrevistaService;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/horarios")
@@ -130,4 +132,14 @@ public class HorarioEntrevistaController {
         horarioEntrevistaService.borrarHorario(id);
         return ResponseEntity.noContent().build();
     }
+    @ControllerAdvice
+    public class GlobalExceptionHandler {
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", ex.getMessage()));
+        }
+    }
+
 }
