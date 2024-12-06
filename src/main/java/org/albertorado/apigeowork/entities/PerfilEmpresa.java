@@ -72,7 +72,6 @@ public class PerfilEmpresa {
 
     @Basic
     @Size(min = 12, max = 50)
-    @NotNull
     @Column(name = "password",nullable = false)
     private String password;
 

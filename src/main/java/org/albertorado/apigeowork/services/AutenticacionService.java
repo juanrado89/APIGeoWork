@@ -124,6 +124,8 @@ public class AutenticacionService {
                 } catch (SignatureException e) {
                     System.err.println("Firma del token inválida: " + e.getMessage());
                 }
+            }else{
+                System.err.println("el token ha expirado o esta revocado.");
             }
         }
         return false;
