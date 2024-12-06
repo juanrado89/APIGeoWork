@@ -55,7 +55,7 @@ public class AutenticacionController {
         }
     }
 
-    @PostMapping("/login/revocartoken")
+    @GetMapping("/login/revocartoken")
     public ResponseEntity<Void> revocarToken(@RequestHeader("Authorization") String autorizacion) {
         autenticacionService.revocarToken(autorizacion);
         return ResponseEntity.ok().build();
