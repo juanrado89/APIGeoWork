@@ -14,7 +14,6 @@ import java.util.Objects;
 
 @Entity
 public class OfertaEmpleo {
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
 
     public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector,
                         String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion,
@@ -135,7 +134,7 @@ public class OfertaEmpleo {
 
     public String getFechaPublicacion() {
         if (this.fechaPublicacion != null) {
-            return this.fechaPublicacion.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return this.fechaPublicacion.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
         return null;
     }
@@ -146,9 +145,9 @@ public class OfertaEmpleo {
 
     public void setFechaPublicacion(@NotNull String fechaPublicacion) {
         try {
-            this.fechaPublicacion = LocalDate.parse(fechaPublicacion, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            this.fechaPublicacion = LocalDate.parse(fechaPublicacion, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera ISO 8601.");
+            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera 'dd/MM/yyyy'.");
         }
     }
 
