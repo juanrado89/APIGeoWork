@@ -51,7 +51,7 @@ public class HorarioEntrevistaDto {
 
     public String getDia() {
         if (this.dia != null) {
-            return this.dia.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return this.dia.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
         return null;
     }
@@ -62,9 +62,9 @@ public class HorarioEntrevistaDto {
 
     public void setDia(String dia) {
         try {
-            this.dia = LocalDate.parse(dia, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            this.dia = LocalDate.parse(dia, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera 'yyyy-MM-dd'.", e);
+            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera 'dd/MM/yyyy'.", e);
         }
     }
 
