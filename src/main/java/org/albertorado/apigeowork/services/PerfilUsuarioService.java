@@ -55,7 +55,7 @@ public class PerfilUsuarioService {
         if (busqueda.isPresent()) {
             PerfilUsuario perfilExistente = busqueda.get();
             if (perfilUsuario.getPassword() != null && !perfilUsuario.getPassword().isEmpty()) {
-                perfilExistente.setPassword(PasswordEncoderProvider.getPasswordEncoder().encode(perfilUsuario.getPassword()));
+                perfilExistente.setPassword(perfilUsuario.getPassword());
             }
             if (perfilUsuario.getEmail() != null) {
                 perfilExistente.setEmail(perfilUsuario.getEmail());

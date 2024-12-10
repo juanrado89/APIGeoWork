@@ -52,7 +52,7 @@ public class PerfilEmpresaService {
         if (busqueda.isPresent()) {
             PerfilEmpresa perfilExistente = busqueda.get();
             if (perfilEmpresa.getPassword() != null && !perfilEmpresa.getPassword().isEmpty()) {
-                perfilExistente.setPassword(PasswordEncoderProvider.getPasswordEncoder().encode(perfilEmpresa.getPassword()));
+                perfilExistente.setPassword(perfilEmpresa.getPassword());
             }
             if (perfilEmpresa.getEmail() != null) {
                 perfilExistente.setEmail(perfilEmpresa.getEmail());
