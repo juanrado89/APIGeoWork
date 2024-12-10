@@ -120,7 +120,7 @@ public class Direccion {
 
     @NotNull
     @ManyToOne()
-    @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad", nullable = false, updatable = false)
+    @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad", nullable = false)
     private Ciudad ciudad;
 
     @NotNull
