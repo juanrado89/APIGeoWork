@@ -1,10 +1,13 @@
 package org.albertorado.apigeowork.services;
 
+import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.dtos.PerfilEmpresaDto;
 import org.albertorado.apigeowork.dtos.PerfilEmpresaPDto;
+import org.albertorado.apigeowork.entities.Foto;
 import org.albertorado.apigeowork.entities.PerfilEmpresa;
 import org.albertorado.apigeowork.mapper.PerfilEmpresaMapper;
 import org.albertorado.apigeowork.mapper.PerfilEmpresaPMapper;
+import org.albertorado.apigeowork.repositories.FotoRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,12 +22,14 @@ public class PerfilEmpresaService {
     private final PerfilEmpresaRepository perfilEmpresaRepository;
     private final PerfilEmpresaMapper perfilEmpresaMapper;
     private final PerfilEmpresaPMapper perfilEmpresaPMapper;
+    private final FotoRepository fotoRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public PerfilEmpresaService(PerfilEmpresaRepository perfilEmpresaRepository, PerfilEmpresaMapper perfilEmpresaMapper, PerfilEmpresaPMapper perfilEmpresaPMapper, PasswordEncoder passwordEncoder) {
+    public PerfilEmpresaService(PerfilEmpresaRepository perfilEmpresaRepository, PerfilEmpresaMapper perfilEmpresaMapper, PerfilEmpresaPMapper perfilEmpresaPMapper, FotoRepository fotoRepository, PasswordEncoder passwordEncoder) {
         this.perfilEmpresaRepository = perfilEmpresaRepository;
         this.perfilEmpresaMapper = perfilEmpresaMapper;
         this.perfilEmpresaPMapper = perfilEmpresaPMapper;
+        this.fotoRepository = fotoRepository;
         this.passwordEncoder = passwordEncoder;
     }
     @Transactional(readOnly = true)
@@ -47,8 +52,7 @@ public class PerfilEmpresaService {
         if (busqueda.isPresent()) {
             PerfilEmpresa perfilExistente = busqueda.get();
             if (perfilEmpresa.getPassword() != null && !perfilEmpresa.getPassword().isEmpty()) {
-                PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                perfilExistente.setPassword(passwordEncoder.encode(perfilEmpresa.getPassword()));
+                perfilExistente.setPassword(PasswordEncoderProvider.getPasswordEncoder().encode(perfilEmpresa.getPassword()));
             }
             if (perfilEmpresa.getEmail() != null) {
                 perfilExistente.setEmail(perfilEmpresa.getEmail());
@@ -56,8 +60,9 @@ public class PerfilEmpresaService {
             if (perfilEmpresa.getEmpresa() != null) {
                 perfilExistente.setEmpresa(perfilEmpresa.getEmpresa());
             }
-            if (perfilEmpresa.getFoto() != null) {
-                perfilExistente.setFoto(perfilEmpresa.getFoto());
+            if (perfilEmpresa.getFoto() != null && perfilEmpresa.getFoto().getIdFoto() == null) {
+                Foto foto = fotoRepository.save(perfilEmpresa.getFoto());
+                perfilExistente.setFoto(foto);
             }
             PerfilEmpresa actualizado = perfilEmpresaRepository.save(perfilExistente);
             return perfilEmpresaMapper.toDto(actualizado);

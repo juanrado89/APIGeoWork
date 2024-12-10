@@ -86,7 +86,7 @@ public class PerfilEmpresa {
     @Column(name = "email",unique = true,length = 255,nullable = false)
     private String email;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "id_foto", referencedColumnName = "id_foto")
     private Foto foto;
 
@@ -95,7 +95,7 @@ public class PerfilEmpresa {
     @PreUpdate
     private void encriptarPassword() {
         if (this.password != null) {
-            this.password = MD5Util.hash(this.password);
+            this.password = PasswordEncoderProvider.getPasswordEncoder().encode(this.password);
         }
     }
 

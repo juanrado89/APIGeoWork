@@ -1,10 +1,13 @@
 package org.albertorado.apigeowork.services;
 
+import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioDto;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
+import org.albertorado.apigeowork.entities.Foto;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.albertorado.apigeowork.mapper.PerfilUsuarioMapper;
 import org.albertorado.apigeowork.mapper.PerfilUsuarioPMapper;
+import org.albertorado.apigeowork.repositories.FotoRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,11 +23,15 @@ public class PerfilUsuarioService {
     private final PerfilUsuarioRepository perfilUsuarioRepository;
     private final PerfilUsuarioMapper perfilUsuarioMapper;
     private final PerfilUsuarioPMapper perfilUsuarioPMapper;
+    private final FotoRepository fotoRepository;
+    private final PasswordEncoderProvider passwordEncoderProvider;
 
-    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper, PerfilUsuarioPMapper perfilUsuarioPMapper) {
+    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper, PerfilUsuarioPMapper perfilUsuarioPMapper, FotoRepository fotoRepository, PasswordEncoderProvider passwordEncoderProvider) {
         this.perfilUsuarioRepository = perfilUsuarioRepository;
         this.perfilUsuarioMapper = perfilUsuarioMapper;
         this.perfilUsuarioPMapper = perfilUsuarioPMapper;
+        this.fotoRepository = fotoRepository;
+        this.passwordEncoderProvider = passwordEncoderProvider;
     }
 
     @Transactional(readOnly = true)
@@ -48,8 +55,7 @@ public class PerfilUsuarioService {
         if (busqueda.isPresent()) {
             PerfilUsuario perfilExistente = busqueda.get();
             if (perfilUsuario.getPassword() != null && !perfilUsuario.getPassword().isEmpty()) {
-                PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                perfilExistente.setPassword(passwordEncoder.encode(perfilUsuario.getPassword()));
+                perfilExistente.setPassword(PasswordEncoderProvider.getPasswordEncoder().encode(perfilUsuario.getPassword()));
             }
             if (perfilUsuario.getEmail() != null) {
                 perfilExistente.setEmail(perfilUsuario.getEmail());
@@ -57,8 +63,9 @@ public class PerfilUsuarioService {
             if (perfilUsuario.getTrabajador() != null) {
                 perfilExistente.setTrabajador(perfilUsuario.getTrabajador());
             }
-            if (perfilUsuario.getFoto() != null) {
-                perfilExistente.setFoto(perfilUsuario.getFoto());
+            if (perfilUsuario.getFoto() != null && perfilUsuario.getFoto().getIdFoto() == null) {
+                Foto foto = fotoRepository.save(perfilUsuario.getFoto());
+                perfilExistente.setFoto(foto);
             }
             PerfilUsuario actualizado = perfilUsuarioRepository.save(perfilExistente);
             return perfilUsuarioMapper.toDto(actualizado);

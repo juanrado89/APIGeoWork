@@ -53,13 +53,14 @@ public class AutenticacionService {
 
     @Transactional
     public Autenticacion autenticacionUsuario(String email, String password, boolean tipoPerfil) throws Exception {
-        String hashedPassword = MD5Util.hash(password);
+        PasswordEncoder passwordEncoder = PasswordEncoderProvider.getPasswordEncoder();
+
 
         System.out.println(email);
         if (tipoPerfil) {
             Optional<PerfilUsuario> perfilUsuario = perfilUsuarioRepository.findPerfilUsuarioByEmail(email);
             if (perfilUsuario.isPresent()) {
-                if(hashedPassword.equals(perfilUsuario.get().getPassword())){
+                if(passwordEncoder.matches(password, perfilUsuario.get().getPassword())) {
                     return generarTokenAutenticacion(perfilUsuario.get().getIdPerfil(), "PerfilUsuario", "USUARIO");
                 }else{
                     System.out.println("password incorrecta");
@@ -70,7 +71,7 @@ public class AutenticacionService {
         } else {
             Optional<PerfilEmpresa> perfilEmpresa = perfilEmpresaRepository.findPerfilEmpresaByEmail(email);
             if (perfilEmpresa.isPresent()) {
-                if(hashedPassword.equals(perfilEmpresa.get().getPassword())){
+                if(passwordEncoder.matches(password, perfilEmpresa.get().getPassword())){
                     return generarTokenAutenticacion(perfilEmpresa.get().getIdUsuario(), "PerfilEmpresa", "EMPRESA");
                 }else{
                     System.out.println("password incorrecta");
