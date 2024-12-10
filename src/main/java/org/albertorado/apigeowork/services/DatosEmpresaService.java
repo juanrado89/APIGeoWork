@@ -67,7 +67,7 @@ public class DatosEmpresaService {
             if(datosEmpresa.getSitioWeb() != null){
                 existentes.setSitioWeb(datosEmpresa.getSitioWeb());
             }
-            if(!datosEmpresa.getSector().isEmpty()){
+            if(!datosEmpresa.getSector().isEmpty() && datosEmpresa.getSector() != null){
                 List<Sector> sectores = new ArrayList<>();
                 for(Sector sector : datosEmpresa.getSector()){
                     sectores.add(sector);
