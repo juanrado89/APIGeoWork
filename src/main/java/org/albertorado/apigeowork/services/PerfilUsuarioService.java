@@ -4,16 +4,21 @@ import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioDto;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.Foto;
+import org.albertorado.apigeowork.entities.HorarioEntrevista;
+import org.albertorado.apigeowork.entities.OfertaEmpleo;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.albertorado.apigeowork.mapper.PerfilUsuarioMapper;
 import org.albertorado.apigeowork.mapper.PerfilUsuarioPMapper;
 import org.albertorado.apigeowork.repositories.FotoRepository;
+import org.albertorado.apigeowork.repositories.HorarioEntrevistaRepository;
+import org.albertorado.apigeowork.repositories.OfertaEmpleoRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.PerfilUsuarioRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,14 +29,19 @@ public class PerfilUsuarioService {
     private final PerfilUsuarioMapper perfilUsuarioMapper;
     private final PerfilUsuarioPMapper perfilUsuarioPMapper;
     private final FotoRepository fotoRepository;
-    private final PasswordEncoderProvider passwordEncoderProvider;
+    private final OfertaEmpleoRepository ofertaEmpleoRepository;
+    private final HorarioEntrevistaRepository horarioEntrevistaRepository;
 
-    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper, PerfilUsuarioPMapper perfilUsuarioPMapper, FotoRepository fotoRepository, PasswordEncoderProvider passwordEncoderProvider) {
+    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper,
+                                PerfilUsuarioPMapper perfilUsuarioPMapper, FotoRepository fotoRepository,
+                                OfertaEmpleoRepository ofertaEmpleoRepository,
+                                HorarioEntrevistaRepository horarioEntrevistaRepository) {
         this.perfilUsuarioRepository = perfilUsuarioRepository;
         this.perfilUsuarioMapper = perfilUsuarioMapper;
         this.perfilUsuarioPMapper = perfilUsuarioPMapper;
         this.fotoRepository = fotoRepository;
-        this.passwordEncoderProvider = passwordEncoderProvider;
+        this.ofertaEmpleoRepository = ofertaEmpleoRepository;
+        this.horarioEntrevistaRepository = horarioEntrevistaRepository;
     }
 
     @Transactional(readOnly = true)
@@ -66,6 +76,20 @@ public class PerfilUsuarioService {
             if (perfilUsuario.getFoto() != null && perfilUsuario.getFoto().getIdFoto() == null) {
                 Foto foto = fotoRepository.save(perfilUsuario.getFoto());
                 perfilExistente.setFoto(foto);
+            }if(perfilUsuario.getOfertas() != null && perfilUsuario.getOfertas().size() > 0){
+                List<OfertaEmpleo> ofertasActualizadas  = new ArrayList<>();
+                for(OfertaEmpleo oferta : perfilUsuario.getOfertas()){
+                    ofertasActualizadas.add(oferta);
+                }
+                List<OfertaEmpleo> ofertas = ofertaEmpleoRepository.saveAll(ofertasActualizadas);
+                perfilExistente.setOfertas(ofertas);
+            }if(perfilUsuario.getHorarios() != null && perfilUsuario.getHorarios().size() > 0){
+                List<HorarioEntrevista> horariosActualizados = new ArrayList<>();
+                for(HorarioEntrevista horarios : perfilUsuario.getHorarios()){
+                    horariosActualizados.add(horarios);
+                }
+                List<HorarioEntrevista> horarios = horarioEntrevistaRepository.saveAll(horariosActualizados);
+                perfilExistente.setHorarios(horarios);
             }
             PerfilUsuario actualizado = perfilUsuarioRepository.save(perfilExistente);
             return perfilUsuarioMapper.toDto(actualizado);

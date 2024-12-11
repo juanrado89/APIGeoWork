@@ -18,7 +18,7 @@ public class HorarioEntrevistaDto {
 
     private int candidatosAsignados;
 
-    private List<TrabajadorDto> trabajadores;
+    private List<PerfilUsuarioDto> trabajadores;
 
     public int getIdHorario() {
         return idHorario;
@@ -84,11 +84,11 @@ public class HorarioEntrevistaDto {
         this.candidatosAsignados = candidatosAsignados;
     }
 
-    public List<TrabajadorDto> getTrabajadores() {
+    public List<PerfilUsuarioDto> getTrabajadores() {
         return trabajadores;
     }
 
-    public void setTrabajadores(List<TrabajadorDto> trabajadores) {
+    public void setTrabajadores(List<PerfilUsuarioDto> trabajadores) {
         this.trabajadores = trabajadores;
     }
 }

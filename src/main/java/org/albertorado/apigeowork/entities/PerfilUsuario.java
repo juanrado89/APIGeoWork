@@ -15,13 +15,14 @@ import java.util.Objects;
 @Entity
 public class PerfilUsuario {
 
-    public PerfilUsuario(int idPerfil, String password, Trabajador trabajador, String email, Foto foto, List<OfertaEmpleo> ofertas) {
+    public PerfilUsuario(int idPerfil, String password, Trabajador trabajador, String email, Foto foto, List<OfertaEmpleo> ofertas, List<HorarioEntrevista> horarios) {
         this.idPerfil = idPerfil;
         this.password = password;
         this.trabajador = trabajador;
         this.email = email;
         this.foto = foto;
         this.ofertas = ofertas;
+        this.horarios = horarios;
     }
 
     public PerfilUsuario() {
@@ -75,6 +76,14 @@ public class PerfilUsuario {
         this.ofertas = ofertas;
     }
 
+    public List<HorarioEntrevista> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<HorarioEntrevista> horarios) {
+        this.horarios = horarios;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_perfil",nullable = false)
@@ -104,6 +113,9 @@ public class PerfilUsuario {
 
     @ManyToMany(mappedBy = "trabajadores")
     private List<OfertaEmpleo> ofertas;
+
+    @ManyToMany(mappedBy = "trabajadores")
+    private List<HorarioEntrevista> horarios;
 
     @PrePersist
     @PreUpdate

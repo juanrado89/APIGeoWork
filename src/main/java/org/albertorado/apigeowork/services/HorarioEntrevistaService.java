@@ -3,6 +3,7 @@ package org.albertorado.apigeowork.services;
 import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.HorarioEntrevistaDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
+import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.albertorado.apigeowork.entities.Trabajador;
 import org.albertorado.apigeowork.especificaciones.HorarioEntrevistaEspecificaciones;
 import org.albertorado.apigeowork.mapper.HorarioEntrevistaMapper;
@@ -72,9 +73,9 @@ public class HorarioEntrevistaService {
         if (horarioEntrevista.getCandidatosAsignados() != 0) {
             horarioExistente.setCandidatosAsignados(horarioEntrevista.getCandidatosAsignados());
         }
-        if(!horarioEntrevista.getTrabajadores().isEmpty()){
-            List<Trabajador> trabajadores = new ArrayList<>();
-            for(Trabajador trabajador : horarioEntrevista.getTrabajadores()){
+        if(horarioEntrevista.getTrabajadores() != null && !horarioEntrevista.getTrabajadores().isEmpty()){
+            List<PerfilUsuario> trabajadores = new ArrayList<>();
+            for(PerfilUsuario trabajador : horarioEntrevista.getTrabajadores()){
                 trabajadores.add(trabajador);
             }
             horarioExistente.setTrabajadores(trabajadores);

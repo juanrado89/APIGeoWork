@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.albertorado.apigeowork.dtos.HorarioEntrevistaDto;
-import org.albertorado.apigeowork.dtos.TrabajadorDto;
+import org.albertorado.apigeowork.dtos.PerfilUsuarioDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
-import org.albertorado.apigeowork.entities.Trabajador;
+import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-05T21:24:02+0100",
+    date = "2024-12-11T19:14:53+0100",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.13 (Eclipse Adoptium)"
 )
 @Component
 public class HorarioEntrevistaMapperImpl implements HorarioEntrevistaMapper {
 
     @Autowired
-    private TrabajadorMapper trabajadorMapper;
+    private PerfilUsuarioMapper perfilUsuarioMapper;
 
     @Override
     public HorarioEntrevistaDto toDto(HorarioEntrevista horarioEntrevista) {
@@ -34,7 +34,7 @@ public class HorarioEntrevistaMapperImpl implements HorarioEntrevistaMapper {
         horarioEntrevistaDto.setHora( horarioEntrevista.getHora() );
         horarioEntrevistaDto.setCandidatosDisponibles( horarioEntrevista.getCandidatosDisponibles() );
         horarioEntrevistaDto.setCandidatosAsignados( horarioEntrevista.getCandidatosAsignados() );
-        horarioEntrevistaDto.setTrabajadores( trabajadorListToTrabajadorDtoList( horarioEntrevista.getTrabajadores() ) );
+        horarioEntrevistaDto.setTrabajadores( perfilUsuarioMapper.toDto( horarioEntrevista.getTrabajadores() ) );
 
         return horarioEntrevistaDto;
     }
@@ -52,7 +52,7 @@ public class HorarioEntrevistaMapperImpl implements HorarioEntrevistaMapper {
         horarioEntrevista.setDia( horarioEntrevistaDto.getDia() );
         horarioEntrevista.setCandidatosDisponibles( horarioEntrevistaDto.getCandidatosDisponibles() );
         horarioEntrevista.setCandidatosAsignados( horarioEntrevistaDto.getCandidatosAsignados() );
-        horarioEntrevista.setTrabajadores( trabajadorDtoListToTrabajadorList( horarioEntrevistaDto.getTrabajadores() ) );
+        horarioEntrevista.setTrabajadores( perfilUsuarioDtoListToPerfilUsuarioList( horarioEntrevistaDto.getTrabajadores() ) );
 
         return horarioEntrevista;
     }
@@ -71,27 +71,14 @@ public class HorarioEntrevistaMapperImpl implements HorarioEntrevistaMapper {
         return list;
     }
 
-    protected List<TrabajadorDto> trabajadorListToTrabajadorDtoList(List<Trabajador> list) {
+    protected List<PerfilUsuario> perfilUsuarioDtoListToPerfilUsuarioList(List<PerfilUsuarioDto> list) {
         if ( list == null ) {
             return null;
         }
 
-        List<TrabajadorDto> list1 = new ArrayList<TrabajadorDto>( list.size() );
-        for ( Trabajador trabajador : list ) {
-            list1.add( trabajadorMapper.toDto( trabajador ) );
-        }
-
-        return list1;
-    }
-
-    protected List<Trabajador> trabajadorDtoListToTrabajadorList(List<TrabajadorDto> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<Trabajador> list1 = new ArrayList<Trabajador>( list.size() );
-        for ( TrabajadorDto trabajadorDto : list ) {
-            list1.add( trabajadorMapper.toEntity( trabajadorDto ) );
+        List<PerfilUsuario> list1 = new ArrayList<PerfilUsuario>( list.size() );
+        for ( PerfilUsuarioDto perfilUsuarioDto : list ) {
+            list1.add( perfilUsuarioMapper.toEntity( perfilUsuarioDto ) );
         }
 
         return list1;

@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {OfertaEmpleoMapper.class, TrabajadorMapper.class})
+@Mapper(componentModel = "spring", uses = {OfertaEmpleoMapper.class, PerfilUsuarioMapper.class})
 public interface HorarioEntrevistaMapper {
 
     @Mapping(source = "idHorario", target = "idHorario")

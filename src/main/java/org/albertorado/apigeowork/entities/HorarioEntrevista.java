@@ -14,7 +14,7 @@ import java.util.Objects;
 @Entity
 public class HorarioEntrevista {
 
-    public HorarioEntrevista(int idHorario, OfertaEmpleo ofertaEmpleo, LocalDate dia, LocalTime hora, int candidatosDisponibles, int candidatosAsignados, List<Trabajador> trabajadores) {
+    public HorarioEntrevista(int idHorario, OfertaEmpleo ofertaEmpleo, LocalDate dia, LocalTime hora, int candidatosDisponibles, int candidatosAsignados, List<PerfilUsuario> trabajadores) {
         this.idHorario = idHorario;
         this.ofertaEmpleo = ofertaEmpleo;
         this.dia = dia;
@@ -103,11 +103,11 @@ public class HorarioEntrevista {
         this.candidatosAsignados = candidatosAsignados;
     }
 
-    public List<Trabajador> getTrabajadores() {
+    public List<PerfilUsuario> getTrabajadores() {
         return trabajadores;
     }
 
-    public void setTrabajadores(List<Trabajador> trabajadores) {
+    public void setTrabajadores(List<PerfilUsuario> trabajadores) {
         this.trabajadores = trabajadores;
     }
 
@@ -142,8 +142,8 @@ public class HorarioEntrevista {
     private int candidatosAsignados;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "trabajador_horario", joinColumns = @JoinColumn(name = "horario_id"), inverseJoinColumns = @JoinColumn(name = "trabajador_id"))
-    private List<Trabajador> trabajadores;
+    @JoinTable(name = "usuario_horario", joinColumns = @JoinColumn(name = "horario_id"), inverseJoinColumns = @JoinColumn(name = "id_perfil"))
+    private List<PerfilUsuario> trabajadores;
 
     @Override
     public int hashCode() {

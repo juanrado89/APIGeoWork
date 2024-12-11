@@ -1,5 +1,7 @@
 package org.albertorado.apigeowork.dtos;
 
+import org.albertorado.apigeowork.entities.HorarioEntrevista;
+
 import java.util.List;
 
 public class PerfilUsuarioDto {
@@ -12,6 +14,7 @@ public class PerfilUsuarioDto {
 
     private FotoDto foto;
     private List<OfertaEmpleoDto> ofertas;
+    private List<HorarioEntrevista> horarios;
 
     public int getIdPerfil() {
         return idPerfil;
@@ -51,5 +54,12 @@ public class PerfilUsuarioDto {
 
     public void setOfertas(List<OfertaEmpleoDto> ofertas) {
         this.ofertas = ofertas;
+    }
+    public List<HorarioEntrevista> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<HorarioEntrevista> horarios) {
+        this.horarios = horarios;
     }
 }

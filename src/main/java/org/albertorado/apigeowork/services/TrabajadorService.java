@@ -48,13 +48,6 @@ public class TrabajadorService {
             if (trabajador.getDatosExperiencia() != null) {
                 trabajadorExistente.setDatosExperiencia(trabajador.getDatosExperiencia());
             }
-            if (trabajador.getHorarios() != null && !trabajador.getHorarios().isEmpty()) {
-                List<HorarioEntrevista> horariosActualizados = new ArrayList<>();
-                for(HorarioEntrevista horarios : trabajador.getHorarios()){
-                    horariosActualizados.add(horarios);
-                }
-                trabajadorExistente.setHorarios(horariosActualizados);
-            }
             Trabajador actualizado = trabajadorRepository.save(trabajadorExistente);
             return trabajadorMapper.toDto(actualizado);
         } else {
