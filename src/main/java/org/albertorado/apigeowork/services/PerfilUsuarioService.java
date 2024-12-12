@@ -55,6 +55,10 @@ public class PerfilUsuarioService {
     }
     @Transactional
     public PerfilUsuarioDto crearPerfilU(PerfilUsuario perfilUsuario) {
+        if(perfilUsuario.getFoto() != null){
+            Foto fotoCreada = fotoRepository.save(perfilUsuario.getFoto());
+            perfilUsuario.setFoto(fotoCreada);
+        }
         PerfilUsuario creado = perfilUsuarioRepository.save(perfilUsuario);
         return perfilUsuarioMapper.toDto(creado);
     }
