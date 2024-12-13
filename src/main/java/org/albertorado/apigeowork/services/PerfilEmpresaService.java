@@ -42,6 +42,10 @@ public class PerfilEmpresaService {
     }
     @Transactional
     public PerfilEmpresaDto crearPerfilE(PerfilEmpresa perfilEmpresa) {
+        if(perfilEmpresa.getFoto() != null){
+            Foto fotoCreada = fotoRepository.save(perfilEmpresa.getFoto());
+            perfilEmpresa.setFoto(fotoCreada);
+        }
         PerfilEmpresa creado = perfilEmpresaRepository.save(perfilEmpresa);
         return perfilEmpresaMapper.toDto(creado);
     }

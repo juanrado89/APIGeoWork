@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.services;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.OfertaEmpleo;
@@ -37,6 +38,7 @@ public class OfertaEmpleoService {
         return ofertaEmpleoMapper.toDto(creado);
     }
 
+    @Transactional
     public OfertaEmpleoDto actualizarOferta(int id, OfertaEmpleo ofertaEmpleo) {
         Optional<OfertaEmpleo> busqueda = ofertaEmpleoRepository.findByIdOferta(id);
 
@@ -98,6 +100,7 @@ public class OfertaEmpleoService {
         ofertaEmpleoRepository.deleteById(id);
     }
 
+    @Transactional
     public List<OfertaEmpleoDto> buscarPorParametros(OfertaEmpleo parametros) {
         Specification<OfertaEmpleo> especificaciones = Specification.where(
                 OfertaEmpleoEspecificaciones.tienePais(parametros.getDireccion().getCiudad().getEstado().getPais().getPais())
@@ -115,6 +118,7 @@ public class OfertaEmpleoService {
         return ofertaEmpleoMapper.toDto(resultado);
     }
 
+    @Transactional
     public List<OfertaEmpleoDto> buscarPorIdEmpresa(int id) {
         List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllByEmpresa_IdEmpresaOrderByFechaPublicacionDesc(id);
         return ofertaEmpleoMapper.toDto(resultado);
