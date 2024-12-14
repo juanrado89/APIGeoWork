@@ -1,7 +1,6 @@
 package org.albertorado.apigeowork.services;
 
 import jakarta.transaction.Transactional;
-import org.albertorado.apigeowork.configuracion.MD5Util;
 import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.entities.Autenticacion;
 import io.jsonwebtoken.Claims;
