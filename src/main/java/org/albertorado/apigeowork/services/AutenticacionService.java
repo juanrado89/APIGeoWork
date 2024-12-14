@@ -143,10 +143,26 @@ public class AutenticacionService {
 
 
     public void revocarToken(String token) {
-        Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(token);
-        if (autenticacionOpt.isPresent()) {
-            Autenticacion autenticacion = autenticacionOpt.get();
-            autenticacion.setRevocado(true);
+        String tokenLimpio = token.trim().replaceFirst("^Bearer\\s+", "");
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(tokenLimpio)
+                    .getBody();
+
+            System.out.println("Token válido para el usuario: " + claims.getSubject());
+
+            Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(tokenLimpio);
+            if (autenticacionOpt.isPresent()) {
+                Autenticacion autenticacion = autenticacionOpt.get();
+                autenticacion.setRevocado(true);
+            }
+        }catch (MalformedJwtException e) {
+            System.out.println("El token está mal formado: " + e.getMessage());
+        } catch (SignatureException e) {
+            System.out.println("Firma del token inválida: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error al validar el token: " + e.getMessage());
         }
     }
 
