@@ -1,12 +1,9 @@
 package org.albertorado.apigeowork.services;
 
+import io.jsonwebtoken.*;
 import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.entities.Autenticacion;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
 import org.albertorado.apigeowork.entities.PerfilEmpresa;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.beans.factory.annotation.Value;
@@ -113,26 +110,37 @@ public class AutenticacionService {
 
 
     public boolean validarToken(String token) {
-        String tokenLimpio = token.replace("Bearer ", "");
-        Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(tokenLimpio);
-        System.out.println(token);
-        if (autenticacionOpt.isPresent()) {
-            Autenticacion autenticacion = autenticacionOpt.get();
+        String tokenLimpio = token.trim().replaceFirst("^Bearer\\s+", "");
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(tokenLimpio)
+                    .getBody();
 
-            if (autenticacion.getFechaExpiracion().isAfter(LocalDateTime.now()) && !autenticacion.isRevocado()) {
-                try {
-                    Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+            System.out.println("Token válido para el usuario: " + claims.getSubject());
+
+            Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(tokenLimpio);
+            if (autenticacionOpt.isPresent()) {
+                Autenticacion autenticacion = autenticacionOpt.get();
+
+                if (autenticacion.getFechaExpiracion().isAfter(LocalDateTime.now()) && !autenticacion.isRevocado()) {
                     return true;
-                } catch (SignatureException e) {
-                    System.out.println("Firma del token inválida: " + e.getMessage());
+                } else {
+                    System.out.println("El token ha expirado o está revocado.");
                 }
-            }else{
-                System.out.println("el token ha expirado o esta revocado.");
+            } else {
+                System.out.println("Token no encontrado en la base de datos.");
             }
+        } catch (MalformedJwtException e) {
+            System.out.println("El token está mal formado: " + e.getMessage());
+        } catch (SignatureException e) {
+            System.out.println("Firma del token inválida: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error al validar el token: " + e.getMessage());
         }
-        System.out.println("no se encuentra el token");
         return false;
     }
+
 
     public void revocarToken(String token) {
         Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(token);
