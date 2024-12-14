@@ -34,6 +34,7 @@ public class HorarioEntrevistaService {
         return horarioEntrevistaMapper.toDto(horario.get());
     }
 
+    @Transactional
     public List<HorarioEntrevistaDto> buscarPorIdOferta(int id) {
         List<HorarioEntrevista> horarios = horarioEntrevistaRepository.findAllByOfertaEmpleo_IdOfertaOrderByDiaAsc(id);
         return horarioEntrevistaMapper.toDto(horarios);
@@ -43,6 +44,7 @@ public class HorarioEntrevistaService {
         HorarioEntrevista creado = horarioEntrevistaRepository.save(horarioEntrevista);
         return horarioEntrevistaMapper.toDto(creado);
     }
+
 
     public List<HorarioEntrevistaDto> crearHorariosEntrevista(List<HorarioEntrevista> horariosEntrevista) {
         List<HorarioEntrevista> creado = horarioEntrevistaRepository.saveAll(horariosEntrevista);
@@ -89,6 +91,7 @@ public class HorarioEntrevistaService {
         horarioEntrevistaRepository.deleteById(id);
     }
 
+    @Transactional
     public List<HorarioEntrevistaDto> buscarPorParametros(HorarioEntrevista parametros) {
         Specification<HorarioEntrevista> especificaciones = Specification.where(
                 HorarioEntrevistaEspecificaciones.tieneIdOferta(parametros.getOfertaEmpleo().getIdOferta())

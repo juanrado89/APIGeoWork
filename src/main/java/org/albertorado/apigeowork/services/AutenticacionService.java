@@ -115,6 +115,7 @@ public class AutenticacionService {
 
     public boolean validarToken(String token) {
         Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(token);
+        System.out.println(token);
         if (autenticacionOpt.isPresent()) {
             Autenticacion autenticacion = autenticacionOpt.get();
 
@@ -123,12 +124,13 @@ public class AutenticacionService {
                     Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
                     return true;
                 } catch (SignatureException e) {
-                    System.err.println("Firma del token inválida: " + e.getMessage());
+                    System.out.println("Firma del token inválida: " + e.getMessage());
                 }
             }else{
-                System.err.println("el token ha expirado o esta revocado.");
+                System.out.println("el token ha expirado o esta revocado.");
             }
         }
+        System.out.println("no se encuentra el token");
         return false;
     }
 
