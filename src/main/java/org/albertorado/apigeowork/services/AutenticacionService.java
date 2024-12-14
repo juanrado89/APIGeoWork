@@ -113,7 +113,8 @@ public class AutenticacionService {
 
 
     public boolean validarToken(String token) {
-        Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(token);
+        String tokenLimpio = token.replace("Bearer ", "");
+        Optional<Autenticacion> autenticacionOpt = autenticacionRepository.findByRefreshToken(tokenLimpio);
         System.out.println(token);
         if (autenticacionOpt.isPresent()) {
             Autenticacion autenticacion = autenticacionOpt.get();
