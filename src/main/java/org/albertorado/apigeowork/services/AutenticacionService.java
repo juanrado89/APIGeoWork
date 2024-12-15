@@ -156,6 +156,8 @@ public class AutenticacionService {
             if (autenticacionOpt.isPresent()) {
                 Autenticacion autenticacion = autenticacionOpt.get();
                 autenticacion.setRevocado(true);
+            }else{
+                System.out.println("hubo un problema el buscar el token: " + tokenLimpio);
             }
         }catch (MalformedJwtException e) {
             System.out.println("El token está mal formado: " + e.getMessage());
