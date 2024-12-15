@@ -24,6 +24,13 @@ public class DescripcionExperienciaSerice {
         this.experienciaTotalRepository = experienciaTotalRepository;
     }
 
+    public List<DescripcionExperienciaDto> buscarPorIdExperienciaTotal(int id) {
+        List<DescripcionExperiencia> resultado = descripcionExperienciaRepository.findAllByExperienciaTotal_IdExperienciaTotal(id);
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return descripcionExperienciaMapper.toDto(resultado);
+    }
     public DescripcionExperienciaDto buscarPorId(int id) {
         Optional<DescripcionExperiencia> resultado = descripcionExperienciaRepository.findByIdDescripcionExperiencia(id);
         if(resultado.isEmpty()){

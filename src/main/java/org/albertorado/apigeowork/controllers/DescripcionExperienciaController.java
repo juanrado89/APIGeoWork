@@ -29,6 +29,21 @@ public class DescripcionExperienciaController {
         String token = autorizacion.replace("Bearer ", "");
         return autenticacionService.validarToken(token);
     }
+    @GetMapping("/buscardescripcionexperienciaporidet/{id}")
+    public ResponseEntity<List<DescripcionExperienciaDto>> buscarDescripcionExperienciaPorIdExpTot(
+            @RequestHeader("Authorization") String autorizacion, @PathVariable int id){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        List<DescripcionExperienciaDto> resultado = descripcionExperienciaSerice.buscarPorIdExperienciaTotal(id);
+        if(resultado != null){
+            return ResponseEntity.ok(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @GetMapping("/buscardescripcionexperienciaporid/{id}")
     public ResponseEntity<DescripcionExperienciaDto> buscarDescripcionExperienciaPorId(
