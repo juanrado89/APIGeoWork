@@ -156,6 +156,7 @@ public class AutenticacionService {
             if (autenticacionOpt.isPresent()) {
                 Autenticacion autenticacion = autenticacionOpt.get();
                 autenticacion.setRevocado(true);
+                autenticacionRepository.save(autenticacion);
             }else{
                 System.out.println("hubo un problema el buscar el token: " + tokenLimpio);
             }
