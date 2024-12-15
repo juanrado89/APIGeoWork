@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.services;
 
+import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.DescripcionExperienciaDto;
 import org.albertorado.apigeowork.entities.DescripcionExperiencia;
 import org.albertorado.apigeowork.entities.ExperienciaTotal;
@@ -24,6 +25,7 @@ public class DescripcionExperienciaSerice {
         this.experienciaTotalRepository = experienciaTotalRepository;
     }
 
+    @Transactional
     public List<DescripcionExperienciaDto> buscarPorIdExperienciaTotal(int id) {
         List<DescripcionExperiencia> resultado = descripcionExperienciaRepository.findAllByExperienciaTotal_IdExperienciaTotal(id);
         if(resultado.isEmpty()){
@@ -31,6 +33,7 @@ public class DescripcionExperienciaSerice {
         }
         return descripcionExperienciaMapper.toDto(resultado);
     }
+    @Transactional
     public DescripcionExperienciaDto buscarPorId(int id) {
         Optional<DescripcionExperiencia> resultado = descripcionExperienciaRepository.findByIdDescripcionExperiencia(id);
         if(resultado.isEmpty()){
