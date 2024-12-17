@@ -57,7 +57,7 @@ public class DatosController {
     }
 
     @Transactional
-    @PostMapping("actualizardatosusuario/{id}")
+    @PostMapping("/actualizardatosusuario/{id}")
     public ResponseEntity<DatosDto> actualizarDatos(@RequestHeader("authorization") String autorizacion, @PathVariable int id, @RequestBody Datos datos){
 
         if (!validarToken(autorizacion)) {
