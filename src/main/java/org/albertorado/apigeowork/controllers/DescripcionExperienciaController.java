@@ -103,7 +103,7 @@ public class DescripcionExperienciaController {
         }
     }
     @Transactional
-    @PostMapping("actualizardescripciones/{id}")
+    @PostMapping("/actualizardescripciones/{id}")
     public ResponseEntity<List<DescripcionExperienciaDto>> actualizarDescripciones(
             @RequestHeader("Authorization") String autorizacion, @PathVariable int id,
             @RequestBody List<DescripcionExperiencia> descripciones){
