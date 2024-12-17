@@ -102,6 +102,22 @@ public class DescripcionExperienciaController {
             return ResponseEntity.notFound().build();
         }
     }
+    @Transactional
+    @PostMapping("actualizardescripciones/{id}")
+    public ResponseEntity<List<DescripcionExperienciaDto>> actualizarDescripciones(
+            @RequestHeader("Authorization") String autorizacion, @PathVariable int id,
+            @RequestBody List<DescripcionExperiencia> descripciones){
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        List<DescripcionExperienciaDto> resultado = descripcionExperienciaSerice.actualizarDescripciones(id,descripciones);
+        if(resultado != null){
+            return ResponseEntity.ok(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @DeleteMapping("/borrardescripcionexperiencia/{id}")
     public ResponseEntity<Void> borrarDescripcionExperiencia(@RequestHeader("Authorization") String autorizacion,

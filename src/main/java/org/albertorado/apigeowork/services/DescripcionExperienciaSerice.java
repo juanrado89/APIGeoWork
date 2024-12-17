@@ -9,6 +9,7 @@ import org.albertorado.apigeowork.repositories.ExperienciaTotalRepository;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.DescripcionExperienciaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,6 +71,32 @@ public class DescripcionExperienciaSerice {
         } else {
             return null;
         }
+    }
+    public List<DescripcionExperienciaDto> actualizarDescripciones(int id,List<DescripcionExperiencia> descripciones) {
+        List<DescripcionExperiencia> busqueda = descripcionExperienciaRepository.findAllByExperienciaTotal_IdExperienciaTotal(id);
+        List<DescripcionExperiencia> actuaalizadas = new ArrayList<>();
+        for (int i = 0; i < descripciones.size(); i++) {
+            if(busqueda.contains(descripciones.get(i))){
+                DescripcionExperiencia descripcionExistente = busqueda.get(busqueda.indexOf(descripciones.get(i)));
+                if (descripciones.get(i).getNombreEmpresa() != null) {
+                    descripcionExistente.setNombreEmpresa(descripciones.get(i).getNombreEmpresa());
+                }
+                if (descripciones.get(i).getDescripcion() != null) {
+                    descripcionExistente.setDescripcion(descripciones.get(i).getDescripcion());
+                }
+                if (descripciones.get(i).getFechaInicio() != null) {
+                    descripcionExistente.setFechaInicio(descripciones.get(i).getFechaInicio());
+                }
+                if (descripciones.get(i).getFechaFin() != null) {
+                    descripcionExistente.setFechaFin(descripciones.get(i).getFechaFin());
+                }
+                DescripcionExperiencia actualizada = descripcionExperienciaRepository.save(descripcionExistente);
+                actuaalizadas.add(actualizada);
+            }else{
+                actuaalizadas.add(descripcionExperienciaRepository.save(descripciones.get(i)));
+            }
+        }
+        return descripcionExperienciaMapper.toDto(actuaalizadas);
     }
 
 
