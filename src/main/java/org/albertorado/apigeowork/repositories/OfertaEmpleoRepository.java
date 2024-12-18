@@ -12,4 +12,5 @@ public interface OfertaEmpleoRepository extends JpaRepository<OfertaEmpleo,Integ
     Optional<OfertaEmpleo> findByIdOferta(@Param("id") int idOferta);
 
     List<OfertaEmpleo> findAllByEmpresa_IdEmpresaOrderByFechaPublicacionDesc(@Param("id") int idEmpresa);
+    List<OfertaEmpleo> findAllByTrabajadores_IdPerfilOrderByFechaPublicacionDesc(@Param("id") int idPerfil);
 }

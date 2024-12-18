@@ -123,4 +123,9 @@ public class OfertaEmpleoService {
         List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllByEmpresa_IdEmpresaOrderByFechaPublicacionDesc(id);
         return ofertaEmpleoMapper.toDto(resultado);
     }
+    @Transactional
+    public List<OfertaEmpleoDto> buscarPorIdUsuario(int id) {
+        List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllByTrabajadores_IdPerfilOrderByFechaPublicacionDesc(id);
+        return ofertaEmpleoMapper.toDto(resultado);
+    }
 }

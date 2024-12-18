@@ -60,12 +60,25 @@ public class OfertaEmpleoController {
         }
     }
     @GetMapping("/buscarporidempresa/{id}")
-    public ResponseEntity<List<OfertaEmpleoDto>> buscarPorParametros(@RequestHeader("authorization") String autorizacion,
+    public ResponseEntity<List<OfertaEmpleoDto>> buscarPorIdEmpresa(@RequestHeader("authorization") String autorizacion,
                                                                      @PathVariable int id) {
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         List<OfertaEmpleoDto> resultado = ofertaEmpleoService.buscarPorIdEmpresa(id);
+        if (resultado != null) {
+            return ResponseEntity.ok().body(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/buscarporidusuario/{id}")
+    public ResponseEntity<List<OfertaEmpleoDto>> buscarPorIdUsuario(@RequestHeader("authorization") String autorizacion,
+                                                                     @PathVariable int id) {
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        List<OfertaEmpleoDto> resultado = ofertaEmpleoService.buscarPorIdUsuario(id);
         if (resultado != null) {
             return ResponseEntity.ok().body(resultado);
         }else{
