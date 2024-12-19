@@ -2,6 +2,7 @@ package org.albertorado.apigeowork.services;
 
 import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
+import org.albertorado.apigeowork.dtos.OfertaEmpleoFiltroDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.OfertaEmpleo;
 import org.albertorado.apigeowork.especificaciones.OfertaEmpleoEspecificaciones;
@@ -101,18 +102,18 @@ public class OfertaEmpleoService {
     }
 
     @Transactional
-    public List<OfertaEmpleoDto> buscarPorParametros(OfertaEmpleo parametros) {
+    public List<OfertaEmpleoDto> buscarPorParametros(OfertaEmpleoFiltroDto parametros) {
         Specification<OfertaEmpleo> especificaciones = Specification.where(
-                OfertaEmpleoEspecificaciones.tienePais(parametros.getDireccion().getCiudad().getEstado().getPais().getPais())
-                        .and(OfertaEmpleoEspecificaciones.tieneEstado(parametros.getDireccion().getCiudad().getEstado().getEstado()))
-                        .and(OfertaEmpleoEspecificaciones.tieneCiudad(parametros.getDireccion().getCiudad().getCiudad()))
+                OfertaEmpleoEspecificaciones.tienePais(parametros.getPais())
+                        .and(OfertaEmpleoEspecificaciones.tieneEstado(parametros.getEstado()))
+                        .and(OfertaEmpleoEspecificaciones.tieneCiudad(parametros.getCiudad()))
                         .and(OfertaEmpleoEspecificaciones.tieneTitulo(parametros.getTitulo()))
                         .and(OfertaEmpleoEspecificaciones.tieneSector(parametros.getSector()))
-                        .and(OfertaEmpleoEspecificaciones.tieneNivel(parametros.getNivel().getNombreNivel()))
+                        .and(OfertaEmpleoEspecificaciones.tieneNivel(parametros.getNivel()))
                         .and(OfertaEmpleoEspecificaciones.salarioMayorQue(parametros.getSalarioMin()))
                         .and(OfertaEmpleoEspecificaciones.salarioMenorQue(parametros.getSalarioMax()))
                         .and(OfertaEmpleoEspecificaciones.tieneRequisitos(parametros.getRequisitos()))
-                        .and(OfertaEmpleoEspecificaciones.estatus(parametros.getEstado()))
+                        .and(OfertaEmpleoEspecificaciones.estatus(parametros.getEstatus()))
                         .and(OfertaEmpleoEspecificaciones.ordenarPorFecha(false)));
         List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAll(especificaciones);
         return ofertaEmpleoMapper.toDto(resultado);
@@ -126,6 +127,12 @@ public class OfertaEmpleoService {
     @Transactional
     public List<OfertaEmpleoDto> buscarPorIdUsuario(int id) {
         List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllByTrabajadores_IdPerfilOrderByFechaPublicacionDesc(id);
+        return ofertaEmpleoMapper.toDto(resultado);
+    }
+
+    @Transactional
+    public List<OfertaEmpleoDto> buscarTodas() {
+        List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllOrderByFechaPublicacionDesc();
         return ofertaEmpleoMapper.toDto(resultado);
     }
 }

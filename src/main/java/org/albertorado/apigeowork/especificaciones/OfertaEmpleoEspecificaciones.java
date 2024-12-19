@@ -1,9 +1,5 @@
 package org.albertorado.apigeowork.especificaciones;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
-import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.Sector;
 import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
@@ -33,7 +29,7 @@ public class OfertaEmpleoEspecificaciones {
         };
     }
 
-    public static Specification<OfertaEmpleo> tieneSector(Sector sector) {
+    public static Specification<OfertaEmpleo> tieneSector(String sector) {
         return (root, query, criteriaBuilder) -> {
             if (sector == null) {
                 return criteriaBuilder.conjunction();
@@ -77,7 +73,7 @@ public class OfertaEmpleoEspecificaciones {
             if (nivelRequerido == null || nivelRequerido.isEmpty()) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.like(root.get("nivelRequerido"),"%" + nivelRequerido + "%");
+            return criteriaBuilder.like(root.get("nivel"),"%" + nivelRequerido + "%");
         };
     }
 

@@ -2,6 +2,7 @@ package org.albertorado.apigeowork.controllers;
 
 import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
+import org.albertorado.apigeowork.dtos.OfertaEmpleoFiltroDto;
 import org.albertorado.apigeowork.entities.OfertaEmpleo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,20 @@ public class OfertaEmpleoController {
         String token = autorizacion.replace("Bearer ", "");
         return autenticacionService.validarToken(token);
     }
+    @GetMapping("/buscarofertas")
+    public ResponseEntity<List<OfertaEmpleoDto>> buscarTodas(@RequestHeader("authorization") String autorizacion) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        List<OfertaEmpleoDto> resultado = ofertaEmpleoService.buscarTodas();
+        if (resultado != null) {
+            return ResponseEntity.ok().body(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @GetMapping("/buscarofertaporid/{id}")
     public ResponseEntity<OfertaEmpleoDto> buscarPorId(@RequestHeader("authorization") String autorizacion, @PathVariable int id) {
@@ -45,9 +60,9 @@ public class OfertaEmpleoController {
         }
     }
 
-    @GetMapping("/buscarporparametros/")
+    @GetMapping("/buscarporparametros")
     public ResponseEntity<List<OfertaEmpleoDto>> buscarPorParametros(@RequestHeader("authorization") String autorizacion,
-                                                                     @RequestBody OfertaEmpleo parametros) {
+                                                                     @RequestBody OfertaEmpleoFiltroDto parametros) {
         if (!validarToken(autorizacion)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
