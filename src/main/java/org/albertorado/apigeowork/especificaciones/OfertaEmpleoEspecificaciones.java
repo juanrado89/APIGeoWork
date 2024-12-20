@@ -34,7 +34,7 @@ public class OfertaEmpleoEspecificaciones {
             if (sector == null) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.like(root.get("sector"),"%" +  sector.getSector() + "%");
+            return criteriaBuilder.like(root.get("sector"),"%" +  sector + "%");
         };
     }
 
