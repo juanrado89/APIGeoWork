@@ -67,6 +67,7 @@ public class OfertaEmpleoController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
+
         List<OfertaEmpleoDto> resultado = ofertaEmpleoService.buscarPorParametros(parametros);
         if (resultado != null) {
             return ResponseEntity.ok().body(resultado);
