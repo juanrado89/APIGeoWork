@@ -60,7 +60,7 @@ public class OfertaEmpleoController {
         }
     }
 
-    @GetMapping("/buscarporparametros")
+    @PostMapping("/buscarporparametros")
     public ResponseEntity<List<OfertaEmpleoDto>> buscarPorParametros(@RequestHeader("authorization") String autorizacion,
                                                                      @RequestBody OfertaEmpleoFiltroDto parametros) {
         if (!validarToken(autorizacion)) {
