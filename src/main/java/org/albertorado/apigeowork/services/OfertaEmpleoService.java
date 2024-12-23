@@ -8,6 +8,7 @@ import org.albertorado.apigeowork.entities.OfertaEmpleo;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.albertorado.apigeowork.especificaciones.OfertaEmpleoEspecificaciones;
 import org.albertorado.apigeowork.mapper.OfertaEmpleoMapper;
+import org.albertorado.apigeowork.repositories.PerfilUsuarioRepository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.OfertaEmpleoRepository;
@@ -21,10 +22,12 @@ public class OfertaEmpleoService {
 
     private final OfertaEmpleoRepository ofertaEmpleoRepository;
     private final OfertaEmpleoMapper ofertaEmpleoMapper;
+    private final PerfilUsuarioRepository perfilUsuarioRepository;
 
-    public OfertaEmpleoService(OfertaEmpleoRepository ofertaEmpleoRepository, OfertaEmpleoMapper ofertaEmpleoMapper) {
+    public OfertaEmpleoService(OfertaEmpleoRepository ofertaEmpleoRepository, OfertaEmpleoMapper ofertaEmpleoMapper, PerfilUsuarioRepository perfilUsuarioRepository) {
         this.ofertaEmpleoRepository = ofertaEmpleoRepository;
         this.ofertaEmpleoMapper = ofertaEmpleoMapper;
+        this.perfilUsuarioRepository = perfilUsuarioRepository;
     }
 
     public OfertaEmpleoDto buscarPorId(int id) {
@@ -107,6 +110,16 @@ public class OfertaEmpleoService {
 
             }
             OfertaEmpleo actualizada = ofertaEmpleoRepository.save(ofertaExistente);
+            for (PerfilUsuario trabajador : ofertaEmpleo.getTrabajadores()) {
+                if(trabajador.getOfertas() != null && !trabajador.getOfertas().isEmpty()){
+                    trabajador.getOfertas().add(actualizada);
+                }else{
+                    List<OfertaEmpleo> ofertaAniadir = new ArrayList<>();
+                    ofertaAniadir.add(actualizada);
+                    trabajador.setOfertas(ofertaAniadir);
+                }
+                perfilUsuarioRepository.save(trabajador);
+            }
             return ofertaEmpleoMapper.toDto(actualizada);
         } else {
             return null;
