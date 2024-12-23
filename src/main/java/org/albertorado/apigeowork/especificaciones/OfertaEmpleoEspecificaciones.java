@@ -17,7 +17,11 @@ public class OfertaEmpleoEspecificaciones {
                 return criteriaBuilder.conjunction();
             }
             Join<Object, Object> direccionJoin = root.join("direccion");
-            return criteriaBuilder.like(direccionJoin.get("pais"), "%" + pais + "%");
+            Join<Object, Object> ciudadJoin = direccionJoin.join("ciudad");
+            Join<Object, Object> estadoJoin = ciudadJoin.join("estado");
+            Join<Object, Object> paisJoin = estadoJoin.join("pais");
+
+            return criteriaBuilder.like(paisJoin.get("pais"), "%" + pais + "%");
         };
     }
 
@@ -27,7 +31,9 @@ public class OfertaEmpleoEspecificaciones {
                 return criteriaBuilder.conjunction();
             }
             Join<Object, Object> direccionJoin = root.join("direccion");
-            return criteriaBuilder.like(direccionJoin.get("estado"), "%" + estado + "%");
+            Join<Object, Object> ciudadJoin = direccionJoin.join("ciudad");
+            Join<Object, Object> estadoJoin = ciudadJoin.join("estado");
+            return criteriaBuilder.like(estadoJoin.get("estado"), "%" + estado + "%");
         };
     }
 
@@ -37,7 +43,8 @@ public class OfertaEmpleoEspecificaciones {
                 return criteriaBuilder.conjunction();
             }
             Join<Object, Object> direccionJoin = root.join("direccion");
-            return criteriaBuilder.like(direccionJoin.get("ciudad"), "%" + ciudad + "%");
+            Join<Object, Object> ciudadJoin = direccionJoin.join("ciudad");
+            return criteriaBuilder.like(ciudadJoin.get("ciudad"), "%" + ciudad + "%");
         };
     }
 
@@ -46,8 +53,8 @@ public class OfertaEmpleoEspecificaciones {
             if (sector == null) {
                 return criteriaBuilder.conjunction();
             }
-            Join<Object, Object> direccionJoin = root.join("sector");
-            return criteriaBuilder.like(root.get("sector"),"%" +  sector + "%");
+            Join<Object, Object> sectorJoin = root.join("sector");
+            return criteriaBuilder.like(sectorJoin.get("sector"),"%" +  sector + "%");
         };
     }
 
@@ -78,8 +85,8 @@ public class OfertaEmpleoEspecificaciones {
             if (nivelRequerido == null || nivelRequerido.isEmpty()) {
                 return criteriaBuilder.conjunction();
             }
-            Join<Object, Object> direccionJoin = root.join("nivel");
-            return criteriaBuilder.like(root.get("nivel"),"%" + nivelRequerido + "%");
+            Join<Object, Object> nivelJoin = root.join("nivel");
+            return criteriaBuilder.like(nivelJoin.get("nivel"),"%" + nivelRequerido + "%");
         };
     }
 
