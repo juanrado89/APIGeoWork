@@ -5,6 +5,7 @@ import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoFiltroDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.OfertaEmpleo;
+import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.albertorado.apigeowork.especificaciones.OfertaEmpleoEspecificaciones;
 import org.albertorado.apigeowork.mapper.OfertaEmpleoMapper;
 import org.springframework.data.jpa.domain.Specification;
@@ -87,7 +88,14 @@ public class OfertaEmpleoService {
                 for(HorarioEntrevista horario : ofertaEmpleo.getHorarios()){
                     horariosActualizados.add(horario);
                 }
-                ofertaExistente.setHorarios(horariosActualizados);
+                ofertaExistente.getHorarios().addAll(horariosActualizados);
+            }
+            if(ofertaEmpleo.getTrabajadores() != null && !ofertaEmpleo.getTrabajadores().isEmpty()){
+                List<PerfilUsuario> trabajadoresActualizados = new ArrayList<>();
+                for(PerfilUsuario perfil : ofertaEmpleo.getTrabajadores()){
+                    trabajadoresActualizados.add(perfil);
+                }
+                ofertaExistente.getTrabajadores().addAll(trabajadoresActualizados);
             }
             OfertaEmpleo actualizada = ofertaEmpleoRepository.save(ofertaExistente);
             return ofertaEmpleoMapper.toDto(actualizada);

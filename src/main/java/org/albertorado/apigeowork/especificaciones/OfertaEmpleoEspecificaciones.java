@@ -85,7 +85,7 @@ public class OfertaEmpleoEspecificaciones {
                 return criteriaBuilder.conjunction();
             }
             Join<Object, Object> nivelJoin = root.join("nivel");
-            return criteriaBuilder.like(nivelJoin.get("nivel"),"%" + nivelRequerido + "%");
+            return criteriaBuilder.like(nivelJoin.get("nombre_nivel"),"%" + nivelRequerido + "%");
         };
     }
 
