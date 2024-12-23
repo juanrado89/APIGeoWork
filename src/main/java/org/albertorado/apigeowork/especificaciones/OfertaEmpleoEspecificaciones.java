@@ -1,7 +1,6 @@
 package org.albertorado.apigeowork.especificaciones;
 
 import jakarta.persistence.criteria.Join;
-import org.albertorado.apigeowork.entities.Sector;
 import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
 import org.albertorado.apigeowork.entities.OfertaEmpleo;
@@ -114,7 +113,7 @@ public class OfertaEmpleoEspecificaciones {
                 return criteriaBuilder.conjunction();
             }
 
-            return criteriaBuilder.equal(root.get("estatus"), estatus);
+            return criteriaBuilder.equal(root.get("estado"), estatus);
         };
     }
 
