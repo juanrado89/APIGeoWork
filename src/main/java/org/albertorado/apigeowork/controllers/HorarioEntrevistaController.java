@@ -3,6 +3,7 @@ package org.albertorado.apigeowork.controllers;
 import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.HorarioEntrevistaDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
+import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -119,6 +120,23 @@ public class HorarioEntrevistaController {
         }
 
         HorarioEntrevistaDto resultado = horarioEntrevistaService.actualizarHorario(id, horarioEntrevista);
+        if (resultado != null) {
+            return ResponseEntity.ok().body(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @Transactional
+    @PostMapping("/inscribirtrabajador/{id}")
+    public ResponseEntity<HorarioEntrevistaDto> inscribirTrabajador(@RequestHeader("authorization") String autorizacion,
+                                                                  @PathVariable int id,
+                                                                  @RequestBody PerfilUsuario perfilUsuario) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        HorarioEntrevistaDto resultado = horarioEntrevistaService.agregarTrabajador(id, perfilUsuario);
         if (resultado != null) {
             return ResponseEntity.ok().body(resultado);
         }else{

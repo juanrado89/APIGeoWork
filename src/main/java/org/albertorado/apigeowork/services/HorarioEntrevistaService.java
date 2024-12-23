@@ -1,12 +1,14 @@
 package org.albertorado.apigeowork.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.HorarioEntrevistaDto;
+import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
-import org.albertorado.apigeowork.entities.Trabajador;
 import org.albertorado.apigeowork.especificaciones.HorarioEntrevistaEspecificaciones;
 import org.albertorado.apigeowork.mapper.HorarioEntrevistaMapper;
+import org.albertorado.apigeowork.repositories.PerfilUsuarioRepository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.HorarioEntrevistaRepository;
@@ -20,10 +22,12 @@ public class HorarioEntrevistaService {
 
     private final HorarioEntrevistaRepository horarioEntrevistaRepository;
     private final HorarioEntrevistaMapper horarioEntrevistaMapper;
+    private final PerfilUsuarioRepository perfilUsuarioRepository;
 
-    public HorarioEntrevistaService(HorarioEntrevistaRepository horarioEntrevistaRepository, HorarioEntrevistaMapper horarioEntrevistaMapper) {
+    public HorarioEntrevistaService(HorarioEntrevistaRepository horarioEntrevistaRepository, HorarioEntrevistaMapper horarioEntrevistaMapper, PerfilUsuarioRepository perfilUsuarioRepository) {
         this.horarioEntrevistaRepository = horarioEntrevistaRepository;
         this.horarioEntrevistaMapper = horarioEntrevistaMapper;
+        this.perfilUsuarioRepository = perfilUsuarioRepository;
     }
 
     public HorarioEntrevistaDto buscarPorId(int id) {
@@ -102,5 +106,40 @@ public class HorarioEntrevistaService {
                         .and(HorarioEntrevistaEspecificaciones.ordenarPorHoraAscendente()));
         List<HorarioEntrevista> resultado = horarioEntrevistaRepository.findAll(especificaciones);
         return horarioEntrevistaMapper.toDto(resultado);
+    }
+
+    @Transactional
+    public HorarioEntrevistaDto agregarTrabajador(int idHorario, PerfilUsuario perfil) {
+        Optional<HorarioEntrevista> busqueda = horarioEntrevistaRepository.findByIdHorario(idHorario);
+        if (busqueda.isPresent()) {
+            HorarioEntrevista horarioExistente = busqueda.get();
+
+            if(horarioExistente.getCandidatosAsignados() < horarioExistente.getCandidatosDisponibles()){
+                horarioExistente.setCandidatosAsignados(horarioExistente.getCandidatosAsignados() + 1);
+                if (horarioExistente.getTrabajadores() == null || horarioExistente.getTrabajadores().isEmpty()) {
+                    List<PerfilUsuario> listaTrabajadores = new ArrayList<>();
+                    horarioExistente.setTrabajadores(listaTrabajadores);
+                }
+                if (!horarioExistente.getTrabajadores().contains(perfil)) {
+                    horarioExistente.getTrabajadores().add(perfil);
+                    if (perfil.getOfertas() == null || perfil.getOfertas().isEmpty()) {
+                        List<HorarioEntrevista> horariosTrabajador = new ArrayList<>();
+                        perfil.setHorarios(horariosTrabajador);
+                    }
+                    if (!perfil.getHorarios().contains(horarioExistente)) {
+                        perfil.getHorarios().add(horarioExistente);
+                    }
+                    perfilUsuarioRepository.save(perfil);
+
+                }
+                HorarioEntrevista horarioActualizado = horarioEntrevistaRepository.save(horarioExistente);
+                return horarioEntrevistaMapper.toDto(horarioActualizado);
+            }else{
+                throw new RuntimeException("no hay plazas disponibles para el horario: " + idHorario);
+            }
+
+        } else {
+            throw new EntityNotFoundException("Oferta de empleo no encontrada con ID: " + idHorario);
+        }
     }
 }

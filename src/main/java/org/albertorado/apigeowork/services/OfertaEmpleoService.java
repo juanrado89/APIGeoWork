@@ -172,13 +172,15 @@ public class OfertaEmpleoService {
         if (busqueda.isPresent()) {
             OfertaEmpleo ofertaExistente = busqueda.get();
 
-            if (ofertaExistente.getTrabajadores() == null) {
-                ofertaExistente.setTrabajadores(new ArrayList<>());
+            if (ofertaExistente.getTrabajadores() == null || ofertaExistente.getTrabajadores().isEmpty()) {
+                List<PerfilUsuario> listaTrabajadores = new ArrayList<>();
+                ofertaExistente.setTrabajadores(listaTrabajadores);
             }
             if (!ofertaExistente.getTrabajadores().contains(perfil)) {
                 ofertaExistente.getTrabajadores().add(perfil);
-                if (perfil.getOfertas() == null) {
-                    perfil.setOfertas(new ArrayList<>());
+                if (perfil.getOfertas() == null || perfil.getOfertas().isEmpty()) {
+                    List<OfertaEmpleo> ofertasTrabajadores = new ArrayList<>();
+                    perfil.setOfertas(ofertasTrabajadores);
                 }
                 if (!perfil.getOfertas().contains(ofertaExistente)) {
                     perfil.getOfertas().add(ofertaExistente);
