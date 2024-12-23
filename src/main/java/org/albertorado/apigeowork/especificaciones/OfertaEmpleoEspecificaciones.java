@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.especificaciones;
 
+import jakarta.persistence.criteria.Join;
 import org.albertorado.apigeowork.entities.Sector;
 import jakarta.persistence.criteria.Path;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,26 +16,8 @@ public class OfertaEmpleoEspecificaciones {
             if (pais == null || pais.isEmpty()) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.like(root.get("pais"), "%" + pais + "%");
-        };
-    }
-
-
-    public static Specification<OfertaEmpleo> tieneCiudad(String ciudad) {
-        return (root, query, criteriaBuilder) -> {
-            if (ciudad == null || ciudad.isEmpty()) {
-                return criteriaBuilder.conjunction();
-            }
-            return criteriaBuilder.like(root.get("ciudad"),"%" +  ciudad + "%");
-        };
-    }
-
-    public static Specification<OfertaEmpleo> tieneSector(String sector) {
-        return (root, query, criteriaBuilder) -> {
-            if (sector == null) {
-                return criteriaBuilder.conjunction();
-            }
-            return criteriaBuilder.like(root.get("sector"),"%" +  sector + "%");
+            Join<Object, Object> direccionJoin = root.join("direccion");
+            return criteriaBuilder.like(direccionJoin.get("pais"), "%" + pais + "%");
         };
     }
 
@@ -43,9 +26,31 @@ public class OfertaEmpleoEspecificaciones {
             if (estado == null || estado.isEmpty()) {
                 return criteriaBuilder.conjunction();
             }
-            return criteriaBuilder.like(root.get("estado"),"%" +  estado + "%");
+            Join<Object, Object> direccionJoin = root.join("direccion");
+            return criteriaBuilder.like(direccionJoin.get("estado"), "%" + estado + "%");
         };
     }
+
+    public static Specification<OfertaEmpleo> tieneCiudad(String ciudad) {
+        return (root, query, criteriaBuilder) -> {
+            if (ciudad == null || ciudad.isEmpty()) {
+                return criteriaBuilder.conjunction();
+            }
+            Join<Object, Object> direccionJoin = root.join("direccion");
+            return criteriaBuilder.like(direccionJoin.get("ciudad"), "%" + ciudad + "%");
+        };
+    }
+
+    public static Specification<OfertaEmpleo> tieneSector(String sector) {
+        return (root, query, criteriaBuilder) -> {
+            if (sector == null) {
+                return criteriaBuilder.conjunction();
+            }
+            Join<Object, Object> direccionJoin = root.join("sector");
+            return criteriaBuilder.like(root.get("sector"),"%" +  sector + "%");
+        };
+    }
+
 
 
     public static Specification<OfertaEmpleo> tieneTitulo(String titulo) {
@@ -73,6 +78,7 @@ public class OfertaEmpleoEspecificaciones {
             if (nivelRequerido == null || nivelRequerido.isEmpty()) {
                 return criteriaBuilder.conjunction();
             }
+            Join<Object, Object> direccionJoin = root.join("nivel");
             return criteriaBuilder.like(root.get("nivel"),"%" + nivelRequerido + "%");
         };
     }
