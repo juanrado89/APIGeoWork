@@ -91,11 +91,20 @@ public class OfertaEmpleoService {
                 ofertaExistente.getHorarios().addAll(horariosActualizados);
             }
             if(ofertaEmpleo.getTrabajadores() != null && !ofertaEmpleo.getTrabajadores().isEmpty()){
-                List<PerfilUsuario> trabajadoresActualizados = new ArrayList<>();
-                for(PerfilUsuario perfil : ofertaEmpleo.getTrabajadores()){
-                    trabajadoresActualizados.add(perfil);
+                if(ofertaExistente.getTrabajadores() != null && !ofertaExistente.getTrabajadores().isEmpty()){
+                    for (PerfilUsuario nuevoTrabajador : ofertaEmpleo.getTrabajadores()) {
+                        if (!ofertaExistente.getTrabajadores().contains(nuevoTrabajador)) {
+                            ofertaExistente.getTrabajadores().add(nuevoTrabajador);
+                        }
+                    }
+                }else{
+                    List<PerfilUsuario> trabajadoresActualizados = new ArrayList<>();
+                    for(PerfilUsuario perfil : ofertaEmpleo.getTrabajadores()){
+                        trabajadoresActualizados.add(perfil);
+                    }
+                    ofertaExistente.setTrabajadores(trabajadoresActualizados);
                 }
-                ofertaExistente.getTrabajadores().addAll(trabajadoresActualizados);
+
             }
             OfertaEmpleo actualizada = ofertaEmpleoRepository.save(ofertaExistente);
             return ofertaEmpleoMapper.toDto(actualizada);
