@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoFiltroDto;
 import org.albertorado.apigeowork.entities.OfertaEmpleo;
+import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -129,6 +130,23 @@ public class OfertaEmpleoController {
         }
 
         OfertaEmpleoDto resultado = ofertaEmpleoService.actualizarOferta(id, ofertaEmpleo);
+        if (resultado != null) {
+            return ResponseEntity.ok().body(resultado);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @Transactional
+    @PostMapping("/inscribirusuario/{id}")
+    public ResponseEntity<OfertaEmpleoDto> actualizarOferta(@RequestHeader("authorization") String autorizacion,
+                                                            @PathVariable int id,
+                                                            @RequestBody PerfilUsuario perfilUsuario) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        OfertaEmpleoDto resultado = ofertaEmpleoService.agregarTrabajador(id, perfilUsuario);
         if (resultado != null) {
             return ResponseEntity.ok().body(resultado);
         }else{

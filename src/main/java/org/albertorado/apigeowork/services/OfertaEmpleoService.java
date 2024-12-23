@@ -1,5 +1,6 @@
 package org.albertorado.apigeowork.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoFiltroDto;
@@ -165,4 +166,30 @@ public class OfertaEmpleoService {
         List<OfertaEmpleo> resultado = ofertaEmpleoRepository.findAllOrderByFechaPublicacionDesc();
         return ofertaEmpleoMapper.toDto(resultado);
     }
+    @Transactional
+    public OfertaEmpleoDto agregarTrabajador(int idOferta, PerfilUsuario perfil) {
+        Optional<OfertaEmpleo> busqueda = ofertaEmpleoRepository.findByIdOferta(idOferta);
+        if (busqueda.isPresent()) {
+            OfertaEmpleo ofertaExistente = busqueda.get();
+
+            if (ofertaExistente.getTrabajadores() == null) {
+                ofertaExistente.setTrabajadores(new ArrayList<>());
+            }
+            if (!ofertaExistente.getTrabajadores().contains(perfil)) {
+                ofertaExistente.getTrabajadores().add(perfil);
+                if (perfil.getOfertas() == null) {
+                    perfil.setOfertas(new ArrayList<>());
+                }
+                if (!perfil.getOfertas().contains(ofertaExistente)) {
+                    perfil.getOfertas().add(ofertaExistente);
+                }
+                perfilUsuarioRepository.save(perfil);
+            }
+            OfertaEmpleo ofertaActualizada = ofertaEmpleoRepository.save(ofertaExistente);
+            return ofertaEmpleoMapper.toDto(ofertaActualizada);
+        } else {
+            throw new EntityNotFoundException("Oferta de empleo no encontrada con ID: " + idOferta);
+        }
+    }
+
 }
