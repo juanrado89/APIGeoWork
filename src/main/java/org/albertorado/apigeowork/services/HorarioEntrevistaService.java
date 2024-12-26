@@ -114,7 +114,7 @@ public class HorarioEntrevistaService {
         if (busqueda.isPresent()) {
             HorarioEntrevista horarioExistente = busqueda.get();
 
-            if(horarioExistente.getCandidatosAsignados() < horarioExistente.getCandidatosDisponibles()){
+            if(horarioExistente.getCandidatosDisponibles() < horarioExistente.getCandidatosAsignados()){
                 horarioExistente.setCandidatosAsignados(horarioExistente.getCandidatosAsignados() + 1);
                 if (horarioExistente.getTrabajadores() == null || horarioExistente.getTrabajadores().isEmpty()) {
                     List<PerfilUsuario> listaTrabajadores = new ArrayList<>();
