@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Integer> {
@@ -21,6 +22,8 @@ public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Int
 
     @Query("SELECT d.email,d.idPerfil,d.password FROM PerfilUsuario d WHERE d.email like lower(:email) ")
     Optional<PerfilUsuario> buscarPorMailAutenticacion(@Param("email") String email);
+    @Query("SELECT p FROM PerfilUsuario p JOIN p.horarios h WHERE h.idHorario = :id")
+    List<PerfilUsuario> findAllByHorarioId(@Param("id") Integer idHorario);
 
     int deleteByIdPerfil(@Param("id") int idPerfil);
 

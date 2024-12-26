@@ -54,6 +54,15 @@ public class PerfilUsuarioService {
         }
         return null;
     }
+    @Transactional(readOnly = true)
+    public List<PerfilUsuarioDto> buscarPerfilUPorIdHorario(int id) {
+        List<PerfilUsuario> resultado = perfilUsuarioRepository.findAllByHorarioId(id);
+
+        if(resultado != null && !resultado.isEmpty()){
+            return perfilUsuarioMapper.toDto(resultado);
+        }
+        return null;
+    }
     @Transactional
     public PerfilUsuarioDto crearPerfilU(PerfilUsuario perfilUsuario) {
         if(perfilUsuario.getFoto() != null){
