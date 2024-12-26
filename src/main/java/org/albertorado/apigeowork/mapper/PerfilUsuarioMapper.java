@@ -9,15 +9,13 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {TrabajadorMapper.class,FotoMapper.class, OfertaEmpleoMapper.class, HorarioEntrevistaMapper.class})
+@Mapper(componentModel = "spring", uses = {TrabajadorMapper.class,FotoMapper.class})
 public interface PerfilUsuarioMapper {
 
     @Mapping(source = "idPerfil", target = "idPerfil")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "trabajador", target = "trabajador")
     @Mapping(source = "foto", target = "foto")
-    @Mapping(source = "ofertas", target = "ofertas")
-    @Mapping(source = "horarios", target = "horarios")
 
 
     PerfilUsuarioDto toDto(PerfilUsuario perfilUsuario);

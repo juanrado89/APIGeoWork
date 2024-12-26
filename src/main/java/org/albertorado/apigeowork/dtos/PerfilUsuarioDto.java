@@ -13,8 +13,6 @@ public class PerfilUsuarioDto {
     private String email;
 
     private FotoDto foto;
-    private List<OfertaEmpleoDto> ofertas;
-    private List<HorarioEntrevista> horarios;
 
     public int getIdPerfil() {
         return idPerfil;
@@ -48,18 +46,4 @@ public class PerfilUsuarioDto {
         this.foto = foto;
     }
 
-    public List<OfertaEmpleoDto> getOfertas() {
-        return ofertas;
-    }
-
-    public void setOfertas(List<OfertaEmpleoDto> ofertas) {
-        this.ofertas = ofertas;
-    }
-    public List<HorarioEntrevista> getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(List<HorarioEntrevista> horarios) {
-        this.horarios = horarios;
-    }
 }
