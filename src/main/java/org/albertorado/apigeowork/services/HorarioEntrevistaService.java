@@ -2,6 +2,7 @@ package org.albertorado.apigeowork.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import org.albertorado.apigeowork.configuracion.EvitarCiclosMapping;
 import org.albertorado.apigeowork.dtos.HorarioEntrevistaDto;
 import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
@@ -23,6 +24,7 @@ public class HorarioEntrevistaService {
     private final HorarioEntrevistaRepository horarioEntrevistaRepository;
     private final HorarioEntrevistaMapper horarioEntrevistaMapper;
     private final PerfilUsuarioRepository perfilUsuarioRepository;
+    private final EvitarCiclosMapping evitarCiclosMapping = new EvitarCiclosMapping();
 
     public HorarioEntrevistaService(HorarioEntrevistaRepository horarioEntrevistaRepository, HorarioEntrevistaMapper horarioEntrevistaMapper, PerfilUsuarioRepository perfilUsuarioRepository) {
         this.horarioEntrevistaRepository = horarioEntrevistaRepository;
@@ -35,24 +37,24 @@ public class HorarioEntrevistaService {
         if(horario.isEmpty()){
             return null;
         }
-        return horarioEntrevistaMapper.toDto(horario.get());
+        return horarioEntrevistaMapper.toDto(horario.get(),evitarCiclosMapping);
     }
 
     @Transactional
     public List<HorarioEntrevistaDto> buscarPorIdOferta(int id) {
         List<HorarioEntrevista> horarios = horarioEntrevistaRepository.findAllByOfertaEmpleo_IdOfertaOrderByDiaAsc(id);
-        return horarioEntrevistaMapper.toDto(horarios);
+        return horarioEntrevistaMapper.toDto(horarios, evitarCiclosMapping);
     }
 
     public HorarioEntrevistaDto crearHorarioEntrevista(HorarioEntrevista horarioEntrevista) {
         HorarioEntrevista creado = horarioEntrevistaRepository.save(horarioEntrevista);
-        return horarioEntrevistaMapper.toDto(creado);
+        return horarioEntrevistaMapper.toDto(creado, evitarCiclosMapping);
     }
 
 
     public List<HorarioEntrevistaDto> crearHorariosEntrevista(List<HorarioEntrevista> horariosEntrevista) {
         List<HorarioEntrevista> creado = horarioEntrevistaRepository.saveAll(horariosEntrevista);
-        return horarioEntrevistaMapper.toDto(creado);
+        return horarioEntrevistaMapper.toDto(creado, evitarCiclosMapping);
     }
 
     @Transactional
@@ -87,7 +89,7 @@ public class HorarioEntrevistaService {
             horarioExistente.setTrabajadores(trabajadores);
         }
         HorarioEntrevista actualizado = horarioEntrevistaRepository.save(horarioExistente);
-        return horarioEntrevistaMapper.toDto(actualizado);
+        return horarioEntrevistaMapper.toDto(actualizado, evitarCiclosMapping);
     }
 
 
@@ -105,7 +107,7 @@ public class HorarioEntrevistaService {
                         .and(HorarioEntrevistaEspecificaciones.ordenarPorDiaAscendente())
                         .and(HorarioEntrevistaEspecificaciones.ordenarPorHoraAscendente()));
         List<HorarioEntrevista> resultado = horarioEntrevistaRepository.findAll(especificaciones);
-        return horarioEntrevistaMapper.toDto(resultado);
+        return horarioEntrevistaMapper.toDto(resultado, evitarCiclosMapping);
     }
 
     @Transactional
@@ -133,7 +135,7 @@ public class HorarioEntrevistaService {
 
                 }
                 HorarioEntrevista horarioActualizado = horarioEntrevistaRepository.save(horarioExistente);
-                return horarioEntrevistaMapper.toDto(horarioActualizado);
+                return horarioEntrevistaMapper.toDto(horarioActualizado, evitarCiclosMapping);
             }else{
                 throw new RuntimeException("no hay plazas disponibles para el horario: " + idHorario);
             }
