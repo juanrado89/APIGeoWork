@@ -137,7 +137,6 @@ public class HorarioEntrevistaService {
             }else{
                 throw new RuntimeException("no hay plazas disponibles para el horario: " + idHorario);
             }
-
         } else {
             throw new EntityNotFoundException("Oferta de empleo no encontrada con ID: " + idHorario);
         }
