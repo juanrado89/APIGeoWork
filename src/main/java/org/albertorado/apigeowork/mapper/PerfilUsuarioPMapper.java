@@ -1,7 +1,9 @@
 package org.albertorado.apigeowork.mapper;
 
+import org.albertorado.apigeowork.configuracion.EvitarCiclosMapping;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -19,7 +21,7 @@ public interface PerfilUsuarioPMapper {
 
 
 
-    PerfilUsuarioPDto toDto(PerfilUsuario perfilUsuario);
-    PerfilUsuario toEntity(PerfilUsuarioPDto perfilUsuarioPDto);
+    PerfilUsuarioPDto toDto(PerfilUsuario perfilUsuario, @Context EvitarCiclosMapping contexto);
+    PerfilUsuario toEntity(PerfilUsuarioPDto perfilUsuarioPDto, @Context EvitarCiclosMapping contexto);
 }
 

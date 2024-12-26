@@ -1,7 +1,9 @@
 package org.albertorado.apigeowork.mapper;
 
+import org.albertorado.apigeowork.configuracion.EvitarCiclosMapping;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioDto;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -18,8 +20,8 @@ public interface PerfilUsuarioMapper {
     @Mapping(source = "horarios", target = "horarios")
 
 
-    PerfilUsuarioDto toDto(PerfilUsuario perfilUsuario);
-    PerfilUsuario toEntity(PerfilUsuarioDto perfilUsuarioDto);
+    PerfilUsuarioDto toDto(PerfilUsuario perfilUsuario, @Context EvitarCiclosMapping contexto);
+    PerfilUsuario toEntity(PerfilUsuarioDto perfilUsuarioDto,@Context EvitarCiclosMapping contexto);
 
-    List<PerfilUsuarioDto> toDto(List<PerfilUsuario> perfiles);
+    List<PerfilUsuarioDto> toDto(List<PerfilUsuario> perfiles,@Context EvitarCiclosMapping contexto);
 }
