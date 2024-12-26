@@ -20,8 +20,8 @@ public interface PerfilUsuarioMapper {
     @Mapping(source = "horarios", target = "horarios")
 
 
-    PerfilUsuarioDto toDto(PerfilUsuario perfilUsuario, @Context EvitarCiclosMapping contexto);
-    PerfilUsuario toEntity(PerfilUsuarioDto perfilUsuarioDto,@Context EvitarCiclosMapping contexto);
+    PerfilUsuarioDto toDto(PerfilUsuario perfilUsuario);
+    PerfilUsuario toEntity(PerfilUsuarioDto perfilUsuarioDto);
 
-    List<PerfilUsuarioDto> toDto(List<PerfilUsuario> perfiles,@Context EvitarCiclosMapping contexto);
+    List<PerfilUsuarioDto> toDto(List<PerfilUsuario> perfiles);
 }

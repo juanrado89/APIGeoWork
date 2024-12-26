@@ -32,7 +32,6 @@ public class PerfilUsuarioService {
     private final FotoRepository fotoRepository;
     private final OfertaEmpleoRepository ofertaEmpleoRepository;
     private final HorarioEntrevistaRepository horarioEntrevistaRepository;
-    private final EvitarCiclosMapping evitarCiclosMapping = new EvitarCiclosMapping();
 
     public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper,
                                 PerfilUsuarioPMapper perfilUsuarioPMapper, FotoRepository fotoRepository,
@@ -51,7 +50,7 @@ public class PerfilUsuarioService {
         Optional<PerfilUsuario> resultado = perfilUsuarioRepository.findByIdPerfil(id);
 
         if(resultado.isPresent()){
-            return perfilUsuarioMapper.toDto(resultado.get(), evitarCiclosMapping);
+            return perfilUsuarioMapper.toDto(resultado.get());
         }
         return null;
     }
@@ -62,7 +61,7 @@ public class PerfilUsuarioService {
             perfilUsuario.setFoto(fotoCreada);
         }
         PerfilUsuario creado = perfilUsuarioRepository.save(perfilUsuario);
-        return perfilUsuarioMapper.toDto(creado, evitarCiclosMapping);
+        return perfilUsuarioMapper.toDto(creado);
     }
     @Transactional
     public PerfilUsuarioDto actualizarPerfilU(int id, PerfilUsuario perfilUsuario) {
@@ -98,7 +97,7 @@ public class PerfilUsuarioService {
                 perfilExistente.setHorarios(horarios);
             }
             PerfilUsuario actualizado = perfilUsuarioRepository.save(perfilExistente);
-            return perfilUsuarioMapper.toDto(actualizado, evitarCiclosMapping);
+            return perfilUsuarioMapper.toDto(actualizado);
         } else {
             return null;
         }
@@ -112,7 +111,7 @@ public class PerfilUsuarioService {
     public PerfilUsuarioPDto buscarPorCorreo(String correo) {
         Optional<PerfilUsuario> resultado = perfilUsuarioRepository.findByEmailContainsIgnoreCase(correo);
         if(resultado.isPresent()){
-            return perfilUsuarioPMapper.toDto(resultado.get(), evitarCiclosMapping);
+            return perfilUsuarioPMapper.toDto(resultado.get());
         }
         return null;
     }
@@ -128,6 +127,6 @@ public class PerfilUsuarioService {
 
     public List<PerfilUsuarioDto> buscarTodos() {
         List<PerfilUsuario> perfiles = perfilUsuarioRepository.findAll();
-        return perfilUsuarioMapper.toDto(perfiles, evitarCiclosMapping);
+        return perfilUsuarioMapper.toDto(perfiles);
     }
 }

@@ -21,7 +21,7 @@ public interface PerfilUsuarioPMapper {
 
 
 
-    PerfilUsuarioPDto toDto(PerfilUsuario perfilUsuario, @Context EvitarCiclosMapping contexto);
-    PerfilUsuario toEntity(PerfilUsuarioPDto perfilUsuarioPDto, @Context EvitarCiclosMapping contexto);
+    PerfilUsuarioPDto toDto(PerfilUsuario perfilUsuario);
+    PerfilUsuario toEntity(PerfilUsuarioPDto perfilUsuarioPDto);
 }
 

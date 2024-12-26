@@ -17,9 +17,8 @@ public interface HorarioEntrevistaMapper {
     @Mapping(source = "hora", target = "hora")
     @Mapping(source = "candidatosDisponibles", target = "candidatosDisponibles")
     @Mapping(source = "candidatosAsignados", target = "candidatosAsignados")
-    @Mapping(source = "trabajadores", target = "trabajadores")
-
-    HorarioEntrevistaDto toDto(HorarioEntrevista horarioEntrevista, @Context EvitarCiclosMapping contexto);
-    HorarioEntrevista toEntity(HorarioEntrevistaDto horarioEntrevistaDto, @Context EvitarCiclosMapping contexto);
-    List<HorarioEntrevistaDto> toDto(List<HorarioEntrevista> horarios, @Context EvitarCiclosMapping contexto);
+    @Mapping(target = "trabajadores", ignore = true)
+    HorarioEntrevistaDto toDto(HorarioEntrevista horarioEntrevista);
+    HorarioEntrevista toEntity(HorarioEntrevistaDto horarioEntrevistaDto);
+    List<HorarioEntrevistaDto> toDto(List<HorarioEntrevista> horarios);
 }

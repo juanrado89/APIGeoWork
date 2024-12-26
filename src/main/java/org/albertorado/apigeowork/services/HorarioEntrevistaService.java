@@ -24,7 +24,6 @@ public class HorarioEntrevistaService {
     private final HorarioEntrevistaRepository horarioEntrevistaRepository;
     private final HorarioEntrevistaMapper horarioEntrevistaMapper;
     private final PerfilUsuarioRepository perfilUsuarioRepository;
-    private final EvitarCiclosMapping evitarCiclosMapping = new EvitarCiclosMapping();
 
     public HorarioEntrevistaService(HorarioEntrevistaRepository horarioEntrevistaRepository, HorarioEntrevistaMapper horarioEntrevistaMapper, PerfilUsuarioRepository perfilUsuarioRepository) {
         this.horarioEntrevistaRepository = horarioEntrevistaRepository;
@@ -37,24 +36,24 @@ public class HorarioEntrevistaService {
         if(horario.isEmpty()){
             return null;
         }
-        return horarioEntrevistaMapper.toDto(horario.get(),evitarCiclosMapping);
+        return horarioEntrevistaMapper.toDto(horario.get());
     }
 
     @Transactional
     public List<HorarioEntrevistaDto> buscarPorIdOferta(int id) {
         List<HorarioEntrevista> horarios = horarioEntrevistaRepository.findAllByOfertaEmpleo_IdOfertaOrderByDiaAsc(id);
-        return horarioEntrevistaMapper.toDto(horarios, evitarCiclosMapping);
+        return horarioEntrevistaMapper.toDto(horarios);
     }
 
     public HorarioEntrevistaDto crearHorarioEntrevista(HorarioEntrevista horarioEntrevista) {
         HorarioEntrevista creado = horarioEntrevistaRepository.save(horarioEntrevista);
-        return horarioEntrevistaMapper.toDto(creado, evitarCiclosMapping);
+        return horarioEntrevistaMapper.toDto(creado);
     }
 
 
     public List<HorarioEntrevistaDto> crearHorariosEntrevista(List<HorarioEntrevista> horariosEntrevista) {
         List<HorarioEntrevista> creado = horarioEntrevistaRepository.saveAll(horariosEntrevista);
-        return horarioEntrevistaMapper.toDto(creado, evitarCiclosMapping);
+        return horarioEntrevistaMapper.toDto(creado);
     }
 
     @Transactional
@@ -89,7 +88,7 @@ public class HorarioEntrevistaService {
             horarioExistente.setTrabajadores(trabajadores);
         }
         HorarioEntrevista actualizado = horarioEntrevistaRepository.save(horarioExistente);
-        return horarioEntrevistaMapper.toDto(actualizado, evitarCiclosMapping);
+        return horarioEntrevistaMapper.toDto(actualizado);
     }
 
 
@@ -107,7 +106,7 @@ public class HorarioEntrevistaService {
                         .and(HorarioEntrevistaEspecificaciones.ordenarPorDiaAscendente())
                         .and(HorarioEntrevistaEspecificaciones.ordenarPorHoraAscendente()));
         List<HorarioEntrevista> resultado = horarioEntrevistaRepository.findAll(especificaciones);
-        return horarioEntrevistaMapper.toDto(resultado, evitarCiclosMapping);
+        return horarioEntrevistaMapper.toDto(resultado);
     }
 
     @Transactional
@@ -135,7 +134,7 @@ public class HorarioEntrevistaService {
 
                 }
                 HorarioEntrevista horarioActualizado = horarioEntrevistaRepository.save(horarioExistente);
-                return horarioEntrevistaMapper.toDto(horarioActualizado, evitarCiclosMapping);
+                return horarioEntrevistaMapper.toDto(horarioActualizado);
             }else{
                 throw new RuntimeException("no hay plazas disponibles para el horario: " + idHorario);
             }
