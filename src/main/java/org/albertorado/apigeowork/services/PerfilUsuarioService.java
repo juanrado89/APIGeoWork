@@ -139,6 +139,7 @@ public class PerfilUsuarioService {
         return perfilUsuarioMapper.toDto(perfiles);
     }
 
+    @Transactional(readOnly = true)
     public List<PerfilUsuarioDto> buscarPerfilUPorIdOferta(int id) {
         List<PerfilUsuario> resultado = perfilUsuarioRepository.findAllByOfertaId(id);
 
