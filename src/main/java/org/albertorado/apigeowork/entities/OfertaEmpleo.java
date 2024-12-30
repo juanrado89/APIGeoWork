@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -17,7 +18,7 @@ public class OfertaEmpleo {
 
     public OfertaEmpleo(int idOferta, Empresa empresa, String titulo, int cantidad, String descripcion, Sector sector,
                         String requisitos, Nivel nivel, float salarioMin, float salarioMax, Direccion direccion,
-                        LocalDate fechaPublicacion, Boolean estado,
+                        LocalDateTime fechaPublicacion, Boolean estado,
                         List<PerfilUsuario> trabajadores, List<HorarioEntrevista> horarios) {
         this.idOferta = idOferta;
         this.empresa = empresa;
@@ -134,20 +135,20 @@ public class OfertaEmpleo {
 
     public String getFechaPublicacion() {
         if (this.fechaPublicacion != null) {
-            return this.fechaPublicacion.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            return this.fechaPublicacion.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         }
         return null;
     }
 
-    public void setFechaPublicacion(@NotNull LocalDate fechaPublicacion) {
+    public void setFechaPublicacion(@NotNull LocalDateTime fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
     public void setFechaPublicacion(@NotNull String fechaPublicacion) {
         try {
-            this.fechaPublicacion = LocalDate.parse(fechaPublicacion, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            this.fechaPublicacion = LocalDateTime.parse(fechaPublicacion, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera 'dd/MM/yyyy'.");
+            throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera 'dd/MM/yyyy HH:mm:ss'.");
         }
     }
 
@@ -229,7 +230,7 @@ public class OfertaEmpleo {
     @NotNull
     @Basic
     @Column(name = "fecha_publicacion",nullable = false)
-    private LocalDate fechaPublicacion;
+    private LocalDateTime fechaPublicacion;
 
     @Basic
     @NotNull

@@ -1,6 +1,7 @@
 package org.albertorado.apigeowork.dtos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -19,7 +20,7 @@ public class OfertaEmpleoDto {
     private float salarioMin;
     private float salarioMax;
     private DireccionDto direccion;
-    private LocalDate fechaPublicacion;
+    private LocalDateTime fechaPublicacion;
     private boolean estado;
     private List<PerfilUsuarioDto> trabajadores;
     private List<HorarioEntrevistaDto> horarios;
@@ -114,12 +115,12 @@ public class OfertaEmpleoDto {
 
     public String getFechaPublicacion() {
         if (this.fechaPublicacion != null) {
-            return this.fechaPublicacion.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            return this.fechaPublicacion.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         }
         return null;
     }
 
-    public void setFechaPublicacion(LocalDate fechaPublicacion) {
+    public void setFechaPublicacion(LocalDateTime fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
@@ -153,7 +154,7 @@ public class OfertaEmpleoDto {
 
     public void setFechaPublicacion(String fechaPublicacion) {
         try {
-            this.fechaPublicacion = LocalDate.parse(fechaPublicacion, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            this.fechaPublicacion = LocalDateTime.parse(fechaPublicacion, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("El formato de la fecha no es válido. Se espera 'dd/MM/yyyy'.");
         }
