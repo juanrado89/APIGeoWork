@@ -1,7 +1,5 @@
 package org.albertorado.apigeowork.services;
 
-import org.albertorado.apigeowork.configuracion.EvitarCiclosMapping;
-import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioDto;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.Foto;
@@ -13,8 +11,6 @@ import org.albertorado.apigeowork.mapper.PerfilUsuarioPMapper;
 import org.albertorado.apigeowork.repositories.FotoRepository;
 import org.albertorado.apigeowork.repositories.HorarioEntrevistaRepository;
 import org.albertorado.apigeowork.repositories.OfertaEmpleoRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.PerfilUsuarioRepository;
 import org.springframework.transaction.annotation.Transactional;

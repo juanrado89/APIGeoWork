@@ -1,15 +1,12 @@
 package org.albertorado.apigeowork.services;
 
 import org.albertorado.apigeowork.dtos.TrabajadorDto;
-import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.Trabajador;
 import org.albertorado.apigeowork.mapper.TrabajadorMapper;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.TrabajadorRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service

@@ -1,8 +1,5 @@
 package org.albertorado.apigeowork.dtos;
 
-import org.albertorado.apigeowork.entities.HorarioEntrevista;
-
-import java.util.List;
 
 public class PerfilUsuarioPDto {
 

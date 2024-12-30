@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.services;
 
-import org.albertorado.apigeowork.configuracion.PasswordEncoderProvider;
 import org.albertorado.apigeowork.dtos.PerfilEmpresaDto;
 import org.albertorado.apigeowork.dtos.PerfilEmpresaPDto;
 import org.albertorado.apigeowork.entities.Foto;
@@ -8,7 +7,6 @@ import org.albertorado.apigeowork.entities.PerfilEmpresa;
 import org.albertorado.apigeowork.mapper.PerfilEmpresaMapper;
 import org.albertorado.apigeowork.mapper.PerfilEmpresaPMapper;
 import org.albertorado.apigeowork.repositories.FotoRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.albertorado.apigeowork.repositories.PerfilEmpresaRepository;

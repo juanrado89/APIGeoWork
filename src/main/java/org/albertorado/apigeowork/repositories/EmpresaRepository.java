@@ -10,7 +10,6 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 
     Optional<Empresa> findByIdEmpresa(@Param("id") int idEmpresa);
 
-    Optional<Empresa> findByDatosEmpresa_IdDatosEmpresa(@Param("idDatos") int idDatos);
 
     int deleteByIdEmpresa(@Param("id") int idEmpresa);
 }

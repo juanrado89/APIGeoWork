@@ -12,7 +12,6 @@ public interface DireccionReposirory extends JpaRepository<Direccion,Integer> {
 
     Optional<Direccion> findDireccionByIdDireccion(@Param("direccion") int idDireccion);
 
-    Optional<Direccion> findDireccionByDireccionContainsIgnoreCaseAndPisoAndPuertaContainsIgnoreCaseAndCodigoPostal(@Param("direccion") String direccion,@Param("piso") int piso,@Param("puerta") String puerta, @Param("codigoP") int codigoPostal);
 
     @Modifying
     @Transactional

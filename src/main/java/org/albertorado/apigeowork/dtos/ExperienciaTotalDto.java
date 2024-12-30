@@ -1,6 +1,5 @@
 package org.albertorado.apigeowork.dtos;
 
-import java.util.List;
 
 public class ExperienciaTotalDto {
 

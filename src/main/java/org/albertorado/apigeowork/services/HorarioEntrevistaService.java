@@ -2,9 +2,7 @@ package org.albertorado.apigeowork.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import org.albertorado.apigeowork.configuracion.EvitarCiclosMapping;
 import org.albertorado.apigeowork.dtos.HorarioEntrevistaDto;
-import org.albertorado.apigeowork.dtos.OfertaEmpleoDto;
 import org.albertorado.apigeowork.entities.HorarioEntrevista;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
 import org.albertorado.apigeowork.especificaciones.HorarioEntrevistaEspecificaciones;

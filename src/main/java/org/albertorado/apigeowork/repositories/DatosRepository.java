@@ -11,7 +11,6 @@ import java.util.Optional;
 public interface DatosRepository extends JpaRepository<Datos,Integer> {
 
     Optional<Datos> findDatosByIdDatos(@Param("datos") int idDatos);
-    Optional<Datos> findDatosByNombreContainsIgnoreCaseAndApellidosContainsIgnoreCaseAndDireccion_IdDireccion(@Param("nombre") String nombre,@Param("apellidos") String apellidos, @Param("idDireccion") int idDireccion);
 
     @Modifying
     @Transactional

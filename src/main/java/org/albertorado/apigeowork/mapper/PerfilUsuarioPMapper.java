@@ -1,9 +1,7 @@
 package org.albertorado.apigeowork.mapper;
 
-import org.albertorado.apigeowork.configuracion.EvitarCiclosMapping;
 import org.albertorado.apigeowork.dtos.PerfilUsuarioPDto;
 import org.albertorado.apigeowork.entities.PerfilUsuario;
-import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

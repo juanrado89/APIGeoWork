@@ -12,9 +12,6 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador,Integer> 
 
     Optional<Trabajador> findTrabajadorByIdTrabajador(@Param("trabajador") int idTrabajador);
 
-    Optional<Trabajador> findTrabajadorByDatosUsuario_IdDatos(@Param("idDatos") int idDatos);
-
-
     @Modifying
     @Transactional
     int deleteByIdTrabajador(@Param("trabajador") int idTrabajador);

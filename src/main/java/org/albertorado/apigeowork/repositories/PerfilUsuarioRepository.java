@@ -14,26 +14,11 @@ import java.util.Optional;
 public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Integer> {
 
     Optional<PerfilUsuario> findByIdPerfil(@Param("id") int idUsuario);
-
     Optional<PerfilUsuario> findByEmailContainsIgnoreCase(@Param("email") String email);
-
-    @Query("SELECT d.email,d.idPerfil,d.password,d.trabajador,d.foto FROM PerfilUsuario d WHERE d.email like lower(:email) ")
-    Optional<PerfilUsuario> buscarPorMail(@Param("email") String email);
-
-    @Query("SELECT d.email,d.idPerfil,d.password FROM PerfilUsuario d WHERE d.email like lower(:email) ")
-    Optional<PerfilUsuario> buscarPorMailAutenticacion(@Param("email") String email);
     @Query("SELECT p FROM PerfilUsuario p JOIN p.horarios h WHERE h.idHorario = :id")
     List<PerfilUsuario> findAllByHorarioId(@Param("id") Integer idHorario);
     @Query("SELECT p FROM PerfilUsuario p JOIN p.ofertas h WHERE h.idOferta = :id")
     List<PerfilUsuario> findAllByOfertaId(@Param("id") Integer idHorario);
-
     int deleteByIdPerfil(@Param("id") int idPerfil);
-
-    Optional<PerfilUsuario> findPerfilUsuariosByEmailContainsIgnoreCase(@Size(min = 20, max = 255) @Email @NotNull String email);
-
-    Optional<PerfilUsuario> findPerfilUsuariosByEmailContains(@Param("email") String email);
-
-    Optional<PerfilUsuario> findPerfilUsuariosByEmail(@Size(min = 20, max = 255) @Email @NotNull String email);
-
     Optional<PerfilUsuario> findPerfilUsuarioByEmail(@Size(min = 20, max = 255) @Email @NotNull String email);
 }
