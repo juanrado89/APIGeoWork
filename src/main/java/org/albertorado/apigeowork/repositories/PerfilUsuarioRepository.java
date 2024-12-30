@@ -24,6 +24,8 @@ public interface PerfilUsuarioRepository extends JpaRepository<PerfilUsuario,Int
     Optional<PerfilUsuario> buscarPorMailAutenticacion(@Param("email") String email);
     @Query("SELECT p FROM PerfilUsuario p JOIN p.horarios h WHERE h.idHorario = :id")
     List<PerfilUsuario> findAllByHorarioId(@Param("id") Integer idHorario);
+    @Query("SELECT p FROM PerfilUsuario p JOIN p.ofertas h WHERE h.idOferta = :id")
+    List<PerfilUsuario> findAllByOfertaId(@Param("id") Integer idHorario);
 
     int deleteByIdPerfil(@Param("id") int idPerfil);
 

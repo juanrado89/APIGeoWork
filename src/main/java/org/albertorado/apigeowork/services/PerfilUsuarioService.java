@@ -138,4 +138,13 @@ public class PerfilUsuarioService {
         List<PerfilUsuario> perfiles = perfilUsuarioRepository.findAll();
         return perfilUsuarioMapper.toDto(perfiles);
     }
+
+    public List<PerfilUsuarioDto> buscarPerfilUPorIdOferta(int id) {
+        List<PerfilUsuario> resultado = perfilUsuarioRepository.findAllByOfertaId(id);
+
+        if(resultado != null && !resultado.isEmpty()){
+            return perfilUsuarioMapper.toDto(resultado);
+        }
+        return null;
+    }
 }

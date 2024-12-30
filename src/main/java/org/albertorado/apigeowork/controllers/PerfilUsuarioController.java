@@ -65,6 +65,21 @@ public class PerfilUsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/buscarperfiluporidoferta/{id}")
+    public ResponseEntity<List<PerfilUsuarioDto>> buscarPerfilUPorIdOferta(@RequestHeader("authorization") String autorizacion,
+                                                                            @PathVariable int id) {
+
+        if (!validarToken(autorizacion)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        List<PerfilUsuarioDto> perfil = perfilUsuarioService.buscarPerfilUPorIdOferta(id);
+        if(perfil != null) {
+            return ResponseEntity.ok(perfil);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
     @GetMapping("/buscartodosperfilu")
     public ResponseEntity<List<PerfilUsuarioDto>> buscarPerfilUPorId(@RequestHeader("authorization") String autorizacion) {
 
