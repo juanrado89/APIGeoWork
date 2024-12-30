@@ -111,15 +111,17 @@ public class OfertaEmpleoService {
 
             }
             OfertaEmpleo actualizada = ofertaEmpleoRepository.save(ofertaExistente);
-            for (PerfilUsuario trabajador : ofertaEmpleo.getTrabajadores()) {
-                if(trabajador.getOfertas() != null && !trabajador.getOfertas().isEmpty()){
-                    trabajador.getOfertas().add(actualizada);
-                }else{
-                    List<OfertaEmpleo> ofertaAniadir = new ArrayList<>();
-                    ofertaAniadir.add(actualizada);
-                    trabajador.setOfertas(ofertaAniadir);
+            if(ofertaEmpleo.getTrabajadores() != null && !ofertaEmpleo.getTrabajadores().isEmpty()){
+                for (PerfilUsuario trabajador : ofertaEmpleo.getTrabajadores()) {
+                    if(trabajador.getOfertas() != null && !trabajador.getOfertas().isEmpty()){
+                        trabajador.getOfertas().add(actualizada);
+                    }else{
+                        List<OfertaEmpleo> ofertaAniadir = new ArrayList<>();
+                        ofertaAniadir.add(actualizada);
+                        trabajador.setOfertas(ofertaAniadir);
+                    }
+                    perfilUsuarioRepository.save(trabajador);
                 }
-                perfilUsuarioRepository.save(trabajador);
             }
             return ofertaEmpleoMapper.toDto(actualizada);
         } else {
